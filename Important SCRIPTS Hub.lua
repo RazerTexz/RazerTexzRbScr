@@ -1,5 +1,5 @@
 -- Library
-local Library = loadstring(game:HttpGet("https://pastebin.com/raw/cR2C0dAP"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RobloxScripts/main/Kavo%20UI%20Draggable%20Android.lua?token=GHSAT0AAAAAACGNMMWVOASIOPXUG5BI6MS6ZG6DKMQ"))()
 local Window = Library.CreateLib("Important SCRIPTS Hub", "Ocean")
 
 -- Main
