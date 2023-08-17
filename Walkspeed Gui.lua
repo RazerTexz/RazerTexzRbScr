@@ -1,5 +1,5 @@
 -- LIBRARY
-local Library = loadstring(game:HttpGet("https://pastebin.com/raw/cR2C0dAP"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/Kavo%20UI%20Draggable%20Android.lua"))()
 local Window = Library.CreateLib("Walkspeed Gui", "Ocean")
 
 -- MAIN TAB
