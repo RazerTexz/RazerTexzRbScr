@@ -9,10 +9,6 @@ local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
 local runService = game:GetService("RunService")
 
-getgenv().thumbstick = false
-
-local thumbstickFrame = localPlayer.PlayerGui.TouchGui.TouchControlFrame:FindFirstChild("ThumbstickFrame")
-
 MainSec:NewButton("Infinite Yield", "", function() 
     loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 end)
@@ -56,7 +52,7 @@ MainSec:NewButton("RTX Gui By Sx-p0t", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/RTX%20Gui%20By%20Sx-p0t.lua"))()
 end)
 MainSec:NewButton("Change Thumbstick Position", "", function()
-    thumbstick = not thumbstick
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/Change%20Thumbstick%20Position.lua"))()
 end)
 MainSec:NewButton("Change Jump Button Position", "", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/Change%20Jump%20Button%20Position.lua"))()
