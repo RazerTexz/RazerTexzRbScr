@@ -1,33 +1,34 @@
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
-local runService = game:GetService("RunService")
 
-local headHitboxSize = 6 -- DONT CHANGE
+local headHitboxSize = 6 -- RECOMMENDED SIZE
 local teamCheck = false
-local headSizeVector = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
+local delay = 1
+local transparency = 0.7
+local headSizeVec = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
 
 if teamCheck then
-    runService.Stepped:Connect(function()
-        for _, v in ipairs(players:GetPlayers()) do
-            if v ~= localPlayer and v.Team ~= localPlayer.Team then
-                pcall(local function()
-                v.Character.Head.Size = headSizeVector
-                v.Character.Head.Transparency = 0.7
-                v.Character.Head.CanCollide = false
-            end)
+    coroutine.wrap(function()
+        while task.wait(delay) do
+            for _, v in ipairs(players:GetPlayers()) do
+                if v ~= localPlayer and v.Team ~= localPlayer.Team and v.Character and v.Character:FindFirstChild("Head") then           
+                    v.Character.Head.Size = headSizeVec
+                    v.Character.Head.Transparency = transparency
+                    v.Character.Head.CanCollide = false
+                end
             end
         end
-    end)
+    end)()
 else
-    runService.Stepped:Connect(function()
-        for _, v in ipairs(players:GetPlayers()) do
-            if v ~= localPlayer then
-                pcall(local function()
-                v.Character.Head.Size = headSizeVector
-                v.Character.Head.Transparency = 0.7
-                v.Character.Head.CanCollide = false
-            end)
+    coroutine.wrap(function()
+        while task.wait(delay) do
+            for _, v in ipairs(players:GetPlayers()) do
+                if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then                    
+                    v.Character.Head.Size = headSizeVec
+                    v.Character.Head.Transparency = transparency
+                    v.Character.Head.CanCollide = false
+                end
             end
         end
-    end)
+    end)()
 end
