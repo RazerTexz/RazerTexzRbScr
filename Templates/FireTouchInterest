@@ -1,5 +1,0 @@
-local player = game:GetService("Players").LocalPlayer.Character.Head
-local obj = game:GetService("Workspace")
-
-firetouchinterest(player, obj, 0) -- OBJECT HAVE TO BE THE PARENT OF THE TOUCHINTEREST
-firetouchinterest(player, obj, 1) -- OBJECT HAVE TO BE THE PARENT OF THE TOUCHINTEREST
