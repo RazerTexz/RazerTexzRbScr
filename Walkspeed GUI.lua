@@ -9,13 +9,12 @@ local localPlayer = players.LocalPlayer
 local MainTab = Window:NewTab("Main")
 local MainSec = MainTab:NewSection("--- MAIN TAB ---")
 local customWalkSpeedCounter = MainSec:NewLabel("Custom walkspeed counter: nil")
-local currentWalkSpeed = MainSec:NewLabel("Current walkspeed: nil")
+local currentWalkSpeed = MainSec:NewLabel("Current walkspeed: "..tonumber(walkSpeed))
 local walkSpeed
-getgenv().isWalkSpeed
 
 MainSec:NewTextBox("Custom walkspeed", "", function(speed)
     walkSpeed = tonumber(speed)
-    customWalkSpeedCounter:UpdateLabel("Custom walkspeed counter: "..tonumber(speed))
+    customWalkSpeedCounter:UpdateLabel("Custom walkspeed counter: "..localPlayer.Character.Humanoid.WalkSpeed)
 end)
 MainSec:NewToggle("Apply custom walkspeed", "", function(bool)
     getgenv().isWalkSpeed = bool
