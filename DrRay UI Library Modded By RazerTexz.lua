@@ -1285,17 +1285,21 @@ DRR_MODULES[DRR["93"]] = {
     local dragging = false
     local dragInput, mousePos, framePos
     local holdStartTime
+    local currentTime
     local isHolding
     DRR["1f"].InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
             mousePos = input.Position
             framePos = DRR["1f"].Position
-            holdStartTime = tick()
+            holdStartTime = os.clock()
             
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
                     dragging = false
+                    isHolding = false
+                    holdStartTick = nil
+                    currentTime = nil
                 end
             end)
         end
@@ -1311,8 +1315,8 @@ DRR_MODULES[DRR["93"]] = {
             DRR["1f"].Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
         end
         if dragging and holdStartTime > 0 then
-            local currentTime = tick()
-            if (currentTime - holdStartTime) > 0.2 then
+            currentTime = os.clock()
+            if (currentTime - holdStartTime) >= 0.1 then
                 isHolding = true
             end
         end
