@@ -7,7 +7,7 @@ local run = game:GetService("RunService")
 
 local Utility = {}
 local Objects = {}
-local function Kavo:DraggingEnabled(frame, parent)        
+function Kavo:DraggingEnabled(frame, parent)        
     parent = parent or frame    
     
     local dragging = false
@@ -40,7 +40,7 @@ local function Kavo:DraggingEnabled(frame, parent)
     end)
 end
 
-local function Utility:TweenObject(obj, properties, duration, ...)
+function Utility:TweenObject(obj, properties, duration, ...)
     tween:Create(obj, tweeninfo(duration, ...), properties):Play()
 end
 
@@ -133,7 +133,7 @@ end)
 
 local LibName = tostring(math.random(1, 100))..tostring(math.random(1, 50))..tostring(math.random(1, 100))
 
-local function Kavo:ToggleUI()
+function Kavo:ToggleUI()
     if game.CoreGui[LibName].Enabled then
         game.CoreGui[LibName].Enabled = false
     else
@@ -141,7 +141,7 @@ local function Kavo:ToggleUI()
     end
 end
 
-local function Kavo.CreateLib(kavName, themeList)
+function Kavo.CreateLib(kavName, themeList)
     if not themeList then
         themeList = themes
     end
@@ -345,7 +345,7 @@ local function Kavo.CreateLib(kavName, themeList)
         end
     end)()
 
-    local function Kavo:ChangeColor(prope,color)
+    function Kavo:ChangeColor(prope,color)
         if prope == "Background" then
             themeList.Background = color
         elseif prope == "SchemeColor" then
@@ -362,7 +362,7 @@ local function Kavo.CreateLib(kavName, themeList)
 
     local first = true
 
-    local function Tabs:NewTab(tabName)
+    function Tabs:NewTab(tabName)
         tabName = tabName or "Tab"
         local tabButton = Instance.new("TextButton")
         local UICorner = Instance.new("UICorner")
@@ -461,7 +461,7 @@ local function Kavo.CreateLib(kavName, themeList)
             end
         end)()
     
-        local function Sections:NewSection(secName, hidden)
+        function Sections:NewSection(secName, hidden)
             secName = secName or "Section"
             local sectionFunctions = {}
             local modules = {}
@@ -565,7 +565,7 @@ local function Kavo.CreateLib(kavName, themeList)
                 updateSectionFrame()
                 UpdateSize()
             local Elements = {}
-            local function Elements:NewButton(bname, tipINf, callback)
+            function Elements:NewButton(bname, tipINf, callback)
                 local showLogo = showLogo or true
                 local ButtonFunction = {}
                 tipINf = tipINf or "Tip: Clicking this nothing will happen!"
@@ -760,13 +760,13 @@ local function Kavo.CreateLib(kavName, themeList)
                     end
                 end)()
                 
-                local function ButtonFunction:UpdateButton(newTitle)
+                function ButtonFunction:UpdateButton(newTitle)
                     btnInfo.Text = newTitle
                 end
                 return ButtonFunction
             end
 
-            local function Elements:NewTextBox(tname, tTip, callback)
+            function Elements:NewTextBox(tname, tTip, callback)
                 tname = tname or "Textbox"
                 tTip = tTip or "Gets a value of Textbox"
                 callback = callback or function() end
@@ -961,7 +961,7 @@ local function Kavo.CreateLib(kavName, themeList)
                 end)()
             end 
 
-                local function Elements:NewToggle(tname, nTip, callback)
+                function Elements:NewToggle(tname, nTip, callback)
                     local TogFunction = {}
                     tname = tname or "Toggle"
                     nTip = nTip or "Prints Current Toggle State"
@@ -1188,7 +1188,7 @@ local function Kavo.CreateLib(kavName, themeList)
                             viewDe = false
                         end
                     end)
-                    local function TogFunction:UpdateToggle(newText, isTogOn)
+                    function TogFunction:UpdateToggle(newText, isTogOn)
                         isTogOn = isTogOn or toggle
                         if newText ~= nil then 
                             togName.Text = newText
@@ -1208,9 +1208,9 @@ local function Kavo.CreateLib(kavName, themeList)
                         end
                     end
                     return TogFunction
-            end
+                end
 
-            local function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, callback)
+            function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, callback)
                 slidInf = slidInf or "Slider"
                 slidTip = slidTip or "Slider tip here"
                 maxvalue = maxvalue or 500
@@ -1454,7 +1454,7 @@ local function Kavo.CreateLib(kavName, themeList)
                 end)        
             end
 
-            local function Elements:NewDropdown(dropname, dropinf, list, callback)
+            function Elements:NewDropdown(dropname, dropinf, list, callback)
                 local DropFunction = {}
                 dropname = dropname or "Dropdown"
                 list = list or {}
@@ -1789,7 +1789,7 @@ local function Kavo.CreateLib(kavName, themeList)
                     end)()
                 end
 
-                local function DropFunction:Refresh(newList)
+                function DropFunction:Refresh(newList)
                     newList = newList or {}
                     for _, v in next, dropFrame:GetChildren() do
                         if v.Name == "optionSelect" then
@@ -1903,7 +1903,7 @@ local function Kavo.CreateLib(kavName, themeList)
                 end
                 return DropFunction
             end
-            local function Elements:NewKeybind(keytext, keyinf, first, callback)
+            function Elements:NewKeybind(keytext, keyinf, first, callback)
                 keytext = keytext or "KeybindText"
                 keyinf = keyinf or "KebindInfo"
                 callback = callback or function() end
@@ -2117,7 +2117,7 @@ local function Kavo.CreateLib(kavName, themeList)
                 end)()
             end
 
-            local function Elements:NewColorPicker(colText, colInf, defcolor, callback)
+            function Elements:NewColorPicker(colText, colInf, defcolor, callback)
                 colText = colText or "ColorPicker"
                 callback = callback or function() end
                 defcolor = defcolor or Color3.fromRGB(1,1,1)
@@ -2586,7 +2586,7 @@ local function Kavo.CreateLib(kavName, themeList)
                 setcolor({h, s, v})
             end
             
-            local function Elements:NewLabel(title)
+            function Elements:NewLabel(title)
             	local labelFunctions = {}
             	local label = Instance.new("TextLabel")
             	local UICorner = Instance.new("UICorner")
@@ -2625,7 +2625,7 @@ local function Kavo.CreateLib(kavName, themeList)
                 updateSectionFrame()
                 UpdateSize()
                 
-                local function labelFunctions:UpdateLabel(newText)
+                function labelFunctions:UpdateLabel(newText)
                 	if label.Text ~= "  "..newText then
                 		label.Text = "  "..newText
                 	end

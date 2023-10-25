@@ -1447,7 +1447,7 @@ DRR_MODULES[DRR["93"]] = {
     	end
     end 
         
-    local function UILIB.newTab(name, img)	
+    function UILIB.newTab(name, img)	
     	local self = setmetatable({}, UILIB)
     
     	local newTab = parent.Folder.TabReserved:Clone()
@@ -1482,7 +1482,7 @@ DRR_MODULES[DRR["93"]] = {
     			end
     		end
     	end)    
-    	local function self.newButton(name, desc, func)
+    	function self.newButton(name, desc, func)
     		local newbtn = reserved.Button:Clone()
     		newbtn.Parent = newTab
     		newbtn.Title.Text = name
@@ -1500,7 +1500,7 @@ DRR_MODULES[DRR["93"]] = {
     		end)
     		newbtn.MouseButton1Click:Connect(func)
     	end    
-    	local function self.newLabel(text)
+    	function self.newLabel(text)
     		local newLabel = reserved.Label:Clone()
     		newLabel.Parent = newTab
     		newLabel.Visible = true
@@ -1508,7 +1508,7 @@ DRR_MODULES[DRR["93"]] = {
     
     		return newLabel.Title
     	end    
-    	local function self.newInput(name, desc, func)
+    	function self.newInput(name, desc, func)
     		local newInput = reserved.Textbox:Clone()
     		local textbox = newInput.TextboxBar.ActualTextbox    
     		newInput.MouseEnter:Connect(function()
@@ -1530,7 +1530,7 @@ DRR_MODULES[DRR["93"]] = {
     			func(textbox.Text)
     		end)    
     	end    
-    	local function self.newKeybind(name, desc, func)
+    	function self.newKeybind(name, desc, func)
     		local newKey = reserved.Keybind:Clone()
     		newKey.MouseEnter:Connect(function()
     			local twBtn = twServ:Create(newKey, TweenInfo.new(0.2), { Transparency = 0 })
@@ -1589,7 +1589,7 @@ DRR_MODULES[DRR["93"]] = {
     			end)
     		end)
     	end    
-    	local function self.newSlider(name, desc, max, manageSlider, func)
+    	function self.newSlider(name, desc, max, manageSlider, func)
     		local newSlider = reserved.Slider:Clone()    
     		newSlider.MouseEnter:Connect(function()
     			local twBtn = twServ:Create(newSlider, TweenInfo.new(0.2), { Transparency = 0 })
@@ -1643,7 +1643,7 @@ DRR_MODULES[DRR["93"]] = {
     			end
     		end)
     	end    	
-    	local function self.newToggle(title, desc, toggle, func)
+    	function self.newToggle(title, desc, toggle, func)
     		local realToggle = toggle
     		local newToggle = reserved.Toggle:Clone()
     		newToggle.Parent = newTab
@@ -1681,7 +1681,7 @@ DRR_MODULES[DRR["93"]] = {
     			end
     		end)    		
     	end    	
-    	local function self.newDropdown(name, desc, listTable, func)
+    	function self.newDropdown(name, desc, listTable, func)
     		local newdd = reserved.Dropdown:Clone()
     		newdd.Visible = true
     		newdd.Parent = newTab    		
