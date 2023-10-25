@@ -1506,12 +1506,19 @@ DRR_MODULES[DRR["93"]] = {
     		newbtn.MouseButton1Click:Connect(func)
     	end    
     	function self.newLabel(text)
+    	    local labelFunction = {}
     		local newLabel = reserved.Label:Clone()
     		newLabel.Parent = newTab
     		newLabel.Visible = true
     		newLabel.Title.Text = text
     
     		return newLabel.Title
+    		
+    		function labelFunction.UpdateLabel(newText)
+        	    if newLabel.Title.Text ~= "  "..newText then
+            		newLabel.Title.Text = "  "..newText
+            	end
+           end	
     	end    
     	function self.newInput(name, desc, func)
     		local newInput = reserved.Textbox:Clone()
