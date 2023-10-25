@@ -1,12 +1,11 @@
 -- Instances: 147 | Scripts: 0 | Modules: 1
 local DRR = {};
-local LibName = tostring(math.random(1, 100))..tostring(math.random(1, 50))..tostring(math.random(1, 100))
 
 -- DrRay
 DRR["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"));
 DRR["1"]["IgnoreGuiInset"] = true;
 DRR["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
-DRR["1"]["Name"] = [[LibName]];
+DRR["1"]["Name"] = [[tostring(math.random(1, 100))..tostring(math.random(1, 50))..tostring(math.random(1, 100))]];
 DRR["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
 -- DrRay.TopBar
@@ -1290,11 +1289,11 @@ local closed = false
 
 local dragging = false
 local dragInput, mousePos, framePos
-DRR["2"].InputBegan:Connect(function(input)
+DRR["22"].InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         mousePos = input.Position
-        framePos = DRR["2"].Position
+        framePos = DRR["22"].Position
         
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
@@ -1303,7 +1302,7 @@ DRR["2"].InputBegan:Connect(function(input)
         end)
     end
 end)
-DRR["2"].InputChanged:Connect(function(input)
+DRR["22"].InputChanged:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
         dragInput = input
     end
@@ -1311,7 +1310,7 @@ end)
 UIS.InputChanged:Connect(function(input)
     if input == dragInput and dragging then
         local delta = input.Position - mousePos
-        DRR["2"].Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+        DRR["22"].Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
     end
 end)
 
