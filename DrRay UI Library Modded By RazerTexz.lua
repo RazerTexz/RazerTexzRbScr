@@ -1339,7 +1339,7 @@ DRR_MODULES[DRR["93"]] = {
     	
     	parent.TopBar.TopBarClose.MouseButton1Down:Connect(function()
     	    local timeHeld = os.clock()    
-    	    if timeHeld => 0.2 then  
+    	    if timeHeld >= 0.2 then  
         		if closed == false then
         			closed = true
         			local tw = twServ:Create(parent.MainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Position = UDim2.new(0.23, 0,-0.612, 0) })
