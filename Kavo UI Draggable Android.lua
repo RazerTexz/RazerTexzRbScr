@@ -7,11 +7,9 @@ local run = game:GetService("RunService")
 
 local Utility = {}
 local Objects = {}
-function Kavo:DraggingEnabled(frame, parent)
-        
-    parent = parent or frame
+local function Kavo:DraggingEnabled(frame, parent)        
+    parent = parent or frame    
     
-    -- stolen from wally or kiriot, kek
     local dragging = false
     local dragInput, mousePos, framePos
 
@@ -19,8 +17,7 @@ function Kavo:DraggingEnabled(frame, parent)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
             mousePos = input.Position
-            framePos = parent.Position
-            
+            framePos = parent.Position   
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
                     dragging = false
@@ -43,10 +40,9 @@ function Kavo:DraggingEnabled(frame, parent)
     end)
 end
 
-function Utility:TweenObject(obj, properties, duration, ...)
+local function Utility:TweenObject(obj, properties, duration, ...)
     tween:Create(obj, tweeninfo(duration, ...), properties):Play()
 end
-
 
 local themes = {
     SchemeColor = Color3.fromRGB(74, 99, 135),
@@ -129,17 +125,15 @@ local SettingsT = {
 local Name = "KavoConfig.JSON"
 
 pcall(function()
-
-if not pcall(function() readfile(Name) end) then
-writefile(Name, game:service'HttpService':JSONEncode(SettingsT))
-end
-
-Settings = game:service'HttpService':JSONEncode(readfile(Name))
+    if not pcall(function() readfile(Name) end) then
+        writefile(Name, game:service'HttpService':JSONEncode(SettingsT))
+    end    
+    Settings = game:service'HttpService':JSONEncode(readfile(Name))
 end)
 
-local LibName = tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
+local LibName = tostring(math.random(1, 100))..tostring(math.random(1, 50))..tostring(math.random(1, 100))
 
-function Kavo:ToggleUI()
+local function Kavo:ToggleUI()
     if game.CoreGui[LibName].Enabled then
         game.CoreGui[LibName].Enabled = false
     else
@@ -147,7 +141,7 @@ function Kavo:ToggleUI()
     end
 end
 
-function Kavo.CreateLib(kavName, themeList)
+local function Kavo.CreateLib(kavName, themeList)
     if not themeList then
         themeList = themes
     end
@@ -187,7 +181,7 @@ function Kavo.CreateLib(kavName, themeList)
     local selectedTab 
     kavName = kavName or "Library"
     table.insert(Kavo, kavName)
-    for i,v in pairs(game.CoreGui:GetChildren()) do
+    for _, v in ipairs(game:GetService("CoreGui"):GetChildren()) do
         if v:IsA("ScreenGui") and v.Name == kavName then
             v:Destroy()
         end
@@ -279,15 +273,15 @@ function Kavo.CreateLib(kavName, themeList)
     close.ImageRectOffset = Vector2.new(284, 4)
     close.ImageRectSize = Vector2.new(24, 24)
     close.MouseButton1Click:Connect(function()
-        game.TweenService:Create(close, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+        tween:Create(close, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
             ImageTransparency = 1
         }):Play()
-        wait()
-        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0,0,0,0),
+        task.wait()
+        tween:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0, 0, 0, 0),
 			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
 		}):Play()
-        wait(1)
+        task.wait(1)
         ScreenGui:Destroy()
     end)
 
@@ -340,10 +334,9 @@ function Kavo.CreateLib(kavName, themeList)
     infoContainer.ClipsDescendants = true
     infoContainer.Position = UDim2.new(0.299047619, 0, 0.874213815, 0)
     infoContainer.Size = UDim2.new(0, 368, 0, 33)
-
     
     coroutine.wrap(function()
-        while wait() do
+        while task.wait() do
             Main.BackgroundColor3 = themeList.Background
             MainHeader.BackgroundColor3 = themeList.Header
             MainSide.BackgroundColor3 = themeList.Header
@@ -352,7 +345,7 @@ function Kavo.CreateLib(kavName, themeList)
         end
     end)()
 
-    function Kavo:ChangeColor(prope,color)
+    local function Kavo:ChangeColor(prope,color)
         if prope == "Background" then
             themeList.Background = color
         elseif prope == "SchemeColor" then
@@ -369,7 +362,7 @@ function Kavo.CreateLib(kavName, themeList)
 
     local first = true
 
-    function Tabs:NewTab(tabName)
+    local function Tabs:NewTab(tabName)
         tabName = tabName or "Tab"
         local tabButton = Instance.new("TextButton")
         local UICorner = Instance.new("UICorner")
@@ -378,9 +371,8 @@ function Kavo.CreateLib(kavName, themeList)
 
         local function UpdateSize()
             local cS = pageListing.AbsoluteContentSize
-
-            game.TweenService:Create(page, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                CanvasSize = UDim2.new(0,cS.X,0,cS.Y)
+            tween:Create(page, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                CanvasSize = UDim2.new(0, cS.X, 0, cS.Y)
             }):Play()
         end
 
@@ -433,11 +425,11 @@ function Kavo.CreateLib(kavName, themeList)
 
         tabButton.MouseButton1Click:Connect(function()
             UpdateSize()
-            for i,v in next, Pages:GetChildren() do
+            for _, v in next, Pages:GetChildren() do
                 v.Visible = false
             end
             page.Visible = true
-            for i,v in next, tabFrames:GetChildren() do
+            for _, v in next, tabFrames:GetChildren() do
                 if v:IsA("TextButton") then
                     if themeList.SchemeColor == Color3.fromRGB(255,255,255) then
                         Utility:TweenObject(v, {TextColor3 = Color3.fromRGB(255,255,255)}, 0.2)
@@ -461,7 +453,7 @@ function Kavo.CreateLib(kavName, themeList)
         local viewDe = false
 
         coroutine.wrap(function()
-            while wait() do
+            while task.wait() do
                 page.BackgroundColor3 = themeList.Background
                 page.ScrollBarImageColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 16, themeList.SchemeColor.g * 255 - 15, themeList.SchemeColor.b * 255 - 28)
                 tabButton.TextColor3 = themeList.TextColor
@@ -469,11 +461,11 @@ function Kavo.CreateLib(kavName, themeList)
             end
         end)()
     
-        function Sections:NewSection(secName, hidden)
+        local function Sections:NewSection(secName, hidden)
             secName = secName or "Section"
             local sectionFunctions = {}
             local modules = {}
-	    hidden = hidden or false
+	        hidden = hidden or false
             local sectionFrame = Instance.new("Frame")
             local sectionlistoknvm = Instance.new("UIListLayout")
             local sectionHead = Instance.new("Frame")
@@ -482,15 +474,15 @@ function Kavo.CreateLib(kavName, themeList)
             local sectionInners = Instance.new("Frame")
             local sectionElListing = Instance.new("UIListLayout")
 			
-	    if hidden then
-		sectionHead.Visible = false
-	    else
-		sectionHead.Visible = true
-	    end
+    	    if hidden then
+        		sectionHead.Visible = false
+    	    else
+        		sectionHead.Visible = true
+    	    end
 
             sectionFrame.Name = "sectionFrame"
             sectionFrame.Parent = page
-            sectionFrame.BackgroundColor3 = themeList.Background--36, 37, 43
+            sectionFrame.BackgroundColor3 = themeList.Background
             sectionFrame.BorderSizePixel = 0
             
             sectionlistoknvm.Name = "sectionlistoknvm"
@@ -498,10 +490,10 @@ function Kavo.CreateLib(kavName, themeList)
             sectionlistoknvm.SortOrder = Enum.SortOrder.LayoutOrder
             sectionlistoknvm.Padding = UDim.new(0, 5)
 
-            for i,v in pairs(sectionInners:GetChildren()) do
-                while wait() do
+            for _, v in ipairs(sectionInners:GetChildren()) do
+                while task.wait() do
                     if v:IsA("Frame") or v:IsA("TextButton") then
-                        function size(pro)
+                        local function size(pro)
                             if pro == "Size" then
                                 UpdateSize()
                                 updateSectionFrame()
@@ -511,6 +503,7 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end
             end
+            
             sectionHead.Name = "sectionHead"
             sectionHead.Parent = sectionFrame
             sectionHead.BackgroundColor3 = themeList.SchemeColor
@@ -552,17 +545,16 @@ function Kavo.CreateLib(kavName, themeList)
             sectionElListing.Parent = sectionInners
             sectionElListing.SortOrder = Enum.SortOrder.LayoutOrder
             sectionElListing.Padding = UDim.new(0, 3)
-
             
-        coroutine.wrap(function()
-            while wait() do
-                sectionFrame.BackgroundColor3 = themeList.Background
-                sectionHead.BackgroundColor3 = themeList.SchemeColor
-                tabButton.TextColor3 = themeList.TextColor
-                tabButton.BackgroundColor3 = themeList.SchemeColor
-                sectionName.TextColor3 = themeList.TextColor
-            end
-        end)()
+            coroutine.wrap(function()
+                while task.wait() do
+                    sectionFrame.BackgroundColor3 = themeList.Background
+                    sectionHead.BackgroundColor3 = themeList.SchemeColor
+                    tabButton.TextColor3 = themeList.TextColor
+                    tabButton.BackgroundColor3 = themeList.SchemeColor
+                    sectionName.TextColor3 = themeList.TextColor
+                end
+            end)()
 
             local function updateSectionFrame()
                 local innerSc = sectionElListing.AbsoluteContentSize
@@ -573,8 +565,8 @@ function Kavo.CreateLib(kavName, themeList)
                 updateSectionFrame()
                 UpdateSize()
             local Elements = {}
-            function Elements:NewButton(bname,tipINf, callback)
-                showLogo = showLogo or true
+            local function Elements:NewButton(bname, tipINf, callback)
+                local showLogo = showLogo or true
                 local ButtonFunction = {}
                 tipINf = tipINf or "Tip: Clicking this nothing will happen!"
                 bname = bname or "Click Me!"
@@ -683,9 +675,9 @@ function Kavo.CreateLib(kavName, themeList)
                 end 
 
                 updateSectionFrame()
-                                UpdateSize()
+                UpdateSize()
 
-                local ms = game.Players.LocalPlayer:GetMouse()
+                local ms = game:GetService("Players").LocalPlayer:GetMouse()
 
                 local btn = buttonElement
                 local sample = Sample
@@ -706,11 +698,11 @@ function Kavo.CreateLib(kavName, themeList)
                         c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                         for i = 1, 10 do
                             c.ImageTransparency = c.ImageTransparency + 0.05
-                            wait(len / 12)
+                            task.wait(len / 12)
                         end
                         c:Destroy()
                     else
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             focusing = false
                         end
@@ -720,7 +712,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local hovering = false
                 btn.MouseEnter:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                         }):Play()
                         hovering = true
@@ -728,7 +720,7 @@ function Kavo.CreateLib(kavName, themeList)
                 end)
                 btn.MouseLeave:Connect(function()
                     if not focusing then 
-                        game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = themeList.ElementColor
                         }):Play()
                         hovering = false
@@ -738,7 +730,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             if v ~= moreInfo then
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             end
@@ -746,16 +738,16 @@ function Kavo.CreateLib(kavName, themeList)
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,0,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
                         Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
-                        wait(1.5)
+                        task.wait(1.5)
                         focusing = false
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,2,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
-                        wait(0)
+                        task.wait(0)
                         viewDe = false
                     end
                 end)
                 coroutine.wrap(function()
-                    while wait() do
+                    while task.wait() do
                         if not hovering then
                             buttonElement.BackgroundColor3 = themeList.ElementColor
                         end
@@ -768,13 +760,13 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end)()
                 
-                function ButtonFunction:UpdateButton(newTitle)
+                local function ButtonFunction:UpdateButton(newTitle)
                     btnInfo.Text = newTitle
                 end
                 return ButtonFunction
             end
 
-            function Elements:NewTextBox(tname, tTip, callback)
+            local function Elements:NewTextBox(tname, tTip, callback)
                 tname = tname or "Textbox"
                 tTip = tTip or "Gets a value of Textbox"
                 callback = callback or function() end
@@ -881,16 +873,15 @@ function Kavo.CreateLib(kavName, themeList)
                 UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = moreInfo
 
-
                 updateSectionFrame()
-                                UpdateSize()
+                UpdateSize()
             
                 local btn = textboxElement
                 local infBtn = viewInfo
 
                 btn.MouseButton1Click:Connect(function()
                     if focusing then
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             focusing = false
                         end
@@ -900,7 +891,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local hovering = false
                 btn.MouseEnter:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                         }):Play()
                         hovering = true
@@ -909,7 +900,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 btn.MouseLeave:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = themeList.ElementColor
                         }):Play()
                         hovering = false
@@ -918,7 +909,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 TextBox.FocusLost:Connect(function(EnterPressed)
                     if focusing then
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             focusing = false
                         end
@@ -928,7 +919,7 @@ function Kavo.CreateLib(kavName, themeList)
                         return
                     else
                         callback(TextBox.Text)
-                        wait(0.18)
+                        task.wait(0.18)
                         TextBox.Text = ""  
                     end
                 end)
@@ -937,7 +928,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             if v ~= moreInfo then
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             end
@@ -945,16 +936,16 @@ function Kavo.CreateLib(kavName, themeList)
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,0,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
                         Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
-                        wait(1.5)
+                        task.wait(1.5)
                         focusing = false
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,2,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
-                        wait(0)
+                        task.wait(0)
                         viewDe = false
                     end
                 end)
                 coroutine.wrap(function()
-                    while wait() do
+                    while task.wait() do
                         if not hovering then
                             textboxElement.BackgroundColor3 = themeList.ElementColor
                         end
@@ -970,7 +961,7 @@ function Kavo.CreateLib(kavName, themeList)
                 end)()
             end 
 
-                function Elements:NewToggle(tname, nTip, callback)
+                local function Elements:NewToggle(tname, nTip, callback)
                     local TogFunction = {}
                     tname = tname or "Toggle"
                     nTip = nTip or "Prints Current Toggle State"
@@ -1089,13 +1080,13 @@ function Kavo.CreateLib(kavName, themeList)
                     local img = toggleEnabled
                     local infBtn = viewInfo
 
-                                    updateSectionFrame()
-                UpdateSize()
+                    updateSectionFrame()
+                    UpdateSize()
 
                     btn.MouseButton1Click:Connect(function()
                         if not focusing then
                             if toggled == false then
-                                game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
+                                tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                     ImageTransparency = 0
                                 }):Play()
                                 local c = sample:Clone()
@@ -1111,11 +1102,11 @@ function Kavo.CreateLib(kavName, themeList)
                                 c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
+                                    task.wait(len / 12)
                                 end
                                 c:Destroy()
                             else
-                                game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
+                                tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                     ImageTransparency = 1
                                 }):Play()
                                 local c = sample:Clone()
@@ -1131,14 +1122,14 @@ function Kavo.CreateLib(kavName, themeList)
                                 c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
+                                    task.wait(len / 12)
                                 end
                                 c:Destroy()
                             end
                             toggled = not toggled
                             pcall(callback, toggled)
                         else
-                            for i,v in next, infoContainer:GetChildren() do
+                            for _, v in next, infoContainer:GetChildren() do
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                                 focusing = false
                             end
@@ -1148,7 +1139,7 @@ function Kavo.CreateLib(kavName, themeList)
                     local hovering = false
                     btn.MouseEnter:Connect(function()
                         if not focusing then
-                            game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                            tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                 BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                             }):Play()
                             hovering = true
@@ -1156,7 +1147,7 @@ function Kavo.CreateLib(kavName, themeList)
                     end)
                     btn.MouseLeave:Connect(function()
                         if not focusing then
-                            game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                            tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                 BackgroundColor3 = themeList.ElementColor
                             }):Play()
                             hovering = false
@@ -1164,7 +1155,7 @@ function Kavo.CreateLib(kavName, themeList)
                     end)
 
                     coroutine.wrap(function()
-                        while wait() do
+                        while task.wait() do
                             if not hovering then
                                 toggleElement.BackgroundColor3 = themeList.ElementColor
                             end
@@ -1181,7 +1172,7 @@ function Kavo.CreateLib(kavName, themeList)
                         if not viewDe then
                             viewDe = true
                             focusing = true
-                            for i,v in next, infoContainer:GetChildren() do
+                            for _, v in next, infoContainer:GetChildren() do
                                 if v ~= moreInfo then
                                     Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                                 end
@@ -1189,28 +1180,28 @@ function Kavo.CreateLib(kavName, themeList)
                             Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,0,0)}, 0.2)
                             Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
                             Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
-                            wait(1.5)
+                            task.wait(1.5)
                             focusing = false
                             Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
-                            wait(0)
+                            task.wait(0)
                             viewDe = false
                         end
                     end)
-                    function TogFunction:UpdateToggle(newText, isTogOn)
+                    local function TogFunction:UpdateToggle(newText, isTogOn)
                         isTogOn = isTogOn or toggle
                         if newText ~= nil then 
                             togName.Text = newText
                         end
                         if isTogOn then
                             toggled = true
-                            game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
+                            tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                 ImageTransparency = 0
                             }):Play()
                             pcall(callback, toggled)
                         else
                             toggled = false
-                            game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
+                            tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                 ImageTransparency = 1
                             }):Play()
                             pcall(callback, toggled)
@@ -1219,7 +1210,7 @@ function Kavo.CreateLib(kavName, themeList)
                     return TogFunction
             end
 
-            function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, callback)
+            local function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, callback)
                 slidInf = slidInf or "Slider"
                 slidTip = slidTip or "Slider tip here"
                 maxvalue = maxvalue or 500
@@ -1356,9 +1347,9 @@ function Kavo.CreateLib(kavName, themeList)
                     Utility:TweenObject(moreInfo, {TextColor3 = Color3.fromRGB(255,255,255)}, 0.2)
                 end 
 
-
-                                updateSectionFrame()
+                updateSectionFrame()
                 UpdateSize()
+                
                 local mouse = game:GetService("Players").LocalPlayer:GetMouse();
 
                 local ms = game.Players.LocalPlayer:GetMouse()
@@ -1368,7 +1359,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local hovering = false
                 btn.MouseEnter:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                         }):Play()
                         hovering = true
@@ -1376,7 +1367,7 @@ function Kavo.CreateLib(kavName, themeList)
                 end)
                 btn.MouseLeave:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = themeList.ElementColor
                         }):Play()
                         hovering = false
@@ -1384,7 +1375,7 @@ function Kavo.CreateLib(kavName, themeList)
                 end)        
 
                 coroutine.wrap(function()
-                    while wait() do
+                    while task.wait() do
                         if not hovering then
                             sliderElement.BackgroundColor3 = themeList.ElementColor
                         end
@@ -1402,7 +1393,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local Value
                 sliderBtn.MouseButton1Down:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             TextTransparency = 0
                         }):Play()
                         Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
@@ -1425,7 +1416,7 @@ function Kavo.CreateLib(kavName, themeList)
                                     callback(Value)
                                 end)
                                 val.Text = Value
-                                game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                                tween:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                     TextTransparency = 1
                                 }):Play()
                                 sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
@@ -1434,7 +1425,7 @@ function Kavo.CreateLib(kavName, themeList)
                             end
                         end)
                     else
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             focusing = false
                         end
@@ -1445,7 +1436,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             if v ~= moreInfo then
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             end
@@ -1453,17 +1444,17 @@ function Kavo.CreateLib(kavName, themeList)
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,0,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
                         Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
-                        wait(1.5)
+                        task.wait(1.5)
                         focusing = false
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,2,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
-                        wait(0)
+                        task.wait(0)
                         viewDe = false
                     end
                 end)        
             end
 
-            function Elements:NewDropdown(dropname, dropinf, list, callback)
+            local function Elements:NewDropdown(dropname, dropinf, list, callback)
                 local DropFunction = {}
                 dropname = dropname or "Dropdown"
                 list = list or {}
@@ -1472,7 +1463,6 @@ function Kavo.CreateLib(kavName, themeList)
 
                 local opened = false
                 local DropYSize = 33
-
 
                 local dropFrame = Instance.new("Frame")
                 local dropOpen = Instance.new("TextButton")
@@ -1516,7 +1506,7 @@ function Kavo.CreateLib(kavName, themeList)
                         if opened then
                             opened = false
                             dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
-                            wait(0.1)
+                            task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
                             local c = sample:Clone()
@@ -1532,13 +1522,13 @@ function Kavo.CreateLib(kavName, themeList)
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
-                                wait(len / 12)
+                                task.wait(len / 12)
                             end
                             c:Destroy()
                         else
                             opened = true
                             dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
-                            wait(0.1)
+                            task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
                             local c = sample:Clone()
@@ -1554,12 +1544,12 @@ function Kavo.CreateLib(kavName, themeList)
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
-                                wait(len / 12)
+                                task.wait(len / 12)
                             end
                             c:Destroy()
                         end
                     else
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             focusing = false
                         end
@@ -1647,7 +1637,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local hovering = false
                 btn.MouseEnter:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                         }):Play()
                         hovering = true
@@ -1655,14 +1645,14 @@ function Kavo.CreateLib(kavName, themeList)
                 end)
                 btn.MouseLeave:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = themeList.ElementColor
                         }):Play()
                         hovering = false
                     end
                 end)        
                 coroutine.wrap(function()
-                    while wait() do
+                    while task.wait() do
                         if not hovering then
                             dropOpen.BackgroundColor3 = themeList.ElementColor
                         end
@@ -1689,7 +1679,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             if v ~= moreInfo then
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             end
@@ -1697,16 +1687,16 @@ function Kavo.CreateLib(kavName, themeList)
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,0,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
                         Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
-                        wait(1.5)
+                        task.wait(1.5)
                         focusing = false
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,2,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
-                        wait(0)
+                        task.wait(0)
                         viewDe = false
                     end
                 end)     
 
-                for i,v in next, list do
+                for _, v in next, list do
                     local optionSelect = Instance.new("TextButton")
                     local UICorner_2 = Instance.new("UICorner")
                     local Sample1 = Instance.new("ImageLabel")
@@ -1740,7 +1730,7 @@ function Kavo.CreateLib(kavName, themeList)
                             callback(v)
                             itemTextbox.Text = v
                             dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), 'InOut', 'Linear', 0.08)
-                            wait(0.1)
+                            task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
                             local c = sample1:Clone()
@@ -1756,11 +1746,11 @@ function Kavo.CreateLib(kavName, themeList)
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
-                                wait(len / 12)
+                                task.wait(len / 12)
                             end
                             c:Destroy()         
                         else
-                            for i,v in next, infoContainer:GetChildren() do
+                            for _, v in next, infoContainer:GetChildren() do
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                                 focusing = false
                             end
@@ -1774,7 +1764,7 @@ function Kavo.CreateLib(kavName, themeList)
                     local oHover = false
                     optionSelect.MouseEnter:Connect(function()
                         if not focusing then
-                            game.TweenService:Create(optionSelect, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                            tween:Create(optionSelect, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                 BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                             }):Play()
                             oHover = true
@@ -1782,14 +1772,14 @@ function Kavo.CreateLib(kavName, themeList)
                     end)
                     optionSelect.MouseLeave:Connect(function()
                         if not focusing then
-                            game.TweenService:Create(optionSelect, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                            tween:Create(optionSelect, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                 BackgroundColor3 = themeList.ElementColor
                             }):Play()
                             oHover = false
                         end
                     end)   
                     coroutine.wrap(function()
-                        while wait() do
+                        while task.wait() do
                             if not oHover then
                                 optionSelect.BackgroundColor3 = themeList.ElementColor
                             end
@@ -1799,14 +1789,14 @@ function Kavo.CreateLib(kavName, themeList)
                     end)()
                 end
 
-                function DropFunction:Refresh(newList)
+                local function DropFunction:Refresh(newList)
                     newList = newList or {}
-                    for i,v in next, dropFrame:GetChildren() do
+                    for _, v in next, dropFrame:GetChildren() do
                         if v.Name == "optionSelect" then
                             v:Destroy()
                         end
                     end
-                    for i,v in next, newList do
+                    for _, v in next, newList do
                         local optionSelect = Instance.new("TextButton")
                         local UICorner_2 = Instance.new("UICorner")
                         local Sample11 = Instance.new("ImageLabel")
@@ -1841,7 +1831,7 @@ function Kavo.CreateLib(kavName, themeList)
                                 callback(v)
                                 itemTextbox.Text = v
                                 dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), 'InOut', 'Linear', 0.08)
-                                wait(0.1)
+                                task.wait(0.1)
                                 updateSectionFrame()
                                 UpdateSize()
                                 local c = sample11:Clone()
@@ -1857,23 +1847,25 @@ function Kavo.CreateLib(kavName, themeList)
                                 c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
+                                    task.wait(len / 12)
                                 end
                                 c:Destroy()         
                             else
-                                for i,v in next, infoContainer:GetChildren() do
+                                for _, v in next, infoContainer:GetChildren() do
                                     Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                                     focusing = false
                                 end
                                 Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                             end
                         end)
-                                        updateSectionFrame()
-                UpdateSize()
+                        
+                        updateSectionFrame()
+                        UpdateSize()
+                        
                         local hov = false
                         optionSelect.MouseEnter:Connect(function()
                             if not focusing then
-                                game.TweenService:Create(optionSelect, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                                tween:Create(optionSelect, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                     BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                                 }):Play()
                                 hov = true
@@ -1881,14 +1873,14 @@ function Kavo.CreateLib(kavName, themeList)
                         end)
                         optionSelect.MouseLeave:Connect(function()
                             if not focusing then
-                                game.TweenService:Create(optionSelect, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                                tween:Create(optionSelect, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                     BackgroundColor3 = themeList.ElementColor
                                 }):Play()
                                 hov = false
                             end
                         end)   
                         coroutine.wrap(function()
-                            while wait() do
+                            while task.wait() do
                                 if not oHover then
                                     optionSelect.BackgroundColor3 = themeList.ElementColor
                                 end
@@ -1899,19 +1891,19 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                     if opened then 
                         dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
-                        wait(0.1)
+                        task.wait(0.1)
                         updateSectionFrame()
                         UpdateSize()
                     else
                         dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
-                        wait(0.1)
+                        task.wait(0.1)
                         updateSectionFrame()
                         UpdateSize()
                     end
                 end
                 return DropFunction
             end
-            function Elements:NewKeybind(keytext, keyinf, first, callback)
+            local function Elements:NewKeybind(keytext, keyinf, first, callback)
                 keytext = keytext or "KeybindText"
                 keyinf = keyinf or "KebindInfo"
                 callback = callback or function() end
@@ -1964,10 +1956,10 @@ function Kavo.CreateLib(kavName, themeList)
                         c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                         for i = 1, 10 do
                         c.ImageTransparency = c.ImageTransparency + 0.05
-                            wait(len / 12)
+                            task.wait(len / 12)
                         end
                     else
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             focusing = false
                         end
@@ -2033,7 +2025,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             if v ~= moreInfo then
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             end
@@ -2041,20 +2033,22 @@ function Kavo.CreateLib(kavName, themeList)
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,0,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
                         Utility:TweenObject(keybindElement, {BackgroundColor3 = themeList.ElementColor}, 0.2)
-                        wait(1.5)
+                        task.wait(1.5)
                         focusing = false
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,2,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
-                        wait(0)
+                        task.wait(0)
                         viewDe = false
                     end
                 end)  
-                                updateSectionFrame()
+                
+                updateSectionFrame()
                 UpdateSize()
+                
                 local oHover = false
                 keybindElement.MouseEnter:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(keybindElement, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(keybindElement, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                         }):Play()
                         oHover = true
@@ -2062,7 +2056,7 @@ function Kavo.CreateLib(kavName, themeList)
                 end)
                 keybindElement.MouseLeave:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(keybindElement, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(keybindElement, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = themeList.ElementColor
                         }):Play()
                         oHover = false
@@ -2107,7 +2101,7 @@ function Kavo.CreateLib(kavName, themeList)
                 togName_2.TextXAlignment = Enum.TextXAlignment.Right   
 
                 coroutine.wrap(function()
-                    while wait() do
+                    while task.wait() do
                         if not oHover then
                             keybindElement.BackgroundColor3 = themeList.ElementColor
                         end
@@ -2119,12 +2113,11 @@ function Kavo.CreateLib(kavName, themeList)
                         Sample.ImageColor3 = themeList.SchemeColor
                         moreInfo.TextColor3 = themeList.TextColor
                         moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
-
                     end
                 end)()
             end
 
-            function Elements:NewColorPicker(colText, colInf, defcolor, callback)
+            local function Elements:NewColorPicker(colText, colInf, defcolor, callback)
                 colText = colText or "ColorPicker"
                 callback = callback or function() end
                 defcolor = defcolor or Color3.fromRGB(1,1,1)
@@ -2154,7 +2147,6 @@ function Kavo.CreateLib(kavName, themeList)
                 local onrainbow = Instance.new("TextButton")
                 local togName_2 = Instance.new("TextLabel")
 
-                --Properties:
                 local Sample = Instance.new("ImageLabel")
                 Sample.Name = "Sample"
                 Sample.Parent = colorHeader
@@ -2184,7 +2176,7 @@ function Kavo.CreateLib(kavName, themeList)
                         if colorOpened then
                             colorOpened = false
                             colorElement:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
-                            wait(0.1)
+                            task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
                             local c = sample:Clone()
@@ -2200,13 +2192,13 @@ function Kavo.CreateLib(kavName, themeList)
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
-                                wait(len / 12)
+                                task.wait(len / 12)
                             end
                             c:Destroy()
                         else
                             colorOpened = true
                             colorElement:TweenSize(UDim2.new(0, 352, 0, 141), "InOut", "Linear", 0.08, true)
-                            wait(0.1)
+                            task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
                             local c = sample:Clone()
@@ -2222,12 +2214,12 @@ function Kavo.CreateLib(kavName, themeList)
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
-                                wait(len / 12)
+                                task.wait(len / 12)
                             end
                             c:Destroy()
                         end
                     else
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             focusing = false
                         end
@@ -2305,7 +2297,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for i,v in next, infoContainer:GetChildren() do
+                        for _, v in next, infoContainer:GetChildren() do
                             if v ~= moreInfo then
                                 Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
                             end
@@ -2313,11 +2305,11 @@ function Kavo.CreateLib(kavName, themeList)
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,0,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
                         Utility:TweenObject(colorElement, {BackgroundColor3 = themeList.ElementColor}, 0.2)
-                        wait(1.5)
+                        task.wait(1.5)
                         focusing = false
                         Utility:TweenObject(moreInfo, {Position = UDim2.new(0,0,2,0)}, 0.2)
                         Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
-                        wait(0)
+                        task.wait(0)
                         viewDe = false
                     end
                 end)   
@@ -2443,7 +2435,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 colorElement.MouseEnter:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(colorElement, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(colorElement, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                         }):Play()
                         hovering = true
@@ -2451,7 +2443,7 @@ function Kavo.CreateLib(kavName, themeList)
                 end)
                 colorElement.MouseLeave:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(colorElement, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                        tween:Create(colorElement, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                             BackgroundColor3 = themeList.ElementColor
                         }):Play()
                         hovering = false
@@ -2465,7 +2457,7 @@ function Kavo.CreateLib(kavName, themeList)
                     Utility:TweenObject(moreInfo, {TextColor3 = Color3.fromRGB(255,255,255)}, 0.2)
                 end 
                 coroutine.wrap(function()
-                    while wait() do
+                    while task.wait() do
                         if not hovering then
                             colorElement.BackgroundColor3 = themeList.ElementColor
                         end
@@ -2482,8 +2474,10 @@ function Kavo.CreateLib(kavName, themeList)
                         Sample.ImageColor3 = themeList.SchemeColor
                     end
                 end)()
+                
                 updateSectionFrame()
                 UpdateSize()
+                
                 local plr = game.Players.LocalPlayer
                 local mouse = plr:GetMouse()
                 local uis = game:GetService('UserInputService')
@@ -2499,7 +2493,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local rainbow = false
                 local rainbowconnection
                 local counter = 0
-                --
+                
                 local function zigzag(X) return math.acos(math.cos(X*math.pi))/math.pi end
                 counter = 0
                 local function mouseLocation()
@@ -2510,17 +2504,17 @@ function Kavo.CreateLib(kavName, themeList)
                         local ml = mouseLocation()
                         local x,y = ml.X - rgb.AbsolutePosition.X,ml.Y - rgb.AbsolutePosition.Y
                         local maxX,maxY = rgb.AbsoluteSize.X,rgb.AbsoluteSize.Y
-                        if x<0 then x=0 end
-                        if x>maxX then x=maxX end
-                        if y<0 then y=0 end
-                        if y>maxY then y=maxY end
+                        if x < 0 then x = 0 end
+                        if x > maxX then x = maxX end
+                        if y < 0 then y = 0 end
+                        if y > maxY then y = maxY end
                         x = x/maxX
                         y = y/maxY
-                        local cx = cursor.AbsoluteSize.X/2
-                        local cy = cursor.AbsoluteSize.Y/2
-                        cursor.Position = UDim2.new(x,-cx,y,-cy)
-                        color = {1-x,1-y,color[3]}
-                        local realcolor = Color3.fromHSV(color[1],color[2],color[3])
+                        local cx = cursor.AbsoluteSize.X / 2
+                        local cy = cursor.AbsoluteSize.Y / 2
+                        cursor.Position = UDim2.new(x, -cx, y, -cy)
+                        color = {1 - x,1 - y, color[3]}
+                        local realcolor = Color3.fromHSV(color[1], color[2], color[3])
                         colorCurrent.BackgroundColor3 = realcolor
                         callback(realcolor)
                     end
@@ -2528,58 +2522,58 @@ function Kavo.CreateLib(kavName, themeList)
                         local ml = mouseLocation()
                         local y = ml.Y - dark.AbsolutePosition.Y
                         local maxY = dark.AbsoluteSize.Y
-                        if y<0 then y=0 end
-                        if y>maxY then y=maxY end
+                        if y < 0 then y = 0 end
+                        if y > maxY then y = maxY end
                         y = y/maxY
-                        local cy = cursor2.AbsoluteSize.Y/2
-                        cursor2.Position = UDim2.new(0.5,0,y,-cy)
-                        cursor2.ImageColor3 = Color3.fromHSV(0,0,y)
-                        color = {color[1],color[2],1-y}
-                        local realcolor = Color3.fromHSV(color[1],color[2],color[3])
+                        local cy = cursor2.AbsoluteSize.Y / 2
+                        cursor2.Position = UDim2.new(0.5, 0, y, -cy)
+                        cursor2.ImageColor3 = Color3.fromHSV(0, 0, y)
+                        color = {color[1], color[2],1 - y}
+                        local realcolor = Color3.fromHSV(color[1], color[2], color[3])
                         colorCurrent.BackgroundColor3 = realcolor
                         callback(realcolor)
                     end
                 end
 
                 local function setcolor(tbl)
-                    local cx = cursor.AbsoluteSize.X/2
-                    local cy = cursor.AbsoluteSize.Y/2
-                    color = {tbl[1],tbl[2],tbl[3]}
-                    cursor.Position = UDim2.new(color[1],-cx,color[2]-1,-cy)
-                    cursor2.Position = UDim2.new(0.5,0,color[3]-1,-cy)
-                    local realcolor = Color3.fromHSV(color[1],color[2],color[3])
+                    local cx = cursor.AbsoluteSize.X / 2
+                    local cy = cursor.AbsoluteSize.Y / 2
+                    color = {tbl[1], tbl[2], tbl[3]}
+                    cursor.Position = UDim2.new(color[1], -cx, color[2] - 1, -cy)
+                    cursor2.Position = UDim2.new(0.5, 0, color[3] - 1, -cy)
+                    local realcolor = Color3.fromHSV(color[1], color[2], color[3])
                     colorCurrent.BackgroundColor3 = realcolor
                 end
                 local function setrgbcolor(tbl)
-                    local cx = cursor.AbsoluteSize.X/2
-                    local cy = cursor.AbsoluteSize.Y/2
-                    color = {tbl[1],tbl[2],color[3]}
-                    cursor.Position = UDim2.new(color[1],-cx,color[2]-1,-cy)
-                    local realcolor = Color3.fromHSV(color[1],color[2],color[3])
+                    local cx = cursor.AbsoluteSize.X / 2
+                    local cy = cursor.AbsoluteSize.Y / 2
+                    color = {tbl[1], tbl[2], color[3]}
+                    cursor.Position = UDim2.new(color[1], -cx, color[2] - 1, -cy)
+                    local realcolor = Color3.fromHSV(color[1], color[2], color[3])
                     colorCurrent.BackgroundColor3 = realcolor
                     callback(realcolor)
                 end
                 local function togglerainbow()
                     if rainbow then
-                        game.TweenService:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
+                        tween:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
                             ImageTransparency = 1
                         }):Play()
                         rainbow = false
                         rainbowconnection:Disconnect()
                     else
-                        game.TweenService:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
+                        tween:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
                             ImageTransparency = 0
                         }):Play()
                         rainbow = true
                         rainbowconnection = rs.RenderStepped:Connect(function()
-                            setrgbcolor({zigzag(counter),1,1})
+                            setrgbcolor({zigzag(counter), 1, 1})
                             counter = counter + 0.01
                         end)
                     end
                 end
 
                 onrainbow.MouseButton1Click:Connect(togglerainbow)
-                --
+                
                 mouse.Move:connect(cp)
                 rgb.MouseButton1Down:connect(function()colorpicker=true end)
                 dark.MouseButton1Down:connect(function()darknesss=true end)
@@ -2589,10 +2583,10 @@ function Kavo.CreateLib(kavName, themeList)
                         if colorpicker then colorpicker = false end
                     end
                 end)
-                setcolor({h,s,v})
+                setcolor({h, s, v})
             end
             
-            function Elements:NewLabel(title)
+            local function Elements:NewLabel(title)
             	local labelFunctions = {}
             	local label = Instance.new("TextLabel")
             	local UICorner = Instance.new("UICorner")
@@ -2622,14 +2616,16 @@ function Kavo.CreateLib(kavName, themeList)
 	            end 
 
 		        coroutine.wrap(function()
-		            while wait() do
+		            while task.wait() do
 		                label.BackgroundColor3 = themeList.SchemeColor
 		                label.TextColor3 = themeList.TextColor
 		            end
 		        end)()
+		        
                 updateSectionFrame()
                 UpdateSize()
-                function labelFunctions:UpdateLabel(newText)
+                
+                local function labelFunctions:UpdateLabel(newText)
                 	if label.Text ~= "  "..newText then
                 		label.Text = "  "..newText
                 	end
