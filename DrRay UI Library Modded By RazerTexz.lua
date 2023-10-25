@@ -1290,11 +1290,11 @@ local closed = false
 
 local dragging = false
 local dragInput, mousePos, framePos
-DRR["1f"].InputBegan:Connect(function(input)
+DRR["2"].InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         mousePos = input.Position
-        framePos = DRR["1f"].Position
+        framePos = DRR["2"].Position
         
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
@@ -1303,7 +1303,7 @@ DRR["1f"].InputBegan:Connect(function(input)
         end)
     end
 end)
-DRR["1f"].InputChanged:Connect(function(input)
+DRR["2"].InputChanged:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
         dragInput = input
     end
@@ -1311,7 +1311,7 @@ end)
 UIS.InputChanged:Connect(function(input)
     if input == dragInput and dragging then
         local delta = input.Position - mousePos
-        DRR["1f"].Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+        DRR["2"].Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
     end
 end)
 
