@@ -1259,11 +1259,9 @@ local DRR_REQUIRE = require;
 local DRR_MODULES = {};
 local function require(Module:ModuleScript)
     local ModuleState = DRR_MODULES[Module];
-    if ModuleState then
-        if not ModuleState.Required then
+    if ModuleState and not ModuleState.Required then
             ModuleState.Required = true;
             ModuleState.Value = ModuleState.Closure();
-        end
         return ModuleState.Value;
     end;
     return DRR_REQUIRE(Module);
@@ -1722,8 +1720,8 @@ DRR_MODULES[DRR["93"]] = {
     		end)
     	end
     	return self
-    end    
+    end
     return UILIB
-    end;
+end;
 };
 return require(DRR["93"]);
