@@ -1285,6 +1285,7 @@ DRR_MODULES[DRR["93"]] = {
     local dragging = false
     local dragInput, mousePos, framePos
     local holdStartTime
+    local currentTime
     local isHolding
     DRR["1f"].InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -1296,6 +1297,9 @@ DRR_MODULES[DRR["93"]] = {
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
                     dragging = false
+                    isHolding = false
+                    holdStartTime = nil
+                    currentTime = nil
                 end
             end)
         end
@@ -1311,7 +1315,7 @@ DRR_MODULES[DRR["93"]] = {
             DRR["1f"].Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
         end
         if dragging and holdStartTime > 0 then
-            local currentTime = os.clock()
+            currentTime = os.clock()
             if (currentTime - holdStartTime) > 0.1 then
                 isHolding = true
             end
@@ -1510,7 +1514,7 @@ DRR_MODULES[DRR["93"]] = {
     		newLabel.Visible = true
     		newLabel.Title.Text = text
     	    
-    		function labelFunction.updateLabel(newText)
+    		function labelFunction:updateLabel(newText)
         	    if newLabel.Title.Text ~= "  "..newText then
                     newLabel.Title.Text = "  "..newText
             	end
