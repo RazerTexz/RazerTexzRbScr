@@ -1,3 +1,11 @@
+--[[
+    MODDED BY RAZERTEXZ
+    CHANGELOGS:
+    - YOU CAN NOW UPDATE ANY LABEL TEXT!!!
+    - CODE OPTIMIZATION
+    - TOGGLE BUTTON CAN NOW BE DRAG!!!
+]]
+
 -- Instances: 147 | Scripts: 0 | Modules: 1
 local DRR = {};
 
@@ -1288,7 +1296,7 @@ DRR_MODULES[DRR["93"]] = {
     local currentTime
     local isHolding
     DRR["1f"].InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and closed then
             dragging = true
             mousePos = input.Position
             framePos = DRR["1f"].Position
@@ -1514,9 +1522,7 @@ DRR_MODULES[DRR["93"]] = {
     		newLabel.Visible = true
     		newLabel.Title.Text = text
     		function labelFunction.updateLabel(newText)
-        	    if newLabel.Title.Text ~= "  "..newText then
-                    newLabel.Title.Text = "  "..newText
-            	end
+                newLabel.Title.Text = newText
             end
             return newLabel.Title and labelFunction
     	end
