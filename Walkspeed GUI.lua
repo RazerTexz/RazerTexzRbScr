@@ -1,26 +1,23 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/Kavo%20UI%20Draggable%20Android.lua"))()
-local Window = Library.CreateLib("Walkspeed Gui", "Ocean")
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/DrRay%20UI%20Library%20Modded%20By%20RazerTexz.lua"))()
+local window = DrRayLibrary:Load("Walkspeed GUI", "Default")
+local mainTab = DrRayLibrary.newTab("Main", "")
 
 local workspace = game:GetService("Workspace")
 local runService = game:GetService("RunService")
+local starterGui = game:GetService("StarterGui")
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
 
-local MainTab = Window:NewTab("Main")
-local MainSec = MainTab:NewSection("--- MAIN TAB ---")
-local customWalkSpeedCounter = MainSec:NewLabel("Custom walkspeed counter: nil")
-local currentWalkSpeed = MainSec:NewLabel("Current walkspeed: "..tonumber(walkSpeed))
 local walkSpeed
+local isWalkSpeed
 
-MainSec:NewTextBox("Custom walkspeed", "", function(speed)
-    walkSpeed = tonumber(speed)
-    customWalkSpeedCounter:UpdateLabel("Custom walkspeed counter: "..localPlayer.Character.Humanoid.WalkSpeed)
-end)
-MainSec:NewToggle("Apply custom walkspeed", "", function(bool)
-    getgenv().isWalkSpeed = bool
-end)
-MainSec:NewToggle("Fix sliding at high speed", "", function(bool)
-    if bool then
+local currentWalkspeed = mainTab.newLabel("Current Walkspeed: "..localPlayer.Character.Humanoid.WalkSpeed)
+
+mainTab.newButton("Destroy GUI", "", function() game:GetService("CoreGui"):FindFirstChild("DrRay"):Destroy() end)
+mainTab.newInput("Custom walkspeed", "", function(speed) walkSpeed = tonumber(speed) end)
+mainTab.newToggle("Apply custom walkspeed", "", false, function(state) isWalkSpeed = state end)
+mainTab.newToggle("Fix sliding at high speed", "", false, function(state)
+    if state then
         if localPlayer.Character.HumanoidRootPart.CustomPhysicalProperties ~= nil then
             local playerProperties = localPlayer.Character.HumanoidRootPart.CustomPhysicalProperties
             local a, b, c, d = playerProperties.Friction, playerProperties.Elasticity, playerProperties.FrictionWeight, playerProperties.ElasticityWeight
@@ -30,20 +27,19 @@ MainSec:NewToggle("Fix sliding at high speed", "", function(bool)
         end
     end
 end)
-MainSec:NewButton("Refresh player", "", function()
+mainTab.newButton("Refresh player", "", function()
     local refreshPosition = localPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
     localPlayer.Character:BreakJoints()
     workspace:WaitForChild(LP.Name)
     localPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = refreshPosition
 end)
 
+local infoTab = DrRayLibrary.newTab("Info", "")
+infoTab.newLabel("Made by RazerTexz")
+
 runService.Heartbeat:Connect(function()
-    currentWalkSpeed:UpdateLabel("Current walkspeed: "..localPlayer.Character.Humanoid.WalkSpeed)
-    if isWalkSpeed then
+    if isWalkSpeed then 
         localPlayer.Character.Humanoid.WalkSpeed = walkSpeed
+        currentWalkspeed.updateLabel("Current Walkspeed: "..localPlayer.Character.Humanoid.WalkSpeed)
     end
 end)
-
-local InfoTab = Window:NewTab("Info")
-local InfoSec = InfoTab:NewSection("--- INFO TAB---")
-InfoSec:NewLabel("Made By RazerTexz")

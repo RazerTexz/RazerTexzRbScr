@@ -1,15 +1,15 @@
 local Game = game:GetDescendants()
-local Workspace = game:GetService("Workspace")
-local Lighting = game:GetService("Lighting"):GetDescendants()
-local RunService = game:GetService("RunService")
+local workspace = game:GetService("Workspace")
+local lighting = game:GetService("Lighting"):GetDescendants()
+local runService = game:GetService("RunService")
 
-local Terrain = Workspace:FindFirstChildOfClass("Terrain")
-Terrain.WaterWaveSize = 0
-Terrain.WaterWaveSpeed = 0
-Terrain.WaterReflectance = 0
-Terrain.WaterTransparency = 0
-Lighting.GlobalShadows = false
-Lighting.FogEnd = 9e9
+local terrain = workspace:FindFirstChildOfClass("Terrain")
+terrain.WaterWaveSize = 0
+terrain.WaterWaveSpeed = 0
+terrain.WaterReflectance = 0
+terrain.WaterTransparency = 0
+lighting.GlobalShadows = false
+lighting.FogEnd = 9e9
 settings().Rendering.QualityLevel = 1
 
 for _, v in ipairs(Game) do
@@ -26,16 +26,16 @@ for _, v in ipairs(Game) do
 	end
 end
 
-for _, v in ipairs(Lighting) do
+for _, v in ipairs(lighting) do
 	if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
 		v.Enabled = false
 	end
 end
 
-Workspace.DescendantAdded:Connect(function(child)
+workspace.DescendantAdded:Connect(function(child)
 	task.spawn(function()
 		if child:IsA("ForceField") or child:IsA("Sparkles") or child:IsA("Smoke") or child:IsA("Fire") then
-			RunService.Heartbeat:Wait()
+			runService.Heartbeat:Wait()
 			child:Destroy()
 		end
 	end)
