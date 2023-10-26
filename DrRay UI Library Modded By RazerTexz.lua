@@ -1627,7 +1627,7 @@ DRR_MODULES[DRR["93"]] = {
     				task.wait()
     				Percent = math.clamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
     				perc = math.round(Percent * max)
-    				if not manageSlider false then
+    				if not manageSlider then
     					Label.Text = perc
     					func(perc)
     				else
