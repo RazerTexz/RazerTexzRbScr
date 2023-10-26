@@ -1291,7 +1291,7 @@ DRR_MODULES[DRR["93"]] = {
             dragging = true
             mousePos = input.Position
             framePos = DRR["1f"].Position
-            holdStartTime = tick()
+            holdStartTime = os.clock()
             
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
@@ -1311,7 +1311,7 @@ DRR_MODULES[DRR["93"]] = {
             DRR["1f"].Position  = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
         end
         if dragging and holdStartTime > 0 then
-            local currentTime = tick()
+            local currentTime = os.clock()
             if (currentTime - holdStartTime) > 0.1 then
                 isHolding = true
             end
@@ -1338,11 +1338,9 @@ DRR_MODULES[DRR["93"]] = {
                 end
             end)
     	parent.TopBar.ProfileMenu.Title.TextLabel.Text = name
-    	if img then
+    	if img and not img == "Default" then
             parent.MainBar.Logo.Image = img
-    	elseif img == "Default" then
-	        
-    	else
+        else
     		parent.MainBar.Logo.Image = ""
     	end
     	
@@ -1629,14 +1627,14 @@ DRR_MODULES[DRR["93"]] = {
     				task.wait()
     				Percent = math.clamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
     				perc = math.round(Percent * max)
-    				if manageSlider == false then
+    				if not manageSlider false then
     					Label.Text = perc
     					func(perc)
     				else
     					Label.Text = perc
     					func(perc, Label)
     				end
-    				local tween = tweenServ:Create(Fill, TweenInfo.new(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = UDim2.fromScale(Percent, 1) }):Play()
+    				local tween = tweenServ:Create(Fill, TweenInfo.new(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = UDim2.fromScale(Percent, 1)}):Play()
     			until not MouseDown
     		end
     		    
