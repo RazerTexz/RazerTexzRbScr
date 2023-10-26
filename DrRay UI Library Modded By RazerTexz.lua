@@ -1511,15 +1511,14 @@ DRR_MODULES[DRR["93"]] = {
     		newLabel.Parent = newTab
     		newLabel.Visible = true
     		newLabel.Title.Text = text
-    
-    		return newLabel.Title
-    		
-    		function labelFunction.UpdateLabel(newText)
+    	    
+    		function labelFunction.updateLabel(newText)
         	    if newLabel.Title.Text ~= "  "..newText then
-            		newLabel.Title.Text = "  "..newText
+                    newLabel.Title.Text = "  "..newText
             	end
-           end	
-    	end    
+            end
+            return newLabel.Title, labelFunction 
+    	end
     	function self.newInput(name, desc, func)
     		local newInput = reserved.Textbox:Clone()
     		local textbox = newInput.TextboxBar.ActualTextbox    
