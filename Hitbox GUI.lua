@@ -1,10 +1,10 @@
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
 
-local teamCheck
-local hitboxEnabled
-local headHitboxEnabled
-local disableOnDeath
+local teamCheck = false
+local hitboxEnabled = false
+local headHitboxEnabled = false
+local disableOnDeath = false
 local hitboxSize = 20
 local headHitboxSize = 6
 local delay = 1
