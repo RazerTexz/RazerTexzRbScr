@@ -1,4 +1,4 @@
-local Game = game:GetDescendants()
+local game = game:GetDescendants()
 local workspace = game:GetService("Workspace")
 local lighting = game:GetService("Lighting"):GetDescendants()
 local runService = game:GetService("RunService")
@@ -12,7 +12,7 @@ lighting.GlobalShadows = false
 lighting.FogEnd = 9e9
 settings().Rendering.QualityLevel = 1
 
-for _, v in ipairs(Game) do
+for _, v in ipairs(game) do
 	if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
 		v.Material = "SmoothPlastic"
 		v.Reflectance = 0
