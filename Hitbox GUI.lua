@@ -19,7 +19,7 @@ mainTab.newButton("Destroy GUI", "", function() game:GetService("CoreGui"):FindF
 mainTab.newToggle("Enable Team Check", "", false, function(state) teamCheck = state end)
 mainTab.newToggle("Enable Hitbox", "", false, function(state) hitboxEnabled = state end)
 mainTab.newToggle("Enable Head Hitbox", "", false, function(state) headHitboxEnabled = state end)
-mainTab.newToggle("Disable On Death", "", false, function(state) disableOnDeathEnabled = state end)
+mainTab.newToggle("Disable On Death", "", false, function(state) disableOnDeath = state end)
 
 settingsTab.newInput("Hitbox Size", "Default hitbox size: 20", function(size) hitboxSize = tonumber(size) end)
 settingsTab.newInput("Head Hitbox Size", "Default head hitbox size: 6", function(size) headHitboxSize = tonumber(size) end)
@@ -34,11 +34,7 @@ local function applyHitbox()
         if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
             if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                 local humanoidRootPart = v.Character.HumanoidRootPart
-                if disableOnDeath and v.Character.Humanoid.Health <= 0 then
-                    humanoidRootPart.Size = Vector3.new(0, 0, 0)
-                else
-                    humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
-                end
+                humanoidRootPart.Size = (disableOnDeath and v.Character.Humanoid.Health <= 0) and EnumVector3.new(0, 0, 0) or Vector3.new(hitboxSize, hitboxSize, hitboxSize)
                 humanoidRootPart.Transparency = transparency
                 humanoidRootPart.BrickColor = BrickColor.new("Really black")
                 humanoidRootPart.Material = "Neon"
@@ -55,11 +51,7 @@ local function applyHeadHitbox()
         if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
             if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                 local head = v.Character.Head
-                if disableOnDeath and v.Character.Humanoid.Health <= 0 then
-                    head.Size = Vector3.new(0, 0, 0)
-                else
-                    head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
-                end
+                head.Size = (disableOnDeath and v.Character.Humanoid.Health <= 0) and EnumVector3.new(0, 0, 0) or Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
                 head.Transparency = transparency
                 head.CanCollide = false
             end
