@@ -7,7 +7,6 @@
 
 -- Instances: 147 | Scripts: 0 | Modules: 1
 local DRR = {};
-
 -- DrRay
 DRR["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"));
 DRR["1"]["IgnoreGuiInset"] = true;
@@ -1291,6 +1290,7 @@ DRR_MODULES[DRR["93"]] = {
 
     parent.TopBar.ProfileMenu.PlayerProfile.TextLabel.Text = game:GetService("Players").LocalPlayer.DisplayName
     parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = game:GetService("Players"):GetUserThumbnailAsync(game:GetService("Players").LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
+
     function UILIB:Load(name, img, direction)
         local self = setmetatable({}, UILIB)
         task.spawn(function()
@@ -1313,7 +1313,7 @@ DRR_MODULES[DRR["93"]] = {
         else
             parent.MainBar.Logo.Image = ""
         end
-	
+
         parent.TopBar.TopBarClose.MouseButton1Down:Connect(function()
             if not closed then
                 closed = true
@@ -1340,7 +1340,7 @@ DRR_MODULES[DRR["93"]] = {
                 twRotate:Play()
                 tw3:Play()
             end
-        end)
+            end)
         function self:Open()
             local tw = twServ:Create(parent.MainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.212, 0)})
             local tw3 = twServ:Create(parent.TopBar.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)})
@@ -1402,21 +1402,21 @@ DRR_MODULES[DRR["93"]] = {
             end
         end
         function self:SetTheme(color, color2)
-            for _, v in ipairs(parent:GetChildren()) do
-                if v:IsA("GuiObject") then
-                    pcall(function()
-                        if v.BackgroundColor3 == Color3.fromRGB(39, 44, 61) then
-                            v.BackgroundColor3 = color
-                            GlobalColor1 = color
-                        elseif v.BackgroundColor3 == Color3.fromRGB(0, 255, 38) then
-                            v.BackgroundColor3 = color2
-                            GlobalColor2 = color2
-                        end
-                    end)
-                end
-            end
-        end
-    end
+    		for _, v in ipairs(parent:GetChildren()) do
+    			if v:IsA("GuiObject") then
+    				pcall(function()
+    					if v.BackgroundColor3 == Color3.fromRGB(39, 44, 61) then
+        					v.BackgroundColor3 = color
+    						GlobalColor1 = color
+    					elseif v.BackgroundColor3 == Color3.fromRGB(0, 255, 38) then
+    						v.BackgroundColor3 = color2
+    						GlobalColor2 = color2
+    					end
+    				end)
+    			end
+    		end
+    	end
+    end 
 
     function UILIB.newTab(name, img)	
         local self = setmetatable({}, UILIB)
@@ -1486,13 +1486,11 @@ DRR_MODULES[DRR["93"]] = {
             newInput.MouseLeave:Connect(function()
                 local twBtn = twServ:Create(newInput, TweenInfo.new(0.2), {Transparency = 0.4}):Play()
             end)
-
             newInput.Visible = true
             newInput.Parent = newTab
             newInput.Title.Text = name
             newInput.Description.Text = desc
             newInput.Name = name
-
             textbox.FocusLost:Connect(function()
                 func(textbox.Text)
             end)
@@ -1522,7 +1520,7 @@ DRR_MODULES[DRR["93"]] = {
                     end
                     task.wait(0.5)
                     if listening then
-                        newKey.Bind.Button.Text = "..."
+                        newKey.Bind.Button.Text = ".."
                     end
                     task.wait(0.5)
                     if listening then
@@ -1535,6 +1533,7 @@ DRR_MODULES[DRR["93"]] = {
                         Loop()
                     end
                 end)
+
                 a = UIS.InputBegan:Connect(function(input, processed)
                     if input.UserInputType == Enum.UserInputType.Keyboard then
                         newKey.Bind.Button.Text = input.KeyCode.Name
@@ -1593,7 +1592,6 @@ DRR_MODULES[DRR["93"]] = {
                     local tween = tweenServ:Create(Fill, TweenInfo.new(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
                 until not MouseDown
             end
-
             Trigger.MouseButton1Down:Connect(Update)
             UIS.InputEnded:Connect(function(input)
                 if input.UserInputType ==  Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -1609,14 +1607,14 @@ DRR_MODULES[DRR["93"]] = {
             newToggle.Visible = true
             newToggle.Title.Text = title
             newToggle.Description.Text = desc
-		
+
             newToggle.MouseEnter:Connect(function()
                 local twBtn = twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play()
             end)
             newToggle.MouseLeave:Connect(function()
                 local twBtn = twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play()
             end)
-	
+
             if realToggle then
                 newToggle.Label.BackgroundColor3 = GlobalColor2
             else
@@ -1657,9 +1655,9 @@ DRR_MODULES[DRR["93"]] = {
                         func(list)
                     end)
                 end)
-            end		
+            end
 
-            newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()			
+            newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()    			
                 if not newdd.Box.Visible then
                     newdd.Box.Visible = true
                     local twPos = twServ:Create(newdd.Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0, 1.696, 0)}):Play()
