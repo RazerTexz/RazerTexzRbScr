@@ -13,7 +13,7 @@ coroutine.wrap(function()
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
                 if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                     local humanoidRootPart = v.Character.HumanoidRootPart
-                    humanoidRootPart.Size = (disableOnDeath and v.Character.Humanoid.Health < 1) and Vector3.new(0, 0, 0) or Vector3.new(hitboxSize, hitboxSize, hitboxSize)
+                    humanoidRootPart.Size = (disableOnDeath and v.Character.Humanoid:GetState() == Enum.HumanoidStateType.Dead) and Vector3.new(0, 0, 0) or Vector3.new(hitboxSize, hitboxSize, hitboxSize)
                     humanoidRootPart.Transparency = transparency
                     humanoidRootPart.BrickColor = BrickColor.new("Really black")
                     humanoidRootPart.Material = "Neon"

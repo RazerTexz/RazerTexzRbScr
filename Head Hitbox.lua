@@ -13,7 +13,7 @@ coroutine.wrap(function()
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
                 if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                     local head = v.Character.Head
-                    head.Size = (disableOnDeath and v.Character.Humanoid.Health < 1) and Vector3.new(0, 0, 0) or Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
+                    head.Size = (disableOnDeath and v.Character.Humanoid:GetState() == Enum.HumanoidStateType.Dead) and Vector3.new(0, 0, 0) or Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
                     head.Transparency = transparency
                     head.CanCollide = false
                 end
