@@ -11,24 +11,9 @@ coroutine.wrap(function()
     while task.wait(delay) do
         for _, v in ipairs(players:GetPlayers()) do
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-                if teamCheck and v.Team ~= localPlayer.Team then
+                if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                     local humanoidRootPart = v.Character.HumanoidRootPart
-                    if disableOnDeath and v.Character.Humanoid.Health < 1 then
-                        humanoidRootPart.Size = Vector3.new(0, 0, 0)
-                    else
-                        humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
-                    end
-                    humanoidRootPart.Transparency = transparency
-                    humanoidRootPart.BrickColor = BrickColor.new("Really black")
-                    humanoidRootPart.Material = "Neon"
-                    humanoidRootPart.CanCollide = false
-                else
-                    local humanoidRootPart = v.Character.HumanoidRootPart
-                    if disableOnDeath and v.Character.Humanoid.Health < 1 then
-                        humanoidRootPart.Size = Vector3.new(0, 0, 0)
-                    else
-                        humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
-                    end
+                    humanoidRootPart.Size = (disableOnDeath and v.Character.Humanoid.Health < 1) and Vector3.new(0, 0, 0) or Vector3.new(hitboxSize, hitboxSize, hitboxSize)
                     humanoidRootPart.Transparency = transparency
                     humanoidRootPart.BrickColor = BrickColor.new("Really black")
                     humanoidRootPart.Material = "Neon"

@@ -16,7 +16,7 @@ local mainTab = DrRayLibrary.newTab("Main", "")
 local settingsTab = DrRayLibrary.newTab("Settings", "")
 
 mainTab.newButton("Destroy GUI", "", function() game:GetService("CoreGui"):FindFirstChild("DrRay"):Destroy() end)
-mainTab.newToggle("Enable Team Check", "", false, function(state) hitboxEnabled = state end)
+mainTab.newToggle("Enable Team Check", "", false, function(state) teamCheck = state end)
 mainTab.newToggle("Enable Hitbox", "", false, function(state) hitboxEnabled = state end)
 mainTab.newToggle("Enable Head Hitbox", "", false, function(state) headHitboxEnabled = state end)
 mainTab.newToggle("Disable On Death", "", false, function(state) disableOnDeathEnabled = state end)
@@ -32,24 +32,9 @@ local function applyHitbox()
     end
     for _, v in ipairs(players:GetPlayers()) do
         if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-            if teamCheck and v.Team ~= localPlayer.Team then
+            if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                 local humanoidRootPart = v.Character.HumanoidRootPart
-                if disableOnDeath and v.Character.Humanoid.Health < 1 then
-                    humanoidRootPart.Size = Vector3.new(0, 0, 0)
-                else
-                    humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
-                end
-                humanoidRootPart.Transparency = transparency
-                humanoidRootPart.BrickColor = BrickColor.new("Really black")
-                humanoidRootPart.Material = "Neon"
-                humanoidRootPart.CanCollide = false
-            else
-                local humanoidRootPart = v.Character.HumanoidRootPart
-                if disableOnDeath and v.Character.Humanoid.Health < 1 then
-                    humanoidRootPart.Size = Vector3.new(0, 0, 0)
-                else
-                    humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
-                end
+                humanoidRootPart.Size = (disableOnDeath and v.Character.Humanoid.Health < 1) and Vector3.new(0, 0, 0) or Vector3.new(hitboxSize, hitboxSize, hitboxSize)
                 humanoidRootPart.Transparency = transparency
                 humanoidRootPart.BrickColor = BrickColor.new("Really black")
                 humanoidRootPart.Material = "Neon"
@@ -64,22 +49,9 @@ local function applyHeadHitbox()
     end
     for _, v in ipairs(players:GetPlayers()) do
         if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
-            if teamCheck and v.Team ~= localPlayer.Team then
+            if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                 local head = v.Character.Head
-                if disableOnDeath and v.Character.Humanoid.Health < 1 then
-                    head.Size = Vector3.new(0, 0, 0)
-                else
-                    head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
-                end
-                head.Transparency = transparency
-                head.CanCollide = false
-            else
-                local head = v.Character.Head
-                if disableOnDeath and v.Character.Humanoid.Health < 1 then
-                    head.Size = Vector3.new(0, 0, 0)
-                else
-                    head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
-                end
+                head.Size = (disableOnDeath and v.Character.Humanoid.Health < 1) and Vector3.new(0, 0, 0) or Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
                 head.Transparency = transparency
                 head.CanCollide = false
             end
