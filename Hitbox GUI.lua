@@ -32,10 +32,13 @@ local function applyHitbox()
     end
     for _, v in ipairs(players:GetPlayers()) do
         if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-            local isDead = disableOnDeath and v.Character.Humanoid.Health < 1
-            if (teamCheck and v.Team ~= localPlayer.Team or not teamCheck) and (not disableOnDeath or (disableOnDeath and not isDead)) then
+            if teamCheck and v.Team ~= localPlayer.Team or not teamCheck then
                 local humanoidRootPart = v.Character.HumanoidRootPart
-                humanoidRootPart.Size = isDead and Vector3.new(0, 0, 0) or Vector3.new(hitboxSize, hitboxSize, hitboxSize)
+                if disableOnDeath and v.Character.Humanoid.Health < 1 then
+                    humanoidRootPart.Size = Vector3.new(0, 0, 0)
+                else
+                    humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
+                end
                 humanoidRootPart.Transparency = transparency
                 humanoidRootPart.BrickColor = BrickColor.new("Really black")
                 humanoidRootPart.Material = "Neon"
@@ -50,10 +53,13 @@ local function applyHeadHitbox()
     end
     for _, v in ipairs(players:GetPlayers()) do
         if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
-            local isDead = disableOnDeath and v.Character.Humanoid.Health < 1
-            if (teamCheck and v.Team ~= localPlayer.Team or not teamCheck) and (not disableOnDeath or (disableOnDeath and not isDead)) then
+            if teamCheck and v.Team ~= localPlayer.Team or not teamCheck then
                 local head = v.Character.Head
-                head.Size = isDead and Vector3.new(0, 0, 0) or Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
+                if disableOnDeath and v.Character.Humanoid.Health < 1 then
+                    head.Size = Vector3.new(0, 0, 0)
+                else
+                    head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
+                end
                 head.Transparency = transparency
                 head.CanCollide = false
             end
