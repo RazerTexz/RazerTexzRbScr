@@ -54,11 +54,15 @@ local function onChatted(player, msg)
 end
 
 for _, plr in ipairs(players:GetPlayers()) do
-	plr.Chatted:Connect(function(msg) onChatted(plr, msg) end)
+	plr.Chatted:Connect(function(msg)
+	    onChatted(plr, msg)
+	end)
 end
 
 players.PlayerAdded:Connect(function(plr)
-	plr.Chatted:Connect(function(msg) onChatted(plr, msg) end)
+	plr.Chatted:Connect(function(msg)
+	    onChatted(plr, msg)
+	end)
 end)
 
 privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"

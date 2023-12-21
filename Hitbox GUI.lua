@@ -30,9 +30,6 @@ end)
 mainTab.newInput("Delay before changing hitbox", "Default delay: 1 (sec)", function(num) delay = tonumber(num) end)
 mainTab.newInput("Hitbox transparency", "Default transparency: 0.7 ", function(num) transparency = tonumber(num) end)
 
-local infoTab = DrRayLibrary.newTab("Info", "")
-infoTab.newLabel("Made by RazerTexz")
-
 local function applyHitbox()
     if not hitboxEnabled then
         return

@@ -34,9 +34,6 @@ mainTab.newButton("Refresh player", "", function()
     localPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = refreshPosition
 end)
 
-local infoTab = DrRayLibrary.newTab("Info", "")
-infoTab.newLabel("Made by RazerTexz")
-
 runService.Heartbeat:Connect(function()
     if isWalkSpeed then 
         localPlayer.Character.Humanoid.WalkSpeed = walkSpeed
