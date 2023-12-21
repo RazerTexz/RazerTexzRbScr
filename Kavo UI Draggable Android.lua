@@ -7,9 +7,9 @@ local run = game:GetService("RunService")
 
 local Utility = {}
 local Objects = {}
-function Kavo:DraggingEnabled(frame, parent)        
-    parent = parent or frame    
-    
+function Kavo:DraggingEnabled(frame, parent)
+    parent = parent or frame
+
     local dragging = false
     local dragInput, mousePos, framePos
 
@@ -17,7 +17,7 @@ function Kavo:DraggingEnabled(frame, parent)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
             mousePos = input.Position
-            framePos = parent.Position   
+            framePos = parent.Position
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then
                     dragging = false
@@ -127,7 +127,7 @@ local Name = "KavoConfig.JSON"
 pcall(function()
     if not pcall(function() readfile(Name) end) then
         writefile(Name, game:GetService("HttpService"):JSONEncode(SettingsT))
-    end    
+    end
     Settings = game:GetService("HttpService"):JSONEncode(readfile(Name))
 end)
 
@@ -329,7 +329,7 @@ function Kavo.CreateLib(kavName, themeList)
     infoContainer.ClipsDescendants = true
     infoContainer.Position = UDim2.new(0.299047619, 0, 0.874213815, 0)
     infoContainer.Size = UDim2.new(0, 368, 0, 33)
-    
+
     coroutine.wrap(function()
         while task.wait() do
             Main.BackgroundColor3 = themeList.Background
@@ -453,12 +453,12 @@ function Kavo.CreateLib(kavName, themeList)
                 tabButton.BackgroundColor3 = themeList.SchemeColor
             end
         end)()
-    
+
         function Sections:NewSection(secName, hidden)
             secName = secName or "Section"
             local sectionFunctions = {}
             local modules = {}
-	        hidden = hidden or false
+            hidden = hidden or false
             local sectionFrame = Instance.new("Frame")
             local sectionlistoknvm = Instance.new("UIListLayout")
             local sectionHead = Instance.new("Frame")
@@ -467,17 +467,17 @@ function Kavo.CreateLib(kavName, themeList)
             local sectionInners = Instance.new("Frame")
             local sectionElListing = Instance.new("UIListLayout")
 			
-    	    if hidden then
-        		sectionHead.Visible = false
-    	    else
-        		sectionHead.Visible = true
-    	    end
+            if hidden then
+                sectionHead.Visible = false
+            else
+                sectionHead.Visible = true
+            end
 
             sectionFrame.Name = "sectionFrame"
             sectionFrame.Parent = page
             sectionFrame.BackgroundColor3 = themeList.Background
             sectionFrame.BorderSizePixel = 0
-            
+
             sectionlistoknvm.Name = "sectionlistoknvm"
             sectionlistoknvm.Parent = sectionFrame
             sectionlistoknvm.SortOrder = Enum.SortOrder.LayoutOrder
@@ -496,7 +496,7 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end
             end
-            
+
             sectionHead.Name = "sectionHead"
             sectionHead.Parent = sectionFrame
             sectionHead.BackgroundColor3 = themeList.SchemeColor
@@ -523,11 +523,10 @@ function Kavo.CreateLib(kavName, themeList)
             sectionName.TextXAlignment = Enum.TextXAlignment.Left
             if themeList.SchemeColor == Color3.fromRGB(255,255,255) then
                 Utility:TweenObject(sectionName, {TextColor3 = Color3.fromRGB(0,0,0)}, 0.2)
-            end 
+            end
             if themeList.SchemeColor == Color3.fromRGB(0,0,0) then
                 Utility:TweenObject(sectionName, {TextColor3 = Color3.fromRGB(255,255,255)}, 0.2)
-            end 
-               
+            end
             sectionInners.Name = "sectionInners"
             sectionInners.Parent = sectionFrame
             sectionInners.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -538,7 +537,7 @@ function Kavo.CreateLib(kavName, themeList)
             sectionElListing.Parent = sectionInners
             sectionElListing.SortOrder = Enum.SortOrder.LayoutOrder
             sectionElListing.Padding = UDim.new(0, 3)
-            
+
             coroutine.wrap(function()
                 while task.wait() do
                     sectionFrame.BackgroundColor3 = themeList.Background
@@ -555,10 +554,10 @@ function Kavo.CreateLib(kavName, themeList)
                 local frameSc = sectionlistoknvm.AbsoluteContentSize
                 sectionFrame.Size = UDim2.new(0, 352, 0, frameSc.Y)
             end
-            
+
             updateSectionFrame()
             UpdateSize()
-            
+
             local Elements = {}
             function Elements:NewButton(bname, tipINf, callback)
                 local showLogo = showLogo or true
@@ -664,10 +663,10 @@ function Kavo.CreateLib(kavName, themeList)
 
                 if themeList.SchemeColor == Color3.fromRGB(255, 255, 255) then
                     Utility:TweenObject(moreInfo, {TextColor3 = Color3.fromRGB(0, 0, 0)}, 0.2)
-                end 
+                end
                 if themeList.SchemeColor == Color3.fromRGB(0, 0, 0) then
                     Utility:TweenObject(moreInfo, {TextColor3 = Color3.fromRGB(255, 255,255)}, 0.2)
-                end 
+                end
 
                 updateSectionFrame()
                 UpdateSize()
@@ -750,7 +749,7 @@ function Kavo.CreateLib(kavName, themeList)
                         btnInfo.TextColor3 = themeList.TextColor
                     end
                 end)()
-                
+
                 function ButtonFunction:UpdateButton(newTitle)
                     btnInfo.Text = newTitle
                 end
