@@ -11,7 +11,16 @@ coroutine.wrap(function()
     while task.wait(delay) do
         for _, v in ipairs(players:GetPlayers()) do
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
-                if teamCheck and v.Team ~= localPlayer.Team or not teamCheck then
+                if teamCheck and v.Team ~= localPlayer.Team then
+                    local head = v.Character.Head
+                    if disableOnDeath and v.Character.Humanoid.Health < 1 then
+                        head.Size = Vector3.new(0, 0, 0)
+                    else
+                        head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
+                    end
+                    head.Transparency = transparency
+                    head.CanCollide = false
+                else
                     local head = v.Character.Head
                     if disableOnDeath and v.Character.Humanoid.Health < 1 then
                         head.Size = Vector3.new(0, 0, 0)
