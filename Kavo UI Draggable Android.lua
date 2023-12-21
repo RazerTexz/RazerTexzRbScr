@@ -134,11 +134,7 @@ end)
 local LibName = tostring(math.random(1, 100))..tostring(math.random(1, 50))..tostring(math.random(1, 100))
 
 local function Kavo:ToggleUI()
-    if game.CoreGui[LibName].Enabled then
-        game.CoreGui[LibName].Enabled = false
-    else
-        game.CoreGui[LibName].Enabled = true
-    end
+    game:GetService("CoreGui")[LibName].Enabled = not game:GetService("CoreGui")[LibName].Enabled
 end
 
 local function Kavo.CreateLib(kavName, themeList)
@@ -466,12 +462,8 @@ local function Kavo.CreateLib(kavName, themeList)
             local sectionName = Instance.new("TextLabel")
             local sectionInners = Instance.new("Frame")
             local sectionElListing = Instance.new("UIListLayout")
-			
-            if hidden then
-                sectionHead.Visible = false
-            else
-                sectionHead.Visible = true
-            end
+	
+            sectionHead.Visible = not hidden
 
             sectionFrame.Name = "sectionFrame"
             sectionFrame.Parent = page
@@ -1071,7 +1063,7 @@ local function Kavo.CreateLib(kavName, themeList)
 
                     btn.MouseButton1Click:Connect(function()
                         if not focusing then
-                            if toggled == false then
+                            if not toggled then
                                 tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
                                 local c = sample:Clone()
                                 c.Parent = btn
