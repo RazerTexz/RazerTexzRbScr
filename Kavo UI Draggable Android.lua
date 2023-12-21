@@ -506,7 +506,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local ButtonFunction = {}
                 local tipINf = tipINf or "Tip: Clicking this nothing will happen!"
                 local bname = bname or "Click Me!"
-                local callback = callback or function() end
+                callback = callback or function() end
 
                 local buttonElement = Instance.new("TextButton")
                 local UICorner = Instance.new("UICorner")
@@ -687,11 +687,10 @@ function Kavo.CreateLib(kavName, themeList)
                 end
                 return ButtonFunction
             end
-
             function Elements:NewTextBox(tname, tTip, callback)
                 local tname = tname or "Textbox"
                 local tTip = tTip or "Gets a value of Textbox"
-                local callback = callback or function() end
+                callback = callback or function() end
                 local textboxElement = Instance.new("TextButton")
                 local UICorner = Instance.new("UICorner")
                 local viewInfo = Instance.new("ImageButton")
@@ -873,7 +872,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local TogFunction = {}
                 local tname = tname or "Toggle"
                 local nTip = nTip or "Prints Current Toggle State"
-                local callback = callback or function() end
+                callback = callback or function() end
                 local toggled = false
                 table.insert(SettingsT, tname)
 
@@ -1095,14 +1094,13 @@ function Kavo.CreateLib(kavName, themeList)
                 end
                 return TogFunction
             end
-
             function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, callback)
                 local slidInf = slidInf or "Slider"
                 local slidTip = slidTip or "Slider tip here"
                 local maxvalue = maxvalue or 500
                 local minvalue = minvalue or 16
                 --local startVal = startVal or 0
-                local callback = callback or function() end
+                callback = callback or function() end
 
                 local sliderElement = Instance.new("TextButton")
                 local UICorner = Instance.new("UICorner")
@@ -1317,13 +1315,12 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end)        
             end
-
             function Elements:NewDropdown(dropname, dropinf, list, callback)
                 local DropFunction = {}
                 local dropname = dropname or "Dropdown"
                 local list = list or {}
                 local dropinf = dropinf or "Dropdown info"
-                local callback = callback or function() end   
+                callback = callback or function() end   
 
                 local opened = false
                 local DropYSize = 33
@@ -1634,7 +1631,6 @@ function Kavo.CreateLib(kavName, themeList)
                         end
                     end)()
                 end
-
                 function DropFunction:Refresh(newList)
                     newList = newList or {}
                     for _, v in ipairs(dropFrame:GetChildren()) do
@@ -1744,7 +1740,7 @@ function Kavo.CreateLib(kavName, themeList)
             function Elements:NewKeybind(keytext, keyinf, first, callback)
                 local keytext = keytext or "KeybindText"
                 local keyinf = keyinf or "KebindInfo"
-                local callback = callback or function() end
+                callback = callback or function() end
                 local oldKey = first.Name
                 local keybindElement = Instance.new("TextButton")
                 local UICorner = Instance.new("UICorner")
@@ -1940,10 +1936,9 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end)()
             end
-
             function Elements:NewColorPicker(colText, colInf, defcolor, callback)
                 local colText = colText or "ColorPicker"
-                local callback = callback or function() end
+                callback = callback or function() end
                 local defcolor = defcolor or Color3.fromRGB(1,1,1)
                 local h, s, v = Color3.toHSV(defcolor)
                 local ms = game:GetService("Players").LocalPlayer:GetMouse()
