@@ -13,7 +13,7 @@ coroutine.wrap(function()
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
                 if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                     local head = v.Character.Head
-                    if disableOnDeath and v.Character:FindFirstChild("Humanoid").Health <= 0 then
+                    if disableOnDeath and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
                         head.Size = Vector3.new(0, 0, 0)
                     else
                         head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)

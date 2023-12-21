@@ -13,7 +13,7 @@ coroutine.wrap(function()
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
                 if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
                     local humanoidRootPart = v.Character.HumanoidRootPart
-                    if disableOnDeath and v.Character:FindFirstChild("Humanoid").Health <= 0 then
+                    if disableOnDeath and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
                         humanoidRootPart.Size = Vector3.new(0, 0, 0)
                     else
                         humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
