@@ -139,7 +139,7 @@ function Kavo:ToggleUI()
     game:GetService("CoreGui")[LibName].Enabled = not game:GetService("CoreGui")[LibName].Enabled
 end
 
-local function Kavo.CreateLib(kavName, themeList)
+function Kavo.CreateLib(kavName, themeList)
     if not themeList then
         themeList = themes
     end
