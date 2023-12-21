@@ -27,39 +27,41 @@ settingsTab.newInput("Delay before changing hitbox", "Default delay: 1 (sec)", f
 settingsTab.newInput("Hitbox transparency", "Default transparency: 0.7 ", function(num) transparency = tonumber(num) end)
 
 local function applyHitbox()
-    if hitboxEnabled then
-        for _, v in ipairs(players:GetPlayers()) do
-            if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-                if teamCheck and v.Team ~= localPlayer.Team or not teamCheck then
-                    local humanoidRootPart = v.Character.HumanoidRootPart
-                    if disableOnDeath and v.Character.Humanoid.Health < 1 then
-                        humanoidRootPart.Size = Vector3.new(0, 0, 0)
-                    else
-                        humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
-                    end
-                    humanoidRootPart.Transparency = transparency
-                    humanoidRootPart.BrickColor = BrickColor.new("Really black")
-                    humanoidRootPart.Material = "Neon"
-                    humanoidRootPart.CanCollide = false
+    if not hitboxEnabled then
+        return
+    end
+    for _, v in ipairs(players:GetPlayers()) do
+        if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+            if teamCheck and v.Team ~= localPlayer.Team or not teamCheck then
+                local humanoidRootPart = v.Character.HumanoidRootPart
+                if disableOnDeath and v.Character.Humanoid.Health < 1 then
+                    humanoidRootPart.Size = Vector3.new(0, 0, 0)
+                else
+                    humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
                 end
+                humanoidRootPart.Transparency = transparency
+                humanoidRootPart.BrickColor = BrickColor.new("Really black")
+                humanoidRootPart.Material = "Neon"
+                humanoidRootPart.CanCollide = false
             end
         end
     end
 end
 local function applyHeadHitbox()
-    if headHitboxEnabled then
-        for _, v in ipairs(players:GetPlayers()) do
-            if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
-                if teamCheck and v.Team ~= localPlayer.Team or not teamCheck then
-                    local head = v.Character.Head
-                    if disableOnDeath and v.Character.Humanoid.Health < 1 then
-                        head.Size = Vector3.new(0, 0, 0)
-                    else
-                        head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
-                    end
-                    head.Transparency = transparency
-                    head.CanCollide = false
+    if not headHitboxEnabled then
+        return
+    end
+    for _, v in ipairs(players:GetPlayers()) do
+        if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
+            if teamCheck and v.Team ~= localPlayer.Team or not teamCheck then
+                local head = v.Character.Head
+                if disableOnDeath and v.Character.Humanoid.Health < 1 then
+                    head.Size = Vector3.new(0, 0, 0)
+                else
+                    head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
                 end
+                head.Transparency = transparency
+                head.CanCollide = false
             end
         end
     end
