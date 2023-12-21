@@ -1291,7 +1291,7 @@ DRR_MODULES[DRR["93"]] = {
 
     parent.TopBar.ProfileMenu.PlayerProfile.TextLabel.Text = game:GetService("Players").LocalPlayer.DisplayName
     parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = game:GetService("Players"):GetUserThumbnailAsync(game:GetService("Players").LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
-    local function UILIB:Load(name, img, direction)
+    function UILIB:Load(name, img, direction)
         local self = setmetatable({}, UILIB)
         task.spawn(function()
             local tw = twServ:Create(parent.MainBar, TweenInfo.new(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0,0.212, 0)})
@@ -1341,7 +1341,7 @@ DRR_MODULES[DRR["93"]] = {
                 tw3:Play()
             end
         end)
-        local function self:Open()
+        function self:Open()
             local tw = twServ:Create(parent.MainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.212, 0)})
             local tw3 = twServ:Create(parent.TopBar.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)})
             local tw2 = twServ:Create(parent.TopBar, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.012, 0)})
@@ -1353,7 +1353,7 @@ DRR_MODULES[DRR["93"]] = {
             twRotate:Play()
             tw3:Play()
         end
-        local function self:Close()
+        function self:Close()
             local tw = twServ:Create(parent.MainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, -0.612, 0)})
             local tw3 = twServ:Create(parent.TopBar.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.95, 0)})
             local tw2 = twServ:Create(parent.TopBar, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, -0.173, 0)})
@@ -1365,16 +1365,16 @@ DRR_MODULES[DRR["93"]] = {
             twRotate:Play()
             tw3:Play()
         end
-        local function self:HideCloseButton()
+        function self:HideCloseButton()
             DRR["1f"].Visible = false
         end
-        local function self:Hide()
+        function self:Hide()
             DDR["1"].Enabled = false
         end
-        local function self:Show()
+        function self:Show()
             DDR["1"].Enabled = true
         end
-        local function self:Toggle()
+        function self:Toggle()
             if not closed then
                 closed = true
                 local tw = twServ:Create(parent.MainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, -0.612, 0)})
@@ -1401,7 +1401,7 @@ DRR_MODULES[DRR["93"]] = {
                 tw3:Play()
             end
         end
-        local function self:SetTheme(color, color2)
+        function self:SetTheme(color, color2)
             for _, v in ipairs(parent:GetChildren()) do
                 if v:IsA("GuiObject") then
                     pcall(function()
@@ -1418,7 +1418,7 @@ DRR_MODULES[DRR["93"]] = {
         end
     end
 
-    local function UILIB.newTab(name, img)	
+    function UILIB.newTab(name, img)	
         local self = setmetatable({}, UILIB)
 
         local newTab = parent.Folder.TabReserved:Clone()
@@ -1451,7 +1451,7 @@ DRR_MODULES[DRR["93"]] = {
                 end
             end
         end)
-        local function self.newButton(name, desc, func)
+        function self.newButton(name, desc, func)
             local newbtn = reserved.Button:Clone()
             newbtn.Parent = newTab
             newbtn.Title.Text = name
@@ -1466,18 +1466,18 @@ DRR_MODULES[DRR["93"]] = {
             end)
             newbtn.MouseButton1Click:Connect(func)
         end
-        local function self.newLabel(text)
+        function self.newLabel(text)
             local labelFunction = {}
             local newLabel = reserved.Label:Clone()
             newLabel.Parent = newTab
             newLabel.Visible = true
             newLabel.Title.Text = text
-            local function labelFunction.updateLabel(newText)
+            function labelFunction.updateLabel(newText)
                 newLabel.Title.Text = newText
             end
             return newLabel.Title and labelFunction
         end
-        local function self.newInput(name, desc, func)
+        function self.newInput(name, desc, func)
             local newInput = reserved.Textbox:Clone()
             local textbox = newInput.TextboxBar.ActualTextbox
             newInput.MouseEnter:Connect(function()
@@ -1497,7 +1497,7 @@ DRR_MODULES[DRR["93"]] = {
                 func(textbox.Text)
             end)
         end
-        local function self.newKeybind(name, desc, func)
+        function self.newKeybind(name, desc, func)
             local newKey = reserved.Keybind:Clone()
             newKey.MouseEnter:Connect(function()
                 local twBtn = twServ:Create(newKey, TweenInfo.new(0.2), {Transparency = 0}):Play()
@@ -1550,7 +1550,7 @@ DRR_MODULES[DRR["93"]] = {
                 end)
             end)
         end
-        local function self.newSlider(name, desc, max, manageSlider, func)
+        function self.newSlider(name, desc, max, manageSlider, func)
             local newSlider = reserved.Slider:Clone()
             newSlider.MouseEnter:Connect(function()
                 local twBtn = twServ:Create(newSlider, TweenInfo.new(0.2), {Transparency = 0}):Play()
@@ -1601,7 +1601,7 @@ DRR_MODULES[DRR["93"]] = {
                 end
             end)
         end	
-        local function self.newToggle(title, desc, toggle, func)
+        function self.newToggle(title, desc, toggle, func)
             local realToggle = toggle
             local newToggle = reserved.Toggle:Clone()
             newToggle.Parent = newTab
@@ -1635,7 +1635,7 @@ DRR_MODULES[DRR["93"]] = {
                 end
             end)		
         end	
-        local function self.newDropdown(name, desc, listTable, func)
+        function self.newDropdown(name, desc, listTable, func)
             local newdd = reserved.Dropdown:Clone()
             newdd.Visible = true
             newdd.Parent = newTab		
