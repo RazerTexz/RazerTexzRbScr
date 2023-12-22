@@ -1377,7 +1377,7 @@ DRR_MODULES[DRR["93"]] = {
             twRotate:Play()
             tw3:Play()
         end
-        function self:Destroy()
+        function self:DestroyUI()
             DRR["1"]:Destroy()
         end
         function self:HideCloseButton()
