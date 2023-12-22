@@ -1,6 +1,5 @@
-local game = game:GetDescendants()
 local workspace = game:GetService("Workspace")
-local lighting = game:GetService("Lighting"):GetDescendants()
+local lighting = game:GetService("Lighting")
 local numberRangeNew = NumberRange.new
 local noLifetime = numberRangeNew(0)
 
@@ -13,8 +12,8 @@ lighting.GlobalShadows = false
 lighting.FogEnd = 9e9
 settings().Rendering.QualityLevel = 1
 
-for _, v in game do
-	if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+for _, v in game:GetDescendants() do
+	if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("BasePart") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
 		v.Material = "SmoothPlastic"
 		v.Reflectance = 0
 	elseif v:IsA("Decal") then
@@ -27,14 +26,14 @@ for _, v in game do
 	end
 end
 
-for _, v in lighting do
+for _, v in lighting:GetDescendants() do
 	if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
 		v.Enabled = false
 	end
 end
 
-workspace.DescendantAdded:Connect(function(child)
-	if child:IsA("ForceField") or child:IsA("Sparkles") or child:IsA("Smoke") or child:IsA("Fire") then
-		child:Destroy()
+workspace.DescendantAdded:Connect(function(descendant)
+	if descendant:IsA("ForceField") or descendant:IsA("Sparkles") or descendant:IsA("Smoke") or descendant:IsA("Fire") then
+		descendant:Destroy()
 	end
 end)
