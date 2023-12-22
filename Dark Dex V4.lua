@@ -1,2 +1,2 @@
-local pissware = loadstring(game:HttpGet("https://raw.githubusercontent.com/AnAvaragelilmemer/scripts/main/funnyapi.lua"))()
-pissware.dex()
+getgenv().Key = "Bash"
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3AIY%20Dex", true))()
