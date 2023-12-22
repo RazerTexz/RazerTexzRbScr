@@ -20,7 +20,7 @@ local window = DrRayLibrary:Load("Hitbox", "Default")
 local mainTab = DrRayLibrary.newTab("Main", "")
 local settingsTab = DrRayLibrary.newTab("Settings", "")
 
-mainTab.newButton("Destroy GUI", "", function() window:Destroy() end)
+mainTab.newButton("Destroy GUI", "", function() window:DestroyUI() end)
 mainTab.newToggle("Enable Team Check", "", false, function(state) teamCheck = state end)
 mainTab.newToggle("Enable Hitbox", "", false, function(state) hitboxEnabled = state end)
 mainTab.newToggle("Enable Head Hitbox", "", false, function(state) headHitboxEnabled = state end)
