@@ -1,5 +1,4 @@
 local players = game:GetService("Players")
-local getPlayers = players:GetPlayers()
 local localPlayer = players.LocalPlayer
 local runService = game:GetService("RunService").Heartbeat
 local vector3New = Vector3.new
@@ -33,7 +32,7 @@ settingsTab.newInput("Delay before changing hitbox", "Default delay: 1 (sec)", f
 settingsTab.newInput("Hitbox transparency", "Default transparency: 0.7 ", function(num) transparency = tonumber(num) end)
 local function applyHitbox()
     if not hitboxEnabled then return end
-    for _, v in getPlayers do
+    for _, v in players:GetPlayers() do
         if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") then
             if not teamCheck or v.Team ~= localPlayer.Team then
                 local humanoidRootPart = v.Character.HumanoidRootPart
@@ -52,7 +51,7 @@ local function applyHitbox()
 end
 local function applyHeadHitbox()
     if not headHitboxEnabled then return end
-    for _, v in getPlayers do
+    for _, v in players:GetPlayers() do
         if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") then
             if not teamCheck or v.Team ~= localPlayer.Team then
                 local head = v.Character.Head
