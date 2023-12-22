@@ -1,5 +1,7 @@
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
+local runService = game:GetService("RunService")
+local gui = game:GetService("CoreGui"):FindFirstChild("DrRay")
 
 local teamCheck = false
 local hitboxEnabled = false
@@ -15,7 +17,7 @@ local window = DrRayLibrary:Load("Hitbox", "Default")
 local mainTab = DrRayLibrary.newTab("Main", "")
 local settingsTab = DrRayLibrary.newTab("Settings", "")
 
-mainTab.newButton("Destroy GUI", "", function() game:GetService("CoreGui"):FindFirstChild("DrRay"):Destroy() end)
+mainTab.newButton("Destroy GUI", "", function() gui:Destroy() end)
 mainTab.newToggle("Enable Team Check", "", false, function(state) teamCheck = state end)
 mainTab.newToggle("Enable Hitbox", "", false, function(state) hitboxEnabled = state end)
 mainTab.newToggle("Enable Head Hitbox", "", false, function(state) headHitboxEnabled = state end)
@@ -31,10 +33,10 @@ local function applyHitbox()
         return
     end
     for _, v in ipairs(players:GetPlayers()) do
-        if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-            if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
+        if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") then
+            if not teamCheck or v.Team ~= localPlayer.Team then
                 local humanoidRootPart = v.Character.HumanoidRootPart
-                if disableOnDeath and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
+                if disableOnDeath and v.Character.Humanoid.Health <= 0 then
                     humanoidRootPart.Size = Vector3.new(0, 0, 0)
                 else
                     humanoidRootPart.Size = Vector3.new(hitboxSize, hitboxSize, hitboxSize)
@@ -52,10 +54,10 @@ local function applyHeadHitbox()
         return
     end
     for _, v in ipairs(players:GetPlayers()) do
-        if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
-            if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
+        if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("Humanoid") then
+            if not teamCheck or v.Team ~= localPlayer.Team then
                 local head = v.Character.Head
-                if disableOnDeath and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
+                if disableOnDeath and v.Character.Humanoid.Health <= 0 then
                     head.Size = Vector3.new(0, 0, 0)
                 else
                     head.Size = Vector3.new(headHitboxSize, headHitboxSize, headHitboxSize)
@@ -67,9 +69,12 @@ local function applyHeadHitbox()
     end
 end
 
-coroutine.wrap(function()
-    while task.wait(delay) do
+local elapsedTime = 0
+runService.Heartbeat:Connect(function(dt)
+    elapsedTime += dt
+    if elapsedTime >= delay then
+        elapsedTime = 0
         applyHitbox()
         applyHeadHitbox()
     end
-end)()
+end)

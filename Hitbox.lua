@@ -7,11 +7,14 @@ local hitboxSize = 20
 local delay = 1
 local transparency = 0.7
 
-coroutine.wrap(function()
-    while task.wait(delay) do
+local elapsedTime = 0
+runService.Heartbeat:Connect(function(dt)
+    elapsedTime += dt
+    if elapsedTime >= delay then
+        elapsedTime = 0
         for _, v in ipairs(players:GetPlayers()) do
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-                if not teamCheck or teamCheck and v.Team ~= localPlayer.Team then
+                if not teamCheck or v.Team ~= localPlayer.Team then
                     local humanoidRootPart = v.Character.HumanoidRootPart
                     if disableOnDeath and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
                         humanoidRootPart.Size = Vector3.new(0, 0, 0)
@@ -26,4 +29,4 @@ coroutine.wrap(function()
             end
         end
     end
-end)()
+end)
