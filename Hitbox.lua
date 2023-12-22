@@ -1,5 +1,5 @@
 local players = game:GetService("Players")
-local getPlayers = players.GetPlayers
+local getPlayers = players:GetPlayers()
 local localPlayer = players.LocalPlayer
 local runService = game:GetService("RunService").Heartbeat
 local vector3New = Vector3.new
@@ -19,7 +19,7 @@ runService:Connect(function(dt)
     elapsedTime += dt
     if elapsedTime >= delay then
         elapsedTime = 0
-        for _, v in getPlayers() do
+        for _, v in getPlayers do
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
                 if not teamCheck or v.Team ~= localPlayer.Team then
                     local humanoidRootPart = v.Character.HumanoidRootPart
