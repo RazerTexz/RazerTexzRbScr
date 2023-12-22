@@ -4,7 +4,6 @@ local localPlayer = players.LocalPlayer
 local runService = game:GetService("RunService").Heartbeat
 local vector3New = Vector3.new
 local brickColorNew = BrickColor.new
-local gui = game:GetService("CoreGui"):FindFirstChild("DrRay")
 
 local teamCheck = false
 local hitboxEnabled = false
@@ -22,7 +21,7 @@ local window = DrRayLibrary:Load("Hitbox", "Default")
 local mainTab = DrRayLibrary.newTab("Main", "")
 local settingsTab = DrRayLibrary.newTab("Settings", "")
 
-mainTab.newButton("Destroy GUI", "", function() gui:Destroy() end)
+mainTab.newButton("Destroy GUI", "", function() window:Destroy() end)
 mainTab.newToggle("Enable Team Check", "", false, function(state) teamCheck = state end)
 mainTab.newToggle("Enable Hitbox", "", false, function(state) hitboxEnabled = state end)
 mainTab.newToggle("Enable Head Hitbox", "", false, function(state) headHitboxEnabled = state end)

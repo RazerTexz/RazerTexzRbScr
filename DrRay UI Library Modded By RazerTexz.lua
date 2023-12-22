@@ -1320,11 +1320,8 @@ DRR_MODULES[DRR["93"]] = {
             end
         end)()
         parent.TopBar.ProfileMenu.Title.TextLabel.Text = name
-        if img and not img == "Default" then
-            parent.MainBar.Logo.Image = img
-        else
-            parent.MainBar.Logo.Image = ""
-        end
+        parent.MainBar.Logo.Image = ""
+        if img and not img == "Default" then parent.MainBar.Logo.Image = img end
 
         parent.TopBar.TopBarClose.MouseButton1Down:Connect(function()
             if not closed then
@@ -1376,6 +1373,9 @@ DRR_MODULES[DRR["93"]] = {
             task.wait(0.1)
             twRotate:Play()
             tw3:Play()
+        end
+        function self:Destroy()
+            DRR["1"]:Destroy()
         end
         function self:HideCloseButton()
             DRR["1f"].Visible = false
@@ -1441,11 +1441,8 @@ DRR_MODULES[DRR["93"]] = {
         newTabBtn.Parent = parent.TopBar.ScrollingFrame
         newTabBtn.Name = name or "Tab"..#parent.MainBar:GetChildren() - 4
         newTabBtn.Frame.TextLabel.Text = name
-        if img then
-            newTabBtn.ImageLabel.Image = img
-        else
-            newTabBtn.ImageLabel.Image = ""
-        end
+        newTabBtn.ImageLabel.Image = ""
+        if img then newTabBtn.ImageLabel.Image = img end
         newTabBtn.Visible = true
 
         newTabBtn.MouseButton1Click:Connect(function()
@@ -1617,11 +1614,8 @@ DRR_MODULES[DRR["93"]] = {
                 local twBtn = twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
             end)
 
-            if realToggle then
-                newToggle.Label.BackgroundColor3 = GlobalColor2
-            else
-                newToggle.Label.BackgroundColor3 = GlobalColor1
-            end				
+            newToggle.Label.BackgroundColor3 = GlobalColor1
+            if realToggle then newToggle.Label.BackgroundColor3 = GlobalColor2 end				
 
             newToggle.Label.Label.MouseButton1Click:Connect(function()			
                 if realToggle then

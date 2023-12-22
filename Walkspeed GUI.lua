@@ -7,36 +7,41 @@ local runService = game:GetService("RunService")
 local starterGui = game:GetService("StarterGui")
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
+local character = players.LocalPlayer.Character
+local mathHuge = math.huge
+local physicalPropertiesNew = PhysicalProperties.new
 
 local walkSpeed
 local isWalkSpeed
 
 local currentWalkspeed = mainTab.newLabel("Current Walkspeed: "..localPlayer.Character.Humanoid.WalkSpeed)
 
-mainTab.newButton("Destroy GUI", "", function() game:GetService("CoreGui"):FindFirstChild("DrRay"):Destroy() end)
+mainTab.newButton("Destroy GUI", "", function() window:Destroy() end)
 mainTab.newInput("Custom walkspeed", "", function(speed) walkSpeed = tonumber(speed) end)
 mainTab.newToggle("Apply custom walkspeed", "", false, function(state) isWalkSpeed = state end)
 mainTab.newToggle("Fix sliding at high speed", "", false, function(state)
     if state then
         if localPlayer.Character.HumanoidRootPart.CustomPhysicalProperties ~= nil then
-            local playerProperties = localPlayer.Character.HumanoidRootPart.CustomPhysicalProperties
+            local playerProperties = character.HumanoidRootPart.CustomPhysicalProperties
             local a, b, c, d = playerProperties.Friction, playerProperties.Elasticity, playerProperties.FrictionWeight, playerProperties.ElasticityWeight
-            playerProperties = PhysicalProperties.new(math.huge, a, b, c, d)
-        elseif localPlayer.Character.HumanoidRootPart.CustomPhysicalProperties == nil then    
-            localPlayer.Character.HumanoidRootPart.CustomPhysicalProperties = PhysicalProperties.new(math.huge, 0, 0)    
+            playerProperties = physicalPropertiesNew(mathHuge, a, b, c, d)
+        elseif character.HumanoidRootPart.CustomPhysicalProperties == nil then    
+            character.HumanoidRootPart.CustomPhysicalProperties = PhysicalProperties.new(mathHuge, 0, 0)    
         end
     end
 end)
+local cframe = character:FindFirstChild("HumanoidRootPart").CFrame
 mainTab.newButton("Refresh player", "", function()
-    local refreshPosition = localPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
-    localPlayer.Character:BreakJoints()
+    local refreshPosition = cframe
+    character:BreakJoints()
     workspace:WaitForChild(LP.Name)
-    localPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = refreshPosition
+    cframe = refreshPosition
 end)
 
+local ws = character.Humanoid.WalkSpeed
 runService.Heartbeat:Connect(function()
     if isWalkSpeed then 
-        localPlayer.Character.Humanoid.WalkSpeed = walkSpeed
+        ws = walkSpeed
         currentWalkspeed.updateLabel("Current Walkspeed: "..localPlayer.Character.Humanoid.WalkSpeed)
     end
 end)
