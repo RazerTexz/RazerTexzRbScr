@@ -10,11 +10,10 @@ local udim2New = UDim2.new
 local mathRandom = math.random
 local mathClamp = math.clamp
 local mathRound = math.round
-
 local rectNew = Rect.new
 local instanceNew = Instance.new
 local vector2New = Vector2.new
-local fontNew = fontNew
+local fontNew = Font.new
 local colorSequenceNew = ColorSequence.new
 local colorSequenceKeypoint = ColorSequenceKeypoint.new
 local tweenInfoNew = TweenInfo.new
