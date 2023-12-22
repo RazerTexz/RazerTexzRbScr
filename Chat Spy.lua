@@ -11,6 +11,7 @@ local privateProperties = {
 
 local starterGui = game:GetService("StarterGui")
 local players = game:GetService("Players")
+local getPlayers = players.GetPlayers
 local localPlayer = players.LocalPlayer
 local saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
 local getmsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("OnMessageDoneFiltering")
@@ -44,7 +45,7 @@ local function onChatted(player, msg)
 	end
 end
 
-for _, plr in ipairs(players:GetPlayers()) do
+for _, plr in pairs(getPlayers()) do
 	plr.Chatted:Connect(function(msg) onChatted(plr, msg) end)
 end
 
