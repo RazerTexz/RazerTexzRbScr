@@ -143,7 +143,7 @@ end)
 
 local LibName = tostring(mathRandom(1, 100))..tostring(mathRandom(1,50))..tostring(mathRandom(1, 100))
 function Kavo:ToggleUI()
-    game:GetService("CoreGui")[LibName].Enabled = not game:GetService("CoreGui")[LibName].Enabled
+    coreGui[LibName].Enabled = not coreGui[LibName].Enabled
 end
 
 function Kavo.CreateLib(kavName, themeList)
