@@ -142,9 +142,8 @@ pcall(function()
 end)
 
 local LibName = tostring(mathRandom(1, 100))..tostring(mathRandom(1,50))..tostring(mathRandom(1, 100))
-local lib = game:GetService("CoreGui")[LibName]
 function Kavo:ToggleUI()
-    lib.Enabled = not lib.Enabled
+    game:GetService("CoreGui")[LibName].Enabled = not game:GetService("CoreGui")[LibName].Enabled
 end
 
 function Kavo.CreateLib(kavName, themeList)
