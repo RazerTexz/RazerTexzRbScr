@@ -1,7 +1,3 @@
-local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/DrRay%20UI%20Library%20Modded%20By%20RazerTexz.lua"))()
-local window = DrRayLibrary:Load("Walkspeed GUI", "Default")
-local mainTab = DrRayLibrary.newTab("Main", "")
-
 local workspace = game:GetService("Workspace")
 local runService = game:GetService("RunService")
 local starterGui = game:GetService("StarterGui")
@@ -12,10 +8,13 @@ local mathHuge = math.huge
 local physicalPropertiesNew = PhysicalProperties.new
 
 local walkSpeed
-local isWalkSpeed
+local isWalkSpeed = false
+
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/DrRay%20UI%20Library%20Modded%20By%20RazerTexz.lua"))()
+local window = DrRayLibrary:Load("Walkspeed GUI", "Default")
+local mainTab = DrRayLibrary.newTab("Main", "")
 
 local currentWalkspeed = mainTab.newLabel("Current Walkspeed: "..localPlayer.Character.Humanoid.WalkSpeed)
-
 mainTab.newButton("Destroy GUI", "", function() window:Destroy() end)
 mainTab.newInput("Custom walkspeed", "", function(speed) walkSpeed = tonumber(speed) end)
 mainTab.newToggle("Apply custom walkspeed", "", false, function(state) isWalkSpeed = state end)

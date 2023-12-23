@@ -12,13 +12,14 @@ local privateProperties = {
 local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/DrRay%20UI%20Library%20Modded%20By%20RazerTexz.lua"))()
 local window = DrRayLibrary:Load("Chat Spy GUI", "Default")
 local tab = DrRayLibrary.newTab("Main", "")
+
 tab.newToggle("Enabled", "", true, function(state) enabled = state end)
 tab.newToggle("Spy On Myself", "", false, function(state) spyOnMyself = state end)
 tab.newToggle("Public", "Show to other players", false, function(state) public = state end)
 tab.newToggle("Public Italics", "Use /me to stand out more", false, function(state) publicItalics = state end)
 tab.newButton("Destroy GUI", "", function() window:Destroy() end)
 
-local starterGui = game:GetService("StarterGui)
+local starterGui = game:GetService("StarterGui")
 local players = game:GetService("Players")
 local getPlayers = players.GetPlayers
 local localPlayer = players.LocalPlayer
