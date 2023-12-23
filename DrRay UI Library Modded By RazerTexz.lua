@@ -1299,6 +1299,10 @@ DRR_MODULES[DRR["93"]] = {
     local GlobalColor1 = color3FromRgb(39, 44, 61)
     local GlobalColor2 = color3FromRgb(0, 255, 38)
     local closed = false
+    local scrollingFrame = parent.TopBar.ScrollingFrame
+    local mainBar = parent.MainBar
+    local themeColor = color3FromRgb(39, 44, 61)
+    local themeColor2 = color3FromRgb(0, 255, 38)
 
     parent.TopBar.ProfileMenu.PlayerProfile.TextLabel.Text = game:GetService("Players").LocalPlayer.DisplayName
     parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = game:GetService("Players"):GetUserThumbnailAsync(game:GetService("Players").LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
@@ -1306,7 +1310,7 @@ DRR_MODULES[DRR["93"]] = {
     function UILIB:Load(name, img, direction)
         local self = setmetatable({}, UILIB)
         coroutine.wrap(function()
-            local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0,0.212, 0)})
+            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0,0.212, 0)})
             local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0,0.012, 0)})
             tw:Play()
             tw.Completed:Wait()
@@ -1321,15 +1325,15 @@ DRR_MODULES[DRR["93"]] = {
         end)()
         parent.TopBar.ProfileMenu.Title.TextLabel.Text = name
         if img and not img == "Default" then
-            parent.MainBar.Logo.Image = img
+            mainBar.Logo.Image = img
         else
-            parent.MainBar.Logo.Image = ""
+            mainBar.Logo.Image = ""
         end
 
         parent.TopBar.TopBarClose.MouseButton1Down:Connect(function()
             if not closed then
                 closed = true
-                local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
                 local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0,0.95, 0)})
                 local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)})
                 local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180})
@@ -1354,7 +1358,7 @@ DRR_MODULES[DRR["93"]] = {
             end
         end)
         function self:Open()
-            local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
+            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
             local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)})
             local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)})
             local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0})
@@ -1366,7 +1370,7 @@ DRR_MODULES[DRR["93"]] = {
             tw3:Play()
         end
         function self:Close()
-            local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
+            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
             local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)})
             local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)})
             local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180})
@@ -1392,7 +1396,7 @@ DRR_MODULES[DRR["93"]] = {
         function self:Toggle()
             if not closed then
                 closed = true
-                local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
                 local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)})
                 local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)})
                 local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180})
@@ -1404,7 +1408,7 @@ DRR_MODULES[DRR["93"]] = {
                 tw3:Play()
             else
                 closed = false
-                local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
                 local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)})
                 local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)})
                 local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0})
@@ -1420,10 +1424,10 @@ DRR_MODULES[DRR["93"]] = {
             for _, v in parent:GetChildren() do
                 if v:IsA("GuiObject") then
                     pcall(function()
-                        if v.BackgroundColor3 == color3FromRgb(39, 44, 61) then
+                        if v.BackgroundColor3 == themeColor then
                             v.BackgroundColor3 = color
                             GlobalColor1 = color
-                        elseif v.BackgroundColor3 == color3FromRgb(0, 255, 38) then
+                        elseif v.BackgroundColor3 == themeColor2 then
                             v.BackgroundColor3 = color2
                             GlobalColor2 = color2
                         end
@@ -1436,14 +1440,14 @@ DRR_MODULES[DRR["93"]] = {
     function UILIB.newTab(name, img)	
         local self = setmetatable({}, UILIB)
 
-        local newTab = parent.Folder.TabReserved:Clone()
-        newTab.Parent = parent.MainBar
+        local newTab = reserved.TabReserved:Clone()
+        newTab.Parent = mainBar
         newTab.Name = name
         newTab.Visible = false
 
-        local newTabBtn = parent.Folder.TabButtonReserved:Clone()
-        newTabBtn.Parent = parent.TopBar.ScrollingFrame
-        newTabBtn.Name = name or "Tab"..#parent.MainBar:GetChildren() - 4
+        local newTabBtn = reserved.TabButtonReserved:Clone()
+        newTabBtn.Parent = scrollingFrame
+        newTabBtn.Name = name or "Tab"..#mainBar:GetChildren() - 4
         newTabBtn.Frame.TextLabel.Text = name
         if img then
             newTabBtn.ImageLabel.Image = img
@@ -1453,9 +1457,9 @@ DRR_MODULES[DRR["93"]] = {
         newTabBtn.Visible = true
 
         newTabBtn.MouseButton1Click:Connect(function()
-            for _, v in parent.TopBar.ScrollingFrame:GetChildren() do
+            for _, v in scrollingFrame:GetChildren() do
                 if v:IsA("ImageButton") then
-                    local vTab = parent.MainBar:FindFirstChild(v.Name)
+                    local vTab = mainBar:FindFirstChild(v.Name)
                     if v.Name ~= name then
                         local twBtn = twServ:Create(v, tweenInfoNew(0.2), {Transparency = 0.75}):Play()
                         vTab.Visible = false
@@ -1623,7 +1627,7 @@ DRR_MODULES[DRR["93"]] = {
             else
                 newToggle.Label.BackgroundColor3 = GlobalColor1
             end
-            newToggle.Label.Label.MouseButton1Click:Connect(function()			
+            newToggle.Label.Label.MouseButton1Click:Connect(function()
                 if realToggle then
                     realToggle = false
                     local twColorOn = twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = GlobalColor1}):Play()				
@@ -1633,15 +1637,15 @@ DRR_MODULES[DRR["93"]] = {
                     local twColorOn = twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = GlobalColor2}):Play()			
                     func(realToggle)
                 end
-            end)		
+            end)
         end	
         function self.newDropdown(name, desc, listTable, func)
             local newdd = reserved.Dropdown:Clone()
             newdd.Visible = true
-            newdd.Parent = newTab		
+            newdd.Parent = newTab
             newdd.Name = name
             newdd.Title.Text = name
-            newdd.Description.Text = desc		
+            newdd.Description.Text = desc
             for _, list in listTable do
                 local newddbtn = reserved.DropdownButton:Clone()
                 newddbtn.Visible = true
@@ -1659,7 +1663,7 @@ DRR_MODULES[DRR["93"]] = {
                 end)()
             end
 
-            newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()			
+            newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()	
                 if not newdd.Box.Visible then
                     newdd.Box.Visible = true
                     local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 1.696, 0)}):Play()
