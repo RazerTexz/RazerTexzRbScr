@@ -1377,7 +1377,7 @@ DRR_MODULES[DRR["93"]] = {
             twRotate:Play()
             tw3:Play()
         end
-        function self.DestroyUI()
+        function self:Destroy()
             DRR["1"]:Destroy()
         end
         function self:HideCloseButton()
@@ -1431,6 +1431,7 @@ DRR_MODULES[DRR["93"]] = {
                 end
             end
         end
+        return self
     end
     function UILIB.newTab(name, img)	
         local self = setmetatable({}, UILIB)
