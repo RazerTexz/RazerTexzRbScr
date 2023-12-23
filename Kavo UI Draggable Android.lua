@@ -1897,7 +1897,7 @@ function Kavo.CreateLib(kavName, themeList)
                         tween:Create(keybindElement, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {BackgroundColor3 = themeList.ElementColor}):Play()
                         oHover = false
                     end
-                end)        
+                end)
 
                 UICorner1.CornerRadius = udimNew(0, 4)
                 UICorner1.Parent = moreInfo
