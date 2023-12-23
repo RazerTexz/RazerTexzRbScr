@@ -45,7 +45,7 @@ local function onChatted(player, msg)
 	end
 end
 
-for _, plr in pairs(getPlayers()) do
+for _, plr in getPlayers() do
 	plr.Chatted:Connect(function(msg) onChatted(plr, msg) end)
 end
 

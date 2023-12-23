@@ -2,6 +2,7 @@ local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
 local runService = game:GetService("RunService").Heartbeat
 local vector3New = Vector3.new
+local getPlayers = players.GetPlayers
 
 local teamCheck = false
 local disableOnDeath = false
@@ -16,7 +17,7 @@ runService:Connect(function(dt)
     elapsedTime += dt
     if elapsedTime >= delay then
         elapsedTime = 0
-        for _, v in players:GetPlayers() do
+        for _, v in getPlayers() do
             if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") then
                 if not teamCheck or v.Team ~= localPlayer.Team then
                     local head = v.Character.Head
