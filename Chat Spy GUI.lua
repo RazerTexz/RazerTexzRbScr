@@ -16,9 +16,9 @@ tab.newToggle("Enabled", "", true, function(state) enabled = state end)
 tab.newToggle("Spy On Myself", "", false, function(state) spyOnMyself = state end)
 tab.newToggle("Public", "Show to other players", false, function(state) public = state end)
 tab.newToggle("Public Italics", "Use /me to stand out more", false, function(state) publicItalics = state end)
-tab.newButton("Destroy GUI", "", function() game:GetService("CoreGui"):FindFirstChild("DrRay"):Destroy() end)
+tab.newButton("Destroy GUI", "", function() window:Destroy() end)
 
-local starterGui = game:GetService("StarterGui")
+local starterGui = game:GetService("StarterGui)
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
 local saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
