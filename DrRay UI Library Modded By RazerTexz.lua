@@ -1572,7 +1572,6 @@ DRR_MODULES[DRR["93"]] = {
             newSlider.Description.Text = desc
 
             local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
-            local tweenServ = twServ
 
             local Trigger = newSlider.ActualSlider.Trigger
             local Label = newSlider.ActualSlider.Title
@@ -1597,7 +1596,7 @@ DRR_MODULES[DRR["93"]] = {
                         Label.Text = perc
                         func(perc, Label)
                     end
-                    local tween = tweenServ:Create(Fill, tweenInfoNew(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
+                    local tween = twServ:Create(Fill, tweenInfoNew(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
                 until not MouseDown
             end
             Trigger.MouseButton1Down:Connect(Update)
@@ -1613,7 +1612,6 @@ DRR_MODULES[DRR["93"]] = {
             newToggle.Visible = true
             newToggle.Title.Text = title
             newToggle.Description.Text = desc
-
             newToggle.MouseEnter:Connect(function()
                 local twBtn = twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0}):Play()
             end)
@@ -1624,8 +1622,7 @@ DRR_MODULES[DRR["93"]] = {
                 newToggle.Label.BackgroundColor3 = GlobalColor2
             else
                 newToggle.Label.BackgroundColor3 = GlobalColor1
-            end	
-
+            end
             newToggle.Label.Label.MouseButton1Click:Connect(function()			
                 if realToggle then
                     realToggle = false
@@ -1651,7 +1648,6 @@ DRR_MODULES[DRR["93"]] = {
                 newddbtn.Parent = newdd.Box.ScrollingFrame
                 newddbtn.Name = list
                 newddbtn.name.Text = list
-                
                 coroutine.wrap(function()
                     newddbtn.MouseButton1Click:Connect(function()
                         newdd.DropdownBar.Open.Text = list
