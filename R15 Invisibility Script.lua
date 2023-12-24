@@ -2,9 +2,7 @@ local removeNametags = true -- remove custom billboardgui nametags from hrp, cou
 
 local vector3New = Vector3.new
 
-local plr = game:GetService("Players").LocalPlayer
-local character = plr.Character
-local hrp = character.HumanoidRootPart
+local hrp = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
 local old = hrp.CFrame
 local tag = hrp:FindFirstChildOfClass("BillboardGui")
 

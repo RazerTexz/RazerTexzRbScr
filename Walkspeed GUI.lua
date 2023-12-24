@@ -1,8 +1,7 @@
 local workspace = game:GetService("Workspace")
 local runService = game:GetService("RunService").Heartbeat
 local starterGui = game:GetService("StarterGui")
-local players = game:GetService("Players")
-local character = players.LocalPlayer.Character
+local character = game:GetService("Players").LocalPlayer.Character
 local mathHuge = math.huge
 local physicalPropertiesNew = PhysicalProperties.new
 

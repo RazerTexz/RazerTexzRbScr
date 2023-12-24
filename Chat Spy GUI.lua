@@ -22,8 +22,8 @@ tab.newButton("Destroy GUI", "", function() window:Destroy() end)
 local starterGui = game:GetService("StarterGui")
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
-local saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
-local getmsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("OnMessageDoneFiltering")
+local saymsg = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
+local getmsg = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFiltering
 local instance = (getgenv().chatSpyInstance or 0) + 1
 getgenv().chatSpyInstance = instance
 
