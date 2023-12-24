@@ -171,7 +171,7 @@ function Kavo.CreateLib(kavName, themeList)
     local themeList = themeList or {}
     local selectedTab 
     local kavName = kavName or "Library"
-    kavoPos = kavoPos + 1
+    kavoPos += 1
     Kavo[kavoPos] = kavName
     for _, v in coreGui:GetChildren() do
         if v:IsA("ScreenGui") and v.Name == kavName then v:Destroy() end
@@ -394,7 +394,7 @@ function Kavo.CreateLib(kavName, themeList)
         UICorner.CornerRadius = udimNew(0, 5)
         UICorner.Parent = tabButton
         
-        tabsPos = tabsPos + 1
+        tabsPos += 1
         Tabs[tabsPos] = tabName
 
         UpdateSize()
@@ -540,7 +540,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local touch = instanceNew("ImageLabel")
                 local Sample = instanceNew("ImageLabel")
 
-                modulesPos = modulesPos + 1
+                modulesPos += 1
                 modules[modulesPos] = bname
 
                 buttonElement.Name = bname
@@ -896,7 +896,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local nTip = nTip or "Prints Current Toggle State"
                 local callback = callback or function() end
                 local toggled = false
-                settingsTPos = settingsTPos + 1
+                settingsTPos += 1
                 SettingsT[settingsTPos] = tname
 
                 local toggleElement = instanceNew("TextButton")
