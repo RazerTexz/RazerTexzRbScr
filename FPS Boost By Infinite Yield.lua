@@ -16,24 +16,18 @@ for _, v in game:GetDescendants() do
 	if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("BasePart") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
 		v.Material = "SmoothPlastic"
 		v.Reflectance = 0
-	elseif v:IsA("Decal") then
-		v.Transparency = 1
-	elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-		v.Lifetime = noLifetime
+	elseif v:IsA("Decal") then v.Transparency = 1
+	elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then v.Lifetime = noLifetime
 	elseif v:IsA("Explosion") then
 		v.BlastPressure = 1
 		v.BlastRadius = 1
-	end
+	elseif v:IsA("Model") then v.LevelOfDetail = Enum.ModelLevelOfDetail.StreamingMesh end
 end
 
 for _, v in lighting:GetDescendants() do
-	if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
-		v.Enabled = false
-	end
+	if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then	v.Enabled = false end
 end
 
 workspace.DescendantAdded:Connect(function(descendant)
-	if descendant:IsA("ForceField") or descendant:IsA("Sparkles") or descendant:IsA("Smoke") or descendant:IsA("Fire") then
-		descendant:Destroy()
-	end
+	if descendant:IsA("ForceField") or descendant:IsA("Sparkles") or descendant:IsA("Smoke") or descendant:IsA("Fire") then descendant:Destroy() end
 end)
