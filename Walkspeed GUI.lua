@@ -2,6 +2,7 @@ local workspace = game:GetService("Workspace")
 local runService = game:GetService("RunService").Heartbeat
 local starterGui = game:GetService("StarterGui")
 local character = game:GetService("Players").LocalPlayer.Character
+local humanoid = game:GetService("Players").LocalPlayer.Character.Humanoid
 local mathHuge = math.huge
 local physicalPropertiesNew = PhysicalProperties.new
 
@@ -22,7 +23,7 @@ mainTab.newToggle("Fix sliding at high speed", "", false, function(state)
             local playerProperties = character.HumanoidRootPart.CustomPhysicalProperties
             local a, b, c, d = playerProperties.Friction, playerProperties.Elasticity, playerProperties.FrictionWeight, playerProperties.ElasticityWeight
             playerProperties = physicalPropertiesNew(mathHuge, a, b, c, d)
-        elseif character.HumanoidRootPart.CustomPhysicalProperties == nil then    
+        else   
             character.HumanoidRootPart.CustomPhysicalProperties = PhysicalProperties.new(mathHuge, 0, 0)    
         end
     end
@@ -35,10 +36,9 @@ mainTab.newButton("Refresh player", "", function()
     cframe = refreshPosition
 end)
 
-local ws = character.Humanoid.WalkSpeed
 runService:Connect(function()
     if isWalkSpeed then 
-        ws = walkSpeed
+        humanoid.WalkSpeed = walkSpeed
         currentWalkspeed.updateLabel("Current Walkspeed: "..character.Humanoid.WalkSpeed)
     end
 end)
