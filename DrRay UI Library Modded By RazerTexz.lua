@@ -1312,11 +1312,10 @@ DRR_MODULES[DRR["93"]] = {
         local self = setmetatable({}, UILIB)
         coroutine.wrap(function()
             local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
-    		local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0, 0.012, 0)})
     		tw:Play()
     		tw.Completed:Wait()
     		task.wait(0.3)
-    		tw2:Play()
+    		twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
         end)()
         coroutine.wrap(function()
             while true do
@@ -1334,7 +1333,8 @@ DRR_MODULES[DRR["93"]] = {
         parent.TopBar.TopBarClose.MouseButton1Down:Connect(function()
             if not closed then
                 closed = true
-                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)}):Play()
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
+                tw:Play()
                 tw.Completed:Wait()
                 twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)}):Play()
                 task.wait(0.1)
@@ -1342,7 +1342,8 @@ DRR_MODULES[DRR["93"]] = {
                 twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)}):Play()
             else
                 closed = false
-                local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)}):Play()
+                local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
+                tw:Play()
                 tw.Completed:Wait()
                 twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
                 task.wait(0.1)
@@ -1351,7 +1352,8 @@ DRR_MODULES[DRR["93"]] = {
             end
         end)
         function self:Open()
-            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)}):Play()
+            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
+            tw:Play()
             tw.Completed:Wait()
             twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
             task.wait(0.1)
@@ -1359,7 +1361,8 @@ DRR_MODULES[DRR["93"]] = {
             twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)}):Play()
         end
         function self:Close()
-            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)}):Play()
+            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
+            tw:Play()
             tw.Completed:Wait()
             twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)}):Play()
             task.wait(0.1)
@@ -1381,8 +1384,9 @@ DRR_MODULES[DRR["93"]] = {
         function self:Toggle()
             if not closed then
                 closed = true
-                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)}):Play()
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
                 local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)})
+                tw:Play()
                 tw.Completed:Wait()
                 tw2:Play()
                 tw2.Completed:Wait()
@@ -1390,8 +1394,9 @@ DRR_MODULES[DRR["93"]] = {
                 twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)}):Play()
             else
                 closed = false
-                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)}):Play()
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
                 local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)})
+                tw:Play()
                 tw.Completed:Wait()
                 tw2:Play()
                 tw2.Completed:Wait()
@@ -1629,7 +1634,8 @@ DRR_MODULES[DRR["93"]] = {
                 coroutine.wrap(function()
                     newddbtn.MouseButton1Click:Connect(function()
                         newdd.DropdownBar.Open.Text = list
-                        local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)}):Play()
+                        local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
+                        twPos:Play()
                         twPos.Completed:Wait()
                         newdd.Box.Visible = false
                         func(list)
@@ -1642,7 +1648,8 @@ DRR_MODULES[DRR["93"]] = {
                     newdd.Box.Visible = true
                     twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 1.696, 0)}):Play()
                 else
-                    local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)}):Play()
+                    local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
+                    twPos:Play()
                     twPos.Completed:Wait()
                     newdd.Box.Visible = false
                 end
