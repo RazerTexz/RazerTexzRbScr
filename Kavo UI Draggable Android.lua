@@ -1,4 +1,5 @@
 local Kavo = {}
+local kavoPos = #Kavo
 
 local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
@@ -132,6 +133,7 @@ local themeStyles = {
 local oldTheme = ""
 
 local SettingsT = {}
+local settingsTPos = #SettingsT
 
 local Name = "KavoConfig.JSON"
 
@@ -169,7 +171,8 @@ function Kavo.CreateLib(kavName, themeList)
     local themeList = themeList or {}
     local selectedTab 
     local kavName = kavName or "Library"
-    table.insert(Kavo, kavName)
+    kavoPos += 1
+    Kavo[kavoPos] = kavName
     for _, v in coreGui:GetChildren() do
         if v:IsA("ScreenGui") and v.Name == kavName then v:Destroy() end
     end
@@ -337,6 +340,7 @@ function Kavo.CreateLib(kavName, themeList)
     end
 
     local Tabs = {}
+    local tabsPos = #Tabs
     local first = true
     function Tabs:NewTab(tabName)
         local tabName = tabName or "Tab"
@@ -389,7 +393,9 @@ function Kavo.CreateLib(kavName, themeList)
 
         UICorner.CornerRadius = udimNew(0, 5)
         UICorner.Parent = tabButton
-        table.insert(Tabs, tabName)
+        
+        tabsPos += 1
+        Tabs[tabsPos] = tabName
 
         UpdateSize()
         page.ChildAdded:Connect(UpdateSize)
@@ -428,6 +434,7 @@ function Kavo.CreateLib(kavName, themeList)
             local secName = secName or "Section"
             local sectionFunctions = {}
             local modules = {}
+            local modulesPos = #modules
             local hidden = hidden or false
             local sectionFrame = instanceNew("Frame")
             local sectionlistoknvm = instanceNew("UIListLayout")
@@ -533,7 +540,8 @@ function Kavo.CreateLib(kavName, themeList)
                 local touch = instanceNew("ImageLabel")
                 local Sample = instanceNew("ImageLabel")
 
-                table.insert(modules, bname)
+                modulesPos += 1
+                modules[modulesPos] = bname
 
                 buttonElement.Name = bname
                 buttonElement.Parent = sectionInners
@@ -888,7 +896,8 @@ function Kavo.CreateLib(kavName, themeList)
                 local nTip = nTip or "Prints Current Toggle State"
                 local callback = callback or function() end
                 local toggled = false
-                table.insert(SettingsT, tname)
+                settingsTPos += 1
+                SettingsT[settingsTPos] = tname
 
                 local toggleElement = instanceNew("TextButton")
                 local UICorner = instanceNew("UICorner")
