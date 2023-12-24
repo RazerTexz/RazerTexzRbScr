@@ -23,7 +23,7 @@ end
 local newroot = character.LowerTorso.Root:Clone()
 hrp.Parent = workspace
 character.PrimaryPart = hrp
-character:MoveTo(Vector3.new(old.X,9e9,old.Z))
+character:MoveTo(Vector3.new(old.X, 9e9, old.Z))
 hrp.Parent = character
 task.wait(0.5)
 newroot.Parent = character.LowerTorso
