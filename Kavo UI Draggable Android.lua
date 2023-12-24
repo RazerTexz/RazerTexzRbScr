@@ -636,11 +636,7 @@ function Kavo.CreateLib(kavName, themeList)
                         local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                         c.Position = udim2New(0, x, 0, y)
                         local len, size = 0.35, nil
-                        if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                            size = (btn.AbsoluteSize.X * 1.5)
-                        else
-                            size = (btn.AbsoluteSize.Y * 1.5)
-                        end
+                        size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then (btn.AbsoluteSize.X * 1.5) else (btn.AbsoluteSize.Y * 1.5)
                         c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                         for i = 1, 10 do
                             c.ImageTransparency = c.ImageTransparency + 0.05
@@ -1011,11 +1007,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
                             local len, size = 0.35, nil
-                            if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                size = (btn.AbsoluteSize.X * 1.5)
-                            else
-                                size = (btn.AbsoluteSize.Y * 1.5)
-                            end
+                            size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then (btn.AbsoluteSize.X * 1.5) else (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
@@ -1029,11 +1021,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
                             local len, size = 0.35, nil
-                            if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                size = (btn.AbsoluteSize.X * 1.5)
-                            else
-                                size = (btn.AbsoluteSize.Y * 1.5)
-                            end
+                            size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then (btn.AbsoluteSize.X * 1.5) else (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
@@ -1388,11 +1376,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
                             local len, size = 0.35, nil
-                            if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                size = (btn.AbsoluteSize.X * 1.5)
-                            else
-                                size = (btn.AbsoluteSize.Y * 1.5)
-                            end
+                            size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then (btn.AbsoluteSize.X * 1.5) else (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
@@ -1410,11 +1394,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
                             local len, size = 0.35, nil
-                            if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                size = (btn.AbsoluteSize.X * 1.5)
-                            else
-                                size = (btn.AbsoluteSize.Y * 1.5)
-                            end
+                            size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then (btn.AbsoluteSize.X * 1.5) else (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
@@ -1599,11 +1579,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
                             local len, size = 0.35, nil
-                            if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then
-                                size = (optionSelect.AbsoluteSize.X * 1.5)
-                            else
-                                size = (optionSelect.AbsoluteSize.Y * 1.5)
-                            end
+                            size = if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then (optionSelect.AbsoluteSize.X * 1.5) else (optionSelect.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
@@ -1691,11 +1667,7 @@ function Kavo.CreateLib(kavName, themeList)
                                 local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                                 c.Position = udim2New(0, x, 0, y)
                                 local len, size = 0.35, nil
-                                if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then
-                                    size = (optionSelect.AbsoluteSize.X * 1.5)
-                                else
-                                    size = (optionSelect.AbsoluteSize.Y * 1.5)
-                                end
+                                size = if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then (optionSelect.AbsoluteSize.X * 1.5) else (optionSelect.AbsoluteSize.Y * 1.5)
                                 c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency = c.ImageTransparency + 0.05
@@ -1793,11 +1765,7 @@ function Kavo.CreateLib(kavName, themeList)
                         local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                         c.Position = udim2New(0, x, 0, y)
                         local len, size = 0.35, nil
-                        if keybindElement.AbsoluteSize.X >= keybindElement.AbsoluteSize.Y then
-                            size = (keybindElement.AbsoluteSize.X * 1.5)
-                        else
-                            size = (keybindElement.AbsoluteSize.Y * 1.5)
-                        end
+                        size = if keybindElement.AbsoluteSize.X >= keybindElement.AbsoluteSize.Y then (keybindElement.AbsoluteSize.X * 1.5) else (keybindElement.AbsoluteSize.Y * 1.5)
                         c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                         for i = 1, 10 do
                             c.ImageTransparency = c.ImageTransparency + 0.05
@@ -2015,11 +1983,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
                             local len, size = 0.35, nil
-                            if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                size = (btn.AbsoluteSize.X * 1.5)
-                            else
-                                size = (btn.AbsoluteSize.Y * 1.5)
-                            end
+                            size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then (btn.AbsoluteSize.X * 1.5) else (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
@@ -2037,11 +2001,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
                             local len, size = 0.35, nil
-                            if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
-                                size = (btn.AbsoluteSize.X * 1.5)
-                            else
-                                size = (btn.AbsoluteSize.Y * 1.5)
-                            end
+                            size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then (btn.AbsoluteSize.X * 1.5) else (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency = c.ImageTransparency + 0.05
@@ -2369,7 +2329,7 @@ function Kavo.CreateLib(kavName, themeList)
                     else
                         tween:Create(toggleEnabled, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageTransparency = 0}):Play()
                         rainbow = true
-                        rainbowconnection = run.RenderStepped:Connect(function()
+                        rainbowconnection = run.Heartbeat:Connect(function()
                             setrgbcolor({zigzag(counter), 1, 1})
                             counter = counter + 0.01
                         end)

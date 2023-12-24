@@ -1292,43 +1292,35 @@ DRR_MODULES[DRR["93"]] = {
     local UILIB = {}
     local parent  = script.Parent
     local reserved = parent.Folder
+    local scrollingFrame = parent.TopBar.ScrollingFrame
+    local mainBar = parent.MainBar
     UILIB.__index = UILIB
 
     local listening = false
     local twServ = game:GetService("TweenService")
     local UIS = game:GetService("UserInputService")
-    local GlobalColor1 = color3FromRgb(39, 44, 61)
-    local GlobalColor2 = color3FromRgb(0, 255, 38)
+    local globalColor1 = color3FromRgb(39, 44, 61)
+    local globalColor2 = color3FromRgb(0, 255, 38)
     local closed = false
-    local scrollingFrame = parent.TopBar.ScrollingFrame
-    local mainBar = parent.MainBar
-    local themeColor = color3FromRgb(39, 44, 61)
-    local themeColor2 = color3FromRgb(0, 255, 38)
 
     parent.TopBar.ProfileMenu.PlayerProfile.TextLabel.Text = game:GetService("Players").LocalPlayer.DisplayName
     parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = game:GetService("Players"):GetUserThumbnailAsync(game:GetService("Players").LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
 
     function UILIB:Load(name, img, direction)
         local self = setmetatable({}, UILIB)
+        local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
+		tw:Play()
+		tw.Completed:Wait()
+		task.wait(0.3)
+		twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
         coroutine.wrap(function()
-            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
-    		tw:Play()
-    		tw.Completed:Wait()
-    		task.wait(0.3)
-    		twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
-        end)()
-        coroutine.wrap(function()
-            while true do
-                task.wait(0.1)
+    		while true do
+                task.wait()
                 parent.TopBar.ProfileMenu.Clock.TextLabel.Text = os.date("%H:%M")
             end
         end)()
         parent.TopBar.ProfileMenu.Title.TextLabel.Text = name
-        if img and not img == "Default" then
-            mainBar.Logo.Image = img
-        else
-            mainBar.Logo.Image = ""
-        end
+        mainBar.Logo.Image = if img and not img == "Default" then img else ''
 
         parent.TopBar.TopBarClose.MouseButton1Down:Connect(function()
             if not closed then
@@ -1408,12 +1400,12 @@ DRR_MODULES[DRR["93"]] = {
             for _, v in parent:GetChildren() do
                 if v:IsA("GuiObject") then
                     pcall(function()
-                        if v.BackgroundColor3 == themeColor then
+                        if v.BackgroundColor3 == globalColor then
                             v.BackgroundColor3 = color
-                            GlobalColor1 = color
-                        elseif v.BackgroundColor3 == themeColor2 then
+                            globalColor1 = color
+                        elseif v.BackgroundColor3 == globalColor2 then
                             v.BackgroundColor3 = color2
-                            GlobalColor2 = color2
+                            globalColor2 = color2
                         end
                     end)
                 end
@@ -1431,11 +1423,7 @@ DRR_MODULES[DRR["93"]] = {
         newTabBtn.Parent = scrollingFrame
         newTabBtn.Name = name or "Tab"..#mainBar:GetChildren() - 4
         newTabBtn.Frame.TextLabel.Text = name
-        if img then
-            newTabBtn.ImageLabel.Image = img
-        else
-            newTabBtn.ImageLabel.Image = ""
-        end
+        newTabBtn.ImageLabel.Image = if img then img else ''
         newTabBtn.Visible = true
         newTabBtn.MouseButton1Click:Connect(function()
             for _, v in scrollingFrame:GetChildren() do
@@ -1601,23 +1589,19 @@ DRR_MODULES[DRR["93"]] = {
             newToggle.MouseLeave:Connect(function()
                 twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
             end)
-            if realToggle then
-                newToggle.Label.BackgroundColor3 = GlobalColor2
-            else
-                newToggle.Label.BackgroundColor3 = GlobalColor1
-            end
+            newToggle.Label.BackgroundColor3 = if realToggle then globalColor2 else globalColor1
             newToggle.Label.Label.MouseButton1Click:Connect(function()
                 if realToggle then
                     realToggle = false
-                    twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = GlobalColor1}):Play()				
+                    twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = globalColor1}):Play()
                     func(realToggle)
                 else
                     realToggle = true
-                    twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = GlobalColor2}):Play()			
+                    twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = globalColor2}):Play()
                     func(realToggle)
                 end
             end)
-        end	
+        end
         function self.newDropdown(name, desc, listTable, func)
             local newdd = reserved.Dropdown:Clone()
             newdd.Visible = true
@@ -1631,19 +1615,17 @@ DRR_MODULES[DRR["93"]] = {
                 newddbtn.Parent = newdd.Box.ScrollingFrame
                 newddbtn.Name = list
                 newddbtn.name.Text = list
-                coroutine.wrap(function()
-                    newddbtn.MouseButton1Click:Connect(function()
-                        newdd.DropdownBar.Open.Text = list
-                        local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
-                        twPos:Play()
-                        twPos.Completed:Wait()
-                        newdd.Box.Visible = false
-                        func(list)
-                    end)
-                end)()
+                newddbtn.MouseButton1Click:Connect(function()
+                    newdd.DropdownBar.Open.Text = list
+                    local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
+                    twPos:Play()
+                    twPos.Completed:Wait()
+                    newdd.Box.Visible = false
+                    func(list)
+                end)
             end
 
-            newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()	
+            newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()
                 if not newdd.Box.Visible then
                     newdd.Box.Visible = true
                     twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 1.696, 0)}):Play()
