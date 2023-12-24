@@ -7,6 +7,7 @@
 local color3FromRgb = Color3.fromRGB
 local udimNew = UDim.new
 local udim2New = UDim2.new
+local udim2FromScale = UDim2.fromScale
 local mathRandom = math.random
 local mathClamp = math.clamp
 local mathRound = math.round
@@ -1600,7 +1601,7 @@ DRR_MODULES[DRR["93"]] = {
                         Label.Text = perc
                         func(perc, Label)
                     end
-                    local tween = twServ:Create(Fill, tweenInfoNew(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
+                    local tween = twServ:Create(Fill, tweenInfoNew(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = udim2FromScale(Percent, 1)}):Play()
                 until not MouseDown
             end
             Trigger.MouseButton1Down:Connect(Update)
