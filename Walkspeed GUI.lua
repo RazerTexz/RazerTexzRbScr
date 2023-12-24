@@ -1,8 +1,7 @@
 local workspace = game:GetService("Workspace")
-local runService = game:GetService("RunService")
+local runService = game:GetService("RunService").Heartbeat
 local starterGui = game:GetService("StarterGui")
 local players = game:GetService("Players")
-local localPlayer = players.LocalPlayer
 local character = players.LocalPlayer.Character
 local mathHuge = math.huge
 local physicalPropertiesNew = PhysicalProperties.new
@@ -14,13 +13,13 @@ local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/
 local window = DrRayLibrary:Load("Walkspeed GUI", "Default")
 local mainTab = DrRayLibrary.newTab("Main", "")
 
-local currentWalkspeed = mainTab.newLabel("Current Walkspeed: "..localPlayer.Character.Humanoid.WalkSpeed)
+local currentWalkspeed = mainTab.newLabel("Current Walkspeed: "..character.Humanoid.WalkSpeed)
 mainTab.newButton("Destroy GUI", "", function() window:Destroy() end)
 mainTab.newInput("Custom walkspeed", "", function(speed) walkSpeed = tonumber(speed) end)
 mainTab.newToggle("Apply custom walkspeed", "", false, function(state) isWalkSpeed = state end)
 mainTab.newToggle("Fix sliding at high speed", "", false, function(state)
     if state then
-        if localPlayer.Character.HumanoidRootPart.CustomPhysicalProperties ~= nil then
+        if character.HumanoidRootPart.CustomPhysicalProperties ~= nil then
             local playerProperties = character.HumanoidRootPart.CustomPhysicalProperties
             local a, b, c, d = playerProperties.Friction, playerProperties.Elasticity, playerProperties.FrictionWeight, playerProperties.ElasticityWeight
             playerProperties = physicalPropertiesNew(mathHuge, a, b, c, d)
@@ -38,9 +37,9 @@ mainTab.newButton("Refresh player", "", function()
 end)
 
 local ws = character.Humanoid.WalkSpeed
-runService.Heartbeat:Connect(function()
+runService:Connect(function()
     if isWalkSpeed then 
         ws = walkSpeed
-        currentWalkspeed.updateLabel("Current Walkspeed: "..localPlayer.Character.Humanoid.WalkSpeed)
+        currentWalkspeed.updateLabel("Current Walkspeed: "..character.Humanoid.WalkSpeed)
     end
 end)

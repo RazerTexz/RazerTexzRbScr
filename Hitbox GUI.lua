@@ -74,4 +74,4 @@ runService:Connect(function(dt)
         applyHitbox()
         applyHeadHitbox()
     end
-end)
+end
