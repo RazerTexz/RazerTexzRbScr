@@ -1311,12 +1311,10 @@ DRR_MODULES[DRR["93"]] = {
     function UILIB:Load(name, img, direction)
         local self = setmetatable({}, UILIB)
         coroutine.wrap(function()
-            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0,0.212, 0)})
-            local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0,0.012, 0)})
-            tw:Play()
+            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0,0.212, 0)}):Play()
             tw.Completed:Wait()
             task.wait(0.3)
-            tw2:Play()
+            twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0,0.012, 0)}):Play()
         end)()
         coroutine.wrap(function()
             while true do
@@ -1334,53 +1332,37 @@ DRR_MODULES[DRR["93"]] = {
         parent.TopBar.TopBarClose.MouseButton1Down:Connect(function()
             if not closed then
                 closed = true
-                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
-                local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0,0.95, 0)})
-                local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)})
-                local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180})
-                tw:Play()
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)}):Play()
                 tw.Completed:Wait()
-                tw2:Play()
+                twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)}):Play()
                 task.wait(0.1)
-                twRotate:Play()
-                tw3:Play()
+                twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
+                twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)}):Play()
             else
                 closed = false
-                local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
-                local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)})
-                local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)})
-                local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0})
-                tw:Play()
+                local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)}):Play()
                 tw.Completed:Wait()
-                tw2:Play()
+                twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
                 task.wait(0.1)
-                twRotate:Play()
-                tw3:Play()
+                twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0}):Play()
+                twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)}):Play()
             end
         end)
         function self:Open()
-            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
-            local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)})
-            local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)})
-            local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0})
-            tw:Play()
+            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)}):Play()
             tw.Completed:Wait()
-            tw2:Play()
+            twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
             task.wait(0.1)
-            twRotate:Play()
-            tw3:Play()
+            twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0}):Play()
+            twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)}):Play()
         end
         function self:Close()
-            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
-            local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)})
-            local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)})
-            local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180})
-            tw:Play()
+            local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)}):Play()
             tw.Completed:Wait()
-            tw2:Play()
+            twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)}):Play()
             task.wait(0.1)
-            twRotate:Play()
-            tw3:Play()
+            twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
+            twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)}):Play()
         end
         function self:Destroy()
             DRR["1"]:Destroy()
@@ -1397,28 +1379,22 @@ DRR_MODULES[DRR["93"]] = {
         function self:Toggle()
             if not closed then
                 closed = true
-                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
-                local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)})
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)}):Play()
                 local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)})
-                local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180})
-                tw:Play()
                 tw.Completed:Wait()
                 tw2:Play()
                 tw2.Completed:Wait()
-                twRotate:Play()
-                tw3:Play()
+                twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
+                twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)}):Play()
             else
                 closed = false
-                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
-                local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)})
+                local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)}):Play()
                 local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.012, 0)})
-                local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0})
-                tw:Play()
                 tw.Completed:Wait()
                 tw2:Play()
                 tw2.Completed:Wait()
-                twRotate:Play()
-                tw3:Play()
+                twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0}):Play()
+                twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.52, 0)}):Play()
             end
         end
         function self:SetTheme(color, color2)
@@ -1440,12 +1416,10 @@ DRR_MODULES[DRR["93"]] = {
     end
     function UILIB.newTab(name, img)	
         local self = setmetatable({}, UILIB)
-
         local newTab = reserved.TabReserved:Clone()
         newTab.Parent = mainBar
         newTab.Name = name
         newTab.Visible = false
-
         local newTabBtn = reserved.TabButtonReserved:Clone()
         newTabBtn.Parent = scrollingFrame
         newTabBtn.Name = name or "Tab"..#mainBar:GetChildren() - 4
@@ -1456,17 +1430,16 @@ DRR_MODULES[DRR["93"]] = {
             newTabBtn.ImageLabel.Image = ""
         end
         newTabBtn.Visible = true
-
         newTabBtn.MouseButton1Click:Connect(function()
             for _, v in scrollingFrame:GetChildren() do
                 if v:IsA("ImageButton") then
                     local vTab = mainBar:FindFirstChild(v.Name)
                     if v.Name ~= name then
-                        local twBtn = twServ:Create(v, tweenInfoNew(0.2), {Transparency = 0.75}):Play()
+                        twServ:Create(v, tweenInfoNew(0.2), {Transparency = 0.75}):Play()
                         vTab.Visible = false
                     elseif v.Name == name then
                         vTab.Visible = true
-                        local twBtn = twServ:Create(v, tweenInfoNew(0.2), {Transparency = 0}):Play()
+                        twServ:Create(v, tweenInfoNew(0.2), {Transparency = 0}):Play()
                     end
                 end
             end
@@ -1479,10 +1452,10 @@ DRR_MODULES[DRR["93"]] = {
             newbtn.Visible = true
             newbtn.Name = name
             newbtn.MouseEnter:Connect(function()
-                local twBtn = twServ:Create(newbtn, tweenInfoNew(0.2), {Transparency = 0}):Play()
+                twServ:Create(newbtn, tweenInfoNew(0.2), {Transparency = 0}):Play()
             end)
             newbtn.MouseLeave:Connect(function()
-                local twBtn = twServ:Create(newbtn, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
+                twServ:Create(newbtn, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
             end)
             newbtn.MouseButton1Click:Connect(func)
         end
@@ -1501,10 +1474,10 @@ DRR_MODULES[DRR["93"]] = {
             local newInput = reserved.Textbox:Clone()
             local textbox = newInput.TextboxBar.ActualTextbox
             newInput.MouseEnter:Connect(function()
-                local twBtn = twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0}):Play()
+                twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0}):Play()
             end)
             newInput.MouseLeave:Connect(function()
-                local twBtn = twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
+                twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
             end)
             newInput.Visible = true
             newInput.Parent = newTab
@@ -1518,10 +1491,10 @@ DRR_MODULES[DRR["93"]] = {
         function self.newKeybind(name, desc, func)
             local newKey = reserved.Keybind:Clone()
             newKey.MouseEnter:Connect(function()
-                local twBtn = twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0}):Play()
+                twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0}):Play()
             end)
             newKey.MouseLeave:Connect(function()
-                local twBtn = twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
+                twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
             end)
             newKey.Parent = newTab
             newKey.Title.Text = name
@@ -1546,7 +1519,6 @@ DRR_MODULES[DRR["93"]] = {
                         Loop()
                     end
                 end)()
-
                 a = UIS.InputBegan:Connect(function(input, processed)
                     if input.UserInputType == Enum.UserInputType.Keyboard then
                         newKey.Bind.Button.Text = input.KeyCode.Name
@@ -1565,10 +1537,10 @@ DRR_MODULES[DRR["93"]] = {
         function self.newSlider(name, desc, max, manageSlider, func)
             local newSlider = reserved.Slider:Clone()
             newSlider.MouseEnter:Connect(function()
-                local twBtn = twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0}):Play()
+                twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0}):Play()
             end)
             newSlider.MouseLeave:Connect(function()
-                local twBtn = twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
+                twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
             end)
             newSlider.Visible = true
             newSlider.Name = name
@@ -1587,7 +1559,6 @@ DRR_MODULES[DRR["93"]] = {
             local Percent
             local MouseDown = false
             local delayTw = 0.3
-
             local function Update()
                 MouseDown = true
                 repeat
@@ -1601,7 +1572,7 @@ DRR_MODULES[DRR["93"]] = {
                         Label.Text = perc
                         func(perc, Label)
                     end
-                    local tween = twServ:Create(Fill, tweenInfoNew(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = udim2FromScale(Percent, 1)}):Play()
+                    twServ:Create(Fill, tweenInfoNew(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = udim2FromScale(Percent, 1)}):Play()
                 until not MouseDown
             end
             Trigger.MouseButton1Down:Connect(Update)
@@ -1618,10 +1589,10 @@ DRR_MODULES[DRR["93"]] = {
             newToggle.Title.Text = title
             newToggle.Description.Text = desc
             newToggle.MouseEnter:Connect(function()
-                local twBtn = twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0}):Play()
+                twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0}):Play()
             end)
             newToggle.MouseLeave:Connect(function()
-                local twBtn = twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
+                twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
             end)
             if realToggle then
                 newToggle.Label.BackgroundColor3 = GlobalColor2
@@ -1631,11 +1602,11 @@ DRR_MODULES[DRR["93"]] = {
             newToggle.Label.Label.MouseButton1Click:Connect(function()
                 if realToggle then
                     realToggle = false
-                    local twColorOn = twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = GlobalColor1}):Play()				
+                    twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = GlobalColor1}):Play()				
                     func(realToggle)
                 else
                     realToggle = true
-                    local twColorOn = twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = GlobalColor2}):Play()			
+                    twServ:Create(newToggle.Label, tweenInfoNew(0.2), {BackgroundColor3 = GlobalColor2}):Play()			
                     func(realToggle)
                 end
             end)
@@ -1667,7 +1638,7 @@ DRR_MODULES[DRR["93"]] = {
             newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()	
                 if not newdd.Box.Visible then
                     newdd.Box.Visible = true
-                    local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 1.696, 0)}):Play()
+                    twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 1.696, 0)}):Play()
                 else
                     local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)}):Play()
                     twPos.Completed:Wait()
