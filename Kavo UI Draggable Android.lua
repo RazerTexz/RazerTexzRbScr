@@ -163,7 +163,8 @@ function Kavo.CreateLib(kavName, themeList)
         elseif themeList.Background == nil then themeList.Background = color3FromRgb(36, 37, 43)
         elseif themeList.Header == nil then themeList.Header = color3FromRgb(28, 29, 34)
         elseif themeList.TextColor == nil then themeList.TextColor = globalColor
-        elseif themeList.ElementColor == nil then themeList.ElementColor = color3FromRgb(32, 32, 38) end
+        elseif themeList.ElementColor == nil then themeList.ElementColor = color3FromRgb(32, 32, 38)
+        end
     end
     local themeList = themeList or {}
     local selectedTab 
@@ -331,7 +332,8 @@ function Kavo.CreateLib(kavName, themeList)
         elseif prope == "SchemeColor" then themeList.SchemeColor = color
         elseif prope == "Header" then themeList.Header = color
         elseif prope == "TextColor" then themeList.TextColor = color
-        elseif prope == "ElementColor" then themeList.ElementColor = color end
+        elseif prope == "ElementColor" then themeList.ElementColor = color
+        end
     end
 
     local Tabs = {}
