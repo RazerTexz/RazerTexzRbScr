@@ -1334,15 +1334,12 @@ DRR_MODULES[DRR["93"]] = {
             if not closed then
     			closed = true
     			local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.612, 0)})
-    			local tw3 = twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)})
-    			local tw2 = twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)})
-    			local twRotate = twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180})
     			tw:Play()
     			tw.Completed:Wait()
-    			tw2:Play()
+    			twServ:Create(parent.TopBar, tweenInfoNew(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, -0.173, 0)}):Play()
     			task.wait(0.1)
-    			twRotate:Play()
-    			tw3:Play()
+    			twServ:Create(parent.TopBar.TopBarClose.ImageLabel, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
+    			twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)}):Play()
             else
                 closed = false
                 local tw = twServ:Create(parent.MainBar, tweenInfoNew(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
