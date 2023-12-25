@@ -1397,17 +1397,17 @@ DRR_MODULES[DRR["93"]] = {
             end
         end
         function self:SetTheme(color, color2)
-            for _, v in parent:GetChildren() do
+            local getParentChildren = parent.GetChildren
+            local getParent = getParentChildren(parent)
+            for _, v in getParent do
                 if v:IsA("GuiObject") then
-                    pcall(function()
-                        if v.BackgroundColor3 == globalColor then
-                            v.BackgroundColor3 = color
-                            globalColor1 = color
-                        elseif v.BackgroundColor3 == globalColor2 then
-                            v.BackgroundColor3 = color2
-                            globalColor2 = color2
-                        end
-                    end)
+                    if v.BackgroundColor3 == globalColor then
+                        v.BackgroundColor3 = color
+                        globalColor1 = color
+                    elseif v.BackgroundColor3 == globalColor2 then
+                        v.BackgroundColor3 = color2
+                        globalColor2 = color2
+                    end
                 end
             end
         end
@@ -1415,20 +1415,26 @@ DRR_MODULES[DRR["93"]] = {
     end
     function UILIB.newTab(name, img)	
         local self = setmetatable({}, UILIB)
-        local newTab = reserved.TabReserved:Clone()
+        local newTabClone = reserved.TabReserved.Clone
+        local newTab = newTabClone(reserved.TabReserved)
         newTab.Parent = mainBar
         newTab.Name = name
         newTab.Visible = false
-        local newTabBtn = reserved.TabButtonReserved:Clone()
+        local newTabBtnClone = reserved.TabButtonReserved.Clone
+        local newTabBtn = newTabBtnClone(reserved.TabButtonReserved)
         newTabBtn.Parent = scrollingFrame
         newTabBtn.Name = name or "Tab"..#mainBar:GetChildren() - 4
         newTabBtn.Frame.TextLabel.Text = name
         newTabBtn.ImageLabel.Image = img and img or ''
         newTabBtn.Visible = true
+
+        local getScrollingFrameChildren = scrollingFrame.GetChildren
+        local getScrollingFrame = getScrollingFrameChildren(scrollingFrame)
         newTabBtn.MouseButton1Click:Connect(function()
-            for _, v in scrollingFrame:GetChildren() do
+            for _, v in getScrollingFrame do
                 if v:IsA("ImageButton") then
-                    local vTab = mainBar:FindFirstChild(v.Name)
+                    local findFirstChild = mainBar.FindFirstChild
+                    local vTab = findFirstChild(mainBar, v.Name)
                     if v.Name ~= name then
                         twServ:Create(v, tweenInfoNew(0.2), {Transparency = 0.75}):Play()
                         vTab.Visible = false
@@ -1440,7 +1446,8 @@ DRR_MODULES[DRR["93"]] = {
             end
         end)
         function self.newButton(name, desc, func)
-            local newbtn = reserved.Button:Clone()
+            local newbtnClone = reserved.Button.Clone
+            local newbtn = newbtnClone(reserved.Button)
             newbtn.Parent = newTab
             newbtn.Title.Text = name
             newbtn.Description.Text = desc
@@ -1456,7 +1463,8 @@ DRR_MODULES[DRR["93"]] = {
         end
         function self.newLabel(text)
             local labelFunction = {}
-            local newLabel = reserved.Label:Clone()
+            local newLabelClone = reserved.Label.Clone
+            local newLabel = newLabelClone(reserved.Label)
             newLabel.Parent = newTab
             newLabel.Visible = true
             newLabel.Title.Text = text
@@ -1466,7 +1474,8 @@ DRR_MODULES[DRR["93"]] = {
             return newLabel.Title and labelFunction
         end
         function self.newInput(name, desc, func)
-            local newInput = reserved.Textbox:Clone()
+            local newInputClone = reserved.Textbox.Clone
+            local newInput = newInputClone(reserved.Textbox)
             local textbox = newInput.TextboxBar.ActualTextbox
             newInput.MouseEnter:Connect(function()
                 twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0}):Play()
@@ -1484,7 +1493,8 @@ DRR_MODULES[DRR["93"]] = {
             end)
         end
         function self.newKeybind(name, desc, func)
-            local newKey = reserved.Keybind:Clone()
+            local newKeyClone = reserved.Keybind.Clone
+            local newKey = newKeyClone(reserved.Keybind)
             newKey.MouseEnter:Connect(function()
                 twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0}):Play()
             end)
@@ -1530,7 +1540,8 @@ DRR_MODULES[DRR["93"]] = {
             end)
         end
         function self.newSlider(name, desc, max, manageSlider, func)
-            local newSlider = reserved.Slider:Clone()
+            local newSliderClone = reserved.Slider.Clone
+            local newSlider = newSliderClone(reserved.Slider)
             newSlider.MouseEnter:Connect(function()
                 twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0}):Play()
             end)
@@ -1577,7 +1588,8 @@ DRR_MODULES[DRR["93"]] = {
         end	
         function self.newToggle(title, desc, toggle, func)
             local realToggle = toggle
-            local newToggle = reserved.Toggle:Clone()
+            local newToggleClone = reserved.Toggle.Clone
+            local newToggle = newToggleClone(reserved.Toggle)
             newToggle.Parent = newTab
             newToggle.Name = title
             newToggle.Visible = true
@@ -1603,14 +1615,17 @@ DRR_MODULES[DRR["93"]] = {
             end)
         end
         function self.newDropdown(name, desc, listTable, func)
-            local newdd = reserved.Dropdown:Clone()
+            local newddClone = reserved.Dropdown.Clone
+            local newdd = newddClone(reserved.Dropdown)
             newdd.Visible = true
             newdd.Parent = newTab
             newdd.Name = name
             newdd.Title.Text = name
             newdd.Description.Text = desc
+
+            local newddbtnClone = reserved.DropdownButton.Clone
             for _, list in listTable do
-                local newddbtn = reserved.DropdownButton:Clone()
+                local newddbtn = newddbtnClone(reserved.DropdownButton)
                 newddbtn.Visible = true
                 newddbtn.Parent = newdd.Box.ScrollingFrame
                 newddbtn.Name = list

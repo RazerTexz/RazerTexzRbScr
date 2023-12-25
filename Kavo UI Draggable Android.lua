@@ -173,7 +173,10 @@ function Kavo.CreateLib(kavName, themeList)
     local kavName = kavName or "Library"
     kavoPos += 1
     Kavo[kavoPos] = kavName
-    for _, v in coreGui:GetChildren() do
+
+    local coreGuiGetChildren = coreGui.GetChildren
+    local getCoreGui = coreGuiGetChildren(coreGui)
+    for _, v in getCoreGui do
         if v:IsA("ScreenGui") and v.Name == kavName then v:Destroy() end
     end
     local ScreenGui = instanceNew("ScreenGui")
@@ -192,6 +195,8 @@ function Kavo.CreateLib(kavName, themeList)
     local pages = instanceNew("Frame")
     local Pages = instanceNew("Folder")
     local infoContainer = instanceNew("Frame")
+    local infoContainerGetChildren = infoContainer.GetChildren
+    local getInfoContainer = infoContainerGetChildren(infoContainer)
 
     local blurFrame = instanceNew("Frame")
 
@@ -321,7 +326,8 @@ function Kavo.CreateLib(kavName, themeList)
     infoContainer.Size = udim2New(0, 368, 0, 33)
 
     coroutine.wrap(function()
-        while task.wait() do
+        while true do
+            task.wait()
             Main.BackgroundColor3 = themeList.Background
             MainHeader.BackgroundColor3 = themeList.Header
             MainSide.BackgroundColor3 = themeList.Header
@@ -401,13 +407,17 @@ function Kavo.CreateLib(kavName, themeList)
         page.ChildAdded:Connect(UpdateSize)
         page.ChildRemoved:Connect(UpdateSize)
 
+        local pagesGetChildren = Pages.GetChildren
+        local getPages = pagesGetChildren(Pages)
+        local tabFramesGetChildren = tabFrames.GetChildren
+        local getTabFrames = tabFramesGetChildren(tabFrames)
         tabButton.MouseButton1Click:Connect(function()
             UpdateSize()
-            for _, v in Pages:GetChildren() do
+            for _, v in getPages do
                 v.Visible = false
             end
             page.Visible = true
-            for _, v in tabFrames:GetChildren() do
+            for _, v in getTabFrames do
                 if v:IsA("TextButton") then
                     if themeList.schemecolor == globalColor then Utility:TweenObject(v, {TextColor3 = globalColor}, 0.2) end
                     if themeList.schemecolor == globalColor2 then Utility:TweenObject(v, {TextColor3 = globalColor2}, 0.2) end
@@ -456,8 +466,11 @@ function Kavo.CreateLib(kavName, themeList)
             sectionlistoknvm.SortOrder = Enum.SortOrder.LayoutOrder
             sectionlistoknvm.Padding = udimNew(0, 5)
 
-            for _, v in sectionInners:GetChildren() do
-                while task.wait() do
+            local sectionInnersGetChildren = sectionInners.GetChildren
+            local getSectionInners = sectionInnersGetChildren(sectionInners)
+            for _, v in getSectionInners do
+                while true do
+                    task.wait()
                     if v:IsA("Frame") or v:IsA("TextButton") then
                         local function size(pro)
                             if pro == "Size" then
@@ -638,10 +651,12 @@ function Kavo.CreateLib(kavName, themeList)
 
                 local btn = buttonElement
                 local sample = Sample
+
+                local sampleClone = sample.Clone
                 btn.MouseButton1Click:Connect(function()
                     if not focusing then
                         callback()
-                        local c = sample:Clone()
+                        local c = sampleClone(sample)
                         c.Parent = btn
                         local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                         c.Position = udim2New(0, x, 0, y)
@@ -654,7 +669,7 @@ function Kavo.CreateLib(kavName, themeList)
                         end
                         c:Destroy()
                     else
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
@@ -678,7 +693,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             if v ~= moreInfo then Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2) end
                         end
                         Utility:TweenObject(moreInfo, {Position = udim2New(0, 0, 0, 0)}, 0.2)
@@ -819,7 +834,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local infBtn = viewInfo
                 btn.MouseButton1Click:Connect(function()
                     if focusing then
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
@@ -843,7 +858,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 TextBox.FocusLost:Connect(function(EnterPressed)
                     if focusing then
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
@@ -862,7 +877,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             if v ~= moreInfo then Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2) end
                         end
                         Utility:TweenObject(moreInfo, {Position = udim2New(0, 0, 0, 0)}, 0.2)
@@ -1009,11 +1024,12 @@ function Kavo.CreateLib(kavName, themeList)
                 updateSectionFrame()
                 UpdateSize()
 
+                local sampleClone = sample.Clone
                 btn.MouseButton1Click:Connect(function()
                     if not focusing then
                         if not toggled then
                             tween:Create(img, tweeninfo(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
-                            local c = sample:Clone()
+                            local c = sampleClone(sample)
                             c.Parent = btn
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
@@ -1027,7 +1043,7 @@ function Kavo.CreateLib(kavName, themeList)
                             c:Destroy()
                         else
                             tween:Create(img, tweeninfo(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 1}):Play()
-                            local c = sample:Clone()
+                            local c = sampleClone(sample)
                             c.Parent = btn
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
@@ -1043,7 +1059,7 @@ function Kavo.CreateLib(kavName, themeList)
                         toggled = not toggled
                         pcall(callback, toggled)
                     else
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
@@ -1080,7 +1096,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             if v ~= moreInfo then Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2) end
                         end
                         Utility:TweenObject(moreInfo, {Position = udim2New(0, 0, 0, 0)}, 0.2)
@@ -1301,7 +1317,7 @@ function Kavo.CreateLib(kavName, themeList)
                             end
                         end)
                     else
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
@@ -1312,7 +1328,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             if v ~= moreInfo then Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2) end
                         end
                         Utility:TweenObject(moreInfo, {Position = udim2New(0, 0, 0, 0)}, 0.2)
@@ -1374,6 +1390,8 @@ function Kavo.CreateLib(kavName, themeList)
                 dropOpen.TextColor3 = globalColor2
                 dropOpen.TextSize = 14.000
                 dropOpen.ClipsDescendants = true
+
+                local sampleClone = sample.Clone
                 dropOpen.MouseButton1Click:Connect(function()
                     if not focusing then
                         if opened then
@@ -1382,7 +1400,7 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sample:Clone()
+                            local c = sampleClone(sample)
                             c.Parent = btn
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
@@ -1400,7 +1418,7 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sample:Clone()
+                            local c = sampleClone(sample)
                             c.Parent = btn
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
@@ -1414,7 +1432,7 @@ function Kavo.CreateLib(kavName, themeList)
                             c:Destroy()
                         end
                     else
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
@@ -1533,7 +1551,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             if v ~= moreInfo then Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2) end
                         end
                         Utility:TweenObject(moreInfo, {Position = udim2New(0, 0, 0, 0)}, 0.2)
@@ -1576,6 +1594,8 @@ function Kavo.CreateLib(kavName, themeList)
                     optionSelect.TextSize = 14.000
                     optionSelect.TextXAlignment = Enum.TextXAlignment.Left
                     optionSelect.ClipsDescendants = true
+
+                    local sample1Clone = sample1.Clone
                     optionSelect.MouseButton1Click:Connect(function()
                         if not focusing then
                             opened = false
@@ -1585,7 +1605,7 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sample1:Clone()
+                            local c = sample1Clone(sample1)
                             c.Parent = optionSelect
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
@@ -1598,7 +1618,7 @@ function Kavo.CreateLib(kavName, themeList)
                             end
                             c:Destroy()         
                         else
-                            for _, v in infoContainer:GetChildren() do
+                            for _, v in getInfoContainer do
                                 Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                                 focusing = false
                             end
@@ -1632,7 +1652,9 @@ function Kavo.CreateLib(kavName, themeList)
                 end
                 function DropFunction:Refresh(newList)
                     newList = newList or {}
-                    for _, v in dropFrame:GetChildren() do
+                    local dropFrameGetChildren = dropFrame.GetChildren
+                    local getDropFrame = dropFrameGetChildren(dropFrame)
+                    for _, v in getDropFrame do
                         if v.Name == "optionSelect" then v:Destroy() end
                     end
                     for _, v in newList do
@@ -1664,6 +1686,8 @@ function Kavo.CreateLib(kavName, themeList)
                         optionSelect.ClipsDescendants = true
                         UICorner_2.CornerRadius = udimNew(0, 4)
                         UICorner_2.Parent = optionSelect
+                        
+                        local sample11Clone = sample11.Clone
                         optionSelect.MouseButton1Click:Connect(function()
                             if not focusing then
                                 opened = false
@@ -1673,7 +1697,7 @@ function Kavo.CreateLib(kavName, themeList)
                                 task.wait(0.1)
                                 updateSectionFrame()
                                 UpdateSize()
-                                local c = sample11:Clone()
+                                local c = sample11Clone(sample11)
                                 c.Parent = optionSelect
                                 local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                                 c.Position = udim2New(0, x, 0, y)
@@ -1686,7 +1710,7 @@ function Kavo.CreateLib(kavName, themeList)
                                 end
                                 c:Destroy()         
                             else
-                                for _, v in infoContainer:GetChildren() do
+                                for _, v in getInfoContainer do
                                     Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                                     focusing = false
                                 end
@@ -1763,6 +1787,8 @@ function Kavo.CreateLib(kavName, themeList)
                 keybindElement.Text = ""
                 keybindElement.TextColor3 = globalColor2
                 keybindElement.TextSize = 14.000
+
+                local sampleClone = sample.Clone
                 keybindElement.MouseButton1Click:connect(function(e) 
                     if not focusing then
                         togName_2.Text = ". . ."
@@ -1771,7 +1797,7 @@ function Kavo.CreateLib(kavName, themeList)
                             togName_2.Text = a.KeyCode.Name
                             oldKey = a.KeyCode.Name;
                         end
-                        local c = sample:Clone()
+                        local c = sampleClone(sample)
                         c.Parent = keybindElement
                         local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                         c.Position = udim2New(0, x, 0, y)
@@ -1783,7 +1809,7 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(len / 12)
                         end
                     else
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
@@ -1847,7 +1873,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             if v ~= moreInfo then Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2) end
                         end
                         Utility:TweenObject(moreInfo, {Position = udim2New(0, 0, 0, 0)}, 0.2)
@@ -1981,6 +2007,8 @@ function Kavo.CreateLib(kavName, themeList)
                 colorElement.Text = ""
                 colorElement.TextColor3 = globalColor2
                 colorElement.TextSize = 14.000
+
+                local sampleClone = sample.Clone
                 colorElement.MouseButton1Click:Connect(function()
                     if not focusing then
                         if colorOpened then
@@ -1989,7 +2017,7 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sample:Clone()
+                            local c = sampleClone(sample)
                             c.Parent = btn
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
@@ -2007,7 +2035,7 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sample:Clone()
+                            local c = sampleClone(sample)
                             c.Parent = btn
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = udim2New(0, x, 0, y)
@@ -2021,7 +2049,7 @@ function Kavo.CreateLib(kavName, themeList)
                             c:Destroy()
                         end
                     else
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
@@ -2099,7 +2127,7 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in infoContainer:GetChildren() do
+                        for _, v in getInfoContainer do
                             if v ~= moreInfo then Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2) end
                         end
                         Utility:TweenObject(moreInfo, {Position = udim2New(0, 0, 0, 0)}, 0.2)
