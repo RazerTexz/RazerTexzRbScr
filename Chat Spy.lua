@@ -21,7 +21,7 @@ local function onChatted(player, msg)
 	if chatSpyInstance == instance then
 		if player == localPlayer and msg:lower():sub(1, 4) == "/spy" then
 			enabled = not enabled
-			privateProperties.Text = "{SPY "..(if enabled then "EN" else "DIS").."ABLED}"
+			privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
 			starterGui:SetCore("ChatMakeSystemMessage", privateProperties)
 		elseif enabled and (spyOnMyself or player ~= localPlayer) then
 			msg = msg:gsub("[\n\r]",''):gsub("\t",' '):gsub("[ ]+",' ')
@@ -32,7 +32,7 @@ local function onChatted(player, msg)
 			conn:Disconnect()
 			if hidden and enabled then
 				if public then
-					saymsg:FireServer((if publicItalics then "/me " else '').."{SPY} ["..player.Name.."]: "..msg, "All")
+					saymsg:FireServer((publicItalics and "/me " or '').."{SPY} ["..player.Name.."]: "..msg, "All")
 				else
 					privateProperties.Text = "{SPY} ["..player.Name.."]: "..msg
 					starterGui:SetCore("ChatMakeSystemMessage", privateProperties)
@@ -50,7 +50,7 @@ players.PlayerAdded:Connect(function(plr)
 	plr.Chatted:Connect(function(msg) onChatted(plr, msg) end)
 end)
 
-privateProperties.Text = "{SPY "..(if enabled then "EN" else "DIS").."ABLED}"
+privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
 starterGui:SetCore("ChatMakeSystemMessage", privateProperties)
 local chatFrame = localPlayer.PlayerGui.Chat.Frame
 chatFrame.ChatChannelParentFrame.Visible = true
