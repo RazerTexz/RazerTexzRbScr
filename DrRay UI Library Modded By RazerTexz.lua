@@ -1616,15 +1616,15 @@ DRR_MODULES[DRR["93"]] = {
             end)
         end
         function self.newDropdown(name, desc, listTable, func)
+            local lists = listTable
             local dropDownFunction = {}
             local newdd = newddClone(reserved.Dropdown)
-            local newddGetChildren = newdd.GetChildren
             newdd.Visible = true
             newdd.Parent = newTab
             newdd.Name = name
             newdd.Title.Text = name
             newdd.Description.Text = desc
-            for _, list in listTable do
+            for _, list in lists do
                 local newddbtn = newddbtnClone(reserved.DropdownButton)
                 newddbtn.Visible = true
                 newddbtn.Parent = newdd.Box.ScrollingFrame
@@ -1652,8 +1652,11 @@ DRR_MODULES[DRR["93"]] = {
                 end
             end)
             function dropDownFunction.refresh(newList)
-                for _, v in newddGetChildren(newdd) do
-                    v:Destroy()
+                if lists then
+                    for _, v in lists do
+                        newdd[v]:Destroy()
+                    end
+                    lists = nil
                 end
                 for _, list in newList do
                     local newddbtn = newddbtnClone(reserved.DropdownButton)
