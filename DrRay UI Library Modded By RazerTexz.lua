@@ -1617,15 +1617,15 @@ DRR_MODULES[DRR["93"]] = {
             end)
         end
         function self.newDropdown(name, desc, listTable, func)
-            local lists = listTable
             local dropDownFunction = {}
             local newdd = newddClone(reserved.Dropdown)
+            local scrollingFrameGetChildren = newdd.Box.ScrollingFrame.GetChildren
             newdd.Visible = true
             newdd.Parent = newTab
             newdd.Name = name
             newdd.Title.Text = name
             newdd.Description.Text = desc
-            for _, list in lists do
+            for _, list in listTable do
                 local newddbtn = newddbtnClone(reserved.DropdownButton)
                 newddbtn.Visible = true
                 newddbtn.Parent = newdd.Box.ScrollingFrame
@@ -1653,14 +1653,10 @@ DRR_MODULES[DRR["93"]] = {
                 end
             end)
             function dropDownFunction.refresh(newList)
-                if lists then
-                    for _, v in lists do
-                        newdd.Box.ScrollingFrame[v]:Destroy()
-                    end
-                    lists = nil
+                for _, v in scrollingFrameGetChildren(newdd.Box.ScrollingFrame) do
+                    if v.Name ~= "UIListLayout" then v:Destroy() end
                 end
                 for _, list in newList do
-                    newdd.Box.ScrollingFrame[list]:Destroy()
                     local newddbtn = newddbtnClone(reserved.DropdownButton)
                     newddbtn.Visible = true
                     newddbtn.Parent = newdd.Box.ScrollingFrame
