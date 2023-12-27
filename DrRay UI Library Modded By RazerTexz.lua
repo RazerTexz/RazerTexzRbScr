@@ -1616,7 +1616,9 @@ DRR_MODULES[DRR["93"]] = {
             end)
         end
         function self.newDropdown(name, desc, listTable, func)
+            local dropDownFunction = {}
             local newdd = newddClone(reserved.Dropdown)
+            local newddGetChildren = newdd.GetChildren
             newdd.Visible = true
             newdd.Parent = newTab
             newdd.Name = name
@@ -1649,6 +1651,27 @@ DRR_MODULES[DRR["93"]] = {
                     newdd.Box.Visible = false
                 end
             end)
+            function dropDownFunction.refresh(newList)
+                for _, v in newddGetChildren(newdd) do
+                    v:Destroy()
+                end
+                for _, list in newList do
+                    local newddbtn = newddbtnClone(reserved.DropdownButton)
+                    newddbtn.Visible = true
+                    newddbtn.Parent = newdd.Box.ScrollingFrame
+                    newddbtn.Name = list
+                    newddbtn.name.Text = list
+                    newddbtn.MouseButton1Click:Connect(function()
+                        newdd.DropdownBar.Open.Text = list
+                        local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
+                        twPos:Play()
+                        twPos.Completed:Wait()
+                        newdd.Box.Visible = false
+                        func(list)
+                    end)
+                end
+            end
+            return dropDownFunction
         end
         return self
     end
