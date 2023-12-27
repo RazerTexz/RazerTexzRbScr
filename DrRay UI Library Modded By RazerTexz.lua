@@ -1,7 +1,8 @@
 --[[
     MODDED BY RAZERTEXZ
     CHANGELOGS:
-    - YOU CAN NOW UPDATE ANY LABEL TEXT!!!
+    - UPDATE LABEL TEXT
+    - UPDATE / REFRESH DROPDOWN LIST
     - CODE OPTIMIZATION
 ]]
 local color3FromRgb = Color3.fromRGB
@@ -1657,12 +1658,9 @@ DRR_MODULES[DRR["93"]] = {
                         newdd[v]:Destroy()
                     end
                     lists = nil
-                elseif newList then
-                    for _, v in newList do
-                        newdd[v]:Destroy()
-                    end
                 end
                 for _, list in newList do
+                    newdd[v]:Destroy()
                     local newddbtn = newddbtnClone(reserved.DropdownButton)
                     newddbtn.Visible = true
                     newddbtn.Parent = newdd.Box.ScrollingFrame
