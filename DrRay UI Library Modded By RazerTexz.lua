@@ -1657,6 +1657,10 @@ DRR_MODULES[DRR["93"]] = {
                         newdd[v]:Destroy()
                     end
                     lists = nil
+                elseif newList then
+                    for _, v in newList do
+                        newdd[v]:Destroy()
+                    end
                 end
                 for _, list in newList do
                     local newddbtn = newddbtnClone(reserved.DropdownButton)
