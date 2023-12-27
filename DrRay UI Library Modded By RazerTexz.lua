@@ -1655,12 +1655,12 @@ DRR_MODULES[DRR["93"]] = {
             function dropDownFunction.refresh(newList)
                 if lists then
                     for _, v in lists do
-                        newdd[v]:Destroy()
+                        newdd.Box.ScrollingFrame[v]:Destroy()
                     end
                     lists = nil
                 end
                 for _, list in newList do
-                    newdd[v]:Destroy()
+                    newdd.Box.ScrollingFrame[list]:Destroy()
                     local newddbtn = newddbtnClone(reserved.DropdownButton)
                     newddbtn.Visible = true
                     newddbtn.Parent = newdd.Box.ScrollingFrame
