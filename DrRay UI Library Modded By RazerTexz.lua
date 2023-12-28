@@ -1330,8 +1330,7 @@ DRR_MODULES[DRR["93"]] = {
 		task.wait(0.3)
 		twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
         coroutine.wrap(function()
-    		while true do
-                task.wait()
+    		while task.wait() do
                 parent.TopBar.ProfileMenu.Clock.TextLabel.Text = os.date("%H:%M")
             end
         end)()
