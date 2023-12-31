@@ -1504,11 +1504,11 @@ DRR_MODULES[DRR["93"]] = {
                 listening = true
                 coroutine.wrap(function()
                     while listening do
-                        newKey.Bind.Button.Text = "." end
+                        newKey.Bind.Button.Text = "."
                         task.wait(0.5)
-                        newKey.Bind.Button.Text = ".." end
+                        newKey.Bind.Button.Text = ".."
                         task.wait(0.5)
-                        newKey.Bind.Button.Text = "..." end
+                        newKey.Bind.Button.Text = "..."
                         task.wait(0.5)
                     end
                 end)()
