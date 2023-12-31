@@ -1043,7 +1043,7 @@ function Kavo.CreateLib(kavName, themeList)
                             c:Destroy()
                         end
                         toggled = not toggled
-                        pcall(callback, toggled)
+                        callback(toggled)
                     else
                         for _, v in getInfoContainer(infoContainer) do
                             Utility:TweenObject(v, {Position = udim2New(0, 0, 2, 0)}, 0.2)
@@ -1102,11 +1102,11 @@ function Kavo.CreateLib(kavName, themeList)
                     if isTogOn then
                         toggled = true
                         tween:Create(img, tweeninfo(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
-                        pcall(callback, toggled)
+                        callback(toggled)
                     else
                         toggled = false
                         tween:Create(img, tweeninfo(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 1}):Play()
-                        pcall(callback, toggled)
+                        callback(toggled)
                     end
                 end
                 return TogFunction
