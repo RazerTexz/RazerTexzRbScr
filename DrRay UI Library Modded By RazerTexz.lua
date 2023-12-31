@@ -1600,10 +1600,10 @@ DRR_MODULES[DRR["93"]] = {
                     local newddbtn = newddbtnClone(reserved.DropdownButton)
                     newddbtn.Visible = true
                     newddbtn.Parent = newdd.Box.ScrollingFrame
-                    newddbtn.Name = list
-                    newddbtn.name.Text = list
+                    newddbtn.Name = tostring(list)
+                    newddbtn.name.Text = tostring(list)
                     newddbtn.MouseButton1Click:Connect(function()
-                        newdd.DropdownBar.Open.Text = list
+                        newdd.DropdownBar.Open.Text = tostring(list)
                         local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
                         twPos:Play()
                         twPos.Completed:Wait()
@@ -1636,10 +1636,10 @@ DRR_MODULES[DRR["93"]] = {
                     local newddbtn = newddbtnClone(reserved.DropdownButton)
                     newddbtn.Visible = true
                     newddbtn.Parent = newdd.Box.ScrollingFrame
-                    newddbtn.Name = list
-                    newddbtn.name.Text = list
+                    newddbtn.Name = tostring(list)
+                    newddbtn.name.Text = tostring(list)
                     newddbtn.MouseButton1Click:Connect(function()
-                        newdd.DropdownBar.Open.Text = list
+                        newdd.DropdownBar.Open.Text = tostring(list)
                         local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
                         twPos:Play()
                         twPos.Completed:Wait()
