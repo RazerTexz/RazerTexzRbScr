@@ -1595,24 +1595,26 @@ DRR_MODULES[DRR["93"]] = {
             newdd.Name = name
             newdd.Title.Text = name
             newdd.Description.Text = desc
-            for _, list in listTable do
-                local newddbtn = newddbtnClone(reserved.DropdownButton)
-                newddbtn.Visible = true
-                newddbtn.Parent = newdd.Box.ScrollingFrame
-                newddbtn.Name = list
-                newddbtn.name.Text = list
-                newddbtn.MouseButton1Click:Connect(function()
-                    newdd.DropdownBar.Open.Text = list
-                    local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
-                    twPos:Play()
-                    twPos.Completed:Wait()
-                    newdd.Box.Visible = false
-                    if not useCustomFunc then
-                        func(list)
-                    else
-                        func(list, dropDownFunction)
-                    end
-                end)
+            if listTable then
+                for _, list in listTable do
+                    local newddbtn = newddbtnClone(reserved.DropdownButton)
+                    newddbtn.Visible = true
+                    newddbtn.Parent = newdd.Box.ScrollingFrame
+                    newddbtn.Name = list
+                    newddbtn.name.Text = list
+                    newddbtn.MouseButton1Click:Connect(function()
+                        newdd.DropdownBar.Open.Text = list
+                        local twPos = twServ:Create(newdd.Box, tweenInfoNew(0.15), {Size = udim2New(0.97, 0, 0, 0)})
+                        twPos:Play()
+                        twPos.Completed:Wait()
+                        newdd.Box.Visible = false
+                        if not useCustomFunc then
+                            func(list)
+                        else
+                            func(list, dropDownFunction)
+                        end
+                    end)
+                end
             end
 
             newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()
