@@ -1330,6 +1330,7 @@ DRR_MODULES[DRR["93"]] = {
 		tw.Completed:Wait()
 		task.wait(0.3)
 		twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
+		parent.TopBar.ProfileMenu.Clock.TextLabel.Text = DateTime.now():FormatLocalTime("LT", locale)
         coroutine.wrap(function()
     		while task.wait(30) do
                 parent.TopBar.ProfileMenu.Clock.TextLabel.Text = DateTime.now():FormatLocalTime("LT", locale)
