@@ -1296,6 +1296,7 @@ DRR_MODULES[DRR["93"]] = {
     local scrollingFrame = parent.TopBar.ScrollingFrame
     local mainBar = parent.MainBar
     UILIB.__index = UILIB
+    local locale = game:GetService("LocalizationService").SystemLocaleId
 
     local getParent = parent.GetChildren
     local getMainBar = mainBar.GetChildren
@@ -1330,8 +1331,8 @@ DRR_MODULES[DRR["93"]] = {
 		task.wait(0.3)
 		twServ:Create(parent.TopBar, tweenInfoNew(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.23, 0, 0.012, 0)}):Play()
         coroutine.wrap(function()
-    		while task.wait() do
-                parent.TopBar.ProfileMenu.Clock.TextLabel.Text = os.date("%H:%M")
+    		while task.wait(30) do
+                parent.TopBar.ProfileMenu.Clock.TextLabel.Text = DateTime.now():FormatLocalTime("LT", locale)
             end
         end)()
         parent.TopBar.ProfileMenu.Title.TextLabel.Text = name
@@ -1459,12 +1460,8 @@ DRR_MODULES[DRR["93"]] = {
             newbtn.Description.Text = desc
             newbtn.Visible = true
             newbtn.Name = name
-            newbtn.MouseEnter:Connect(function()
-                twServ:Create(newbtn, tweenInfoNew(0.2), {Transparency = 0}):Play()
-            end)
-            newbtn.MouseLeave:Connect(function()
-                twServ:Create(newbtn, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
-            end)
+            newbtn.MouseEnter:Connect(function() twServ:Create(newbtn, tweenInfoNew(0.2), {Transparency = 0}):Play() end)
+            newbtn.MouseLeave:Connect(function() twServ:Create(newbtn, tweenInfoNew(0.2), {Transparency = 0.4}):Play() end)
             newbtn.MouseButton1Click:Connect(func)
         end
         function self.newLabel(text)
@@ -1481,29 +1478,19 @@ DRR_MODULES[DRR["93"]] = {
         function self.newInput(name, desc, func)
             local newInput = newInputClone(reserved.Textbox)
             local textbox = newInput.TextboxBar.ActualTextbox
-            newInput.MouseEnter:Connect(function()
-                twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0}):Play()
-            end)
-            newInput.MouseLeave:Connect(function()
-                twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
-            end)
+            newInput.MouseEnter:Connect(function() twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0}):Play() end)
+            newInput.MouseLeave:Connect(function() twServ:Create(newInput, tweenInfoNew(0.2), {Transparency = 0.4}):Play() end)
             newInput.Visible = true
             newInput.Parent = newTab
             newInput.Title.Text = name
             newInput.Description.Text = desc
             newInput.Name = name
-            textbox.FocusLost:Connect(function()
-                func(textbox.Text)
-            end)
+            textbox.FocusLost:Connect(function() func(textbox.Text) end)
         end
         function self.newKeybind(name, desc, func)
             local newKey = newKeyClone(reserved.Keybind)
-            newKey.MouseEnter:Connect(function()
-                twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0}):Play()
-            end)
-            newKey.MouseLeave:Connect(function()
-                twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
-            end)
+            newKey.MouseEnter:Connect(function() twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0}):Play() end)
+            newKey.MouseLeave:Connect(function() twServ:Create(newKey, tweenInfoNew(0.2), {Transparency = 0.4}):Play() end)
             newKey.Parent = newTab
             newKey.Title.Text = name
             newKey.Name = name
@@ -1514,27 +1501,19 @@ DRR_MODULES[DRR["93"]] = {
             local a
             newKey.Bind.Button.MouseButton1Click:Connect(function()
                 listening = true
-                local function Loop()
-                    if listening then newKey.Bind.Button.Text = "." end
-                    task.wait(0.5)
-                    if listening then newKey.Bind.Button.Text = ".." end
-                    task.wait(0.5)
-                    if listening then newKey.Bind.Button.Text = "..." end
-                    task.wait(0.5)
-                end
                 coroutine.wrap(function()
                     while listening do
-                        Loop()
+                        newKey.Bind.Button.Text = "." end
+                        task.wait(0.5)
+                        newKey.Bind.Button.Text = ".." end
+                        task.wait(0.5)
+                        newKey.Bind.Button.Text = "..." end
+                        task.wait(0.5)
                     end
                 end)()
                 a = UIS.InputBegan:Connect(function(input, processed)
-                    if input.UserInputType == Enum.UserInputType.Keyboard then
-                        newKey.Bind.Button.Text = input.KeyCode.Name
-                        listening = false
-                        a:Disconnect()
-                        func(input)
-                    elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 or input.UserInputType == Enum.UserInputType.MouseButton3 then
-                        newKey.Bind.Button.Text = input.UserInputType.Name
+                    if input.UserInputType == Enum.UserInputType.Keyboard or input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 or input.UserInputType == Enum.UserInputType.MouseButton3 then
+                        newKey.Bind.Button.Text = input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode.Name or input.UserInputType.Name
                         listening = false
                         a:Disconnect()
                         func(input)
@@ -1544,12 +1523,8 @@ DRR_MODULES[DRR["93"]] = {
         end
         function self.newSlider(name, desc, max, manageSlider, func)
             local newSlider = newSliderClone(reserved.Slider)
-            newSlider.MouseEnter:Connect(function()
-                twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0}):Play()
-            end)
-            newSlider.MouseLeave:Connect(function()
-                twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
-            end)
+            newSlider.MouseEnter:Connect(function() twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0}):Play() end)
+            newSlider.MouseLeave:Connect(function() twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0.4}):Play() end)
             newSlider.Visible = true
             newSlider.Name = name
             newSlider.Parent = newTab
@@ -1566,8 +1541,8 @@ DRR_MODULES[DRR["93"]] = {
             local perc
             local Percent
             local MouseDown = false
-            local delayTw = 0.3
-            local function Update()
+            local triggerTweenInfo = tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+            Trigger.MouseButton1Down:Connect(function()
                 MouseDown = true
                 repeat
                     task.wait()
@@ -1580,10 +1555,9 @@ DRR_MODULES[DRR["93"]] = {
                         Label.Text = perc
                         func(perc, Label)
                     end
-                    twServ:Create(Fill, tweenInfoNew(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = udim2FromScale(Percent, 1)}):Play()
+                    twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
                 until not MouseDown
-            end
-            Trigger.MouseButton1Down:Connect(Update)
+            end)
             UIS.InputEnded:Connect(function(input)
                 if input.UserInputType ==  Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then MouseDown = false end
             end)
@@ -1596,12 +1570,8 @@ DRR_MODULES[DRR["93"]] = {
             newToggle.Visible = true
             newToggle.Title.Text = title
             newToggle.Description.Text = desc
-            newToggle.MouseEnter:Connect(function()
-                twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0}):Play()
-            end)
-            newToggle.MouseLeave:Connect(function()
-                twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0.4}):Play()
-            end)
+            newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0}):Play() end)
+            newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, tweenInfoNew(0.2), {Transparency = 0.4}):Play() end)
             newToggle.Label.BackgroundColor3 = realToggle and globalColor2 or globalColor1
             newToggle.Label.Label.MouseButton1Click:Connect(function()
                 if realToggle then
