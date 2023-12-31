@@ -1615,7 +1615,7 @@ DRR_MODULES[DRR["93"]] = {
                 end
             end)
         end
-        function self.newDropdown(name, desc, listTable, func)
+        function self.newDropdown(name, desc, listTable, canRefreshInFunction, func)
             local dropDownFunction = {}
             local newdd = newddClone(reserved.Dropdown)
             local scrollingFrameGetChildren = newdd.Box.ScrollingFrame.GetChildren
@@ -1636,7 +1636,11 @@ DRR_MODULES[DRR["93"]] = {
                     twPos:Play()
                     twPos.Completed:Wait()
                     newdd.Box.Visible = false
-                    func(list)
+                    if not canRefreshInFunction then
+                        func(list)
+                    else
+                        func(list, dropDownFunction)
+                    end
                 end)
             end
 
@@ -1667,7 +1671,11 @@ DRR_MODULES[DRR["93"]] = {
                         twPos:Play()
                         twPos.Completed:Wait()
                         newdd.Box.Visible = false
-                        func(list)
+                        if not canRefreshInFunction then
+                            func(list)
+                        else
+                            func(list, dropDownFunction)
+                        end
                     end)
                 end
             end
