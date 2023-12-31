@@ -1,5 +1,4 @@
 local Kavo = {}
-local kavoPos = #Kavo
 
 local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
@@ -8,6 +7,7 @@ local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
 local run = game:GetService("RunService")
 local coreGui = game:GetService("CoreGui")
+local insert = table.insert
 local color3FromRgb = Color3.fromRGB
 local color3ToHsv = Color3.toHSV
 local mathRandom = math.random
@@ -133,7 +133,6 @@ local themeStyles = {
 local oldTheme = ""
 
 local SettingsT = {}
-local settingsTPos = #SettingsT
 
 local Name = "KavoConfig.JSON"
 pcall(function()
@@ -168,8 +167,7 @@ function Kavo.CreateLib(kavName, themeList)
     local themeList = themeList or {}
     local selectedTab 
     local kavName = kavName or "Library"
-    kavoPos += 1
-    Kavo[kavoPos] = kavName
+    insert(Kavo, kavName)
     local getCoreGui = coreGui.GetChildren
     for _, v in getCoreGui(coreGui) do
         if v:IsA("ScreenGui") and v.Name == kavName then v:Destroy() end
@@ -342,7 +340,6 @@ function Kavo.CreateLib(kavName, themeList)
     end
 
     local Tabs = {}
-    local tabsPos = #Tabs
     local first = true
     function Tabs:NewTab(tabName)
         local tabName = tabName or "Tab"
@@ -396,8 +393,7 @@ function Kavo.CreateLib(kavName, themeList)
         UICorner.CornerRadius = udimNew(0, 5)
         UICorner.Parent = tabButton
         
-        tabsPos += 1
-        Tabs[tabsPos] = tabName
+        insert(Tabs, tabName)
 
         UpdateSize()
         page.ChildAdded:Connect(UpdateSize)
@@ -436,7 +432,6 @@ function Kavo.CreateLib(kavName, themeList)
             local secName = secName or "Section"
             local sectionFunctions = {}
             local modules = {}
-            local modulesPos = #modules
             local hidden = hidden or false
             local sectionFrame = instanceNew("Frame")
             local sectionlistoknvm = instanceNew("UIListLayout")
@@ -543,8 +538,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local touch = instanceNew("ImageLabel")
                 local Sample = instanceNew("ImageLabel")
 
-                modulesPos += 1
-                modules[modulesPos] = bname
+                insert(modules, bname)
 
                 buttonElement.Name = bname
                 buttonElement.Parent = sectionInners
@@ -899,8 +893,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local nTip = nTip or "Prints Current Toggle State"
                 local callback = callback or function() end
                 local toggled = false
-                settingsTPos += 1
-                SettingsT[settingsTPos] = tname
+                insert(SettingsT, tname)
 
                 local toggleElement = instanceNew("TextButton")
                 local UICorner = instanceNew("UICorner")
