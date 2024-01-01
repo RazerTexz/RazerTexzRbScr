@@ -894,7 +894,6 @@ DRR["6c"]["TextColor3"] = color3FromRgb(255, 255, 255)
 DRR["6c"]["LayoutOrder"] = 3
 DRR["6c"]["Size"] = udim2New(0.9582196474075317, 0, 0.5971987247467041, 0)
 DRR["6c"]["BorderColor3"] = color3FromRgb(0, 0, 0)
-DRR["6c"]["Text"] = [[100]]
 DRR["6c"]["Name"] = [[Title]]
 DRR["6c"]["BackgroundTransparency"] = 1
 DRR["6c"]["Position"] = udim2New(0.023000000044703484, 0, 0.23100000619888306, 0)
@@ -1522,7 +1521,7 @@ DRR_MODULES[DRR["93"]] = {
                 end)
             end)
         end
-        function self.newSlider(name, desc, max, func)
+        function self.newSlider(name, desc, min, max, func)
             local newSlider = newSliderClone(reserved.Slider)
             newSlider.MouseEnter:Connect(function() twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0}):Play() end)
             newSlider.MouseLeave:Connect(function() twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0.4}):Play() end)
@@ -1541,6 +1540,7 @@ DRR_MODULES[DRR["93"]] = {
             Label.Text = max
 
             local perc
+            local calcMinMax = (max - min) + min
             local Percent
             local MouseDown = false
             local triggerTweenInfo = tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
@@ -1549,8 +1549,8 @@ DRR_MODULES[DRR["93"]] = {
                 repeat
                     task.wait()
                     Percent = mathClamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
-                    perc = mathRound(Percent * max)
-                    func(perc)
+                    perc = mathRound(Percent * calcMinMax)
+                    func(perc, mathFloor((((max - min) / 149) * Parent.AbsoluteSize.X) + min))
                     Label.Text = perc
                     twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
                 until not MouseDown
@@ -1558,7 +1558,7 @@ DRR_MODULES[DRR["93"]] = {
             UIS.InputEnded:Connect(function(input)
                 if input.UserInputType ==  Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then MouseDown = false end
             end)
-        end	
+        end
         function self.newToggle(title, desc, toggle, func)
             local realToggle = toggle
             local newToggle = newToggleClone(reserved.Toggle)
