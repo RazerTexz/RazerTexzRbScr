@@ -1538,6 +1538,7 @@ DRR_MODULES[DRR["93"]] = {
             local Label = newSlider.ActualSlider.Title
             local Fill = newSlider.ActualSlider.Fill
             local Parent = newSlider.ActualSlider
+            Label.Text = max
 
             local perc
             local Percent
