@@ -1522,7 +1522,7 @@ DRR_MODULES[DRR["93"]] = {
                 end)
             end)
         end
-        function self.newSlider(name, desc, max, manageSlider, func)
+        function self.newSlider(name, desc, max, func)
             local newSlider = newSliderClone(reserved.Slider)
             newSlider.MouseEnter:Connect(function() twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0}):Play() end)
             newSlider.MouseLeave:Connect(function() twServ:Create(newSlider, tweenInfoNew(0.2), {Transparency = 0.4}):Play() end)
@@ -1549,13 +1549,7 @@ DRR_MODULES[DRR["93"]] = {
                     task.wait()
                     Percent = mathClamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
                     perc = mathRound(Percent * max)
-                    if not manageSlider then
-                        Label.Text = perc
-                        func(perc)
-                    else
-                        Label.Text = perc
-                        func(perc, Label)
-                    end
+                    func(perc)
                     twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
                 until not MouseDown
             end)
