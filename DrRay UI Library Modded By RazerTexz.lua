@@ -12,7 +12,6 @@ local udim2FromScale = UDim2.fromScale
 local mathRandom = math.random
 local mathClamp = math.clamp
 local mathRound = math.round
-local mathFloor = math.floor
 local rectNew = Rect.new
 local instanceNew = Instance.new
 local vector2New = Vector2.new
@@ -1497,7 +1496,6 @@ DRR_MODULES[DRR["93"]] = {
             newKey.Name = name
             newKey.Description.Text = desc
             newKey.Visible =  true
-
             local listening = false
             local a
             newKey.Bind.Button.MouseButton1Click:Connect(function()
@@ -1535,25 +1533,22 @@ DRR_MODULES[DRR["93"]] = {
             local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
             local Trigger = newSlider.ActualSlider.Trigger
-            local Label = newSlider.ActualSlider.Title
+            local valueLabel = newSlider.ActualSlider.Title
             local Fill = newSlider.ActualSlider.Fill
             local Parent = newSlider.ActualSlider
-            Label.Text = max
+            valueLabel.Text = max
 
-            local perc
-            local Percent
-            local value
+            local calcMinMax = (max - min) + min
             local MouseDown = false
             local triggerTweenInfo = tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
             Trigger.MouseButton1Down:Connect(function()
                 MouseDown = true
                 repeat
                     task.wait()
-                    Percent = mathClamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
-                    perc = mathRound(Percent * (max - min) + min)
-                    value = mathFloor((((max - min) / 149) * Parent.AbsoluteSize.X) + min)
-                    func(perc, value)
-                    Label.Text = perc
+                    local Percent = mathClamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
+                    local perc = mathRound(Percent * calcMinMax)
+                    func(perc)
+                    valueLabel.Text = perc
                     twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
                 until not MouseDown
             end)
