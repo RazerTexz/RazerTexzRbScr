@@ -1538,7 +1538,7 @@ DRR_MODULES[DRR["93"]] = {
             local Parent = newSlider.ActualSlider
             valueLabel.Text = max
 
-            local calcMinMax = (max - min) + min
+            local calcMinMax = max - min
             local MouseDown = false
             local triggerTweenInfo = tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
             Trigger.MouseButton1Down:Connect(function()
@@ -1546,7 +1546,7 @@ DRR_MODULES[DRR["93"]] = {
                 repeat
                     task.wait()
                     local Percent = mathClamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
-                    local perc = mathRound(Percent * calcMinMax)
+                    local perc = mathRound(Percent * calcMinMax + min)
                     func(perc)
                     valueLabel.Text = perc
                     twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
