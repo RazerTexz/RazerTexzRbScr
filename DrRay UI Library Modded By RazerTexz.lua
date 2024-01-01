@@ -12,6 +12,7 @@ local udim2FromScale = UDim2.fromScale
 local mathRandom = math.random
 local mathClamp = math.clamp
 local mathRound = math.round
+local mathFloor = math.floor
 local rectNew = Rect.new
 local instanceNew = Instance.new
 local vector2New = Vector2.new
