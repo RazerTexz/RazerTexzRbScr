@@ -1550,6 +1550,7 @@ DRR_MODULES[DRR["93"]] = {
                     Percent = mathClamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
                     perc = mathRound(Percent * max)
                     func(perc)
+                    Label.Text = perc
                     twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
                 until not MouseDown
             end)
