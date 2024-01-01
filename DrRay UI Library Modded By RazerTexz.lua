@@ -4,6 +4,7 @@
     - UPDATE LABEL TEXT
     - UPDATE / REFRESH DROPDOWN LIST
     - CODE OPTIMIZATION
+    - NO MORE MODULE SCRIPT!!!
 ]]
 local color3FromRgb = Color3.fromRGB
 local udimNew = UDim.new
@@ -19,7 +20,7 @@ local fontNew = Font.new
 local colorSequenceNew = ColorSequence.new
 local colorSequenceKeypoint = ColorSequenceKeypoint.new
 local tweenInfoNew = TweenInfo.new
--- Instances: 147 | Scripts: 0 | Modules: 1
+-- Instances: 146 | Scripts: 0 | Modules: 0
 local DRR = {}
 -- DrRay
 DRR["1"] = instanceNew("ScreenGui", game:GetService("CoreGui"))
