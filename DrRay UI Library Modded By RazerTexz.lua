@@ -1295,7 +1295,6 @@ DRR_MODULES[DRR["93"]] = {
     local scrollingFrame = parent.TopBar.ScrollingFrame
     local mainBar = parent.MainBar
     UILIB.__index = UILIB
-    local locale = game:GetService("LocalizationService").SystemLocaleId
 
     local getParent = parent.GetChildren
     local getMainBar = mainBar.GetChildren
@@ -1530,30 +1529,30 @@ DRR_MODULES[DRR["93"]] = {
             newSlider.Title.Text = name
             newSlider.Description.Text = desc
 
-            local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+            local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
             local Trigger = newSlider.ActualSlider.Trigger
             local valueLabel = newSlider.ActualSlider.Title
             local Fill = newSlider.ActualSlider.Fill
             local Parent = newSlider.ActualSlider
-            valueLabel.Text = max
+            valueLabel.Text = min
 
             local calcMinMax = max - min
-            local MouseDown = false
+            local mouseDown = false
             local triggerTweenInfo = tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
             Trigger.MouseButton1Down:Connect(function()
-                MouseDown = true
+                mouseDown = true
                 repeat
                     task.wait()
-                    local Percent = mathClamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
+                    local Percent = mathClamp((mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
                     local perc = mathRound(Percent * calcMinMax + min)
                     func(perc)
                     valueLabel.Text = perc
                     twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
-                until not MouseDown
+                until not mouseDown
             end)
             UIS.InputEnded:Connect(function(input)
-                if input.UserInputType ==  Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then MouseDown = false end
+                if input.UserInputType ==  Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then mouseDown = false end
             end)
         end
         function self.newToggle(title, desc, toggle, func)
