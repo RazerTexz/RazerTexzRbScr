@@ -130,7 +130,7 @@ local themeStyles = {
         ElementColor = color3FromRgb(22, 29, 31)
     }
 }
-local oldTheme = ""
+local oldTheme
 
 local SettingsT = {}
 
@@ -157,11 +157,11 @@ function Kavo.CreateLib(kavName, themeList)
     elseif themeList == "Synapse" then themeList = themeStyles.Synapse
     elseif themeList == "Serpent" then themeList = themeStyles.Serpent
     else
-        if themeList.SchemeColor == nil then themeList.SchemeColor = color3FromRgb(74, 99, 135)
-        elseif themeList.Background == nil then themeList.Background = color3FromRgb(36, 37, 43)
-        elseif themeList.Header == nil then themeList.Header = color3FromRgb(28, 29, 34)
-        elseif themeList.TextColor == nil then themeList.TextColor = globalColor
-        elseif themeList.ElementColor == nil then themeList.ElementColor = color3FromRgb(32, 32, 38)
+        if not themeList.SchemeColor then themeList.SchemeColor = color3FromRgb(74, 99, 135)
+        elseif not themeList.Background then themeList.Background = color3FromRgb(36, 37, 43)
+        elseif not themeList.Header then themeList.Header = color3FromRgb(28, 29, 34)
+        elseif not themeList.TextColor then themeList.TextColor = globalColor
+        elseif not themeList.ElementColor then themeList.ElementColor = color3FromRgb(32, 32, 38)
         end
     end
     local themeList = themeList or {}
@@ -342,7 +342,6 @@ function Kavo.CreateLib(kavName, themeList)
     local Tabs = {}
     local first = true
     function Tabs:NewTab(tabName)
-        local tabName = tabName or "Tab"
         local tabButton = instanceNew("TextButton")
         local UICorner = instanceNew("UICorner")
         local page = instanceNew("ScrollingFrame")
@@ -429,10 +428,8 @@ function Kavo.CreateLib(kavName, themeList)
             end
         end)()
         function Sections:NewSection(secName, hidden)
-            local secName = secName or "Section"
             local sectionFunctions = {}
             local modules = {}
-            local hidden = hidden or false
             local sectionFrame = instanceNew("Frame")
             local sectionlistoknvm = instanceNew("UIListLayout")
             local sectionHead = instanceNew("Frame")
@@ -527,9 +524,6 @@ function Kavo.CreateLib(kavName, themeList)
             function Elements:NewButton(bname, tipINf, callback)
                 --local showLogo = showLogo or true
                 local ButtonFunction = {}
-                local tipINf = tipINf or "Tip: Clicking this nothing will happen!"
-                local bname = bname or "Click Me!"
-                local callback = callback or function() end
 
                 local buttonElement = instanceNew("TextButton")
                 local UICorner = instanceNew("UICorner")
@@ -707,9 +701,6 @@ function Kavo.CreateLib(kavName, themeList)
                 return ButtonFunction
             end
             function Elements:NewTextBox(tname, tTip, callback)
-                local tname = tname or "Textbox"
-                local tTip = tTip or "Gets a value of Textbox"
-                local callback = callback or function() end
                 local textboxElement = instanceNew("TextButton")
                 local UICorner = instanceNew("UICorner")
                 local viewInfo = instanceNew("ImageButton")
@@ -889,9 +880,6 @@ function Kavo.CreateLib(kavName, themeList)
             end
             function Elements:NewToggle(tname, nTip, callback)
                 local TogFunction = {}
-                local tname = tname or "Toggle"
-                local nTip = nTip or "Prints Current Toggle State"
-                local callback = callback or function() end
                 local toggled = false
                 insert(SettingsT, tname)
 
@@ -1091,7 +1079,7 @@ function Kavo.CreateLib(kavName, themeList)
                 end)
                 function TogFunction:UpdateToggle(newText, isTogOn)
                     isTogOn = isTogOn or toggle
-                    if newText ~= nil then togName.Text = newText end
+                    togName.Text = newText
                     if isTogOn then
                         toggled = true
                         tween:Create(img, tweeninfo(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
@@ -1105,12 +1093,7 @@ function Kavo.CreateLib(kavName, themeList)
                 return TogFunction
             end
             function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, callback)
-                local slidInf = slidInf or "Slider"
-                local slidTip = slidTip or "Slider tip here"
-                local maxvalue = maxvalue or 500
-                local minvalue = minvalue or 16
                 --local startVal = startVal or 0
-                local callback = callback or function() end
 
                 local sliderElement = instanceNew("TextButton")
                 local UICorner = instanceNew("UICorner")
@@ -1276,23 +1259,25 @@ function Kavo.CreateLib(kavName, themeList)
                     if not focusing then
                         tween:Create(val, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {TextTransparency = 0}):Play()
                         Value = mathFloor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
-                        pcall(function() callback(Value) end)
+                        callback(Value)
                         sliderDrag:TweenSize(udim2New(0, mathClamp(ms.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
-                        moveconnection = ms.Move:Connect(function()
+                        local moveConnection = ms.Move:Connect(function()
                             val.Text = Value
                             Value = mathFloor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue))
-                            pcall(function() callback(Value) end)
+                            callback(Value)
                             sliderDrag:TweenSize(udim2New(0, mathClamp(ms.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
                         end)
-                        releaseconnection = input.InputEnded:Connect(function(Mouse)
-                            if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+                        local releaseConnection = input.InputEnded:Connect(function(input)
+                            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                                 Value = mathFloor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue))
-                                pcall(function() callback(Value) end)
+                                callback(Value)
                                 val.Text = Value
                                 tween:Create(val, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {TextTransparency = 1}):Play()
                                 sliderDrag:TweenSize(udim2New(0, mathClamp(ms.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
-                                moveconnection:Disconnect()
-                                releaseconnection:Disconnect()
+                                moveConnection:Disconnect()
+                                releaseConnection:Disconnect()
+                                moveConnection = nil
+                                releaseConnection = nil
                             end
                         end)
                     else
@@ -1324,10 +1309,6 @@ function Kavo.CreateLib(kavName, themeList)
             end
             function Elements:NewDropdown(dropname, dropinf, list, callback)
                 local DropFunction = {}
-                local dropname = dropname or "Dropdown"
-                local list = list or {}
-                local dropinf = dropinf or "Dropdown info"
-                local callback = callback or function() end   
 
                 local opened = false
                 local DropYSize = 33
@@ -1732,9 +1713,6 @@ function Kavo.CreateLib(kavName, themeList)
                 return DropFunction
             end
             function Elements:NewKeybind(keytext, keyinf, first, callback)
-                local keytext = keytext or "KeybindText"
-                local keyinf = keyinf or "KebindInfo"
-                local callback = callback or function() end
                 local oldKey = first.Name
                 local keybindElement = instanceNew("TextButton")
                 local UICorner = instanceNew("UICorner")
@@ -1764,7 +1742,7 @@ function Kavo.CreateLib(kavName, themeList)
                 keybindElement.TextSize = 14.000
 
                 local sampleClone = sample.Clone
-                keybindElement.MouseButton1Click:connect(function(e) 
+                keybindElement.MouseButton1Click:Connect(function(e) 
                     if not focusing then
                         togName_2.Text = ". . ."
                         local a, b = game:GetService('UserInputService').InputBegan:wait();
@@ -1791,7 +1769,7 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end)
         
-                input.InputBegan:connect(function(current, ok) 
+                input.InputBegan:Connect(function(current, ok) 
                     if not ok then 
                         if current.KeyCode.Name == oldKey then callback() end
                     end
@@ -1927,9 +1905,6 @@ function Kavo.CreateLib(kavName, themeList)
                 end)()
             end
             function Elements:NewColorPicker(colText, colInf, defcolor, callback)
-                local colText = colText or "ColorPicker"
-                local callback = callback or function() end
-                local defcolor = defcolor or color3FromRgb(1, 1, 1)
                 local h, s, v = color3ToHsv(defcolor)
                 local ms = localPlayer:GetMouse()
                 local colorOpened = false
@@ -2275,7 +2250,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local rainbowconnection
                 local counter = 0
 
-                local function zigzag(X) return mathAcos(mathCos(X*mathPi))/mathPi end
+                local function zigzag(X) return mathAcos(mathCos(X * mathPi)) / mathPi end
                 local function mouseLocation()
                     return mouse
                 end
@@ -2337,6 +2312,7 @@ function Kavo.CreateLib(kavName, themeList)
                         tween:Create(toggleEnabled, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageTransparency = 1}):Play()
                         rainbow = false
                         rainbowconnection:Disconnect()
+                        rainbowconnection = nil
                     else
                         tween:Create(toggleEnabled, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageTransparency = 0}):Play()
                         rainbow = true
@@ -2349,9 +2325,9 @@ function Kavo.CreateLib(kavName, themeList)
 
                 onrainbow.MouseButton1Click:Connect(togglerainbow)
 
-                mouse.Move:connect(cp)
-                rgb.MouseButton1Down:connect(function() colorpicker = true end)
-                dark.MouseButton1Down:connect(function() darknesss = true end)
+                mouse.Move:Connect(cp)
+                rgb.MouseButton1Down:Connect(function() colorpicker = true end)
+                dark.MouseButton1Down:Connect(function() darknesss = true end)
                 input.InputEnded:Connect(function(input)
                     if input.UserInputType.Name == "MouseButton1" then
                         if darknesss then darknesss = false end
