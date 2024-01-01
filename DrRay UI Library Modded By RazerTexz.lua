@@ -1542,6 +1542,7 @@ DRR_MODULES[DRR["93"]] = {
 
             local perc
             local Percent
+            local value
             local MouseDown = false
             local triggerTweenInfo = tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
             Trigger.MouseButton1Down:Connect(function()
@@ -1550,7 +1551,8 @@ DRR_MODULES[DRR["93"]] = {
                     task.wait()
                     Percent = mathClamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
                     perc = mathRound(Percent * (max - min) + min)
-                    func(perc, mathFloor((((max - min) / 149) * Parent.AbsoluteSize.X) + min))
+                    value = mathFloor((((max - min) / 149) * Parent.AbsoluteSize.X) + min)
+                    func(perc, value)
                     Label.Text = perc
                     twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
                 until not MouseDown
