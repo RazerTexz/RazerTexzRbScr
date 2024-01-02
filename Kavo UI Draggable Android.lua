@@ -37,9 +37,9 @@ function Kavo:DraggingEnabled(frame, parent)
             dragging = true
             mousePos = input.Position
             framePos = parent.Position
-            cons[#cons + 1] = input.Changed:Connect(function()
+            insert(cons, input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then dragging = false end
-            end)
+            end))
         end
     end)
 
@@ -47,12 +47,12 @@ function Kavo:DraggingEnabled(frame, parent)
         if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end
     end)
 
-    cons[#cons + 1] = input.InputChanged:Connect(function(input)
+    insert(cons, input.InputChanged:Connect(function(input)
         if input == dragInput and dragging then
             local delta = input.Position - mousePos
             parent.Position  = udim2New(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
         end
-    end)
+    end))
 end
 
 function Utility:TweenObject(obj, properties, duration, ...)
@@ -267,9 +267,9 @@ function Kavo.CreateLib(kavName, themeList)
         task.wait()
         tween:Create(Main, tweeninfo(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = udim2New(0, 0, 0, 0), Position = udim2New(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))}):Play()
         task.wait(1)
-        for _, v in cons do
+        for i, v in cons do
             v:Disconnect()
-            v = nil
+        	cons[i] = nil
         end
         cons = nil
         ScreenGui:Destroy()
@@ -1774,11 +1774,11 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end)
         
-                cons[#cons + 1] = input.InputBegan:Connect(function(current, ok) 
+                insert(cons, input.InputBegan:Connect(function(current, ok) 
                     if not ok then 
                         if current.KeyCode.Name == oldKey then callback() end
                     end
-                end)
+                end))
 
                 moreInfo.Name = "TipMore"
                 moreInfo.Parent = infoContainer
@@ -2330,15 +2330,15 @@ function Kavo.CreateLib(kavName, themeList)
 
                 onrainbow.MouseButton1Click:Connect(togglerainbow)
 
-                cons[#cons + 1] = mouse.Move:Connect(cp)
+                insert(cons, mouse.Move:Connect(cp))
                 rgb.MouseButton1Down:Connect(function() colorpicker = true end)
                 dark.MouseButton1Down:Connect(function() darknesss = true end)
-                cons[#cons + 1] = input.InputEnded:Connect(function(input)
+                insert(cons, input.InputEnded:Connect(function(input)
                     if input.UserInputType.Name == "MouseButton1" then
                         if darknesss then darknesss = false end
                         if colorpicker then colorpicker = false end
                     end
-                end)
+                end))
                 setcolor({h, s, v})
             end
             function Elements:NewLabel(title)
