@@ -17,6 +17,7 @@ local rectNew = Rect.new
 local instanceNew = Instance.new
 local vector2New = Vector2.new
 local fontNew = Font.new
+local insert = table.insert
 local colorSequenceNew = ColorSequence.new
 local colorSequenceKeypoint = ColorSequenceKeypoint.new
 local tweenInfoNew = TweenInfo.new
@@ -1302,7 +1303,7 @@ local closed = false
 parent.TopBar.ProfileMenu.PlayerProfile.TextLabel.Text = game:GetService("Players").LocalPlayer.DisplayName
 parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = game:GetService("Players"):GetUserThumbnailAsync(game:GetService("Players").LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
 
-local cons
+local cons = {}
 function UILIB:Load(name, img, direction)
     local self = setmetatable({}, UILIB)
     local tw = twServ:Create(mainBar, tweenInfoNew(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = udim2New(0.23, 0, 0.212, 0)})
@@ -1359,9 +1360,9 @@ function UILIB:Load(name, img, direction)
         twServ:Create(parent.TopBar.TopBarClose, tweenInfoNew(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = udim2New(0.916, 0, 0.95, 0)}):Play()
     end
     function self:Destroy()
-        for _, v in cons do
+        for i, v in cons do
             v:Disconnect()
-            v = nil
+        	cons[i] = nil
         end
         cons = nil
         parent:Destroy()
@@ -1538,9 +1539,9 @@ function UILIB.newTab(name, img)
                 twServ:Create(Fill, triggerTweenInfo, {Size = udim2FromScale(Percent, 1)}):Play()
             until not mouseDown
         end)
-        cons[#cons + 1] = UIS.InputEnded:Connect(function(input)
+        insert(cons, UIS.InputEnded:Connect(function(input)
             if input.UserInputType ==  Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then mouseDown = false end
-        end)
+        end))
     end
     function self.newToggle(title, desc, toggle, func)
         local realToggle = toggle
