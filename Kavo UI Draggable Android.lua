@@ -50,7 +50,7 @@ function Kavo:DraggingEnabled(frame, parent)
     insert(cons, input.InputChanged:Connect(function(input)
         if input == dragInput and dragging then
             local delta = input.Position - mousePos
-            parent.Position  = udim2New(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+            parent.Position = udim2New(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
         end
     end))
 end
@@ -646,7 +646,7 @@ function Kavo.CreateLib(kavName, themeList)
                         local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
                         c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                         for i = 1, 10 do
-                            c.ImageTransparency = c.ImageTransparency + 0.05
+                            c.ImageTransparency += 0.05
                             task.wait(0.35 / 12)
                         end
                         c:Destroy()
@@ -1010,7 +1010,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
-                                c.ImageTransparency = c.ImageTransparency + 0.05
+                                c.ImageTransparency += 0.05
                                 task.wait(0.35 / 12)
                             end
                             c:Destroy()
@@ -1023,7 +1023,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
-                                c.ImageTransparency = c.ImageTransparency + 0.05
+                                c.ImageTransparency += 0.05
                                 task.wait(0.35 / 12)
                             end
                             c:Destroy()
@@ -1260,19 +1260,21 @@ function Kavo.CreateLib(kavName, themeList)
                 end)()
 
                 local Value
+                local moveConnection
+                local releaseConnection
                 sliderBtn.MouseButton1Down:Connect(function()
                     if not focusing then
                         tween:Create(val, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {TextTransparency = 0}):Play()
                         Value = mathFloor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
                         callback(Value)
                         sliderDrag:TweenSize(udim2New(0, mathClamp(ms.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
-                        local moveConnection = ms.Move:Connect(function()
+                        moveConnection = ms.Move:Connect(function()
                             val.Text = Value
                             Value = mathFloor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue))
                             callback(Value)
                             sliderDrag:TweenSize(udim2New(0, mathClamp(ms.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
                         end)
-                        local releaseConnection = input.InputEnded:Connect(function(input)
+                        releaseConnection = input.InputEnded:Connect(function(input)
                             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                                 Value = mathFloor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue))
                                 callback(Value)
@@ -1374,7 +1376,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
-                                c.ImageTransparency = c.ImageTransparency + 0.05
+                                c.ImageTransparency += 0.05
                                 task.wait(0.35 / 12)
                             end
                             c:Destroy()
@@ -1391,7 +1393,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
-                                c.ImageTransparency = c.ImageTransparency + 0.05
+                                c.ImageTransparency += 0.05
                                 task.wait(0.35 / 12)
                             end
                             c:Destroy()
@@ -1546,7 +1548,7 @@ function Kavo.CreateLib(kavName, themeList)
                     Sample1.ImageTransparency = 0.600
 
                     local sample1 = Sample1
-                    DropYSize = DropYSize + 33
+                    DropYSize += 33
                     optionSelect.Name = "optionSelect"
                     optionSelect.Parent = dropFrame
                     optionSelect.BackgroundColor3 = themeList.ElementColor
@@ -1577,7 +1579,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local size = optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y and (optionSelect.AbsoluteSize.X * 1.5) or (optionSelect.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
-                                c.ImageTransparency = c.ImageTransparency + 0.05
+                                c.ImageTransparency += 0.05
                                 task.wait(0.35 / 12)
                             end
                             c:Destroy()         
@@ -1633,7 +1635,7 @@ function Kavo.CreateLib(kavName, themeList)
                         Sample11.ImageTransparency = 0.600
     
                         local sample11 = Sample11
-                        DropYSize = DropYSize + 33
+                        DropYSize += 33
                         optionSelect.Name = "optionSelect"
                         optionSelect.Parent = dropFrame
                         optionSelect.BackgroundColor3 = themeList.ElementColor
@@ -1666,7 +1668,7 @@ function Kavo.CreateLib(kavName, themeList)
                                 local size = optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y and (optionSelect.AbsoluteSize.X * 1.5) or (optionSelect.AbsoluteSize.Y * 1.5)
                                 c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                                 for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
+                                    c.ImageTransparency += 0.05
                                     task.wait(0.35 / 12)
                                 end
                                 c:Destroy()         
@@ -1762,7 +1764,7 @@ function Kavo.CreateLib(kavName, themeList)
                         local size = keybindElement.AbsoluteSize.X >= keybindElement.AbsoluteSize.Y and (keybindElement.AbsoluteSize.X * 1.5) or (keybindElement.AbsoluteSize.Y * 1.5)
                         c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                         for i = 1, 10 do
-                            c.ImageTransparency = c.ImageTransparency + 0.05
+                            c.ImageTransparency += 0.05
                             task.wait(0.35 / 12)
                         end
                     else
@@ -1978,7 +1980,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
-                                c.ImageTransparency = c.ImageTransparency + 0.05
+                                c.ImageTransparency += 0.05
                                 task.wait(0.35 / 12)
                             end
                             c:Destroy()
@@ -1995,7 +1997,7 @@ function Kavo.CreateLib(kavName, themeList)
                             local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
                             c:TweenSizeAndPosition(udim2New(0, size, 0, size), udim2New(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
-                                c.ImageTransparency = c.ImageTransparency + 0.05
+                                c.ImageTransparency += 0.05
                                 task.wait(0.35 / 12)
                             end
                             c:Destroy()
@@ -2252,7 +2254,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local cursor2 = darkcircle
                 local color = {1, 1, 1}
                 local rainbow = false
-                local rainbowconnection
+                local rainbowConnection
                 local counter = 0
 
                 local function zigzag(X) return mathAcos(mathCos(X * mathPi)) / mathPi end
@@ -2316,14 +2318,14 @@ function Kavo.CreateLib(kavName, themeList)
                     if rainbow then
                         tween:Create(toggleEnabled, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageTransparency = 1}):Play()
                         rainbow = false
-                        rainbowconnection:Disconnect()
-                        rainbowconnection = nil
+                        rainbowConnection:Disconnect()
+                        rainbowConnection = nil
                     else
                         tween:Create(toggleEnabled, tweeninfo(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageTransparency = 0}):Play()
                         rainbow = true
-                        rainbowconnection = run.Heartbeat:Connect(function()
+                        rainbowConnection = run.Heartbeat:Connect(function()
                             setrgbcolor({zigzag(counter), 1, 1})
-                            counter = counter + 0.01
+                            counter += 0.01
                         end)
                     end
                 end

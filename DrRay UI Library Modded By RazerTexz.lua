@@ -18,6 +18,7 @@ local instanceNew = Instance.new
 local vector2New = Vector2.new
 local fontNew = Font.new
 local insert = table.insert
+local find = table.find
 local colorSequenceNew = ColorSequence.new
 local colorSequenceKeypoint = ColorSequenceKeypoint.new
 local tweenInfoNew = TweenInfo.new
@@ -1296,12 +1297,14 @@ local newddbtnClone = reserved.DropdownButton.Clone
 local listening = false
 local twServ = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
+local players = game:GetService("Players")
+local localPlayer = players.LocalPlayer
 local globalColor1 = color3FromRgb(39, 44, 61)
 local globalColor2 = color3FromRgb(0, 255, 38)
 local closed = false
 
-parent.TopBar.ProfileMenu.PlayerProfile.TextLabel.Text = game:GetService("Players").LocalPlayer.DisplayName
-parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = game:GetService("Players"):GetUserThumbnailAsync(game:GetService("Players").LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
+parent.TopBar.ProfileMenu.PlayerProfile.TextLabel.Text = localPlayer.DisplayName
+parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = players:GetUserThumbnailAsync(localPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
 
 local cons = {}
 function UILIB:Load(name, img, direction)
@@ -1484,6 +1487,7 @@ function UILIB.newTab(name, img)
         newKey.Description.Text = desc
         newKey.Visible =  true
         local listening = false
+        local a
         newKey.Bind.Button.MouseButton1Click:Connect(function()
             listening = true
             coroutine.wrap(function()
@@ -1496,7 +1500,7 @@ function UILIB.newTab(name, img)
                     task.wait(0.5)
                 end
             end)()
-            local a = UIS.InputBegan:Connect(function(input, processed)
+            a = UIS.InputBegan:Connect(function(input, processed)
                 if input.UserInputType == Enum.UserInputType.Keyboard or input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 or input.UserInputType == Enum.UserInputType.MouseButton3 then
                     newKey.Bind.Button.Text = input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode.Name or input.UserInputType.Name
                     listening = false
