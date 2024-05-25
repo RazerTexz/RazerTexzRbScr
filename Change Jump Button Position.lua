@@ -1,0 +1,1 @@
+game:GetService("Players").LocalPlayer.PlayerGui.TouchGui.TouchControlFrame.JumpButton.Position = UDim2.fromScale(0.87, 0.72)
