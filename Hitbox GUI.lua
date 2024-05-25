@@ -1,5 +1,3 @@
-local vector3New = Vector3.new
-
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
 local runService = game:GetService("RunService").Heartbeat
@@ -10,8 +8,8 @@ local hitboxEnabled = false
 local headHitboxEnabled = false
 local delay = 1
 local transparency = 0.7
-local hitboxSizeVec = vector3New(20, 20, 20)
-local headHitboxSizeVec = vector3New(6, 6, 6)
+local hitboxSizeVec = Vector3.new(20, 20, 20)
+local headHitboxSizeVec = Vector3.new(6, 6, 6)
 
 local function applyHitbox()
     if not hitboxEnabled then return end
