@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-RemoteSpy-For-Mobile-6609"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RS/main/SimpleSpyMobile"))()
