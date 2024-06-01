@@ -4,12 +4,14 @@ workspace.StreamingEnabled = true
 sethiddenproperty(workspace, "StreamingIntegrityMode", Enum.StreamingIntegrityMode.MinimumRadiusPause)
 sethiddenproperty(workspace, "StreamOutBehavior", Enum.StreamOutBehavior.Opportunistic)
 
---[[local lighting = game:GetService("Lighting")
+--[[
+local lighting = game:GetService("Lighting")
 lighting.GlobalShadows = false
 lighting.FogEnd = 9e9
 lighting.ShadowSoftness = 0
 sethiddenproperty(lighting, "Technology", Enum.Technology.Compatibility))
-print("Technology", gethiddenproperty(lighting, "Technology"))--]]
+print("Technology", gethiddenproperty(lighting, "Technology"))
+]]
 
 --settings().Rendering.GraphicsMode = Enum.GraphicsMode.Automatic
 settings().Rendering.QualityLevel = 1
