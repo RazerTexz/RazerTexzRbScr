@@ -1568,7 +1568,7 @@ DRR_MODULES[DRR["93"]] = {
                     if v.Name ~= name then
                         twServ:Create(v, TweenInfo.new(0.2), {Transparency = 0.75}):Play()
                         vTab.Visible = false
-                    elseif v.Name == name then
+                    else
                         vTab.Visible = true
                         twServ:Create(v, TweenInfo.new(0.2), {Transparency = 0}):Play()
                     end
@@ -1655,7 +1655,6 @@ DRR_MODULES[DRR["93"]] = {
 
             local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
-            local Trigger = newSlider.ActualSlider.Trigger
             local valueLabel = newSlider.ActualSlider.Title
             local Fill = newSlider.ActualSlider.Fill
             local Parent = newSlider.ActualSlider
@@ -1663,7 +1662,7 @@ DRR_MODULES[DRR["93"]] = {
 
             local mouseDown = false
             local triggerTweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-            Trigger.MouseButton1Down:Connect(function()
+            newSlider.ActualSlider.Trigger.MouseButton1Down:Connect(function()
                 mouseDown = true
                 repeat
                     task.wait()
@@ -1686,9 +1685,9 @@ DRR_MODULES[DRR["93"]] = {
             newToggle.Visible = true
             newToggle.Title.Text = title
             newToggle.Description.Text = desc
+            newToggle.Label.BackgroundColor3 = if realToggle then globalColor2 else globalColor1
             newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
             newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
-            newToggle.Label.BackgroundColor3 = if realToggle then globalColor2 else globalColor1
             newToggle.Label.Label.MouseButton1Click:Connect(function()
                 if realToggle then
                     realToggle = false

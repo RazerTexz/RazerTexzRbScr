@@ -1,6 +1,7 @@
 local Kavo = {}
 local cons = {}
 
+local ms = localPlayer:GetMouse()
 local tween = game:GetService("TweenService")
 local input = game:GetService("UserInputService")
 local players = game:GetService("Players")
@@ -9,7 +10,6 @@ local coreGui = game:GetService("CoreGui")
 local globalColor = Color3.fromRGB(255, 255, 255)
 local globalColor2 = Color3.fromRGB(0, 0, 0)
 
-local Utility = {}
 local Objects = {}
 function Kavo:DraggingEnabled(frame, parent)
     parent = parent or frame
@@ -39,7 +39,7 @@ function Kavo:DraggingEnabled(frame, parent)
     end))
 end
 
-function Utility:TweenObject(obj, properties, duration, ...)
+local function tweenObject(obj, properties, duration, ...)
     tween:Create(obj, TweenInfo.new(duration, ...), properties):Play()
 end
 
@@ -171,11 +171,6 @@ function Kavo.CreateLib(kavName, themeList)
     local pages = Instance.new("Frame")
     local Pages = Instance.new("Folder")
     local infoContainer = Instance.new("Frame")
-
-    local getPages = Pages.GetChildren
-    local getTabFrames = tabFrames.GetChildren
-    local getInfoContainer = infoContainer.GetChildren
-
     local blurFrame = Instance.new("Frame")
 
     Kavo:DraggingEnabled(MainHeader, Main)
@@ -388,20 +383,16 @@ function Kavo.CreateLib(kavName, themeList)
 
         tabButton.MouseButton1Click:Connect(function()
             UpdateSize()
-            for _, v in getPages(Pages) do
+            for _, v in Pages:GetChildren() do
                 v.Visible = false
             end
             page.Visible = true
-            for _, v in getTabFrames(tabFrames) do
+            for _, v in tabFrames:GetChildren() do
                 if v:IsA("TextButton") then
-                    if themeList.schemecolor == globalColor then Utility:TweenObject(v, {TextColor3 = globalColor}, 0.2) end
-                    if themeList.schemecolor == globalColor2 then Utility:TweenObject(v, {TextColor3 = globalColor2}, 0.2) end
-                    Utility:TweenObject(v, {BackgroundTransparency = 1}, 0.2)
+                    tweenObject(v, {BackgroundTransparency = 1}, 0.2)
                 end
             end
-            if themeList.schemecolor == globalColor then Utility:TweenObject(tabButton, {TextColor3 = globalColor2}, 0.2) end
-            if themeList.schemecolor == globalColor2 then Utility:TweenObject(tabButton, {TextColor3 = globalColor}, 0.2) end
-            Utility:TweenObject(tabButton, {BackgroundTransparency = 0}, 0.2)
+            tweenObject(tabButton, {BackgroundTransparency = 0}, 0.2)
         end)
         local Sections = {}
         local focusing = false
@@ -426,8 +417,6 @@ function Kavo.CreateLib(kavName, themeList)
             local sectionInners = Instance.new("Frame")
             local sectionElListing = Instance.new("UIListLayout")
 
-            local getSectionInners = sectionInners.GetChildren
-
             sectionHead.Visible = not hidden
 
             sectionFrame.Name = "sectionFrame"
@@ -440,18 +429,17 @@ function Kavo.CreateLib(kavName, themeList)
             sectionlistoknvm.Padding = UDim.new(0, 5)
             sectionlistoknvm.Parent = sectionFrame
 
-            for _, v in getSectionInners(sectionInners) do
-                while task.wait() do
-                    if v:IsA("Frame") or v:IsA("TextButton") then
-                        v.Changed:Connect(function(pro)
-                            if pro == "Size" then
-                                UpdateSize()
-                                updateSectionFrame()
-                            end
-                        end)
-                    end
+            for _, v in sectionInners:GetChildren() do
+                if v:IsA("Frame") or v:IsA("TextButton") then
+                    v.Changed:Connect(function(pro)
+                        if pro == "Size" then
+                            UpdateSize()
+                            updateSectionFrame()
+                        end
+                    end)
                 end
             end
+
             sectionHead.Name = "sectionHead"
             sectionHead.BackgroundColor3 = themeList.SchemeColor
             Objects[sectionHead] = "BackgroundColor3"
@@ -477,9 +465,6 @@ function Kavo.CreateLib(kavName, themeList)
             sectionName.TextXAlignment = Enum.TextXAlignment.Left
             sectionName.Parent = sectionHead
 
-            if themeList.schemecolor == globalColor then Utility:TweenObject(sectionName, {TextColor3 = globalColor2}, 0.2) end
-            if themeList.schemecolor == globalColor2 then Utility:TweenObject(sectionName, {TextColor3 = globalColor}, 0.2) end
-
             sectionInners.Name = "sectionInners"
             sectionInners.BackgroundColor3 = globalColor
             sectionInners.BackgroundTransparency = 1.000
@@ -501,10 +486,8 @@ function Kavo.CreateLib(kavName, themeList)
                 end
             end)
             local function updateSectionFrame()
-                local innerSc = sectionElListing.AbsoluteContentSize
-                sectionInners.Size = UDim2.new(1, 0, 0, innerSc.Y)
-                local frameSc = sectionlistoknvm.AbsoluteContentSize
-                sectionFrame.Size = UDim2.new(0, 352, 0, frameSc.Y)
+                sectionInners.Size = UDim2.new(1, 0, 0, sectionElListing.AbsoluteContentSize.Y)
+                sectionFrame.Size = UDim2.new(0, 352, 0, sectionlistoknvm.AbsoluteContentSize.Y)
             end
             updateSectionFrame()
             UpdateSize()
@@ -607,26 +590,18 @@ function Kavo.CreateLib(kavName, themeList)
                 btnInfo.TextXAlignment = Enum.TextXAlignment.Left
                 btnInfo.Parent = buttonElement
 
-                if themeList.schemecolor == globalColor then Utility:TweenObject(moreInfo, {TextColor3 = globalColor2}, 0.2) end
-                if themeList.schemecolor == globalColor2 then Utility:TweenObject(moreInfo, {TextColor3 = globalColor}, 0.2) end
-
                 updateSectionFrame()
                 UpdateSize()
 
-                local ms = localPlayer:GetMouse()
-
                 local btn = buttonElement
-                local sample = Sample
-
-                local sampleClone = sample.Clone
                 btn.MouseButton1Click:Connect(function()
                     if not focusing then
                         callback()
-                        local c = sampleClone(sample)
+                        local c = Sample:Clone()
                         local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                         c.Position = UDim2.new(0, x, 0, y)
                         c.Parent = btn
-                        local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
+                        local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
                         c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                         for i = 1, 10 do
                             c.ImageTransparency += 0.05
@@ -634,11 +609,11 @@ function Kavo.CreateLib(kavName, themeList)
                         end
                         c:Destroy()
                     else
-                        for _, v in getInfoContainer(infoContainer) do
-                            Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        for _, v in infoContainer:GetChildren() do
+                            tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                     end
                 end)
                 local hovering = false
@@ -658,16 +633,16 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in getInfoContainer(infoContainer) do
-                            if v ~= moreInfo then Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
+                        for _, v in infoContainer:GetChildren() do
+                            if v ~= moreInfo then tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
                         end
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
-                        Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
+                        tweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
                         task.wait(1.5)
                         focusing = false
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         task.wait(0)
                         viewDe = false
                     end
@@ -782,9 +757,6 @@ function Kavo.CreateLib(kavName, themeList)
                 moreInfo.TextXAlignment = Enum.TextXAlignment.Left
                 moreInfo.Parent = infoContainer
 
-                if themeList.schemecolor == globalColor then Utility:TweenObject(moreInfo, {TextColor3 = globalColor2}, 0.2) end
-                if themeList.schemecolor == globalColor2 then Utility:TweenObject(moreInfo, {TextColor3 = globalColor}, 0.2) end
-
                 UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = moreInfo
 
@@ -792,14 +764,13 @@ function Kavo.CreateLib(kavName, themeList)
                 UpdateSize()
             
                 local btn = textboxElement
-                local infBtn = viewInfo
                 btn.MouseButton1Click:Connect(function()
                     if focusing then
-                        for _, v in getInfoContainer(infoContainer) do
-                            Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        for _, v in infoContainer:GetChildren() do
+                            tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                     end
                 end)
                 local hovering = false
@@ -819,11 +790,11 @@ function Kavo.CreateLib(kavName, themeList)
 
                 TextBox.FocusLost:Connect(function(EnterPressed)
                     if focusing then
-                        for _, v in getInfoContainer(infoContainer) do
-                            Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        for _, v in infoContainer:GetChildren() do
+                            tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                     end
                     if not EnterPressed then 
                         return
@@ -838,16 +809,16 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in getInfoContainer(infoContainer) do
-                            if v ~= moreInfo then Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
+                        for _, v in infoContainer:GetChildren() do
+                            if v ~= moreInfo then tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
                         end
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
-                        Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
+                        tweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
                         task.wait(1.5)
                         focusing = false
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         task.wait(0)
                         viewDe = false
                     end
@@ -968,29 +939,20 @@ function Kavo.CreateLib(kavName, themeList)
                 UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = moreInfo
 
-                local ms = localPlayer:GetMouse()
-
-                if themeList.schemecolor == globalColor then Utility:TweenObject(moreInfo, {TextColor3 = globalColor2}, 0.2) end
-                if themeList.schemecolor == globalColor2 then Utility:TweenObject(moreInfo, {TextColor3 = globalColor}, 0.2) end
-
                 local btn = toggleElement
-                local sample = Sample
-                local img = toggleEnabled
-                local infBtn = viewInfo
 
                 updateSectionFrame()
                 UpdateSize()
 
-                local sampleClone = sample.Clone
                 btn.MouseButton1Click:Connect(function()
                     if not focusing then
                         if not toggled then
-                            tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
-                            local c = sampleClone(sample)
+                            tween:Create(toggleEnabled, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
+                            local c = Sample:Clone()
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = UDim2.new(0, x, 0, y)
                             c.Parent = btn
-                            local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
+                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency += 0.05
@@ -998,12 +960,12 @@ function Kavo.CreateLib(kavName, themeList)
                             end
                             c:Destroy()
                         else
-                            tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 1}):Play()
-                            local c = sampleClone(sample)
+                            tween:Create(toggleEnabled, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 1}):Play()
+                            local c = Sample:Clone()
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = UDim2.new(0, x, 0, y)
                             c.Parent = btn
-                            local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
+                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency += 0.05
@@ -1014,11 +976,11 @@ function Kavo.CreateLib(kavName, themeList)
                         toggled = not toggled
                         callback(toggled)
                     else
-                        for _, v in getInfoContainer(infoContainer) do
-                            Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        for _, v in infoContainer:GetChildren() do
+                            tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                     end
                 end)
                 local hovering = false
@@ -1051,16 +1013,16 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in getInfoContainer(infoContainer) do
-                            if v ~= moreInfo then Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
+                        for _, v in infoContainer:GetChildren() do
+                            if v ~= moreInfo then tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
                         end
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
-                        Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
+                        tweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
                         task.wait(1.5)
                         focusing = false
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         task.wait(0)
                         viewDe = false
                     end
@@ -1070,11 +1032,11 @@ function Kavo.CreateLib(kavName, themeList)
                     togName.Text = newText
                     if isTogOn then
                         toggled = true
-                        tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
+                        tween:Create(toggleEnabled, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
                         callback(toggled)
                     else
                         toggled = false
-                        tween:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 1}):Play()
+                        tween:Create(toggleEnabled, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {ImageTransparency = 1}):Play()
                         callback(toggled)
                     end
                 end
@@ -1205,15 +1167,10 @@ function Kavo.CreateLib(kavName, themeList)
                 UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = moreInfo
 
-                if themeList.schemecolor == globalColor then Utility:TweenObject(moreInfo, {TextColor3 = globalColor2}, 0.2) end
-                if themeList.schemecolor == globalColor2 then Utility:TweenObject(moreInfo, {TextColor3 = globalColor}, 0.2) end
-
                 updateSectionFrame()
                 UpdateSize()
 
-                local ms = localPlayer:GetMouse()
                 local btn = sliderElement
-                local infBtn = viewInfo
                 local hovering = false
                 btn.MouseEnter:Connect(function()
                     if not focusing then
@@ -1271,27 +1228,27 @@ function Kavo.CreateLib(kavName, themeList)
                             end
                         end)
                     else
-                        for _, v in getInfoContainer(infoContainer) do
-                            Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        for _, v in infoContainer:GetChildren() do
+                            tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                     end
                 end)
                 viewInfo.MouseButton1Click:Connect(function()
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in getInfoContainer(infoContainer) do
-                            if v ~= moreInfo then Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
+                        for _, v in infoContainer:GetChildren() do
+                            if v ~= moreInfo then tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
                         end
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
-                        Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
+                        tweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
                         task.wait(1.5)
                         focusing = false
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         task.wait(0)
                         viewDe = false
                     end
@@ -1312,9 +1269,6 @@ function Kavo.CreateLib(kavName, themeList)
                 local UIListLayout = Instance.new("UIListLayout")
                 local Sample = Instance.new("ImageLabel")
 
-                local getDropFrame = dropFrame.GetChildren
-
-                local ms = localPlayer:GetMouse()
                 Sample.Name = "Sample"
                 Sample.BackgroundColor3 = globalColor
                 Sample.BackgroundTransparency = 1.000
@@ -1330,7 +1284,6 @@ function Kavo.CreateLib(kavName, themeList)
                 dropFrame.Size = UDim2.new(0, 352, 0, 33)
                 dropFrame.ClipsDescendants = true
                 dropFrame.Parent = sectionInners
-                local sample = Sample
 
                 local btn = dropOpen
                 dropOpen.Name = "dropOpen"
@@ -1344,7 +1297,6 @@ function Kavo.CreateLib(kavName, themeList)
                 dropOpen.ClipsDescendants = true
                 dropOpen.Parent = dropFrame
 
-                local sampleClone = sample.Clone
                 dropOpen.MouseButton1Click:Connect(function()
                     if not focusing then
                         if opened then
@@ -1353,11 +1305,11 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sampleClone(sample)
+                            local c = Sample:Clone()
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = UDim2.new(0, x, 0, y)
                             c.Parent = btn
-                            local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
+                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency += 0.05
@@ -1370,11 +1322,11 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sampleClone(sample)
+                            local c = Sample:Clone()
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = UDim2.new(0, x, 0, y)
                             c.Parent = btn
-                            local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
+                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency += 0.05
@@ -1383,11 +1335,11 @@ function Kavo.CreateLib(kavName, themeList)
                             c:Destroy()
                         end
                     else
-                        for _, v in getInfoContainer(infoContainer) do
-                            Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        for _, v in infoContainer:GetChildren() do
+                            tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                     end
                 end)
 
@@ -1448,9 +1400,6 @@ function Kavo.CreateLib(kavName, themeList)
                 updateSectionFrame() 
                 UpdateSize()
 
-                local ms = localPlayer:GetMouse()
-                local infBtn = viewInfo
-
                 local moreInfo = Instance.new("TextLabel")
                 local UICorner = Instance.new("UICorner")
 
@@ -1495,23 +1444,20 @@ function Kavo.CreateLib(kavName, themeList)
                 UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = moreInfo
 
-                if themeList.schemecolor == globalColor then Utility:TweenObject(moreInfo, {TextColor3 = globalColor2}, 0.2) end 
-                if themeList.schemecolor == globalColor2 then Utility:TweenObject(moreInfo, {TextColor3 = globalColor}, 0.2) end 
-
                 viewInfo.MouseButton1Click:Connect(function()
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in getInfoContainer(infoContainer) do
-                            if v ~= moreInfo then Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
+                        for _, v in infoContainer:GetChildren() do
+                            if v ~= moreInfo then tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
                         end
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
-                        Utility:TweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
+                        tweenObject(btn, {BackgroundColor3 = themeList.ElementColor}, 0.2)
                         task.wait(1.5)
                         focusing = false
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         task.wait(0)
                         viewDe = false
                     end
@@ -1522,7 +1468,6 @@ function Kavo.CreateLib(kavName, themeList)
                     local UICorner_2 = Instance.new("UICorner")
                     local Sample1 = Instance.new("ImageLabel")
 
-                    local ms = localPlayer:GetMouse()
                     Sample1.Name = "Sample1"
                     Sample1.BackgroundColor3 = globalColor
                     Sample1.BackgroundTransparency = 1.000
@@ -1531,7 +1476,6 @@ function Kavo.CreateLib(kavName, themeList)
                     Sample1.ImageTransparency = 0.600
                     Sample1.Parent = optionSelect
 
-                    local sample1 = Sample1
                     DropYSize += 33
                     optionSelect.Name = "optionSelect"
                     optionSelect.BackgroundColor3 = themeList.ElementColor
@@ -1546,7 +1490,6 @@ function Kavo.CreateLib(kavName, themeList)
                     optionSelect.ClipsDescendants = true
                     optionSelect.Parent = dropFrame
 
-                    local sample1Clone = sample1.Clone
                     optionSelect.MouseButton1Click:Connect(function()
                         if not focusing then
                             opened = false
@@ -1556,11 +1499,11 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sample1:Clone()
+                            local c = Sample1:Clone()
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = UDim2.new(0, x, 0, y)
                             c.Parent = optionSelect
-                            local size = optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y and (optionSelect.AbsoluteSize.X * 1.5) or (optionSelect.AbsoluteSize.Y * 1.5)
+                            local size = if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then optionSelect.AbsoluteSize.X * 1.5 else optionSelect.AbsoluteSize.Y * 1.5
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency += 0.05
@@ -1568,11 +1511,11 @@ function Kavo.CreateLib(kavName, themeList)
                             end
                             c:Destroy()         
                         else
-                            for _, v in getInfoContainer(infoContainer) do
-                                Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                            for _, v in infoContainer:GetChildren() do
+                                tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                                 focusing = false
                             end
-                            Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                            tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         end
                     end)
     
@@ -1602,14 +1545,13 @@ function Kavo.CreateLib(kavName, themeList)
                 end
                 function DropFunction:Refresh(newList)
                     local newList = newList or {}
-                    for _, v in getDropFrame(dropFrame) do
+                    for _, v in dropFrame:GetChildren() do
                         if v.Name == "optionSelect" then v:Destroy() end
                     end
                     for _, v in newList do
                         local optionSelect = Instance.new("TextButton")
                         local UICorner_2 = Instance.new("UICorner")
                         local Sample11 = Instance.new("ImageLabel")
-                        local ms = localPlayer:GetMouse()
                         Sample11.Name = "Sample11"
                         Sample11.BackgroundColor3 = globalColor
                         Sample11.BackgroundTransparency = 1.000
@@ -1618,7 +1560,6 @@ function Kavo.CreateLib(kavName, themeList)
                         Sample11.ImageTransparency = 0.600
                         Sample11.Parent = optionSelect
     
-                        local sample11 = Sample11
                         DropYSize += 33
                         optionSelect.Name = "optionSelect"
                         optionSelect.BackgroundColor3 = themeList.ElementColor
@@ -1636,7 +1577,6 @@ function Kavo.CreateLib(kavName, themeList)
                         UICorner_2.CornerRadius = UDim.new(0, 4)
                         UICorner_2.Parent = optionSelect
 
-                        local sample11Clone = sample11.Clone
                         optionSelect.MouseButton1Click:Connect(function()
                             if not focusing then
                                 opened = false
@@ -1646,11 +1586,11 @@ function Kavo.CreateLib(kavName, themeList)
                                 task.wait(0.1)
                                 updateSectionFrame()
                                 UpdateSize()
-                                local c = sample11Clone(sample11)
+                                local c = Sample11:Clone()
                                 local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                                 c.Position = UDim2.new(0, x, 0, y)
                                 c.Parent = optionSelect
-                                local size = optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y and (optionSelect.AbsoluteSize.X * 1.5) or (optionSelect.AbsoluteSize.Y * 1.5)
+                                local size = if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then optionSelect.AbsoluteSize.X * 1.5 else optionSelect.AbsoluteSize.Y * 1.5
                                 c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                                 for i = 1, 10 do
                                     c.ImageTransparency += 0.05
@@ -1658,11 +1598,11 @@ function Kavo.CreateLib(kavName, themeList)
                                 end
                                 c:Destroy()         
                             else
-                                for _, v in getInfoContainer(infoContainer) do
-                                    Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                                for _, v in infoContainer:GetChildren() do
+                                    tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                                     focusing = false
                                 end
-                                Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                                tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                             end
                         end)
 
@@ -1714,13 +1654,8 @@ function Kavo.CreateLib(kavName, themeList)
                 local Sample = Instance.new("ImageLabel")
                 local togName_2 = Instance.new("TextLabel")
 
-                local ms = localPlayer:GetMouse()
-                local infBtn = viewInfo
-
                 local moreInfo = Instance.new("TextLabel")
                 local UICorner1 = Instance.new("UICorner")
-
-                local sample = Sample
 
                 keybindElement.Name = "keybindElement"
                 keybindElement.BackgroundColor3 = themeList.ElementColor
@@ -1733,7 +1668,6 @@ function Kavo.CreateLib(kavName, themeList)
                 keybindElement.TextSize = 14.000
                 keybindElement.Parent = sectionInners
 
-                local sampleClone = sample.Clone
                 keybindElement.MouseButton1Click:Connect(function(e) 
                     if not focusing then
                         togName_2.Text = ". . ."
@@ -1742,22 +1676,22 @@ function Kavo.CreateLib(kavName, themeList)
                             togName_2.Text = a.KeyCode.Name
                             oldKey = a.KeyCode.Name;
                         end
-                        local c = sampleClone(sample)
+                        local c = Sample:Clone()
                         local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                         c.Position = UDim2.new(0, x, 0, y)
                         c.Parent = keybindElement
-                        local size = keybindElement.AbsoluteSize.X >= keybindElement.AbsoluteSize.Y and (keybindElement.AbsoluteSize.X * 1.5) or (keybindElement.AbsoluteSize.Y * 1.5)
+                        local size = if keybindElement.AbsoluteSize.X >= keybindElement.AbsoluteSize.Y then keybindElement.AbsoluteSize.X * 1.5 else keybindElement.AbsoluteSize.Y * 1.5
                         c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                         for i = 1, 10 do
                             c.ImageTransparency += 0.05
                             task.wait(0.35 / 12)
                         end
                     else
-                        for _, v in getInfoContainer(infoContainer) do
-                            Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        for _, v in infoContainer:GetChildren() do
+                            tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                     end
                 end)
         
@@ -1816,16 +1750,16 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in getInfoContainer(infoContainer) do
-                            if v ~= moreInfo then Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
+                        for _, v in infoContainer:GetChildren() do
+                            if v ~= moreInfo then tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
                         end
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
-                        Utility:TweenObject(keybindElement, {BackgroundColor3 = themeList.ElementColor}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
+                        tweenObject(keybindElement, {BackgroundColor3 = themeList.ElementColor}, 0.2)
                         task.wait(1.5)
                         focusing = false
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         task.wait(0)
                         viewDe = false
                     end
@@ -1850,9 +1784,6 @@ function Kavo.CreateLib(kavName, themeList)
 
                 UICorner1.CornerRadius = UDim.new(0, 4)
                 UICorner1.Parent = moreInfo
-
-                if themeList.schemecolor == globalColor then Utility:TweenObject(moreInfo, {TextColor3 = globalColor2}, 0.2) end 
-                if themeList.schemecolor == globalColor2 then Utility:TweenObject(moreInfo, {TextColor3 = globalColor}, 0.2) end 
 
                 UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = keybindElement
@@ -1897,7 +1828,6 @@ function Kavo.CreateLib(kavName, themeList)
             end
             function Elements:NewColorPicker(colText, colInf, defcolor, callback)
                 local h, s, v = Color3.toHSV(defcolor)
-                local ms = localPlayer:GetMouse()
                 local colorOpened = false
                 local colorElement = Instance.new("TextButton")
                 local UICorner = Instance.new("UICorner")
@@ -1933,7 +1863,6 @@ function Kavo.CreateLib(kavName, themeList)
                 Sample.Parent = colorHeader
 
                 local btn = colorHeader
-                local sample = Sample
 
                 colorElement.Name = "colorElement"
                 colorElement.BackgroundColor3 = themeList.ElementColor
@@ -1948,7 +1877,6 @@ function Kavo.CreateLib(kavName, themeList)
                 colorElement.TextSize = 14.000
                 colorElement.Parent = sectionInners
 
-                local sampleClone = sample.Clone
                 colorElement.MouseButton1Click:Connect(function()
                     if not focusing then
                         if colorOpened then
@@ -1957,11 +1885,11 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sampleClone(sample)
+                            local c = Sample:Clone()
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = UDim2.new(0, x, 0, y)
                             c.Parent = btn
-                            local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
+                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency += 0.05
@@ -1974,11 +1902,11 @@ function Kavo.CreateLib(kavName, themeList)
                             task.wait(0.1)
                             updateSectionFrame()
                             UpdateSize()
-                            local c = sampleClone(sample)
+                            local c = Sample:Clone()
                             local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
                             c.Position = UDim2.new(0, x, 0, y)
                             c.Parent = btn
-                            local size = btn.AbsoluteSize.X >= btn.AbsoluteSize.Y and (btn.AbsoluteSize.X * 1.5) or (btn.AbsoluteSize.Y * 1.5)
+                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
                             c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
                             for i = 1, 10 do
                                 c.ImageTransparency += 0.05
@@ -1987,11 +1915,11 @@ function Kavo.CreateLib(kavName, themeList)
                             c:Destroy()
                         end
                     else
-                        for _, v in getInfoContainer(infoContainer) do
-                            Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        for _, v in infoContainer:GetChildren() do
+                            tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
                             focusing = false
                         end
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                     end
                 end)
                 UICorner.CornerRadius = UDim.new(0, 4)
@@ -2065,16 +1993,16 @@ function Kavo.CreateLib(kavName, themeList)
                     if not viewDe then
                         viewDe = true
                         focusing = true
-                        for _, v in getInfoContainer(infoContainer) do
-                            if v ~= moreInfo then Utility:TweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
+                        for _, v in infoContainer:GetChildren() do
+                            if v ~= moreInfo then tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
                         end
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
-                        Utility:TweenObject(colorElement, {BackgroundColor3 = themeList.ElementColor}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
+                        tweenObject(colorElement, {BackgroundColor3 = themeList.ElementColor}, 0.2)
                         task.wait(1.5)
                         focusing = false
-                        Utility:TweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
-                        Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
+                        tweenObject(moreInfo, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                        tweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
                         task.wait(0)
                         viewDe = false
                     end
@@ -2190,9 +2118,6 @@ function Kavo.CreateLib(kavName, themeList)
                 togName_2.TextXAlignment = Enum.TextXAlignment.Left
                 togName_2.Parent = colorInners
 
-                if themeList.schemecolor == globalColor then Utility:TweenObject(moreInfo, {TextColor3 = globalColor2}, 0.2) end
-                if themeList.schemecolor == globalColor2 then Utility:TweenObject(moreInfo, {TextColor3 = globalColor}, 0.2) end
-
                 local hovering = false
                 colorElement.MouseEnter:Connect(function()
                     if not focusing then
@@ -2206,9 +2131,6 @@ function Kavo.CreateLib(kavName, themeList)
                         hovering = false
                     end
                 end)
-
-                if themeList.schemecolor == globalColor then Utility:TweenObject(moreInfo, {TextColor3 = globalColor2}, 0.2) end
-                if themeList.schemecolor == globalColor2 then Utility:TweenObject(moreInfo, {TextColor3 = globalColor}, 0.2) end
 
                 task.spawn(function()
                     while task.wait(30) do
@@ -2228,77 +2150,34 @@ function Kavo.CreateLib(kavName, themeList)
                 end)
                 updateSectionFrame()
                 UpdateSize()
-                local mouse = localPlayer:GetMouse()
                 local colorpicker = false
                 local darknesss = false
-                local dark = false
-                local rgb = rgb    
-                local dark = darkness    
-                local cursor = rbgcircle
-                local cursor2 = darkcircle
                 local color = {1, 1, 1}
                 local rainbow = false
                 local rainbowConnection
                 local counter = 0
 
                 local function zigzag(X) return math.acos(math.cos(X * math.pi)) / math.pi end
-                local function mouseLocation()
-                    return mouse
-                end
-                local function cp()
-                    if colorpicker then
-                        local ml = mouseLocation()
-                        local x, y = ml.X - rgb.AbsolutePosition.X, ml.Y - rgb.AbsolutePosition.Y
-                        local maxX, maxY = rgb.AbsoluteSize.X, rgb.AbsoluteSize.Y
-                        if x < 0 then x = 0 end
-                        if x > maxX then x = maxX end
-                        if y < 0 then y = 0 end
-                        if y > maxY then y = maxY end
-                        x = x / maxX
-                        y = y / maxY
-                        local cx = cursor.AbsoluteSize.X / 2
-                        local cy = cursor.AbsoluteSize.Y / 2
-                        cursor.Position = UDim2.new(x, -cx, y, -cy)
-                        color = {1 - x, 1 - y, color[3]}
-                        local realcolor = Color3.fromHSV(color[1], color[2], color[3])
-                        colorCurrent.BackgroundColor3 = realcolor
-                        callback(realcolor)
-                    end
-                    if darknesss then
-                        local ml = mouseLocation()
-                        local y = ml.Y - dark.AbsolutePosition.Y
-                        local maxY = dark.AbsoluteSize.Y
-                        if y < 0 then y = 0 end
-                        if y > maxY then y = maxY end
-                        y = y / maxY
-                        local cy = cursor2.AbsoluteSize.Y / 2
-                        cursor2.Position = UDim2.new(0.5, 0, y, -cy)
-                        cursor2.ImageColor3 = Color3.fromHSV(0, 0, y)
-                        color = {color[1], color[2], 1 - y}
-                        local realcolor = Color3.fromHSV(color[1], color[2], color[3])
-                        colorCurrent.BackgroundColor3 = realcolor
-                        callback(realcolor)
-                    end
-                end
                 local function setcolor(tbl)
-                    local cx = cursor.AbsoluteSize.X / 2
-                    local cy = cursor.AbsoluteSize.Y / 2
+                    local cx = rbgcircle.AbsoluteSize.X / 2
+                    local cy = rbgcircle.AbsoluteSize.Y / 2
                     color = {tbl[1], tbl[2], tbl[3]}
-                    cursor.Position = UDim2.new(color[1], -cx ,color[2] - 1, -cy)
-                    cursor2.Position = UDim2.new(0.5, 0, color[3] - 1, -cy)
+                    rbgcircle.Position = UDim2.new(color[1], -cx ,color[2] - 1, -cy)
+                    darkcircle.Position = UDim2.new(0.5, 0, color[3] - 1, -cy)
                     local realcolor = Color3.fromHSV(color[1], color[2], color[3])
                     colorCurrent.BackgroundColor3 = realcolor
                 end
                 local function setrgbcolor(tbl)
-                    local cx = cursor.AbsoluteSize.X / 2
-                    local cy = cursor.AbsoluteSize.Y / 2
+                    local cx = rbgcircle.AbsoluteSize.X / 2
+                    local cy = rbgcircle.AbsoluteSize.Y / 2
                     color = {tbl[1], tbl[2], color[3]}
-                    cursor.Position = UDim2.new(color[1], -cx, color[2] - 1, -cy)
+                    rbgcircle.Position = UDim2.new(color[1], -cx, color[2] - 1, -cy)
                     local realcolor = Color3.fromHSV(color[1], color[2], color[3])
                     colorCurrent.BackgroundColor3 = realcolor
                     callback(realcolor)
                 end
-                local function togglerainbow()
+
+                onrainbow.MouseButton1Click:Connect(function()
                     if rainbow then
                         tween:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageTransparency = 1}):Play()
                         rainbow = false
@@ -2312,13 +2191,43 @@ function Kavo.CreateLib(kavName, themeList)
                             counter += 0.01
                         end)
                     end
-                end
+                end)
 
-                onrainbow.MouseButton1Click:Connect(togglerainbow)
-
-                table.insert(cons, mouse.Move:Connect(cp))
+                table.insert(cons, ms.Move:Connect(function()
+                    if colorpicker then
+                        local x, y = ms.X - rgb.AbsolutePosition.X, ms.Y - rgb.AbsolutePosition.Y
+                        local maxX, maxY = rgb.AbsoluteSize.X, rgb.AbsoluteSize.Y
+                        if x < 0 then x = 0 end
+                        if x > maxX then x = maxX end
+                        if y < 0 then y = 0 end
+                        if y > maxY then y = maxY end
+                        x = x / maxX
+                        y = y / maxY
+                        local cx = rbgcircle.AbsoluteSize.X / 2
+                        local cy = rbgcircle.AbsoluteSize.Y / 2
+                        rbgcircle.Position = UDim2.new(x, -cx, y, -cy)
+                        color = {1 - x, 1 - y, color[3]}
+                        local realcolor = Color3.fromHSV(color[1], color[2], color[3])
+                        colorCurrent.BackgroundColor3 = realcolor
+                        callback(realcolor)
+                    end
+                    if darknesss then
+                        local y = ms.Y - darkness.AbsolutePosition.Y
+                        local maxY = darkness.AbsoluteSize.Y
+                        if y < 0 then y = 0 end
+                        if y > maxY then y = maxY end
+                        y = y / maxY
+                        local cy = darkcircle.AbsoluteSize.Y / 2
+                        darkcircle.Position = UDim2.new(0.5, 0, y, -cy)
+                        darkcircle.ImageColor3 = Color3.fromHSV(0, 0, y)
+                        color = {color[1], color[2], 1 - y}
+                        local realcolor = Color3.fromHSV(color[1], color[2], color[3])
+                        colorCurrent.BackgroundColor3 = realcolor
+                        callback(realcolor)
+                    end
+                end))
                 rgb.MouseButton1Down:Connect(function() colorpicker = true end)
-                dark.MouseButton1Down:Connect(function() darknesss = true end)
+                darkness.MouseButton1Down:Connect(function() darknesss = true end)
                 table.insert(cons, input.InputEnded:Connect(function(input)
                     if input.UserInputType.Name == "MouseButton1" then
                         if darknesss then darknesss = false end
@@ -2348,9 +2257,6 @@ function Kavo.CreateLib(kavName, themeList)
 
 	           	UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = label
-
-	            if themeList.schemecolor == globalColor then Utility:TweenObject(label, {TextColor3 = globalColor2}, 0.2) end
-	            if themeList.schemecolor == globalColor2 then Utility:TweenObject(label, {TextColor3 = globalColor}, 0.2) end
 
 		        task.spawn(function()
 		            while task.wait(30) do
