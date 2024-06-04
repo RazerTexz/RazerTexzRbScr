@@ -220,7 +220,7 @@ function Kavo.CreateLib(kavName, themeList)
 
     title.Name = "title"
     title.BackgroundColor3 = globalColor
-    title.BackgroundTransparency = 1.000
+    title.BackgroundTransparency = 1
     title.BorderSizePixel = 0
     title.Position = UDim2.new(0.0171428565, 0, 0.344827592, 0)
     title.Size = UDim2.new(0, 204, 0, 8)
@@ -228,12 +228,12 @@ function Kavo.CreateLib(kavName, themeList)
     title.RichText = true
     title.Text = kavName
     title.TextColor3 = Color3.fromRGB(245, 245, 245)
-    title.TextSize = 16.000
+    title.TextSize = 16
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.Parent = MainHeader
 
     close.Name = "close"
-    close.BackgroundTransparency = 1.000
+    close.BackgroundTransparency = 1
     close.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
     close.Size = UDim2.new(0, 21, 0, 21)
     close.ZIndex = 2
@@ -275,7 +275,7 @@ function Kavo.CreateLib(kavName, themeList)
 
     tabFrames.Name = "tabFrames"
     tabFrames.BackgroundColor3 = globalColor
-    tabFrames.BackgroundTransparency = 1.000
+    tabFrames.BackgroundTransparency = 1
     tabFrames.Position = UDim2.new(0.0438990258, 0, -0.00066378375, 0)
     tabFrames.Size = UDim2.new(0, 135, 0, 283)
     tabFrames.Parent = MainSide
@@ -286,7 +286,7 @@ function Kavo.CreateLib(kavName, themeList)
 
     pages.Name = "pages"
     pages.BackgroundColor3 = globalColor
-    pages.BackgroundTransparency = 1.000
+    pages.BackgroundTransparency = 1
     pages.BorderSizePixel = 0
     pages.Position = UDim2.new(0.299047589, 0, 0.122641519, 0)
     pages.Size = UDim2.new(0, 360, 0, 269)
@@ -297,7 +297,7 @@ function Kavo.CreateLib(kavName, themeList)
 
     infoContainer.Name = "infoContainer"
     infoContainer.BackgroundColor3 = globalColor
-    infoContainer.BackgroundTransparency = 1.000
+    infoContainer.BackgroundTransparency = 1
     infoContainer.BorderColor3 = Color3.fromRGB(27, 42, 53)
     infoContainer.ClipsDescendants = true
     infoContainer.Position = UDim2.new(0.299047619, 0, 0.874213815, 0)
@@ -358,7 +358,7 @@ function Kavo.CreateLib(kavName, themeList)
         tabButton.Text = tabName
         tabButton.TextColor3 = themeList.TextColor
         Objects[tabButton] = "TextColor3"
-        tabButton.TextSize = 14.000
+        tabButton.TextSize = 14
         tabButton.BackgroundTransparency = 1
         tabButton.Parent = tabFrames
 
@@ -452,7 +452,7 @@ function Kavo.CreateLib(kavName, themeList)
 
             sectionName.Name = "sectionName"
             sectionName.BackgroundColor3 = globalColor
-            sectionName.BackgroundTransparency = 1.000
+            sectionName.BackgroundTransparency = 1
             sectionName.BorderColor3 = Color3.fromRGB(27, 42, 53)
             sectionName.Position = UDim2.new(0.0198863633, 0, 0, 0)
             sectionName.Size = UDim2.new(0.980113626, 0, 1, 0)
@@ -461,13 +461,13 @@ function Kavo.CreateLib(kavName, themeList)
             sectionName.RichText = true
             sectionName.TextColor3 = themeList.TextColor
             Objects[sectionName] = "TextColor3"
-            sectionName.TextSize = 14.000
+            sectionName.TextSize = 14
             sectionName.TextXAlignment = Enum.TextXAlignment.Left
             sectionName.Parent = sectionHead
 
             sectionInners.Name = "sectionInners"
             sectionInners.BackgroundColor3 = globalColor
-            sectionInners.BackgroundTransparency = 1.000
+            sectionInners.BackgroundTransparency = 1
             sectionInners.Position = UDim2.new(0, 0, 0.190751448, 0)
             sectionInners.Parent = sectionFrame
 
@@ -513,7 +513,7 @@ function Kavo.CreateLib(kavName, themeList)
                 buttonElement.Font = Enum.Font.SourceSans
                 buttonElement.Text = ""
                 buttonElement.TextColor3 = globalColor2
-                buttonElement.TextSize = 14.000
+                buttonElement.TextSize = 14
                 Objects[buttonElement] = "BackgroundColor3"
                 buttonElement.Parent = sectionInners
 
@@ -521,7 +521,7 @@ function Kavo.CreateLib(kavName, themeList)
                 UICorner.Parent = buttonElement
 
                 viewInfo.Name = "viewInfo"
-                viewInfo.BackgroundTransparency = 1.000
+                viewInfo.BackgroundTransparency = 1
                 viewInfo.LayoutOrder = 9
                 viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
                 viewInfo.Size = UDim2.new(0, 23, 0, 23)
@@ -535,7 +535,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 Sample.Name = "Sample"
                 Sample.BackgroundColor3 = globalColor
-                Sample.BackgroundTransparency = 1.000
+                Sample.BackgroundTransparency = 1
                 Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
                 Sample.ImageColor3 = themeList.SchemeColor
                 Objects[Sample] = "ImageColor3"
@@ -554,7 +554,7 @@ function Kavo.CreateLib(kavName, themeList)
                 moreInfo.RichText = true
                 moreInfo.TextColor3 = themeList.TextColor
                 Objects[moreInfo] = "TextColor3"
-                moreInfo.TextSize = 14.000
+                moreInfo.TextSize = 14
                 moreInfo.TextXAlignment = Enum.TextXAlignment.Left
                 Objects[moreInfo] = "BackgroundColor3"
                 moreInfo.Parent = infoContainer
@@ -564,7 +564,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 touch.Name = "touch"
                 touch.BackgroundColor3 = globalColor
-                touch.BackgroundTransparency = 1.000
+                touch.BackgroundTransparency = 1
                 touch.BorderColor3 = Color3.fromRGB(27, 42, 53)
                 touch.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                 touch.Size = UDim2.new(0, 21, 0, 21)
@@ -578,7 +578,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 btnInfo.Name = "btnInfo"
                 btnInfo.BackgroundColor3 = globalColor
-                btnInfo.BackgroundTransparency = 1.000
+                btnInfo.BackgroundTransparency = 1
                 btnInfo.Position = UDim2.new(0.096704483, 0, 0.272727281, 0)
                 btnInfo.Size = UDim2.new(0, 314, 0, 14)
                 btnInfo.Font = Enum.Font.GothamSemibold
@@ -586,7 +586,7 @@ function Kavo.CreateLib(kavName, themeList)
                 btnInfo.RichText = true
                 btnInfo.TextColor3 = themeList.TextColor
                 Objects[btnInfo] = "TextColor3"
-                btnInfo.TextSize = 14.000
+                btnInfo.TextSize = 14
                 btnInfo.TextXAlignment = Enum.TextXAlignment.Left
                 btnInfo.Parent = buttonElement
 
@@ -680,14 +680,14 @@ function Kavo.CreateLib(kavName, themeList)
                 textboxElement.Font = Enum.Font.SourceSans
                 textboxElement.Text = ""
                 textboxElement.TextColor3 = globalColor2
-                textboxElement.TextSize = 14.000
+                textboxElement.TextSize = 14
                 textboxElement.Parent = sectionInners
 
                 UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = textboxElement
 
                 viewInfo.Name = "viewInfo"
-                viewInfo.BackgroundTransparency = 1.000
+                viewInfo.BackgroundTransparency = 1
                 viewInfo.LayoutOrder = 9
                 viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
                 viewInfo.Size = UDim2.new(0, 23, 0, 23)
@@ -700,7 +700,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 write.Name = "write"
                 write.BackgroundColor3 = globalColor
-                write.BackgroundTransparency = 1.000
+                write.BackgroundTransparency = 1
                 write.BorderColor3 = Color3.fromRGB(27, 42, 53)
                 write.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                 write.Size = UDim2.new(0, 21, 0, 21)
@@ -722,7 +722,7 @@ function Kavo.CreateLib(kavName, themeList)
                 TextBox.PlaceholderText = "Type here!"
                 TextBox.Text = ""
                 TextBox.TextColor3 = themeList.SchemeColor
-                TextBox.TextSize = 12.000
+                TextBox.TextSize = 12
                 TextBox.Parent = textboxElement
 
                 UICorner_2.CornerRadius = UDim.new(0, 4)
@@ -730,14 +730,14 @@ function Kavo.CreateLib(kavName, themeList)
 
                 togName.Name = "togName"
                 togName.BackgroundColor3 = globalColor
-                togName.BackgroundTransparency = 1.000
+                togName.BackgroundTransparency = 1
                 togName.Position = UDim2.new(0.096704483, 0, 0.272727281, 0)
                 togName.Size = UDim2.new(0, 138, 0, 14)
                 togName.Font = Enum.Font.GothamSemibold
                 togName.Text = tname
                 togName.RichText = true
                 togName.TextColor3 = themeList.TextColor
-                togName.TextSize = 14.000
+                togName.TextSize = 14
                 togName.TextXAlignment = Enum.TextXAlignment.Left
                 togName.Parent = textboxElement
 
@@ -753,7 +753,7 @@ function Kavo.CreateLib(kavName, themeList)
                 moreInfo.RichText = true
                 moreInfo.Text = "  "..tTip
                 moreInfo.TextColor3 = globalColor
-                moreInfo.TextSize = 14.000
+                moreInfo.TextSize = 14
                 moreInfo.TextXAlignment = Enum.TextXAlignment.Left
                 moreInfo.Parent = infoContainer
 
@@ -858,7 +858,7 @@ function Kavo.CreateLib(kavName, themeList)
                 toggleElement.Font = Enum.Font.SourceSans
                 toggleElement.Text = ""
                 toggleElement.TextColor3 = globalColor2
-                toggleElement.TextSize = 14.000
+                toggleElement.TextSize = 14
                 toggleElement.Parent = sectionInners
 
                 UICorner.CornerRadius = UDim.new(0, 4)
@@ -866,7 +866,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 toggleDisabled.Name = "toggleDisabled"
                 toggleDisabled.BackgroundColor3 = globalColor
-                toggleDisabled.BackgroundTransparency = 1.000
+                toggleDisabled.BackgroundTransparency = 1
                 toggleDisabled.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                 toggleDisabled.Size = UDim2.new(0, 21, 0, 21)
                 toggleDisabled.Image = "rbxassetid://3926309567"
@@ -877,31 +877,31 @@ function Kavo.CreateLib(kavName, themeList)
 
                 toggleEnabled.Name = "toggleEnabled"
                 toggleEnabled.BackgroundColor3 = globalColor
-                toggleEnabled.BackgroundTransparency = 1.000
+                toggleEnabled.BackgroundTransparency = 1
                 toggleEnabled.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                 toggleEnabled.Size = UDim2.new(0, 21, 0, 21)
                 toggleEnabled.Image = "rbxassetid://3926309567"
                 toggleEnabled.ImageColor3 = themeList.SchemeColor
                 toggleEnabled.ImageRectOffset = Vector2.new(784, 420)
                 toggleEnabled.ImageRectSize = Vector2.new(48, 48)
-                toggleEnabled.ImageTransparency = 1.000
+                toggleEnabled.ImageTransparency = 1
                 toggleEnabled.Parent = toggleElement
 
                 togName.Name = "togName"
                 togName.BackgroundColor3 = globalColor
-                togName.BackgroundTransparency = 1.000
+                togName.BackgroundTransparency = 1
                 togName.Position = UDim2.new(0.096704483, 0, 0.272727281, 0)
                 togName.Size = UDim2.new(0, 288, 0, 14)
                 togName.Font = Enum.Font.GothamSemibold
                 togName.Text = tname
                 togName.RichText = true
                 togName.TextColor3 = themeList.TextColor
-                togName.TextSize = 14.000
+                togName.TextSize = 14
                 togName.TextXAlignment = Enum.TextXAlignment.Left
                 togName.Parent = toggleElement
 
                 viewInfo.Name = "viewInfo"
-                viewInfo.BackgroundTransparency = 1.000
+                viewInfo.BackgroundTransparency = 1
                 viewInfo.LayoutOrder = 9
                 viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
                 viewInfo.Size = UDim2.new(0, 23, 0, 23)
@@ -914,7 +914,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 Sample.Name = "Sample"
                 Sample.BackgroundColor3 = globalColor
-                Sample.BackgroundTransparency = 1.000
+                Sample.BackgroundTransparency = 1
                 Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
                 Sample.ImageColor3 = themeList.SchemeColor
                 Sample.ImageTransparency = 0.600
@@ -932,7 +932,7 @@ function Kavo.CreateLib(kavName, themeList)
                 moreInfo.RichText = true
                 moreInfo.Text = "  "..nTip
                 moreInfo.TextColor3 = themeList.TextColor
-                moreInfo.TextSize = 14.000
+                moreInfo.TextSize = 14
                 moreInfo.TextXAlignment = Enum.TextXAlignment.Left
                 moreInfo.Parent = infoContainer
 
@@ -1065,7 +1065,7 @@ function Kavo.CreateLib(kavName, themeList)
                 sliderElement.Font = Enum.Font.SourceSans
                 sliderElement.Text = ""
                 sliderElement.TextColor3 = globalColor2
-                sliderElement.TextSize = 14.000
+                sliderElement.TextSize = 14
                 sliderElement.Parent = sectionInners
 
                 UICorner.CornerRadius = UDim.new(0, 4)
@@ -1073,19 +1073,19 @@ function Kavo.CreateLib(kavName, themeList)
 
                 togName.Name = "togName"
                 togName.BackgroundColor3 = globalColor
-                togName.BackgroundTransparency = 1.000
+                togName.BackgroundTransparency = 1
                 togName.Position = UDim2.new(0.096704483, 0, 0.272727281, 0)
                 togName.Size = UDim2.new(0, 138, 0, 14)
                 togName.Font = Enum.Font.GothamSemibold
                 togName.Text = slidInf
                 togName.RichText = true
                 togName.TextColor3 = themeList.TextColor
-                togName.TextSize = 14.000
+                togName.TextSize = 14
                 togName.TextXAlignment = Enum.TextXAlignment.Left
                 togName.Parent = sliderElement
 
                 viewInfo.Name = "viewInfo"
-                viewInfo.BackgroundTransparency = 1.000
+                viewInfo.BackgroundTransparency = 1
                 viewInfo.LayoutOrder = 9
                 viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
                 viewInfo.Size = UDim2.new(0, 23, 0, 23)
@@ -1105,7 +1105,7 @@ function Kavo.CreateLib(kavName, themeList)
                 sliderBtn.Font = Enum.Font.SourceSans
                 sliderBtn.Text = ""
                 sliderBtn.TextColor3 = globalColor2
-                sliderBtn.TextSize = 14.000
+                sliderBtn.TextSize = 14
                 sliderBtn.Parent = sliderElement
 
                 UICorner_2.Parent = sliderBtn
@@ -1125,7 +1125,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 write.Name = "write"
                 write.BackgroundColor3 = globalColor
-                write.BackgroundTransparency = 1.000
+                write.BackgroundTransparency = 1
                 write.BorderColor3 = Color3.fromRGB(27, 42, 53)
                 write.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                 write.Size = UDim2.new(0, 21, 0, 21)
@@ -1137,14 +1137,14 @@ function Kavo.CreateLib(kavName, themeList)
 
                 val.Name = "val"
                 val.BackgroundColor3 = globalColor
-                val.BackgroundTransparency = 1.000
+                val.BackgroundTransparency = 1
                 val.Position = UDim2.new(0.352386296, 0, 0.272727281, 0)
                 val.Size = UDim2.new(0, 41, 0, 14)
                 val.Font = Enum.Font.GothamSemibold
                 val.Text = minvalue
                 val.TextColor3 = themeList.TextColor
-                val.TextSize = 14.000
-                val.TextTransparency = 1.000
+                val.TextSize = 14
+                val.TextTransparency = 1
                 val.TextXAlignment = Enum.TextXAlignment.Right
                 val.Parent = sliderElement
 
@@ -1159,7 +1159,7 @@ function Kavo.CreateLib(kavName, themeList)
                 moreInfo.Font = Enum.Font.GothamSemibold
                 moreInfo.Text = "  "..slidTip
                 moreInfo.TextColor3 = themeList.TextColor
-                moreInfo.TextSize = 14.000
+                moreInfo.TextSize = 14
                 moreInfo.RichText = true
                 moreInfo.TextXAlignment = Enum.TextXAlignment.Left
                 moreInfo.Parent = infoContainer
@@ -1271,7 +1271,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 Sample.Name = "Sample"
                 Sample.BackgroundColor3 = globalColor
-                Sample.BackgroundTransparency = 1.000
+                Sample.BackgroundTransparency = 1
                 Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
                 Sample.ImageColor3 = themeList.SchemeColor
                 Sample.ImageTransparency = 0.600
@@ -1293,7 +1293,7 @@ function Kavo.CreateLib(kavName, themeList)
                 dropOpen.Font = Enum.Font.SourceSans
                 dropOpen.Text = ""
                 dropOpen.TextColor3 = globalColor2
-                dropOpen.TextSize = 14.000
+                dropOpen.TextSize = 14
                 dropOpen.ClipsDescendants = true
                 dropOpen.Parent = dropFrame
 
@@ -1345,7 +1345,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 listImg.Name = "listImg"
                 listImg.BackgroundColor3 = globalColor
-                listImg.BackgroundTransparency = 1.000
+                listImg.BackgroundTransparency = 1
                 listImg.BorderColor3 = Color3.fromRGB(27, 42, 53)
                 listImg.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                 listImg.Size = UDim2.new(0, 21, 0, 21)
@@ -1357,19 +1357,19 @@ function Kavo.CreateLib(kavName, themeList)
 
                 itemTextbox.Name = "itemTextbox"
                 itemTextbox.BackgroundColor3 = globalColor
-                itemTextbox.BackgroundTransparency = 1.000
+                itemTextbox.BackgroundTransparency = 1
                 itemTextbox.Position = UDim2.new(0.0970000029, 0, 0.273000002, 0)
                 itemTextbox.Size = UDim2.new(0, 138, 0, 14)
                 itemTextbox.Font = Enum.Font.GothamSemibold
                 itemTextbox.Text = dropname
                 itemTextbox.RichText = true
                 itemTextbox.TextColor3 = themeList.TextColor
-                itemTextbox.TextSize = 14.000
+                itemTextbox.TextSize = 14
                 itemTextbox.TextXAlignment = Enum.TextXAlignment.Left
                 itemTextbox.Parent = dropOpen
 
                 viewInfo.Name = "viewInfo"
-                viewInfo.BackgroundTransparency = 1.000
+                viewInfo.BackgroundTransparency = 1
                 viewInfo.LayoutOrder = 9
                 viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
                 viewInfo.Size = UDim2.new(0, 23, 0, 23)
@@ -1387,7 +1387,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 Sample.Name = "Sample"
                 Sample.BackgroundColor3 = globalColor
-                Sample.BackgroundTransparency = 1.000
+                Sample.BackgroundTransparency = 1
                 Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
                 Sample.ImageColor3 = themeList.SchemeColor
                 Sample.ImageTransparency = 0.600
@@ -1412,7 +1412,7 @@ function Kavo.CreateLib(kavName, themeList)
                 moreInfo.Font = Enum.Font.GothamSemibold
                 moreInfo.Text = "  "..dropinf
                 moreInfo.TextColor3 = themeList.TextColor
-                moreInfo.TextSize = 14.000
+                moreInfo.TextSize = 14
                 moreInfo.TextXAlignment = Enum.TextXAlignment.Left
                 moreInfo.Parent = infoContainer
 
@@ -1470,7 +1470,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                     Sample1.Name = "Sample1"
                     Sample1.BackgroundColor3 = globalColor
-                    Sample1.BackgroundTransparency = 1.000
+                    Sample1.BackgroundTransparency = 1
                     Sample1.Image = "http://www.roblox.com/asset/?id=4560909609"
                     Sample1.ImageColor3 = themeList.SchemeColor
                     Sample1.ImageTransparency = 0.600
@@ -1485,7 +1485,7 @@ function Kavo.CreateLib(kavName, themeList)
                     optionSelect.Font = Enum.Font.GothamSemibold
                     optionSelect.Text = "  "..v
                     optionSelect.TextColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 6, themeList.TextColor.g * 255 - 6, themeList.TextColor.b * 255 - 6)
-                    optionSelect.TextSize = 14.000
+                    optionSelect.TextSize = 14
                     optionSelect.TextXAlignment = Enum.TextXAlignment.Left
                     optionSelect.ClipsDescendants = true
                     optionSelect.Parent = dropFrame
@@ -1554,7 +1554,7 @@ function Kavo.CreateLib(kavName, themeList)
                         local Sample11 = Instance.new("ImageLabel")
                         Sample11.Name = "Sample11"
                         Sample11.BackgroundColor3 = globalColor
-                        Sample11.BackgroundTransparency = 1.000
+                        Sample11.BackgroundTransparency = 1
                         Sample11.Image = "http://www.roblox.com/asset/?id=4560909609"
                         Sample11.ImageColor3 = themeList.SchemeColor
                         Sample11.ImageTransparency = 0.600
@@ -1569,7 +1569,7 @@ function Kavo.CreateLib(kavName, themeList)
                         optionSelect.Font = Enum.Font.GothamSemibold
                         optionSelect.Text = "  "..v
                         optionSelect.TextColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 6, themeList.TextColor.g * 255 - 6, themeList.TextColor.b * 255 - 6)
-                        optionSelect.TextSize = 14.000
+                        optionSelect.TextSize = 14
                         optionSelect.TextXAlignment = Enum.TextXAlignment.Left
                         optionSelect.ClipsDescendants = true
                         optionSelect.Parent = dropFrame
@@ -1665,7 +1665,7 @@ function Kavo.CreateLib(kavName, themeList)
                 keybindElement.Font = Enum.Font.SourceSans
                 keybindElement.Text = ""
                 keybindElement.TextColor3 = globalColor2
-                keybindElement.TextSize = 14.000
+                keybindElement.TextSize = 14
                 keybindElement.Parent = sectionInners
 
                 keybindElement.MouseButton1Click:Connect(function(e) 
@@ -1710,13 +1710,13 @@ function Kavo.CreateLib(kavName, themeList)
                 moreInfo.Font = Enum.Font.GothamSemibold
                 moreInfo.Text = "  "..keyinf
                 moreInfo.TextColor3 = themeList.TextColor
-                moreInfo.TextSize = 14.000
+                moreInfo.TextSize = 14
                 moreInfo.TextXAlignment = Enum.TextXAlignment.Left
                 moreInfo.Parent = infoContainer
 
                 Sample.Name = "Sample"
                 Sample.BackgroundColor3 = globalColor
-                Sample.BackgroundTransparency = 1.000
+                Sample.BackgroundTransparency = 1
                 Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
                 Sample.ImageColor3 = themeList.SchemeColor
                 Sample.ImageTransparency = 0.600
@@ -1724,19 +1724,19 @@ function Kavo.CreateLib(kavName, themeList)
 
                 togName.Name = "togName"
                 togName.BackgroundColor3 = themeList.TextColor
-                togName.BackgroundTransparency = 1.000
+                togName.BackgroundTransparency = 1
                 togName.Position = UDim2.new(0.096704483, 0, 0.272727281, 0)
                 togName.Size = UDim2.new(0, 222, 0, 14)
                 togName.Font = Enum.Font.GothamSemibold
                 togName.Text = keytext
                 togName.RichText = true
                 togName.TextColor3 = themeList.TextColor
-                togName.TextSize = 14.000
+                togName.TextSize = 14
                 togName.TextXAlignment = Enum.TextXAlignment.Left
                 togName.Parent = keybindElement
 
                 viewInfo.Name = "viewInfo"
-                viewInfo.BackgroundTransparency = 1.000
+                viewInfo.BackgroundTransparency = 1
                 viewInfo.LayoutOrder = 9
                 viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
                 viewInfo.Size = UDim2.new(0, 23, 0, 23)
@@ -1790,7 +1790,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 touch.Name = "touch"
                 touch.BackgroundColor3 = globalColor
-                touch.BackgroundTransparency = 1.000
+                touch.BackgroundTransparency = 1
                 touch.BorderColor3 = Color3.fromRGB(27, 42, 53)
                 touch.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                 touch.Size = UDim2.new(0, 21, 0, 21)
@@ -1802,13 +1802,13 @@ function Kavo.CreateLib(kavName, themeList)
 
                 togName_2.Name = "togName"
                 togName_2.BackgroundColor3 = globalColor
-                togName_2.BackgroundTransparency = 1.000
+                togName_2.BackgroundTransparency = 1
                 togName_2.Position = UDim2.new(0.727386296, 0, 0.272727281, 0)
                 togName_2.Size = UDim2.new(0, 70, 0, 14)
                 togName_2.Font = Enum.Font.GothamSemibold
                 togName_2.Text = oldKey
                 togName_2.TextColor3 = themeList.SchemeColor
-                togName_2.TextSize = 14.000
+                togName_2.TextSize = 14
                 togName_2.TextXAlignment = Enum.TextXAlignment.Right
                 togName_2.Parent = keybindElement
 
@@ -1856,7 +1856,7 @@ function Kavo.CreateLib(kavName, themeList)
                 local Sample = Instance.new("ImageLabel")
                 Sample.Name = "Sample"
                 Sample.BackgroundColor3 = globalColor
-                Sample.BackgroundTransparency = 1.000
+                Sample.BackgroundTransparency = 1
                 Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
                 Sample.ImageColor3 = themeList.SchemeColor
                 Sample.ImageTransparency = 0.600
@@ -1866,7 +1866,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 colorElement.Name = "colorElement"
                 colorElement.BackgroundColor3 = themeList.ElementColor
-                colorElement.BackgroundTransparency = 1.000
+                colorElement.BackgroundTransparency = 1
                 colorElement.ClipsDescendants = true
                 colorElement.Position = UDim2.new(0, 0, 0.566834569, 0)
                 colorElement.Size = UDim2.new(0, 352, 0, 33)
@@ -1874,7 +1874,7 @@ function Kavo.CreateLib(kavName, themeList)
                 colorElement.Font = Enum.Font.SourceSans
                 colorElement.Text = ""
                 colorElement.TextColor3 = globalColor2
-                colorElement.TextSize = 14.000
+                colorElement.TextSize = 14
                 colorElement.Parent = sectionInners
 
                 colorElement.MouseButton1Click:Connect(function()
@@ -1936,7 +1936,7 @@ function Kavo.CreateLib(kavName, themeList)
                 
                 touch.Name = "touch"
                 touch.BackgroundColor3 = globalColor
-                touch.BackgroundTransparency = 1.000
+                touch.BackgroundTransparency = 1
                 touch.BorderColor3 = Color3.fromRGB(27, 42, 53)
                 touch.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                 touch.Size = UDim2.new(0, 21, 0, 21)
@@ -1948,13 +1948,13 @@ function Kavo.CreateLib(kavName, themeList)
 
                 togName.Name = "togName"
                 togName.BackgroundColor3 = globalColor
-                togName.BackgroundTransparency = 1.000
+                togName.BackgroundTransparency = 1
                 togName.Position = UDim2.new(0.096704483, 0, 0.272727281, 0)
                 togName.Size = UDim2.new(0, 288, 0, 14)
                 togName.Font = Enum.Font.GothamSemibold
                 togName.Text = colText
                 togName.TextColor3 = themeList.TextColor
-                togName.TextSize = 14.000
+                togName.TextSize = 14
                 togName.RichText = true
                 togName.TextXAlignment = Enum.TextXAlignment.Left
                 togName.Parent = colorHeader
@@ -1970,7 +1970,7 @@ function Kavo.CreateLib(kavName, themeList)
                 moreInfo.Font = Enum.Font.GothamSemibold
                 moreInfo.Text = "  "..colInf
                 moreInfo.TextColor3 = themeList.TextColor
-                moreInfo.TextSize = 14.000
+                moreInfo.TextSize = 14
                 moreInfo.RichText = true
                 moreInfo.TextXAlignment = Enum.TextXAlignment.Left
                 moreInfo.Parent = infoContainer
@@ -1979,7 +1979,7 @@ function Kavo.CreateLib(kavName, themeList)
                 UICorner.Parent = moreInfo
 
                 viewInfo.Name = "viewInfo"
-                viewInfo.BackgroundTransparency = 1.000
+                viewInfo.BackgroundTransparency = 1
                 viewInfo.LayoutOrder = 9
                 viewInfo.Position = UDim2.new(0.930000007, 0, 0.151999995, 0)
                 viewInfo.Size = UDim2.new(0, 23, 0, 23)
@@ -2031,7 +2031,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 rgb.Name = "rgb"
                 rgb.BackgroundColor3 = globalColor
-                rgb.BackgroundTransparency = 1.000
+                rgb.BackgroundTransparency = 1
                 rgb.Position = UDim2.new(0.0198863633, 0, 0.0476190485, 0)
                 rgb.Size = UDim2.new(0, 211, 0, 93)
                 rgb.Image = "http://www.roblox.com/asset/?id=6523286724"
@@ -2042,7 +2042,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 rbgcircle.Name = "rbgcircle"
                 rbgcircle.BackgroundColor3 = globalColor
-                rbgcircle.BackgroundTransparency = 1.000
+                rbgcircle.BackgroundTransparency = 1
                 rbgcircle.Size = UDim2.new(0, 14, 0, 14)
                 rbgcircle.Image = "rbxassetid://3926309567"
                 rbgcircle.ImageColor3 = globalColor2
@@ -2052,7 +2052,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 darkness.Name = "darkness"
                 darkness.BackgroundColor3 = globalColor
-                darkness.BackgroundTransparency = 1.000
+                darkness.BackgroundTransparency = 1
                 darkness.Position = UDim2.new(0.636363626, 0, 0.0476190485, 0)
                 darkness.Size = UDim2.new(0, 18, 0, 93)
                 darkness.Image = "http://www.roblox.com/asset/?id=6523291212"
@@ -2064,7 +2064,7 @@ function Kavo.CreateLib(kavName, themeList)
                 darkcircle.Name = "darkcircle"
                 darkcircle.AnchorPoint = Vector2.new(0.5, 0)
                 darkcircle.BackgroundColor3 = globalColor
-                darkcircle.BackgroundTransparency = 1.000
+                darkcircle.BackgroundTransparency = 1
                 darkcircle.Size = UDim2.new(0, 14, 0, 14)
                 darkcircle.Image = "rbxassetid://3926309567"
                 darkcircle.ImageColor3 = globalColor2
@@ -2074,7 +2074,7 @@ function Kavo.CreateLib(kavName, themeList)
 
                 toggleDisabled.Name = "toggleDisabled"
                 toggleDisabled.BackgroundColor3 = globalColor
-                toggleDisabled.BackgroundTransparency = 1.000
+                toggleDisabled.BackgroundTransparency = 1
                 toggleDisabled.Position = UDim2.new(0.704659104, 0, 0.0657142699, 0)
                 toggleDisabled.Size = UDim2.new(0, 21, 0, 21)
                 toggleDisabled.Image = "rbxassetid://3926309567"
@@ -2085,36 +2085,36 @@ function Kavo.CreateLib(kavName, themeList)
 
                 toggleEnabled.Name = "toggleEnabled"
                 toggleEnabled.BackgroundColor3 = globalColor
-                toggleEnabled.BackgroundTransparency = 1.000
+                toggleEnabled.BackgroundTransparency = 1
                 toggleEnabled.Position = UDim2.new(0.704999983, 0, 0.0659999996, 0)
                 toggleEnabled.Size = UDim2.new(0, 21, 0, 21)
                 toggleEnabled.Image = "rbxassetid://3926309567"
                 toggleEnabled.ImageColor3 = themeList.SchemeColor
                 toggleEnabled.ImageRectOffset = Vector2.new(784, 420)
                 toggleEnabled.ImageRectSize = Vector2.new(48, 48)
-                toggleEnabled.ImageTransparency = 1.000
+                toggleEnabled.ImageTransparency = 1
                 toggleEnabled.Parent = colorInners
 
                 onrainbow.Name = "onrainbow"
                 onrainbow.BackgroundColor3 = globalColor
-                onrainbow.BackgroundTransparency = 1.000
+                onrainbow.BackgroundTransparency = 1
                 onrainbow.Position = UDim2.new(2.90643607e-06, 0, 0, 0)
                 onrainbow.Size = UDim2.new(1, 0, 1, 0)
                 onrainbow.Font = Enum.Font.SourceSans
                 onrainbow.Text = ""
                 onrainbow.TextColor3 = globalColor2
-                onrainbow.TextSize = 14.000
+                onrainbow.TextSize = 14
                 onrainbow.Parent = toggleEnabled
 
                 togName_2.Name = "togName"
                 togName_2.BackgroundColor3 = globalColor
-                togName_2.BackgroundTransparency = 1.000
+                togName_2.BackgroundTransparency = 1
                 togName_2.Position = UDim2.new(0.779999971, 0, 0.100000001, 0)
                 togName_2.Size = UDim2.new(0, 278, 0, 14)
                 togName_2.Font = Enum.Font.GothamSemibold
                 togName_2.Text = "Rainbow"
                 togName_2.TextColor3 = themeList.TextColor
-                togName_2.TextSize = 14.000
+                togName_2.TextSize = 14
                 togName_2.TextXAlignment = Enum.TextXAlignment.Left
                 togName_2.Parent = colorInners
 
@@ -2157,12 +2157,11 @@ function Kavo.CreateLib(kavName, themeList)
                 local rainbowConnection
                 local counter = 0
 
-                local function zigzag(X) return math.acos(math.cos(X * math.pi)) / math.pi end
                 local function setcolor(tbl)
                     local cx = rbgcircle.AbsoluteSize.X / 2
                     local cy = rbgcircle.AbsoluteSize.Y / 2
                     color = {tbl[1], tbl[2], tbl[3]}
-                    rbgcircle.Position = UDim2.new(color[1], -cx ,color[2] - 1, -cy)
+                    rbgcircle.Position = UDim2.new(color[1], -cx, color[2] - 1, -cy)
                     darkcircle.Position = UDim2.new(0.5, 0, color[3] - 1, -cy)
                     local realcolor = Color3.fromHSV(color[1], color[2], color[3])
                     colorCurrent.BackgroundColor3 = realcolor
@@ -2187,7 +2186,7 @@ function Kavo.CreateLib(kavName, themeList)
                         tween:Create(toggleEnabled, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {ImageTransparency = 0}):Play()
                         rainbow = true
                         rainbowConnection = game:GetService("RunService").Heartbeat:Connect(function()
-                            setrgbcolor({zigzag(counter), 1, 1})
+                            setrgbcolor({math.acos(math.cos(counter * math.pi)) / math.pi, 1, 1})
                             counter += 0.01
                         end)
                     end
@@ -2251,7 +2250,7 @@ function Kavo.CreateLib(kavName, themeList)
 	            label.RichText = true
 	            label.TextColor3 = themeList.TextColor
 	            Objects[label] = "TextColor3"
-	            label.TextSize = 14.000
+	            label.TextSize = 14
 	            label.TextXAlignment = Enum.TextXAlignment.Left
 	            label.Parent = sectionInners
 

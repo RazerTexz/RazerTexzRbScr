@@ -1,8 +1,7 @@
 --[[
     MODDED BY RAZERTEXZ
     CHANGELOGS:
-    - UPDATE LABEL TEXT
-    - UPDATE / REFRESH DROPDOWN LIST
+    - ADDED A WAY TO UPDATE LABEL TEXT & UPDATE / REFRESH DROPDOWN LIST
     - CODE OPTIMIZATION
 ]]
 -- Instances: 147 | Scripts: 0 | Modules: 1
@@ -88,7 +87,7 @@ DRR["8"]["Parent"] = DRR["7"]
 -- DrRay.TopBar.UIGradient
 DRR["9"] = Instance.new("UIGradient")
 DRR["9"]["Rotation"] = 90
-DRR["9"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(139, 139, 139)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
+DRR["9"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(139, 139, 139)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
 DRR["9"]["Parent"] = DRR["2"]
 
 -- DrRay.TopBar.TopBar
@@ -105,7 +104,7 @@ DRR["a"]["Parent"] = DRR["2"]
 -- DrRay.TopBar.TopBar.UIGradient
 DRR["b"] = Instance.new("UIGradient")
 DRR["b"]["Rotation"] = -90
-DRR["b"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(139, 139, 139)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
+DRR["b"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(139, 139, 139)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
 DRR["b"]["Parent"] = DRR["a"]
 
 -- DrRay.TopBar.ProfileMenu
@@ -137,7 +136,7 @@ DRR["e"]["Parent"] = DRR["d"]
 -- DrRay.TopBar.ProfileMenu.PlayerProfile.UIGradient
 DRR["f"] = Instance.new("UIGradient")
 DRR["f"]["Rotation"] = 90
-DRR["f"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
+DRR["f"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
 DRR["f"]["Parent"] = DRR["d"]
 
 -- DrRay.TopBar.ProfileMenu.PlayerProfile.ImageLabel
@@ -162,7 +161,7 @@ DRR["12"]["Parent"] = DRR["10"]
 -- DrRay.TopBar.ProfileMenu.PlayerProfile.ImageLabel.UIGradient
 DRR["13"] = Instance.new("UIGradient")
 DRR["13"]["Rotation"] = 90
-DRR["13"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(213, 213, 213)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
+DRR["13"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(213, 213, 213)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
 DRR["13"]["Parent"] = DRR["10"]
 
 -- DrRay.TopBar.ProfileMenu.PlayerProfile.TextLabel
@@ -215,7 +214,7 @@ DRR["18"]["Parent"] = DRR["17"]
 -- DrRay.TopBar.ProfileMenu.Clock.UIGradient
 DRR["19"] = Instance.new("UIGradient")
 DRR["19"]["Rotation"] = 90
-DRR["19"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
+DRR["19"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
 DRR["19"]["Parent"] = DRR["17"]
 
 -- DrRay.TopBar.ProfileMenu.Clock.TextLabel
@@ -254,7 +253,7 @@ DRR["1c"]["Parent"] = DRR["1b"]
 -- DrRay.TopBar.ProfileMenu.Title.UIGradient
 DRR["1d"] = Instance.new("UIGradient")
 DRR["1d"]["Rotation"] = 90
-DRR["1d"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
+DRR["1d"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
 DRR["1d"]["Parent"] = DRR["1b"]
 
 -- DrRay.TopBar.ProfileMenu.Title.TextLabel
@@ -296,7 +295,7 @@ DRR["20"]["Parent"] = DRR["1f"]
 -- DrRay.TopBar.TopBarClose.UIGradient
 DRR["21"] = Instance.new("UIGradient")
 DRR["21"]["Rotation"] = 90
-DRR["21"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(218, 218, 218))}
+DRR["21"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(218, 218, 218))}
 DRR["21"]["Parent"] = DRR["1f"]
 
 -- DrRay.TopBar.TopBarClose.idk
@@ -312,7 +311,7 @@ DRR["22"]["Parent"] = DRR["1f"]
 -- DrRay.TopBar.TopBarClose.idk.UIGradient
 DRR["23"] = Instance.new("UIGradient")
 DRR["23"]["Rotation"] = 90
-DRR["23"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(218, 218, 218))}
+DRR["23"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(218, 218, 218))}
 DRR["23"]["Parent"] = DRR["22"]
 
 -- DrRay.TopBar.TopBarClose.UIAspectRatioConstraint
@@ -358,7 +357,7 @@ DRR["29"]["Parent"] = DRR["28"]
 -- DrRay.MainBar.UIGradient
 DRR["2a"] = Instance.new("UIGradient")
 DRR["2a"]["Rotation"] = 90
-DRR["2a"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(90, 90, 90)),ColorSequenceKeypoint.new(0.231, Color3.fromRGB(154, 154, 154)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
+DRR["2a"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(90, 90, 90)), ColorSequenceKeypoint.new(0.231, Color3.fromRGB(154, 154, 154)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
 DRR["2a"]["Parent"] = DRR["28"]
 
 -- DrRay.MainBar.UIAspectRatioConstraint
