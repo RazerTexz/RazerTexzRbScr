@@ -26,9 +26,9 @@ mainSec:NewButton("P-Shade GUI", "", function() load("P-Shade%20GUI.lua") end)
 mainSec:NewButton("Simple Spy Mobile", "", function() load("Simple%20Spy%20Mobile.lua") end)
 mainSec:NewButton("Turtle Spy", "", function() load("Turtle%20Spy.lua") end)
 if not game:GetService("CoreGui"):FindFirstChild("Codex") then
-    local serverPriority = "Players"
-    mainSec:NewDropdown("Server Hop Priority (Default: Lowest Players)", "", {"Lowest Ping", "Lowest Players"}, function(opt) serverPriority = (opt == "Lowest Ping") and "Ping" or "Players" end)
-    mainSec:NewButton("Server Hop", "", function() load("Join%20Lowest%20" .. serverPriority .. "%20Server.lua") end)
+    local serverPriority = "Player"
+    mainSec:NewDropdown("Server Hop Priority (Default: Least Players)", "", {"Least Ping", "Least Players"}, function(opt) serverPriority = if opt == "Least Ping" then "Ping" else "Players" end)
+    mainSec:NewButton("Server Hop", "", function() load("Least%20" .. serverPriority .. "%20Server.lua") end)
 end
 
 local miscTab = window:NewTab("Misc")
