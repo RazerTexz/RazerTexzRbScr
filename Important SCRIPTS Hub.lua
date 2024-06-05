@@ -1,6 +1,9 @@
 -- Library
-local link = "https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/"
-local Library = loadstring(game:HttpGet(link .. "Kavo%20UI%20Draggable%20Android.lua"))()
+local function load(scriptName: string)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/RazerTexz/RazerTexzRbScr/main/" .. scriptName))()
+end
+
+local Library = load("Kavo%20UI%20Draggable%20Android.lua")
 local window = Library.CreateLib("Important SCRIPTS Hub", "Ocean")
 
 local player = game:GetService("Players").LocalPlayer
@@ -10,23 +13,22 @@ local lighting = game:GetService("Lighting")
 local mainTab = window:NewTab("Main")
 local mainSec = mainTab:NewSection("Main Section", false)
 
-mainSec:NewButton("Change Thumbstick Position", "", function() loadstring(game:HttpGet(link .. "Change%20Thumbstick%20Position.lua"))() end)
-mainSec:NewButton("Change Jump Button Position", "", function() loadstring(game:HttpGet(link .. "Change%20Jump%20Button%20Position.lua"))() end)
-mainSec:NewButton("Dark Dex V3", "", function() loadstring(game:HttpGet(link .. "Dark%20Dex%20V3.lua"))() end)
-mainSec:NewButton("Dark Dex V4", "", function() loadstring(game:HttpGet(link .. "Dark%20Dex%20V4.lua"))() end)
-mainSec:NewButton("Fly GUI V3", "", function() loadstring(game:HttpGet(link .. "Fly%20GUI%20V3.lua"))() end)
-mainSec:NewButton("FPS Boost By RazerTexz", "", function() loadstring(game:HttpGet(link .. "FPS%20Boost%20By%20RazerTexz.lua"))() end)
-mainSec:NewButton("Head Hitbox", "", function() loadstring(game:HttpGet(link .. "Head%20Hitbox.lua"))() end)
-mainSec:NewButton("Hitbox GUI", "", function() loadstring(game:HttpGet(link .. "Hitbox%20GUI.lua"))() end)
-mainSec:NewButton("Hitbox", "", function() loadstring(game:HttpGet(link .. "Hitbox.lua"))() end)
-mainSec:NewButton("Keyboard Script", "", function()  loadstring(game:HttpGet(link .. "Keyboard%20Script.lua"))() end)
-mainSec:NewButton("P-Shade GUI", "", function() loadstring(game:HttpGet(link .. "P-Shade%20GUI.lua"))() end)
-mainSec:NewButton("Simple Spy Mobile", "", function() loadstring(game:HttpGet(link .. "Simple%20Spy%20Mobile.lua"))() end)
-mainSec:NewButton("Turtle Spy", "", function() loadstring(game:HttpGet(link .. "Turtle%20Spy.lua"))() end)
+mainSec:NewButton("Change Thumbstick Position", "", function() load("Change%20Thumbstick%20Position.lua") end)
+mainSec:NewButton("Change Jump Button Position", "", function() load("Change%20Jump%20Button%20Position.lua") end)
+mainSec:NewButton("Dark Dex V3", "", function() load("Dark%20Dex%20V3.lua") end)
+mainSec:NewButton("Dark Dex V4", "", function() load("Dark%20Dex%20V4.lua") end)
+mainSec:NewButton("Fly GUI V3", "", function() load("Fly%20GUI%20V3.lua") end)
+mainSec:NewButton("FPS Boost By RazerTexz", "", function() load("FPS%20Boost%20By%20RazerTexz.lua") end)
+mainSec:NewButton("Head Hitbox", "", function() load("Head%20Hitbox.lua") end)
+mainSec:NewButton("Hitbox", "", function() load("Hitbox.lua") end)
+mainSec:NewButton("Keyboard Script", "", function()  load("Keyboard%20Script.lua") end)
+mainSec:NewButton("P-Shade GUI", "", function() load("P-Shade%20GUI.lua") end)
+mainSec:NewButton("Simple Spy Mobile", "", function() load("Simple%20Spy%20Mobile.lua") end)
+mainSec:NewButton("Turtle Spy", "", function() load("Turtle%20Spy.lua") end)
 if not game:GetService("CoreGui"):FindFirstChild("Codex") then
     local serverPriority = "Players"
     mainSec:NewDropdown("Server Hop Priority (Default: Lowest Players)", "", {"Lowest Ping", "Lowest Players"}, function(opt) serverPriority = (opt == "Lowest Ping") and "Ping" or "Players" end)
-    mainSec:NewButton("Server Hop", "", function() loadstring(game:HttpGet(link .. "Join%20Lowest%20" .. serverPriority .. "%20Server.lua"))() end)
+    mainSec:NewButton("Server Hop", "", function() load("Join%20Lowest%20" .. serverPriority .. "%20Server.lua") end)
 end
 
 local miscTab = window:NewTab("Misc")

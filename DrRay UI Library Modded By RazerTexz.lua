@@ -941,7 +941,7 @@ DRR["67"]["Parent"] = DRR["66"]
 -- DrRay.Folder.Slider.ActualSlider.Fill.UIGradient
 DRR["68"] = Instance.new("UIGradient")
 DRR["68"]["Rotation"] = 90
-DRR["68"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(107, 107, 107)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
+DRR["68"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(107, 107, 107)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
 DRR["68"]["Parent"] = DRR["66"]
 
 -- DrRay.Folder.Slider.ActualSlider.Trigger
@@ -967,7 +967,7 @@ DRR["6a"]["Parent"] = DRR["69"]
 -- DrRay.Folder.Slider.ActualSlider.Trigger.UIGradient
 DRR["6b"] = Instance.new("UIGradient")
 DRR["6b"]["Rotation"] = 90
-DRR["6b"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(166, 166, 166)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
+DRR["6b"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(166, 166, 166)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(255, 255, 255))}
 DRR["6b"]["Parent"] = DRR["69"]
 
 -- DrRay.Folder.Slider.ActualSlider.Title
@@ -1633,7 +1633,7 @@ DRR_MODULES[DRR["93"]] = {
                 end)
                 a = UIS.InputBegan:Connect(function(input, processed)
                     if input.UserInputType == Enum.UserInputType.Keyboard or input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 or input.UserInputType == Enum.UserInputType.MouseButton3 then
-                        newKey.Bind.Button.Text = input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode.Name or input.UserInputType.Name
+                        newKey.Bind.Button.Text = if input.UserInputType == Enum.UserInputType.Keyboard then input.KeyCode.Name else input.UserInputType.Name
                         listening = false
                         a:Disconnect()
                         a = nil
@@ -1674,7 +1674,9 @@ DRR_MODULES[DRR["93"]] = {
             end)
             newSlider.Parent = newTab
             table.insert(cons, UIS.InputEnded:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then mouseDown = false end
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    mouseDown = false
+                end
             end))
         end
         function self.newToggle(title: string, desc: string, toggle: boolean, func)
@@ -1691,12 +1693,11 @@ DRR_MODULES[DRR["93"]] = {
                 if realToggle then
                     realToggle = false
                     twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor1}):Play()
-                    func(realToggle)
                 else
                     realToggle = true
                     twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor2}):Play()
-                    func(realToggle)
                 end
+                func(realToggle)
             end)
             newToggle.Parent = newTab
         end
@@ -1708,26 +1709,24 @@ DRR_MODULES[DRR["93"]] = {
             newdd.Title.Text = name
             newdd.Description.Text = desc
             newdd.Parent = newTab
-            if listTable then
-                for _, list in listTable do
-                    local newddbtn = reserved.DropdownButton:Clone()
-                    newddbtn.Visible = true
-                    newddbtn.Name = list
-                    newddbtn.name.Text = list
-                    newddbtn.MouseButton1Click:Connect(function()
-                        newdd.DropdownBar.Open.Text = list
-                        local twPos = twServ:Create(newdd.Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0, 0, 0)})
-                        twPos:Play()
-                        twPos.Completed:Wait()
-                        newdd.Box.Visible = false
-                        if not useCustomFunc then
-                            func(list)
-                        else
-                            func(list, dropDownFunction)
-                        end
-                    end)
-                    newddbtn.Parent = newdd.Box.ScrollingFrame
-                end
+            for _, list in listTable do
+                local newddbtn = reserved.DropdownButton:Clone()
+                newddbtn.Visible = true
+                newddbtn.Name = list
+                newddbtn.name.Text = list
+                newddbtn.MouseButton1Click:Connect(function()
+                    newdd.DropdownBar.Open.Text = list
+                    local twPos = twServ:Create(newdd.Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0, 0, 0)})
+                    twPos:Play()
+                    twPos.Completed:Wait()
+                    newdd.Box.Visible = false
+                    if not useCustomFunc then
+                        func(list)
+                    else
+                        func(list, dropDownFunction)
+                    end
+                end)
+                newddbtn.Parent = newdd.Box.ScrollingFrame
             end
 
             newdd.DropdownBar.Trigger.MouseButton1Click:Connect(function()
@@ -1743,7 +1742,9 @@ DRR_MODULES[DRR["93"]] = {
             end)
             function dropDownFunction.refresh(newList)
                 for _, v in newdd.Box.ScrollingFrame:GetChildren() do
-                    if v.Name ~= "UIListLayout" then v:Destroy() end
+                    if v.Name ~= "UIListLayout" then
+                        v:Destroy()
+                    end
                 end
                 for _, list in newList do
                     local newddbtn = reserved.DropdownButton:Clone()

@@ -153,7 +153,9 @@ function Kavo.CreateLib(kavName, themeList)
     local selectedTab 
     table.insert(Kavo, kavName)
     for _, v in coreGui:GetChildren() do
-        if v.Name == kavName then v:Destroy() end
+        if v.Name == kavName then
+            v:Destroy()
+        end
     end
     local ScreenGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
@@ -1302,38 +1304,24 @@ function Kavo.CreateLib(kavName, themeList)
                         if opened then
                             opened = false
                             dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
-                            task.wait(0.1)
-                            updateSectionFrame()
-                            UpdateSize()
-                            local c = Sample:Clone()
-                            local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                            c.Position = UDim2.new(0, x, 0, y)
-                            c.Parent = btn
-                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
-                            c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
-                            for i = 1, 10 do
-                                c.ImageTransparency += 0.05
-                                task.wait(0.35 / 12)
-                            end
-                            c:Destroy()
                         else
                             opened = true
                             dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
-                            task.wait(0.1)
-                            updateSectionFrame()
-                            UpdateSize()
-                            local c = Sample:Clone()
-                            local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                            c.Position = UDim2.new(0, x, 0, y)
-                            c.Parent = btn
-                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
-                            c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
-                            for i = 1, 10 do
-                                c.ImageTransparency += 0.05
-                                task.wait(0.35 / 12)
-                            end
-                            c:Destroy()
                         end
+                        task.wait(0.1)
+                        updateSectionFrame()
+                        UpdateSize()
+                        local c = Sample:Clone()
+                        local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
+                        c.Position = UDim2.new(0, x, 0, y)
+                        c.Parent = btn
+                        local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
+                        c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
+                        for i = 1, 10 do
+                            c.ImageTransparency += 0.05
+                            task.wait(0.35 / 12)
+                        end
+                        c:Destroy()
                     else
                         for _, v in infoContainer:GetChildren() do
                             tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
@@ -1546,7 +1534,9 @@ function Kavo.CreateLib(kavName, themeList)
                 function DropFunction:Refresh(newList)
                     local newList = newList or {}
                     for _, v in dropFrame:GetChildren() do
-                        if v.Name == "optionSelect" then v:Destroy() end
+                        if v.Name == "optionSelect" then
+                            v:Destroy()
+                        end
                     end
                     for _, v in newList do
                         local optionSelect = Instance.new("TextButton")
@@ -1632,15 +1622,12 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                     if opened then 
                         dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
-                        task.wait(0.1)
-                        updateSectionFrame()
-                        UpdateSize()
                     else
                         dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
-                        task.wait(0.1)
-                        updateSectionFrame()
-                        UpdateSize()
                     end
+                    task.wait(0.1)
+                    updateSectionFrame()
+                    UpdateSize()
                 end
                 return DropFunction
             end
@@ -1671,7 +1658,7 @@ function Kavo.CreateLib(kavName, themeList)
                 keybindElement.MouseButton1Click:Connect(function(e) 
                     if not focusing then
                         togName_2.Text = ". . ."
-                        local a, b = game:GetService('UserInputService').InputBegan:wait();
+                        local a, b = input.InputBegan:wait();
                         if a.KeyCode.Name ~= "Unknown" then
                             togName_2.Text = a.KeyCode.Name
                             oldKey = a.KeyCode.Name;
@@ -1696,8 +1683,8 @@ function Kavo.CreateLib(kavName, themeList)
                 end)
         
                 table.insert(cons, input.InputBegan:Connect(function(current, ok) 
-                    if not ok then 
-                        if current.KeyCode.Name == oldKey then callback() end
+                    if not ok and current.KeyCode.Name == oldKey then
+                        callback()
                     end
                 end))
 
@@ -1751,7 +1738,9 @@ function Kavo.CreateLib(kavName, themeList)
                         viewDe = true
                         focusing = true
                         for _, v in infoContainer:GetChildren() do
-                            if v ~= moreInfo then tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2) end
+                            if v ~= moreInfo then
+                                tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
+                            end
                         end
                         tweenObject(moreInfo, {Position = UDim2.new(0, 0, 0, 0)}, 0.2)
                         tweenObject(blurFrame, {BackgroundTransparency = 0.5}, 0.2)
@@ -1882,38 +1871,24 @@ function Kavo.CreateLib(kavName, themeList)
                         if colorOpened then
                             colorOpened = false
                             colorElement:TweenSize(UDim2.new(0, 352, 0, 33), "InOut", "Linear", 0.08)
-                            task.wait(0.1)
-                            updateSectionFrame()
-                            UpdateSize()
-                            local c = Sample:Clone()
-                            local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                            c.Position = UDim2.new(0, x, 0, y)
-                            c.Parent = btn
-                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
-                            c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
-                            for i = 1, 10 do
-                                c.ImageTransparency += 0.05
-                                task.wait(0.35 / 12)
-                            end
-                            c:Destroy()
                         else
                             colorOpened = true
                             colorElement:TweenSize(UDim2.new(0, 352, 0, 141), "InOut", "Linear", 0.08, true)
-                            task.wait(0.1)
-                            updateSectionFrame()
-                            UpdateSize()
-                            local c = Sample:Clone()
-                            local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
-                            c.Position = UDim2.new(0, x, 0, y)
-                            c.Parent = btn
-                            local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
-                            c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
-                            for i = 1, 10 do
-                                c.ImageTransparency += 0.05
-                                task.wait(0.35 / 12)
-                            end
-                            c:Destroy()
                         end
+                        task.wait(0.1)
+                        updateSectionFrame()
+                        UpdateSize()
+                        local c = Sample:Clone()
+                        local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
+                        c.Position = UDim2.new(0, x, 0, y)
+                        c.Parent = btn
+                        local size = if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then btn.AbsoluteSize.X * 1.5 else btn.AbsoluteSize.Y * 1.5
+                        c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', 0.35, true, nil)
+                        for i = 1, 10 do
+                            c.ImageTransparency += 0.05
+                            task.wait(0.35 / 12)
+                        end
+                        c:Destroy()
                     else
                         for _, v in infoContainer:GetChildren() do
                             tweenObject(v, {Position = UDim2.new(0, 0, 2, 0)}, 0.2)
