@@ -1405,9 +1405,9 @@ DRR["93"]["Parent"] = DRR["1"]
 -- Require DRR wrapper
 local DRR_REQUIRE = require
 local DRR_MODULES = {}
-local function require(Module::ModuleScript)
-    local ModuleState = DRR_MODULES[Module];
-    if ModuleState and not ModuleState.Required then
+local function require(Module:ModuleScript)
+    local ModuleState = DRR_MODULES[Module]
+    if ModuleState and  not ModuleState.Required then
         ModuleState.Required = true
         ModuleState.Value = ModuleState.Closure()
         return ModuleState.Value
