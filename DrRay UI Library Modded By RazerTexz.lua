@@ -1297,7 +1297,7 @@ function UILIB:Load(name: string, img: string)
         	cons[i] = nil
         end
         cons = nil
-        parent:Destroy()
+        screenGui:Destroy()
     end
     function self:HideCloseButton()
         topBarClose1.Visible = false
