@@ -130,14 +130,13 @@ uiPadding2.PaddingLeft = UDim.new(0.014000000432133675, 0)
 uiPadding2.Parent = topMenu
 
 -- DrRay.TopBar.TopMenu.Title
-local title1 = Instance.new("TextButton")
+local title1 = Instance.new("ImageButton")
 title1.BorderSizePixel = 0
 title1.AutoButtonColor = false
 title1.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
 title1.Size = UDim2.new(0.23481373488903046, 0, 0.682426393032074, 0)
 title1.Name = "Title"
 title1.BorderColor3 = Color3.new(0, 0, 0)
-title1.Text = ""
 title1.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
 title1.Parent = topMenu
 
@@ -1323,7 +1322,7 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
 			tw.Completed:Wait()
 			twServ:Create(topBar1, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, -0.173, 0)}):Play()
 			task.wait(0.1)
-			twServ:Create(topBar1.TopBarClose.ImageLabel, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
+			twServ:Create(imageLabel1, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
 			twServ:Create(topBarClose1, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.95, 0)}):Play()
         else
             closed = false
@@ -1332,8 +1331,8 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
             tw.Completed:Wait()
             twServ:Create(topBar1, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.012, 0)}):Play()
             task.wait(0.1)
-            twServ:Create(topBar1.TopBarClose.ImageLabel, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0}):Play()
-            twServ:Create(topBar1.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)}):Play()
+            twServ:Create(imageLabel1, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0}):Play()
+            twServ:Create(topBarClose1, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)}):Play()
         end
     end)
     title1.MouseButton1Down:Once(function()
@@ -1351,8 +1350,8 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
         tw.Completed:Wait()
         twServ:Create(topBar1, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.012, 0)}):Play()
         task.wait(0.1)
-        twServ:Create(topBar1.TopBarClose.ImageLabel, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0}):Play()
-        twServ:Create(topBar1.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)}):Play()
+        twServ:Create(imageLabel1, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0}):Play()
+        twServ:Create(topBarClose1, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)}):Play()
     end
     function self:Close()
         local tw = twServ:Create(mainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, -0.612, 0)})
@@ -1360,8 +1359,8 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
         tw.Completed:Wait()
         twServ:Create(topBar1, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, -0.173, 0)}):Play()
         task.wait(0.1)
-        twServ:Create(topBar1.TopBarClose.ImageLabel, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
-        twServ:Create(topBar1.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.95, 0)}):Play()
+        twServ:Create(imageLabel1, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
+        twServ:Create(topBarClose1, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.95, 0)}):Play()
     end
     function self:HideCloseButton()
         topBarClose1.Visible = false
