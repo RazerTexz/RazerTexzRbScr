@@ -164,7 +164,7 @@ textLabel1.Size = UDim2.new(0.7192937135696411, 0, 0.41530051827430725, 0)
 textLabel1.BorderColor3 = Color3.new(0, 0, 0)
 textLabel1.Text = "TextLabel"
 textLabel1.BackgroundTransparency = 1
-textLabel1.Position = UDim2.new(0.015024710446596146, 0, 0.27320244908332825, 0)
+textLabel1.Position = UDim2.new(0.13402166962623596, 0, 0.27320244908332825, 0)
 textLabel1.Parent = title1
 
 -- DrRay.TopBar.TopMenu.DestroyButton
@@ -184,7 +184,7 @@ destroyButton.Size = UDim2.new(0.7192937135696411, 0, 0.41530051827430725, 0)
 destroyButton.Name = "Destroy Button"
 destroyButton.BorderColor3 = Color3.new(0, 0, 0)
 destroyButton.Text = "Destroy GUI"
-destroyButton.Position = UDim2.new(0.13402166962623596, 0, 0.27320244908332825, 0)
+destroyButton.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
 destroyButton.Parent = topMenu
 
 -- DrRay.TopBar.TopMenu.DestroyButton.UICorner
