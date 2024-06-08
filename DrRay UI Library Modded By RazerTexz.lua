@@ -171,7 +171,7 @@ textLabel1.Parent = title1
 local destroyButton = Instance.new("TextButton")
 destroyButton.TextWrapped = true
 destroyButton.Active = false
---destroyButton.TextScaled = true
+destroyButton.TextScaled = true
 destroyButton.BorderSizePixel = 0
 destroyButton.AutoButtonColor = false
 destroyButton.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
@@ -180,11 +180,13 @@ destroyButton.TextSize = 14
 destroyButton.TextColor3 = Color3.new(1, 1, 1)
 destroyButton.AutomaticSize = Enum.AutomaticSize.X
 destroyButton.Selectable = false
-destroyButton.Size = UDim2.new(0.7192937135696411, 0, 0.41530051827430725, 0)
+destroyButton.Size = UDim2.new(0.10328257083892822, 0, 0.682426393032074, 0)
+--destroyButton.Size = UDim2.new(0.7192937135696411, 0, 0.41530051827430725, 0)
 destroyButton.Name = "Destroy Button"
 destroyButton.BorderColor3 = Color3.new(0, 0, 0)
 destroyButton.Text = "Destroy GUI"
-destroyButton.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
+destroyButton.Position = UDim2.new(0.26031631231307983, 0, 0.158786803483963, 0)
+--destroyButton.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
 destroyButton.Parent = topMenu
 
 -- DrRay.TopBar.TopMenu.DestroyButton.UICorner
