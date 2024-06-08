@@ -116,38 +116,6 @@ topMenu.BorderColor3 = Color3.new(0, 0, 0)
 topMenu.Name = "TopMenu"
 topMenu.Parent = topBar1
 
--- DrRay.TopBar.TopMenu.DestroyButton
-local destroyButton = Instance.new("TextButton")
-destroyButton.TextWrapped = true
-destroyButton.Active = false
-destroyButton.TextScaled = true
-destroyButton.BorderSizePixel = 0
-destroyButton.AutoButtonColor = false
-destroyButton.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
-destroyButton.FontFace = Font.new("rbxassetid://11702779517", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-destroyButton.TextSize = 14
-destroyButton.TextColor3 = Color3.new(1, 1, 1)
-destroyButton.AutomaticSize = Enum.AutomaticSize.X
-destroyButton.Selectable = false
-destroyButton.Size = UDim2.new(0.23481373488903046, 0, 0.682426393032074, 0)
-destroyButton.Name = "Destroy Button"
-destroyButton.BorderColor3 = Color3.new(0, 0, 0)
-destroyButton.BackgroundTransparency = 1
-destroyButton.Text = "Destroy GUI"
-destroyButton.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
-destroyButton.Parent = topMenu
-
--- DrRay.TopBar.TopMenu.DestroyButton.UICorner
-local uiCorner2 = Instance.new("UICorner")
-uiCorner2.CornerRadius = UDim.new(0.30000001192092896, 0)
-uiCorner2.Parent = destroyButton
-
--- DrRay.TopBar.TopMenu.DestroyButton.UIGradient
-local uiGradient3 = Instance.new("UIGradient")
-uiGradient3.Rotation = 90
-uiGradient3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
-uiGradient3.Parent = destroyButton
-
 -- DrRay.TopBar.TopMenu.UIListLayout
 local uiListLayout2 = Instance.new("UIListLayout")
 uiListLayout2.VerticalAlignment = Enum.VerticalAlignment.Center
@@ -172,15 +140,15 @@ title1.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
 title1.Parent = topMenu
 
 -- DrRay.TopBar.TopMenu.Title.UICorner
-local uiCorner3 = Instance.new("UICorner")
-uiCorner3.CornerRadius = UDim.new(0.30000001192092896, 0)
-uiCorner3.Parent = title1
+local uiCorner2 = Instance.new("UICorner")
+uiCorner2.CornerRadius = UDim.new(0.30000001192092896, 0)
+uiCorner2.Parent = title1
 
 -- DrRay.TopBar.TopMenu.Title.UIGradient
-local uiGradient4 = Instance.new("UIGradient")
-uiGradient4.Rotation = 90
-uiGradient4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
-uiGradient4.Parent = title1
+local uiGradient3 = Instance.new("UIGradient")
+uiGradient3.Rotation = 90
+uiGradient3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
+uiGradient3.Parent = title1
 
 -- DrRay.TopBar.TopMenu.Title.TextLabel
 local textLabel1 = Instance.new("TextLabel")
@@ -196,8 +164,39 @@ textLabel1.Size = UDim2.new(0.7192937135696411, 0, 0.41530051827430725, 0)
 textLabel1.BorderColor3 = Color3.new(0, 0, 0)
 textLabel1.Text = "TextLabel"
 textLabel1.BackgroundTransparency = 1
-textLabel1.Position = UDim2.new(0.13402166962623596, 0, 0.27320244908332825, 0)
+textLabel1.Position = UDim2.new(0.015024710446596146, 0, 0.27320244908332825, 0)
 textLabel1.Parent = title1
+
+-- DrRay.TopBar.TopMenu.DestroyButton
+local destroyButton = Instance.new("TextButton")
+destroyButton.TextWrapped = true
+destroyButton.Active = false
+destroyButton.TextScaled = true
+destroyButton.BorderSizePixel = 0
+destroyButton.AutoButtonColor = false
+destroyButton.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
+destroyButton.FontFace = Font.new("rbxassetid://11702779517", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+destroyButton.TextSize = 14
+destroyButton.TextColor3 = Color3.new(1, 1, 1)
+destroyButton.AutomaticSize = Enum.AutomaticSize.X
+destroyButton.Selectable = false
+destroyButton.Size = UDim2.new(0.7192937135696411, 0, 0.41530051827430725, 0)
+destroyButton.Name = "Destroy Button"
+destroyButton.BorderColor3 = Color3.new(0, 0, 0)
+destroyButton.Text = "Destroy GUI"
+destroyButton.Position = UDim2.new(0.13402166962623596, 0, 0.27320244908332825, 0)
+destroyButton.Parent = topMenu
+
+-- DrRay.TopBar.TopMenu.DestroyButton.UICorner
+local uiCorner3 = Instance.new("UICorner")
+uiCorner3.CornerRadius = UDim.new(0.30000001192092896, 0)
+uiCorner3.Parent = destroyButton
+
+-- DrRay.TopBar.TopMenu.DestroyButton.UIGradient
+local uiGradient4 = Instance.new("UIGradient")
+uiGradient4.Rotation = 90
+uiGradient4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
+uiGradient4.Parent = destroyButton
 
 -- DrRay.TopBar.TopBarClose
 local topBarClose1 = Instance.new("TextButton")
