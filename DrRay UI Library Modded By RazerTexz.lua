@@ -86,7 +86,7 @@ dropShadow1.Parent = dropShadowHolder1
 -- DrRay.TopBar.UIGradient
 local uiGradient1 = Instance.new("UIGradient")
 uiGradient1.Rotation = 90
-uiGradient1.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(139, 139, 139)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
+uiGradient1.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(139, 139, 139)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
 uiGradient1.Parent = topBar1
 
 -- DrRay.TopBar.TopBar
@@ -103,7 +103,7 @@ topBar2.Parent = topBar1
 -- DrRay.TopBar.TopBar.UIGradient
 local uiGradient2 = Instance.new("UIGradient")
 uiGradient2.Rotation = -90
-uiGradient2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(139, 139, 139)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
+uiGradient2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(139, 139, 139)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
 uiGradient2.Parent = topBar2
 
 -- DrRay.TopBar.TopMenu
@@ -130,12 +130,14 @@ uiPadding2.PaddingLeft = UDim.new(0.014000000432133675, 0)
 uiPadding2.Parent = topMenu
 
 -- DrRay.TopBar.TopMenu.Title
-local title1 = Instance.new("Frame")
+local title1 = Instance.new("TextButton")
 title1.BorderSizePixel = 0
+title1.AutoButtonColor = false
 title1.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
 title1.Size = UDim2.new(0.23481373488903046, 0, 0.682426393032074, 0)
 title1.Name = "Title"
 title1.BorderColor3 = Color3.new(0, 0, 0)
+title1.Text = ""
 title1.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
 title1.Parent = topMenu
 
@@ -147,7 +149,7 @@ uiCorner2.Parent = title1
 -- DrRay.TopBar.TopMenu.Title.UIGradient
 local uiGradient3 = Instance.new("UIGradient")
 uiGradient3.Rotation = 90
-uiGradient3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
+uiGradient3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1, Color3.fromRGB(231, 231, 231))}
 uiGradient3.Parent = title1
 
 -- DrRay.TopBar.TopMenu.Title.TextLabel
@@ -162,42 +164,9 @@ textLabel1.TextColor3 = Color3.new(1, 1, 1)
 textLabel1.AutomaticSize = Enum.AutomaticSize.X
 textLabel1.Size = UDim2.new(0.7192937135696411, 0, 0.41530051827430725, 0)
 textLabel1.BorderColor3 = Color3.new(0, 0, 0)
-textLabel1.Text = "TextLabel"
 textLabel1.BackgroundTransparency = 1
 textLabel1.Position = UDim2.new(0.13402166962623596, 0, 0.27320244908332825, 0)
 textLabel1.Parent = title1
-
--- DrRay.TopBar.TopMenu.DestroyButton
-local exitButton = Instance.new("TextButton")
-exitButton.TextWrapped = true
-exitButton.Active = false
-exitButton.TextScaled = false
-exitButton.BorderSizePixel = 0
-exitButton.AutoButtonColor = false
-exitButton.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
-exitButton.FontFace = Font.new("rbxassetid://11702779517", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-exitButton.TextSize = 14
-exitButton.TextColor3 = Color3.new(1, 1, 1)
-exitButton.AutomaticSize = Enum.AutomaticSize.X
-exitButton.Selectable = false
-exitButton.Size = UDim2.new(0.23481373488903046, 0, 0.682426393032074, 0)
---exitButton.Size = UDim2.new(0.10328257083892822, 0, 0.682426393032074, 0)
-exitButton.Name = "Exit Button"
-exitButton.BorderColor3 = Color3.new(0, 0, 0)
-exitButton.Text = "EXIT"
-exitButton.Position = UDim2.new(0.26031631231307983, 0, 0.158786803483963, 0)
-exitButton.Parent = topMenu
-
--- DrRay.TopBar.TopMenu.DestroyButton.UICorner
-local uiCorner3 = Instance.new("UICorner")
-uiCorner3.CornerRadius = UDim.new(0.30000001192092896, 0)
-uiCorner3.Parent = exitButton
-
--- DrRay.TopBar.TopMenu.DestroyButton.UIGradient
-local uiGradient4 = Instance.new("UIGradient")
-uiGradient4.Rotation = 90
-uiGradient4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
-uiGradient4.Parent = exitButton
 
 -- DrRay.TopBar.TopBarClose
 local topBarClose1 = Instance.new("TextButton")
@@ -214,15 +183,15 @@ topBarClose1.Position = UDim2.new(0.915977954864502, 0, 0.5196850299835205, 0)
 topBarClose1.Parent = topBar1
 
 -- DrRay.TopBar.TopBarClose.UICorner
-local uiCorner4 = Instance.new("UICorner")
-uiCorner4.CornerRadius = UDim.new(0.20000000298023224, 0)
-uiCorner4.Parent = topBarClose1
+local uiCorner3 = Instance.new("UICorner")
+uiCorner3.CornerRadius = UDim.new(0.20000000298023224, 0)
+uiCorner3.Parent = topBarClose1
 
 -- DrRay.TopBar.TopBarClose.UIGradient
-local uiGradient5 = Instance.new("UIGradient")
-uiGradient5.Rotation = 90
-uiGradient5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(218, 218, 218))}
-uiGradient5.Parent = topBarClose1
+local uiGradient4 = Instance.new("UIGradient")
+uiGradient4.Rotation = 90
+uiGradient4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1, Color3.fromRGB(218, 218, 218))}
+uiGradient4.Parent = topBarClose1
 
 -- DrRay.TopBar.TopBarClose.Frame
 local frame1 = Instance.new("Frame")
@@ -230,15 +199,15 @@ frame1.BorderSizePixel = 0
 frame1.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
 frame1.Size = UDim2.new(0.2622910141944885, 0, 1, 0)
 frame1.BorderColor3 = Color3.new(0, 0, 0)
-frame1.Position = UDim2.new(0.000002001152552111307, 0, 0, 0)
+frame1.Position = UDim2.new(0002001152552111307, 0, 0, 0)
 frame1.Name = "Frame"
 frame1.Parent = topBarClose1
 
 -- DrRay.TopBar.TopBarClose.Frame.UIGradient
-local uiGradient6 = Instance.new("UIGradient")
-uiGradient6.Rotation = 90
-uiGradient6.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(218, 218, 218))}
-uiGradient6.Parent = frame1
+local uiGradient5 = Instance.new("UIGradient")
+uiGradient5.Rotation = 90
+uiGradient5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1, Color3.fromRGB(218, 218, 218))}
+uiGradient5.Parent = frame1
 
 -- DrRay.TopBar.TopBarClose.UIAspectRatioConstraint
 local uiAspectRatioConstraint1 = Instance.new("UIAspectRatioConstraint", topBarClose1)
@@ -276,15 +245,15 @@ mainBar.Name = "MainBar"
 mainBar.Parent = screenGui
 
 -- DrRay.MainBar.UICorner
-local uiCorner5 = Instance.new("UICorner")
-uiCorner5.CornerRadius = UDim.new(0.029999999329447746, 0)
-uiCorner5.Parent = mainBar
+local uiCorner4 = Instance.new("UICorner")
+uiCorner4.CornerRadius = UDim.new(0.029999999329447746, 0)
+uiCorner4.Parent = mainBar
 
 -- DrRay.MainBar.UIGradient
-local uiGradient7 = Instance.new("UIGradient")
-uiGradient7.Rotation = 90
-uiGradient7.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(90, 90, 90)), ColorSequenceKeypoint.new(0.231, Color3.fromRGB(154, 154, 154)),ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient7.Parent = mainBar
+local uiGradient6 = Instance.new("UIGradient")
+uiGradient6.Rotation = 90
+uiGradient6.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(90, 90, 90)), ColorSequenceKeypoint.new(0.231, Color3.fromRGB(154, 154, 154)),ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient6.Parent = mainBar
 
 -- DrRay.MainBar.UIAspectRatioConstraint
 local uiAspectRatioConstraint4 = Instance.new("UIAspectRatioConstraint")
@@ -330,10 +299,10 @@ logo.Position = UDim2.new(0.3991934061050415, 0, 0.33447495102882385, 0)
 logo.Parent = mainBar
 
 -- DrRay.MainBar.Logo.UIGradient
-local uiGradient8 = Instance.new("UIGradient")
-uiGradient8.Rotation = 90
-uiGradient8.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.new(1, 1, 1)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(5, 6, 23))}
-uiGradient8.Parent = logo
+local uiGradient7 = Instance.new("UIGradient")
+uiGradient7.Rotation = 90
+uiGradient7.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)), ColorSequenceKeypoint.new(1, Color3.fromRGB(5, 6, 23))}
+uiGradient7.Parent = logo
 
 -- DrRay.Folder
 local folder = Instance.new("Folder", screenGui)
@@ -376,9 +345,9 @@ tabButtonReserved.Position = UDim2.new(0.015000020153820515, 0, 0.18421050906181
 tabButtonReserved.Parent = folder
 
 -- DrRay.Folder.TabButtonReserved.UICorner
-local uiCorner6 = Instance.new("UICorner")
-uiCorner6.CornerRadius = UDim.new(0.30000001192092896, 0)
-uiCorner6.Parent = tabButtonReserved
+local uiCorner5 = Instance.new("UICorner")
+uiCorner5.CornerRadius = UDim.new(0.30000001192092896, 0)
+uiCorner5.Parent = tabButtonReserved
 
 -- DrRay.Folder.TabButtonReserved.Frame
 local frame2 = Instance.new("Frame")
@@ -386,7 +355,7 @@ frame2.BorderSizePixel = 0
 frame2.BackgroundColor3 = Color3.new(1, 1, 1)
 frame2.BackgroundTransparency = 1
 frame2.LayoutOrder = 1
-frame2.Size = UDim2.new(0.6113507151603699, 0, 1.0000001192092896, 0)
+frame2.Size = UDim2.new(0.6113507151603699, 0, 10001192092896, 0)
 frame2.BorderColor3 = Color3.new(0, 0, 0)
 frame2.Position = UDim2.new(0.26662877202033997, 0, -4.950767973355141e-08, 0)
 frame2.AutomaticSize = Enum.AutomaticSize.X
@@ -418,10 +387,10 @@ uiListLayout4.SortOrder = Enum.SortOrder.LayoutOrder
 uiListLayout4.Parent = frame2
 
 -- DrRay.Folder.TabButtonReserved.UIGradient
-local uiGradient9 = Instance.new("UIGradient")
-uiGradient9.Rotation = 90
-uiGradient9.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
-uiGradient9.Parent = tabButtonReserved
+local uiGradient8 = Instance.new("UIGradient")
+uiGradient8.Rotation = 90
+uiGradient8.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1, Color3.fromRGB(231, 231, 231))}
+uiGradient8.Parent = tabButtonReserved
 
 -- DrRay.Folder.TabButtonReserved.ImageLabel
 local imageLabel2 = Instance.new("ImageLabel")
@@ -464,15 +433,15 @@ dropDown.Name = "Dropdown"
 dropDown.Parent = folder
 
 -- DrRay.Folder.Dropdown.UICorner
-local uiCorner7 = Instance.new("UICorner")
-uiCorner7.CornerRadius = UDim.new(0.03999999910593033, 0)
-uiCorner7.Parent = dropDown
+local uiCorner6 = Instance.new("UICorner")
+uiCorner6.CornerRadius = UDim.new(0.03999999910593033, 0)
+uiCorner6.Parent = dropDown
 
 -- DrRay.Folder.Dropdown.UIGradient
-local uiGradient10 = Instance.new("UIGradient")
-uiGradient10.Rotation = 90
-uiGradient10.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(89, 89, 89)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(139, 139, 139))}
-uiGradient10.Parent = dropDown
+local uiGradient9 = Instance.new("UIGradient")
+uiGradient9.Rotation = 90
+uiGradient9.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(89, 89, 89)), ColorSequenceKeypoint.new(1, Color3.fromRGB(139, 139, 139))}
+uiGradient9.Parent = dropDown
 
 -- DrRay.Folder.Dropdown.Title
 local title2 = Instance.new("TextLabel")
@@ -522,15 +491,15 @@ dropDownBar.Name = "DropdownBar"
 dropDownBar.Parent = dropDown
 
 -- DrRay.Folder.Dropdown.DropdownBar.UICorner
-local uiCorner8 = Instance.new("UICorner")
-uiCorner8.CornerRadius = UDim.new(0.20000000298023224, 0)
-uiCorner8.Parent = dropDownBar
+local uiCorner7 = Instance.new("UICorner")
+uiCorner7.CornerRadius = UDim.new(0.20000000298023224, 0)
+uiCorner7.Parent = dropDownBar
 
 -- DrRay.Folder.Dropdown.DropdownBar.UIGradient
-local uiGradient11 = Instance.new("UIGradient")
-uiGradient11.Rotation = 90
-uiGradient11.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient11.Parent = dropDownBar
+local uiGradient10 = Instance.new("UIGradient")
+uiGradient10.Rotation = 90
+uiGradient10.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient10.Parent = dropDownBar
 
 -- DrRay.Folder.Dropdown.DropdownBar.UIStroke
 local uiStroke1 = Instance.new("UIStroke")
@@ -597,10 +566,10 @@ box.Name = "Box"
 box.Parent = dropDown
 
 -- DrRay.Folder.Dropdown.Box.UIGradient
-local uiGradient12 = Instance.new("UIGradient")
-uiGradient12.Rotation = 90
-uiGradient12.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient12.Parent = box
+local uiGradient11 = Instance.new("UIGradient")
+uiGradient11.Rotation = 90
+uiGradient11.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient11.Parent = box
 
 -- DrRay.Folder.Dropdown.Box.UIStroke
 local uiStroke2 = Instance.new("UIStroke")
@@ -608,9 +577,9 @@ uiStroke2.Color = Color3.fromRGB(40, 45, 62)
 uiStroke2.Parent = box
 
 -- DrRay.Folder.Dropdown.Box.UICorner
-local uiCorner9 = Instance.new("UICorner")
-uiCorner9.CornerRadius = UDim.new(0.05999999865889549, 0)
-uiCorner9.Parent = box
+local uiCorner8 = Instance.new("UICorner")
+uiCorner8.CornerRadius = UDim.new(0.05999999865889549, 0)
+uiCorner8.Parent = box
 
 -- DrRay.Folder.Dropdown.Box.ScrollingFrame
 local scrollingFrame2 = Instance.new("ScrollingFrame")
@@ -648,15 +617,15 @@ keybind.Name = "Keybind"
 keybind.Parent = folder
 
 -- DrRay.Folder.Keybind.UICorner
-local uiCorner10 = Instance.new("UICorner")
-uiCorner10.CornerRadius = UDim.new(0.03999999910593033, 0)
-uiCorner10.Parent = keybind
+local uiCorner9 = Instance.new("UICorner")
+uiCorner9.CornerRadius = UDim.new(0.03999999910593033, 0)
+uiCorner9.Parent = keybind
 
 -- DrRay.Folder.Keybind.UIGradient
-local uiGradient13 = Instance.new("UIGradient")
-uiGradient13.Rotation = 90
-uiGradient13.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(113, 113, 113)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(194, 194, 194))}
-uiGradient13.Parent = keybind
+local uiGradient12 = Instance.new("UIGradient")
+uiGradient12.Rotation = 90
+uiGradient12.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(113, 113, 113)), ColorSequenceKeypoint.new(1, Color3.fromRGB(194, 194, 194))}
+uiGradient12.Parent = keybind
 
 -- DrRay.Folder.Keybind.Title
 local title3 = Instance.new("TextLabel")
@@ -706,15 +675,15 @@ bind.Name = "Bind"
 bind.Parent = keybind
 
 -- DrRay.Folder.Keybind.Bind.UICorner
-local uiCorner11 = Instance.new("UICorner")
-uiCorner11.CornerRadius = UDim.new(0.20000000298023224, 0)
-uiCorner11.Parent = bind
+local uiCorner10 = Instance.new("UICorner")
+uiCorner10.CornerRadius = UDim.new(0.20000000298023224, 0)
+uiCorner10.Parent = bind
 
 -- DrRay.Folder.Keybind.Bind.UIGradient
-local uiGradient14 = Instance.new("UIGradient")
-uiGradient14.Rotation = 90
-uiGradient14.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)),ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient14.Parent = bind
+local uiGradient13 = Instance.new("UIGradient")
+uiGradient13.Rotation = 90
+uiGradient13.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(117, 117, 117)),ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient13.Parent = bind
 
 -- DrRay.Folder.Keybind.Bind.UIStroke
 local uiStroke3 = Instance.new("UIStroke")
@@ -753,15 +722,15 @@ label1.Name = "Label"
 label1.Parent = folder
 
 -- DrRay.Folder.Label.UICorner
-local uiCorner12 = Instance.new("UICorner")
-uiCorner12.CornerRadius = UDim.new(0.33000001311302185, 0)
-uiCorner12.Parent = label1
+local uiCorner11 = Instance.new("UICorner")
+uiCorner11.CornerRadius = UDim.new(0.33000001311302185, 0)
+uiCorner11.Parent = label1
 
 -- DrRay.Folder.Label.UIGradient
-local uiGradient15 = Instance.new("UIGradient")
-uiGradient15.Rotation = 90
-uiGradient15.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(166, 166, 166)),ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient15.Parent = label1
+local uiGradient14 = Instance.new("UIGradient")
+uiGradient14.Rotation = 90
+uiGradient14.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(166, 166, 166)),ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient14.Parent = label1
 
 -- DrRay.Folder.Label.Title
 local title4 = Instance.new("TextLabel")
@@ -794,15 +763,15 @@ slider.Name = "Slider"
 slider.Parent = folder
 
 -- DrRay.Folder.Slider.UICorner
-local uiCorner13 = Instance.new("UICorner")
-uiCorner13.CornerRadius = UDim.new(0.03999999910593033, 0)
-uiCorner13.Parent = slider
+local uiCorner12 = Instance.new("UICorner")
+uiCorner12.CornerRadius = UDim.new(0.03999999910593033, 0)
+uiCorner12.Parent = slider
 
 -- DrRay.Folder.Slider.UIGradient
-local uiGradient16 = Instance.new("UIGradient")
-uiGradient16.Rotation = 90
-uiGradient16.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(108, 108, 108)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(232, 232, 232))}
-uiGradient16.Parent = slider
+local uiGradient15 = Instance.new("UIGradient")
+uiGradient15.Rotation = 90
+uiGradient15.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(108, 108, 108)), ColorSequenceKeypoint.new(1, Color3.fromRGB(232, 232, 232))}
+uiGradient15.Parent = slider
 
 -- DrRay.Folder.Slider.Title
 local title5 = Instance.new("TextLabel")
@@ -834,15 +803,15 @@ actualSlider.Name = "ActualSlider"
 actualSlider.Parent = slider
 
 -- DrRay.Folder.Slider.ActualSlider.UICorner
-local uiCorner14 = Instance.new("UICorner")
-uiCorner14.CornerRadius = UDim.new(0.20000000298023224, 0)
-uiCorner14.Parent = actualSlider
+local uiCorner13 = Instance.new("UICorner")
+uiCorner13.CornerRadius = UDim.new(0.20000000298023224, 0)
+uiCorner13.Parent = actualSlider
 
 -- DrRay.Folder.Slider.ActualSlider.UIGradient
-local uiGradient17 = Instance.new("UIGradient")
-uiGradient17.Rotation = 90
-uiGradient17.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(64, 64, 64)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(148, 148, 148))}
-uiGradient17.Parent = actualSlider
+local uiGradient16 = Instance.new("UIGradient")
+uiGradient16.Rotation = 90
+uiGradient16.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(64, 64, 64)), ColorSequenceKeypoint.new(1, Color3.fromRGB(148, 148, 148))}
+uiGradient16.Parent = actualSlider
 
 -- DrRay.Folder.Slider.ActualSlider.UIStroke
 local uiStroke4 = Instance.new("UIStroke")
@@ -860,15 +829,15 @@ fill.Name = "Fill"
 fill.Parent = actualSlider
 
 -- DrRay.Folder.Slider.ActualSlider.Fill.UICorner
-local uiCorner15 = Instance.new("UICorner")
-uiCorner15.CornerRadius = UDim.new(0.20000000298023224, 0)
-uiCorner15.Parent = fill
+local uiCorner14 = Instance.new("UICorner")
+uiCorner14.CornerRadius = UDim.new(0.20000000298023224, 0)
+uiCorner14.Parent = fill
 
 -- DrRay.Folder.Slider.ActualSlider.Fill.UIGradient
-local uiGradient18 = Instance.new("UIGradient")
-uiGradient18.Rotation = 90
-uiGradient18.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(107, 107, 107)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient18.Parent = fill
+local uiGradient17 = Instance.new("UIGradient")
+uiGradient17.Rotation = 90
+uiGradient17.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(107, 107, 107)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient17.Parent = fill
 
 -- DrRay.Folder.Slider.ActualSlider.Trigger
 local trigger2 = Instance.new("TextButton")
@@ -886,15 +855,15 @@ trigger2.BackgroundTransparency = 1
 trigger2.Parent = actualSlider
 
 -- DrRay.Folder.Slider.ActualSlider.Trigger.UICorner
-local uiCorner16 = Instance.new("UICorner")
-uiCorner16.CornerRadius = UDim.new(0.20000000298023224, 0)
-uiCorner16.Parent = trigger2
+local uiCorner15 = Instance.new("UICorner")
+uiCorner15.CornerRadius = UDim.new(0.20000000298023224, 0)
+uiCorner15.Parent = trigger2
 
 -- DrRay.Folder.Slider.ActualSlider.Trigger.UIGradient
-local uiGradient19 = Instance.new("UIGradient")
-uiGradient19.Rotation = 90
-uiGradient19.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(166, 166, 166)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient19.Parent = trigger2
+local uiGradient18 = Instance.new("UIGradient")
+uiGradient18.Rotation = 90
+uiGradient18.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(166, 166, 166)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient18.Parent = trigger2
 
 -- DrRay.Folder.Slider.ActualSlider.Title
 local title6 = Instance.new("TextLabel")
@@ -945,15 +914,15 @@ textBox.Name = "Textbox"
 textBox.Parent = folder
 
 -- DrRay.Folder.Textbox.UICorner
-local uiCorner17 = Instance.new("UICorner")
-uiCorner17.CornerRadius = UDim.new(0.03999999910593033, 0)
-uiCorner17.Parent = textBox
+local uiCorner16 = Instance.new("UICorner")
+uiCorner16.CornerRadius = UDim.new(0.03999999910593033, 0)
+uiCorner16.Parent = textBox
 
 -- DrRay.Folder.Textbox.UIGradient
-local uiGradient20 = Instance.new("UIGradient")
-uiGradient20.Rotation = 90
-uiGradient20.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(89, 89, 89)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(139, 139, 139))}
-uiGradient20.Parent = textBox
+local uiGradient19 = Instance.new("UIGradient")
+uiGradient19.Rotation = 90
+uiGradient19.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(89, 89, 89)), ColorSequenceKeypoint.new(1, Color3.fromRGB(139, 139, 139))}
+uiGradient19.Parent = textBox
 
 -- DrRay.Folder.Textbox.Title
 local title7 = Instance.new("TextLabel")
@@ -1002,15 +971,15 @@ textBoxBar.Name = "TextboxBar"
 textBoxBar.Parent = textBox
 
 -- DrRay.Folder.Textbox.TextboxBar.UICorner
-local uiCorner18 = Instance.new("UICorner")
-uiCorner18.CornerRadius = UDim.new(0.20000000298023224, 0)
-uiCorner18.Parent = textBoxBar
+local uiCorner17 = Instance.new("UICorner")
+uiCorner17.CornerRadius = UDim.new(0.20000000298023224, 0)
+uiCorner17.Parent = textBoxBar
 
 -- DrRay.Folder.Textbox.TextboxBar.UIGradient
-local uiGradient21 = Instance.new("UIGradient")
-uiGradient21.Rotation = 90
-uiGradient21.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient21.Parent = textBoxBar
+local uiGradient20 = Instance.new("UIGradient")
+uiGradient20.Rotation = 90
+uiGradient20.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient20.Parent = textBoxBar
 
 -- DrRay.Folder.Textbox.TextboxBar.UIStroke
 local uiStroke5 = Instance.new("UIStroke")
@@ -1051,15 +1020,15 @@ toggle.Name = "Toggle"
 toggle.Parent = folder
 
 -- DrRay.Folder.Toggle.UICorner
-local uiCorner19 = Instance.new("UICorner")
-uiCorner19.CornerRadius = UDim.new(0.03999999910593033, 0)
-uiCorner19.Parent = toggle
+local uiCorner18 = Instance.new("UICorner")
+uiCorner18.CornerRadius = UDim.new(0.03999999910593033, 0)
+uiCorner18.Parent = toggle
 
 -- DrRay.Folder.Toggle.UIGradient
-local uiGradient22 = Instance.new("UIGradient")
-uiGradient22.Rotation = 90
-uiGradient22.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(109, 109, 109)), ColorSequenceKeypoint.new(0.765, Color3.fromRGB(181, 181, 181)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(217, 217, 217))}
-uiGradient22.Parent = toggle
+local uiGradient21 = Instance.new("UIGradient")
+uiGradient21.Rotation = 90
+uiGradient21.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(109, 109, 109)), ColorSequenceKeypoint.new(0.765, Color3.fromRGB(181, 181, 181)), ColorSequenceKeypoint.new(1, Color3.fromRGB(217, 217, 217))}
+uiGradient21.Parent = toggle
 
 -- DrRay.Folder.Toggle.Title
 local title8 = Instance.new("TextLabel")
@@ -1110,15 +1079,15 @@ label2.Name = "Label"
 label2.Parent = toggle
 
 -- DrRay.Folder.Toggle.Label.UICorner
-local uiCorner20 = Instance.new("UICorner")
-uiCorner20.CornerRadius = UDim.new(0.33000001311302185, 0)
-uiCorner20.Parent = label2
+local uiCorner19 = Instance.new("UICorner")
+uiCorner19.CornerRadius = UDim.new(0.33000001311302185, 0)
+uiCorner19.Parent = label2
 
 -- DrRay.Folder.Toggle.Label.UIGradient
-local uiGradient23 = Instance.new("UIGradient")
-uiGradient23.Rotation = 90
-uiGradient23.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(166, 166, 166)),ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient23.Parent = label2
+local uiGradient22 = Instance.new("UIGradient")
+uiGradient22.Rotation = 90
+uiGradient22.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(166, 166, 166)),ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient22.Parent = label2
 
 -- DrRay.Folder.Toggle.Label.UIStroke
 local uiStroke6 = Instance.new("UIStroke")
@@ -1141,15 +1110,15 @@ label3.BackgroundTransparency = 1
 label3.Parent = label2
 
 -- DrRay.Folder.Toggle.Label.Label.UICorner
-local uiCorner21 = Instance.new("UICorner")
-uiCorner21.CornerRadius = UDim.new(0.33000001311302185, 0)
-uiCorner21.Parent = label3
+local uiCorner20 = Instance.new("UICorner")
+uiCorner20.CornerRadius = UDim.new(0.33000001311302185, 0)
+uiCorner20.Parent = label3
 
 -- DrRay.Folder.Toggle.Label.Label.UIGradient
-local uiGradient24 = Instance.new("UIGradient")
-uiGradient24.Rotation = 90
-uiGradient24.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(166, 166, 166)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient24.Parent = label3
+local uiGradient23 = Instance.new("UIGradient")
+uiGradient23.Rotation = 90
+uiGradient23.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(166, 166, 166)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient23.Parent = label3
 
 -- DrRay.Folder.Button
 local button2 = Instance.new("TextButton")
@@ -1167,15 +1136,15 @@ button2.BackgroundTransparency = 0.4000000059604645
 button2.Parent = folder
 
 -- DrRay.Folder.Button.UICorner
-local uiCorner22 = Instance.new("UICorner")
-uiCorner22.CornerRadius = UDim.new(0.03999999910593033, 0)
-uiCorner22.Parent = button2
+local uiCorner21 = Instance.new("UICorner")
+uiCorner21.CornerRadius = UDim.new(0.03999999910593033, 0)
+uiCorner21.Parent = button2
 
 -- DrRay.Folder.Button.UIGradient
-local uiGradient25 = Instance.new("UIGradient")
-uiGradient25.Rotation = 90
-uiGradient25.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(109, 109, 109)), ColorSequenceKeypoint.new(0.765, Color3.fromRGB(181, 181, 181)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(217, 217, 217))}
-uiGradient25.Parent = button2
+local uiGradient24 = Instance.new("UIGradient")
+uiGradient24.Rotation = 90
+uiGradient24.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(109, 109, 109)), ColorSequenceKeypoint.new(0.765, Color3.fromRGB(181, 181, 181)),ColorSequenceKeypoint.new(1, Color3.fromRGB(217, 217, 217))}
+uiGradient24.Parent = button2
 
 -- DrRay.Folder.Button.Title
 local title9 = Instance.new("TextLabel")
@@ -1228,15 +1197,15 @@ dropDownButton.Position = UDim2.new(0.08656254410743713, 0, 0, 0)
 dropDownButton.Parent = folder
 
 -- DrRay.Folder.DropdownButton.UICorner
-local uiCorner23 = Instance.new("UICorner")
-uiCorner23.CornerRadius = UDim.new(0.20000000298023224, 0)
-uiCorner23.Parent = dropDownButton
+local uiCorner22 = Instance.new("UICorner")
+uiCorner22.CornerRadius = UDim.new(0.20000000298023224, 0)
+uiCorner22.Parent = dropDownButton
 
 -- DrRay.Folder.DropdownButton.UIGradient
-local uiGradient26 = Instance.new("UIGradient")
-uiGradient26.Rotation = 90
-uiGradient26.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1.000, Color3.new(1, 1, 1))}
-uiGradient26.Parent = dropDownButton
+local uiGradient25 = Instance.new("UIGradient")
+uiGradient25.Rotation = 90
+uiGradient25.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(117, 117, 117)), ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))}
+uiGradient25.Parent = dropDownButton
 
 -- DrRay.Folder.DropdownButton.UIStroke
 local uiStroke7 = Instance.new("UIStroke")
@@ -1276,15 +1245,15 @@ button3.BackgroundTransparency = 0.4000000059604645
 button3.Parent = screenGui
 
 -- DrRay.Button.UICorner
-local uiCorner24 = Instance.new("UICorner")
-uiCorner24.CornerRadius = UDim.new(0.03999999910593033, 0)
-uiCorner24.Parent = button3
+local uiCorner23 = Instance.new("UICorner")
+uiCorner23.CornerRadius = UDim.new(0.03999999910593033, 0)
+uiCorner23.Parent = button3
 
 -- DrRay.Button.UIGradient
-local uiGradient27 = Instance.new("UIGradient")
-uiGradient27.Rotation = 90
-uiGradient27.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(109, 109, 109)), ColorSequenceKeypoint.new(0.765, Color3.fromRGB(181, 181, 181)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(217, 217, 217))}
-uiGradient27.Parent = button3
+local uiGradient26 = Instance.new("UIGradient")
+uiGradient26.Rotation = 90
+uiGradient26.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color3.fromRGB(109, 109, 109)), ColorSequenceKeypoint.new(0.765, Color3.fromRGB(181, 181, 181)), ColorSequenceKeypoint.new(1, Color3.fromRGB(217, 217, 217))}
+uiGradient26.Parent = button3
 
 -- DrRay.Button.Title
 local title10 = Instance.new("TextLabel")
@@ -1367,7 +1336,7 @@ function UILIB:Load(name: string, img: string)
             twServ:Create(topBar1.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)}):Play()
         end
     end)
-    exitButton.MouseButton1Down:Connect(function()
+    title1.MouseButton1Down:Once(function()
         for i, v in cons do
             v:Disconnect()
         	cons[i] = nil
@@ -1392,14 +1361,6 @@ function UILIB:Load(name: string, img: string)
         task.wait(0.1)
         twServ:Create(topBar1.TopBarClose.ImageLabel, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 180}):Play()
         twServ:Create(topBar1.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.95, 0)}):Play()
-    end
-    function self:Destroy()
-        for i, v in cons do
-            v:Disconnect()
-        	cons[i] = nil
-        end
-        cons = nil
-        screenGui:Destroy()
     end
     function self:HideCloseButton()
         topBarClose1.Visible = false
