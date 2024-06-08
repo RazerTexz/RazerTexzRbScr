@@ -198,7 +198,7 @@ frame1.BorderSizePixel = 0
 frame1.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
 frame1.Size = UDim2.new(0.2622910141944885, 0, 1, 0)
 frame1.BorderColor3 = Color3.new(0, 0, 0)
-frame1.Position = UDim2.new(0002001152552111307, 0, 0, 0)
+frame1.Position = UDim2.new(0.000002001152552111307, 0, 0, 0)
 frame1.Name = "Frame"
 frame1.Parent = topBarClose1
 
@@ -354,7 +354,7 @@ frame2.BorderSizePixel = 0
 frame2.BackgroundColor3 = Color3.new(1, 1, 1)
 frame2.BackgroundTransparency = 1
 frame2.LayoutOrder = 1
-frame2.Size = UDim2.new(0.6113507151603699, 0, 10001192092896, 0)
+frame2.Size = UDim2.new(0.6113507151603699, 0, 1.0000001192092896, 0)
 frame2.BorderColor3 = Color3.new(0, 0, 0)
 frame2.Position = UDim2.new(0.26662877202033997, 0, -4.950767973355141e-08, 0)
 frame2.AutomaticSize = Enum.AutomaticSize.X
@@ -1312,7 +1312,11 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
 	task.wait(0.3)
 	twServ:Create(topBar1, TweenInfo.new(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.23, 0, 0.012, 0)}):Play()
 	textLabel1.Text = name
-    logo.Image = img or ""
+	if not img then
+	    logo:Destroy()
+	else
+        logo.Image = img
+    end
 
     topBarClose1.MouseButton1Down:Connect(function()
         if not closed then
