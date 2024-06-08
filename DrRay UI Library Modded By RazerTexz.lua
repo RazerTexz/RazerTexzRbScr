@@ -1305,7 +1305,7 @@ local globalColor2 = Color3.fromRGB(0, 255, 38)
 local closed = false
 
 local cons = {}
-function UILIB:Load(name: string, img: string)
+function UILIB:Load(name: string, onDestroyFunc, img: string)
     local self = setmetatable({}, UILIB)
     local tw = twServ:Create(mainBar, TweenInfo.new(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.212, 0)})
 	tw:Play()
@@ -1342,6 +1342,7 @@ function UILIB:Load(name: string, img: string)
         	cons[i] = nil
         end
         cons = nil
+        if onDestroyFunc then onDestroyFunc() end
         screenGui:Destroy()
     end)
     function self:Open()
