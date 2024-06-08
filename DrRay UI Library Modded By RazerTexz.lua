@@ -168,37 +168,36 @@ textLabel1.Position = UDim2.new(0.13402166962623596, 0, 0.27320244908332825, 0)
 textLabel1.Parent = title1
 
 -- DrRay.TopBar.TopMenu.DestroyButton
-local destroyButton = Instance.new("TextButton")
-destroyButton.TextWrapped = true
-destroyButton.Active = false
-destroyButton.TextScaled = true
-destroyButton.BorderSizePixel = 0
-destroyButton.AutoButtonColor = false
-destroyButton.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
-destroyButton.FontFace = Font.new("rbxassetid://11702779517", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-destroyButton.TextSize = 14
-destroyButton.TextColor3 = Color3.new(1, 1, 1)
-destroyButton.AutomaticSize = Enum.AutomaticSize.X
-destroyButton.Selectable = false
-destroyButton.Size = UDim2.new(0.10328257083892822, 0, 0.682426393032074, 0)
---destroyButton.Size = UDim2.new(0.7192937135696411, 0, 0.41530051827430725, 0)
-destroyButton.Name = "Destroy Button"
-destroyButton.BorderColor3 = Color3.new(0, 0, 0)
-destroyButton.Text = "Destroy GUI"
-destroyButton.Position = UDim2.new(0.26031631231307983, 0, 0.158786803483963, 0)
---destroyButton.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
-destroyButton.Parent = topMenu
+local exitButton = Instance.new("TextButton")
+exitButton.TextWrapped = true
+exitButton.Active = false
+exitButton.TextScaled = false
+exitButton.BorderSizePixel = 0
+exitButton.AutoButtonColor = false
+exitButton.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
+exitButton.FontFace = Font.new("rbxassetid://11702779517", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+exitButton.TextSize = 14
+exitButton.TextColor3 = Color3.new(1, 1, 1)
+exitButton.AutomaticSize = Enum.AutomaticSize.X
+exitButton.Selectable = false
+exitButton.Size = UDim2.new(0.23481373488903046, 0, 0.682426393032074, 0)
+--exitButton.Size = UDim2.new(0.10328257083892822, 0, 0.682426393032074, 0)
+exitButton.Name = "Exit Button"
+exitButton.BorderColor3 = Color3.new(0, 0, 0)
+exitButton.Text = "EXIT"
+exitButton.Position = UDim2.new(0.26031631231307983, 0, 0.158786803483963, 0)
+exitButton.Parent = topMenu
 
 -- DrRay.TopBar.TopMenu.DestroyButton.UICorner
 local uiCorner3 = Instance.new("UICorner")
 uiCorner3.CornerRadius = UDim.new(0.30000001192092896, 0)
-uiCorner3.Parent = destroyButton
+uiCorner3.Parent = exitButton
 
 -- DrRay.TopBar.TopMenu.DestroyButton.UIGradient
 local uiGradient4 = Instance.new("UIGradient")
 uiGradient4.Rotation = 90
 uiGradient4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(154, 154, 154)), ColorSequenceKeypoint.new(1.000, Color3.fromRGB(231, 231, 231))}
-uiGradient4.Parent = destroyButton
+uiGradient4.Parent = exitButton
 
 -- DrRay.TopBar.TopBarClose
 local topBarClose1 = Instance.new("TextButton")
@@ -1368,7 +1367,7 @@ function UILIB:Load(name: string, img: string)
             twServ:Create(topBar1.TopBarClose, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)}):Play()
         end
     end)
-    destroyButton.MouseButton1Down:Connect(function()
+    exitButton.MouseButton1Down:Connect(function()
         for i, v in cons do
             v:Disconnect()
         	cons[i] = nil
