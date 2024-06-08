@@ -130,14 +130,13 @@ uiPadding2.PaddingLeft = UDim.new(0.014000000432133675, 0)
 uiPadding2.Parent = topMenu
 
 -- DrRay.TopBar.TopMenu.Title
-local title1 = Instance.new("TextButton")
+local title1 = Instance.new("ImageButton")
 title1.BorderSizePixel = 0
 title1.AutoButtonColor = false
 title1.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
 title1.Size = UDim2.new(0.23481373488903046, 0, 0.682426393032074, 0)
 title1.Name = "Title"
 title1.BorderColor3 = Color3.new(0, 0, 0)
-title1.Text = ""
 title1.Position = UDim2.new(0.015024710446596146, 0, 0.18421050906181335, 0)
 title1.Parent = topMenu
 
