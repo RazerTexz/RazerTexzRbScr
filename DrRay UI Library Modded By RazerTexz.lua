@@ -131,6 +131,7 @@ uiPadding2.Parent = topMenu
 
 -- DrRay.TopBar.TopMenu.Title
 local title1 = Instance.new("ImageButton")
+title1.Active = true
 title1.BorderSizePixel = 0
 title1.AutoButtonColor = false
 title1.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
@@ -169,7 +170,7 @@ textLabel1.Parent = title1
 
 -- DrRay.TopBar.TopBarClose
 local topBarClose1 = Instance.new("TextButton")
-topBarClose1.Active = false
+topBarClose1.Active = true
 topBarClose1.BorderSizePixel = 0
 topBarClose1.AutoButtonColor = false
 topBarClose1.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
@@ -1512,7 +1513,6 @@ function UILIB.newTab(name: string, img: string)
         valueLabel.Text = tostring(min)
 
         local mouseDown = false
-        local triggerTweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
         newSlider.ActualSlider.Trigger.MouseButton1Down:Connect(function()
             mouseDown = true
             repeat
@@ -1521,7 +1521,7 @@ function UILIB.newTab(name: string, img: string)
                 local perc = math.round(Percent * (max - min) + min)
                 func(perc)
                 valueLabel.Text = perc
-                twServ:Create(Fill, triggerTweenInfo, {Size = UDim2.fromScale(Percent, 1)}):Play()
+                twServ:Create(Fill, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
             until not mouseDown
         end)
         newSlider.Parent = newTab
