@@ -1335,7 +1335,7 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
         if onDestroyFunc then onDestroyFunc() end
         screenGui:Destroy()
     end)
-    function self:Open()
+    --[[function self:Open()
         local tw = twServ:Create(mainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.212, 0)})
         tw:Play()
         tw.Completed:Wait()
@@ -1384,7 +1384,7 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
             twServ:Create(imageLabel1, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Rotation = 0}):Play()
             twServ:Create(topBarClose1, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)}):Play()
         end
-    end
+    end]]
     function self:SetTheme(color, color2)
         for _, v in parent:GetChildren() do
             if v:IsA("GuiObject") then
