@@ -1426,14 +1426,16 @@ function UILIB.newTab(name: string, img: string)
     newTabBtn.MouseButton1Click:Connect(function()
         for _, v in scrollingFrame1:GetChildren() do
             if v:IsA("ImageButton") then
-                local vTab = mainBar:FindFirstChild(v.Name)
+                mainBar:FindFirstChild(v.Name).Visible = (v.Name == name)
+                twServ:Create(v, TweenInfo.new(0.2), {Transparency = if v.Name == name then 0 else 0.75}):Play()
+                --[[local vTab = mainBar:FindFirstChild(v.Name)
                 if v.Name ~= name then
                     twServ:Create(v, TweenInfo.new(0.2), {Transparency = 0.75}):Play()
                     vTab.Visible = false
                 else
                     vTab.Visible = true
                     twServ:Create(v, TweenInfo.new(0.2), {Transparency = 0}):Play()
-                end
+                end]]
             end
         end
     end)
@@ -1551,13 +1553,6 @@ function UILIB.newTab(name: string, img: string)
         newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newToggle.Label.Label.MouseButton1Click:Connect(function()
-            --[[if realToggle then
-                realToggle = false
-                twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor1}):Play()
-            else
-                realToggle = true
-                twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor2}):Play()
-            end]]
             realToggle = not realToggle
             twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor2 else globalColor1}):Play()
             func(realToggle)
