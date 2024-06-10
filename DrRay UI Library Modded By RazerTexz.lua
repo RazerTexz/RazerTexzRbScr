@@ -1524,7 +1524,11 @@ function UILIB.newTab(name: string, img: string)
                 twServ:Create(Fill, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
             until not mouseDown
         end)
-        Parent.Trigger.MouseButton1Up:Connect(function() mouseDown = false end)
+        table.insert(cons, UIS.InputEnded:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                mouseDown = false
+            end
+        end))
         newSlider.Parent = newTab
     end
     function self.newToggle(title: string, desc: string, defBool: boolean, func)
