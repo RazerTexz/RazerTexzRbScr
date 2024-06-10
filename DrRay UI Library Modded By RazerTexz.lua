@@ -1428,14 +1428,6 @@ function UILIB.newTab(name: string, img: string)
             if v:IsA("ImageButton") then
                 mainBar:FindFirstChild(v.Name).Visible = (v.Name == name)
                 twServ:Create(v, TweenInfo.new(0.2), {Transparency = if v.Name == name then 0 else 0.75}):Play()
-                --[[local vTab = mainBar:FindFirstChild(v.Name)
-                if v.Name ~= name then
-                    twServ:Create(v, TweenInfo.new(0.2), {Transparency = 0.75}):Play()
-                    vTab.Visible = false
-                else
-                    vTab.Visible = true
-                    twServ:Create(v, TweenInfo.new(0.2), {Transparency = 0}):Play()
-                end]]
             end
         end
     end)
