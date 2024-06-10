@@ -1513,7 +1513,7 @@ function UILIB.newTab(name: string, img: string)
         valueLabel.Text = tostring(min)
 
         local mouseDown = false
-        newSlider.ActualSlider.Trigger.MouseButton1Down:Connect(function()
+        Parent.Trigger.MouseButton1Down:Connect(function()
             mouseDown = true
             repeat
                 task.wait()
