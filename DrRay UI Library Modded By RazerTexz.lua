@@ -1302,8 +1302,6 @@ UILIB.__index = UILIB
 local listening = false
 local twServ = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
---local players = game:GetService("Players")
---local localPlayer = players.LocalPlayer
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local globalColor1 = Color3.fromRGB(39, 44, 61)
 local globalColor2 = Color3.fromRGB(0, 255, 38)
@@ -1527,16 +1525,16 @@ function UILIB.newTab(name: string, img: string)
         local Parent = newSlider.ActualSlider
 
         local mouseDown = false
-        --local temp
+        local temp
         Parent.Trigger.MouseButton1Down:Connect(function()
             mouseDown = true
-            --[[temp = UIS.InputEnded:Connect(function(input)
+            temp = UIS.InputEnded:Connect(function(input)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                     mouseDown = false
                     temp:Disconnect()
                     temp = nil
                 end
-            end))]]
+            end))
             repeat
                 task.wait()
                 local Percent = math.clamp((mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
@@ -1546,11 +1544,11 @@ function UILIB.newTab(name: string, img: string)
                 twServ:Create(Fill, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
             until not mouseDown
         end)
-        table.insert(cons, UIS.InputEnded:Connect(function(input)
+        --[[table.insert(cons, UIS.InputEnded:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 mouseDown = false
             end
-        end))
+        end))]]
         newSlider.Parent = newTab
     end
     function self.newToggle(title: string, desc: string, defBool: boolean, func)
@@ -1564,15 +1562,8 @@ function UILIB.newTab(name: string, img: string)
         newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newToggle.Label.Label.MouseButton1Click:Connect(function()
-            --[[if realToggle then
-                realToggle = false
-                twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor1}):Play()
-            else
-                realToggle = true
-                twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor2}):Play()
-            end]]
             realToggle = not realToggle
-            twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor1 else globalColor2}):Play()
+            twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor2 else globalColor1}):Play()
             func(realToggle)
         end)
         newToggle.Parent = newTab
