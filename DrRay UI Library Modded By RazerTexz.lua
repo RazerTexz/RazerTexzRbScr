@@ -1564,15 +1564,15 @@ function UILIB.newTab(name: string, img: string)
         newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newToggle.Label.Label.MouseButton1Click:Connect(function()
-            --[[if realToggle then
+            if realToggle then
                 realToggle = false
                 twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor1}):Play()
             else
                 realToggle = true
                 twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor2}):Play()
-            end]]
-            realToggle = not realToggle
-            twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor1 else globalColor2}):Play()
+            end
+            --realToggle = not realToggle
+            --twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor1 else globalColor2}):Play()
             func(realToggle)
         end)
         newToggle.Parent = newTab
