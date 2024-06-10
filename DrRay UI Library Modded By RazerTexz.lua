@@ -1,8 +1,25 @@
 --[[
-    MODDED BY RAZERTEXZ
-    CHANGELOGS:
-    - ADDED A WAY TO UPDATE LABEL TEXT & UPDATE / REFRESH DROPDOWN LIST
-    - CODE OPTIMIZATION
+MIT License
+
+Copyright (c) 2023 Chillz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ]]
 
 -- DrRay
@@ -1283,6 +1300,7 @@ local UILIB = {}
 UILIB.__index = UILIB
 
 local listening = false
+local mouse = localPlayer:GetMouse()
 local twServ = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 local players = game:GetService("Players")
@@ -1504,8 +1522,6 @@ function UILIB.newTab(name: string, img: string)
         newSlider.Name = name
         newSlider.Title.Text = name
         newSlider.Description.Text = desc
-
-        local mouse = localPlayer:GetMouse()
 
         local valueLabel = newSlider.ActualSlider.Title
         local Fill = newSlider.ActualSlider.Fill
