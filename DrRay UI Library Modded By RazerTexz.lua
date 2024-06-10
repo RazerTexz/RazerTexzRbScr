@@ -1527,16 +1527,16 @@ function UILIB.newTab(name: string, img: string)
         local Parent = newSlider.ActualSlider
 
         local mouseDown = false
-        local temp
+        --local temp
         Parent.Trigger.MouseButton1Down:Connect(function()
             mouseDown = true
-            temp = UIS.InputEnded:Connect(function(input)
+            --[[temp = UIS.InputEnded:Connect(function(input)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                     mouseDown = false
                     temp:Disconnect()
                     temp = nil
                 end
-            end))
+            end))]]
             repeat
                 task.wait()
                 local Percent = math.clamp((mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
@@ -1546,11 +1546,11 @@ function UILIB.newTab(name: string, img: string)
                 twServ:Create(Fill, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
             until not mouseDown
         end)
-        --[[table.insert(cons, UIS.InputEnded:Connect(function(input)
+        table.insert(cons, UIS.InputEnded:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 mouseDown = false
             end
-        end))]]
+        end))
         newSlider.Parent = newTab
     end
     function self.newToggle(title: string, desc: string, defBool: boolean, func)
