@@ -1306,7 +1306,7 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
         logo.Image = img
     end
 
-    topBarClose1.MouseButton1Down:Connect(function()
+    topBarClose1.MouseButton1Click:Connect(function()
         if not closed then
 			closed = true
 			local tw = twServ:Create(mainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, -0.612, 0)})
@@ -1327,7 +1327,7 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
             twServ:Create(topBarClose1, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.916, 0, 0.52, 0)}):Play()
         end
     end)
-    title1.MouseButton1Down:Once(function()
+    title1.MouseButton1Click:Once(function()
         for i, v in cons do
             v:Disconnect()
         	cons[i] = nil
@@ -1524,12 +1524,8 @@ function UILIB.newTab(name: string, img: string)
                 twServ:Create(Fill, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
             until not mouseDown
         end)
+        Parent.Trigger.MouseButton1Up:Connect(function() mouseDown = false end)
         newSlider.Parent = newTab
-        table.insert(cons, UIS.InputEnded:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                mouseDown = false
-            end
-        end))
     end
     function self.newToggle(title: string, desc: string, defBool: boolean, func)
         local realToggle = defBool
