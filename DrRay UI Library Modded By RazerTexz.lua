@@ -1487,25 +1487,23 @@ function UILIB.newTab(name: string, img: string)
         newKey.Title.Text = name
         newKey.Name = name
         newKey.Description.Text = desc
-        newKey.Visible =  true
-        local listening = false
+        newKey.Visible = true
+        local bindButton = newKey.Bind.Button
         local a
-        newKey.Bind.Button.MouseButton1Click:Connect(function()
-            listening = true
-            task.spawn(function()
-                while listening do
-                    newKey.Bind.Button.Text = "."
-                    task.wait(0.5)
-                    newKey.Bind.Button.Text = ".."
-                    task.wait(0.5)
-                    newKey.Bind.Button.Text = "..."
-                    task.wait(0.5)
-                end
+        bindButton.MouseButton1Click:Connect(function()
+            local temp = task.spawn(function()
+                bindButton.Text = "."
+                task.wait(0.5)
+                bindButton.Text = ".."
+                task.wait(0.5)
+                bindButton.Text = "..."
+                task.wait(0.5)
             end)
-            a = UIS.InputBegan:Connect(function(input, processed)
+            a = UIS.InputBegan:Connect(function(input)
                 if input.UserInputType == Enum.UserInputType.Keyboard or input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 or input.UserInputType == Enum.UserInputType.MouseButton3 then
-                    newKey.Bind.Button.Text = if input.UserInputType == Enum.UserInputType.Keyboard then input.KeyCode.Name else input.UserInputType.Name
-                    listening = false
+                    bindButton.Text = if input.UserInputType == Enum.UserInputType.Keyboard then input.KeyCode.Name else input.UserInputType.Name
+                    task.cancel(temp)
+                    temp = nil
                     a:Disconnect()
                     a = nil
                     func(input)
@@ -1524,13 +1522,21 @@ function UILIB.newTab(name: string, img: string)
         newSlider.Description.Text = desc
 
         local valueLabel = newSlider.ActualSlider.Title
+        valueLabel.Text = tostring(min)
         local Fill = newSlider.ActualSlider.Fill
         local Parent = newSlider.ActualSlider
-        valueLabel.Text = tostring(min)
 
         local mouseDown = false
+        local temp
         Parent.Trigger.MouseButton1Down:Connect(function()
             mouseDown = true
+            temp = UIS.InputEnded:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    mouseDown = false
+                    temp:Disconnect()
+                    temp = nil
+                end
+            end))
             repeat
                 task.wait()
                 local Percent = math.clamp((mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
@@ -1540,11 +1546,11 @@ function UILIB.newTab(name: string, img: string)
                 twServ:Create(Fill, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
             until not mouseDown
         end)
-        table.insert(cons, UIS.InputEnded:Connect(function(input)
+        --[[table.insert(cons, UIS.InputEnded:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 mouseDown = false
             end
-        end))
+        end))]]
         newSlider.Parent = newTab
     end
     function self.newToggle(title: string, desc: string, defBool: boolean, func)
@@ -1558,13 +1564,15 @@ function UILIB.newTab(name: string, img: string)
         newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newToggle.Label.Label.MouseButton1Click:Connect(function()
-            if realToggle then
+            --[[if realToggle then
                 realToggle = false
                 twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor1}):Play()
             else
                 realToggle = true
                 twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor2}):Play()
-            end
+            end]]
+            realToggle = not realToggle
+            twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor1 else globalColor2}):Play()
             func(realToggle)
         end)
         newToggle.Parent = newTab

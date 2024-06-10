@@ -249,7 +249,11 @@ function Kavo.CreateLib(kavName, themeList)
         tween:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 0, 0), Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))}):Play()
         task.wait(1)
         for i, v in cons do
-            v:Disconnect()
+            if type(cons) == "thread" then
+                task.cancel(cons)
+            else
+                v:Disconnect()
+            end
         	cons[i] = nil
         end
         cons = nil
@@ -400,14 +404,14 @@ function Kavo.CreateLib(kavName, themeList)
         local focusing = false
         local viewDe = false
 
-        task.spawn(function()
+        table.insert(cons, task.spawn(function()
             while task.wait(30) do
                 page.BackgroundColor3 = themeList.Background
                 page.ScrollBarImageColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 16, themeList.SchemeColor.g * 255 - 15, themeList.SchemeColor.b * 255 - 28)
                 tabButton.TextColor3 = themeList.TextColor
                 tabButton.BackgroundColor3 = themeList.SchemeColor
             end
-        end)
+        end))
         function Sections:NewSection(secName, hidden)
             local sectionFunctions = {}
             local modules = {}
@@ -478,7 +482,7 @@ function Kavo.CreateLib(kavName, themeList)
             sectionElListing.Padding = UDim.new(0, 3)
             sectionElListing.Parent = sectionInners
 
-            task.spawn(function()
+            table.insert(cons, task.spawn(function()
                 while task.wait(30) do
                     sectionFrame.BackgroundColor3 = themeList.Background
                     sectionHead.BackgroundColor3 = themeList.SchemeColor
@@ -486,7 +490,7 @@ function Kavo.CreateLib(kavName, themeList)
                     tabButton.BackgroundColor3 = themeList.SchemeColor
                     sectionName.TextColor3 = themeList.TextColor
                 end
-            end)
+            end))
             local function updateSectionFrame()
                 sectionInners.Size = UDim2.new(1, 0, 0, sectionElListing.AbsoluteContentSize.Y)
                 sectionFrame.Size = UDim2.new(0, 352, 0, sectionlistoknvm.AbsoluteContentSize.Y)
@@ -649,7 +653,7 @@ function Kavo.CreateLib(kavName, themeList)
                         viewDe = false
                     end
                 end)
-                task.spawn(function()
+                table.insert(cons, task.spawn(function()
                     while task.wait(30) do
                         if not hovering then buttonElement.BackgroundColor3 = themeList.ElementColor end
                         viewInfo.ImageColor3 = themeList.SchemeColor
@@ -659,7 +663,7 @@ function Kavo.CreateLib(kavName, themeList)
                         touch.ImageColor3 = themeList.SchemeColor
                         btnInfo.TextColor3 = themeList.TextColor
                     end
-                end)
+                end))
                 function ButtonFunction:UpdateButton(newTitle)
                     btnInfo.Text = newTitle
                 end
@@ -825,7 +829,7 @@ function Kavo.CreateLib(kavName, themeList)
                         viewDe = false
                     end
                 end)
-                task.spawn(function()
+                table.insert(cons, task.spawn(function()
                     while task.wait(30) do
                         if not hovering then textboxElement.BackgroundColor3 = themeList.ElementColor end
                         TextBox.BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 - 6, themeList.ElementColor.g * 255 - 6, themeList.ElementColor.b * 255 - 7)
@@ -837,7 +841,7 @@ function Kavo.CreateLib(kavName, themeList)
                         TextBox.PlaceholderColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 19, themeList.SchemeColor.g * 255 - 26, themeList.SchemeColor.b * 255 - 35)
                         TextBox.TextColor3 = themeList.SchemeColor
                     end
-                end)
+                end))
             end
             function Elements:NewToggle(tname, nTip, callback)
                 local TogFunction = {}
@@ -999,7 +1003,7 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end)
 
-                task.spawn(function()
+                table.insert(cons, task.spawn(function()
                     while task.wait(30) do
                         if not hovering then toggleElement.BackgroundColor3 = themeList.ElementColor end
                         toggleDisabled.ImageColor3 = themeList.SchemeColor
@@ -1010,7 +1014,7 @@ function Kavo.CreateLib(kavName, themeList)
                         moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
                         moreInfo.TextColor3 = themeList.TextColor
                     end
-                end)
+                end))
                 viewInfo.MouseButton1Click:Connect(function()
                     if not viewDe then
                         viewDe = true
@@ -1187,7 +1191,7 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end)        
 
-                task.spawn(function()
+                table.insert(cons, task.spawn(function()
                     while task.wait(30) do
                         if not hovering then sliderElement.BackgroundColor3 = themeList.ElementColor end
                         moreInfo.TextColor3 = themeList.TextColor
@@ -1199,7 +1203,7 @@ function Kavo.CreateLib(kavName, themeList)
                         sliderBtn.BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 5, themeList.ElementColor.g * 255 + 5, themeList.ElementColor.b * 255  + 5)
                         sliderDrag.BackgroundColor3 = themeList.SchemeColor
                     end
-                end)
+                end))
 
                 local Value
                 local moveConnection
@@ -1417,7 +1421,7 @@ function Kavo.CreateLib(kavName, themeList)
                         hovering = false
                     end
                 end)        
-                task.spawn(function()
+                table.insert(cons, task.spawn(function()
                     while task.wait(30) do
                         if not hovering then dropOpen.BackgroundColor3 = themeList.ElementColor end
                         Sample.ImageColor3 = themeList.SchemeColor
@@ -1428,7 +1432,7 @@ function Kavo.CreateLib(kavName, themeList)
                         moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
                         moreInfo.TextColor3 = themeList.TextColor
                     end
-                end)
+                end))
                 UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = moreInfo
 
@@ -1523,13 +1527,13 @@ function Kavo.CreateLib(kavName, themeList)
                             oHover = false
                         end
                     end)   
-                    task.spawn(function()
+                    table.insert(cons, task.spawn(function()
                         while task.wait(30) do
                             if not oHover then optionSelect.BackgroundColor3 = themeList.ElementColor end
                             optionSelect.TextColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 6, themeList.TextColor.g * 255 - 6, themeList.TextColor.b * 255 - 6)
                             Sample1.ImageColor3 = themeList.SchemeColor
                         end
-                    end)
+                    end))
                 end
                 function DropFunction:Refresh(newList)
                     local newList = newList or {}
@@ -1612,13 +1616,13 @@ function Kavo.CreateLib(kavName, themeList)
                                 hov = false
                             end
                         end)   
-                        task.spawn(function()
+                        table.insert(cons, task.spawn(function()
                             while task.wait(30) do
                                 if not oHover then optionSelect.BackgroundColor3 = themeList.ElementColor end
                                 optionSelect.TextColor3 = Color3.fromRGB(themeList.TextColor.r * 255 - 6, themeList.TextColor.g * 255 - 6, themeList.TextColor.b * 255 - 6)
                                 Sample11.ImageColor3 = themeList.SchemeColor
                             end
-                        end)
+                        end))
                     end
                     if opened then 
                         dropFrame:TweenSize(UDim2.new(0, 352, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
@@ -1801,7 +1805,7 @@ function Kavo.CreateLib(kavName, themeList)
                 togName_2.TextXAlignment = Enum.TextXAlignment.Right
                 togName_2.Parent = keybindElement
 
-                task.spawn(function()
+                table.insert(cons, task.spawn(function()
                     while task.wait(30) do
                         if not oHover then keybindElement.BackgroundColor3 = themeList.ElementColor end
                         togName_2.TextColor3 = themeList.SchemeColor
@@ -1813,7 +1817,7 @@ function Kavo.CreateLib(kavName, themeList)
                         moreInfo.TextColor3 = themeList.TextColor
                         moreInfo.BackgroundColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 14, themeList.SchemeColor.g * 255 - 17, themeList.SchemeColor.b * 255 - 13)
                     end
-                end)
+                end))
             end
             function Elements:NewColorPicker(colText, colInf, defcolor, callback)
                 local h, s, v = Color3.toHSV(defcolor)
@@ -2107,7 +2111,7 @@ function Kavo.CreateLib(kavName, themeList)
                     end
                 end)
 
-                task.spawn(function()
+                table.insert(cons, task.spawn(function()
                     while task.wait(30) do
                         if not hovering then colorElement.BackgroundColor3 = themeList.ElementColor end
                         touch.ImageColor3 = themeList.SchemeColor
@@ -2122,7 +2126,7 @@ function Kavo.CreateLib(kavName, themeList)
                         togName_2.TextColor3 = themeList.TextColor
                         Sample.ImageColor3 = themeList.SchemeColor
                     end
-                end)
+                end))
                 updateSectionFrame()
                 UpdateSize()
                 local colorpicker = false
@@ -2232,12 +2236,12 @@ function Kavo.CreateLib(kavName, themeList)
 	           	UICorner.CornerRadius = UDim.new(0, 4)
                 UICorner.Parent = label
 
-		        task.spawn(function()
+		        table.insert(cons, task.spawn(function()
 		            while task.wait(30) do
 		                label.BackgroundColor3 = themeList.SchemeColor
 		                label.TextColor3 = themeList.TextColor
 		            end
-		        end)
+		        end))
                 updateSectionFrame()
                 UpdateSize()
                 function labelFunctions:UpdateLabel(newText: string)
