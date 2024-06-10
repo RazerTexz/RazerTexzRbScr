@@ -1528,7 +1528,7 @@ function UILIB.newTab(name: string, img: string)
                     temp:Disconnect()
                     temp = nil
                 end
-            end))
+            end)
             repeat
                 task.wait()
                 local Percent = math.clamp((mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
