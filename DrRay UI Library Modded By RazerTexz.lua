@@ -1307,7 +1307,6 @@ local globalColor1 = Color3.fromRGB(39, 44, 61)
 local globalColor2 = Color3.fromRGB(0, 255, 38)
 local closed = false
 
-local cons = {}
 function UILIB:Load(name: string, onDestroyFunc, img: string)
     local self = setmetatable({}, UILIB)
     local tw = twServ:Create(mainBar, TweenInfo.new(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.212, 0)})
@@ -1344,11 +1343,6 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
         end
     end)
     title1.MouseButton1Click:Once(function()
-        for i, v in cons do
-            v:Disconnect()
-        	cons[i] = nil
-        end
-        cons = nil
         if onDestroyFunc then onDestroyFunc() end
         screenGui:Destroy()
     end)
@@ -1544,11 +1538,6 @@ function UILIB.newTab(name: string, img: string)
                 twServ:Create(Fill, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromScale(Percent, 1)}):Play()
             until not mouseDown
         end)
-        --[[table.insert(cons, UIS.InputEnded:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                mouseDown = false
-            end
-        end))]]
         newSlider.Parent = newTab
     end
     function self.newToggle(title: string, desc: string, defBool: boolean, func)
@@ -1562,8 +1551,15 @@ function UILIB.newTab(name: string, img: string)
         newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newToggle.Label.Label.MouseButton1Click:Connect(function()
-            realToggle = not realToggle
-            twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor2 else globalColor1}):Play()
+            if realToggle then
+                realToggle = false
+                twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor1}):Play()
+            else
+                realToggle = true
+                twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor2}):Play()
+            end
+            --realToggle = not realToggle
+            --twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor2 else globalColor1}):Play()
             func(realToggle)
         end)
         newToggle.Parent = newTab
