@@ -1343,8 +1343,8 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
         end
     end)
     title1.MouseButton1Click:Once(function()
-        if onDestroyFunc then onDestroyFunc() end
         screenGui:Destroy()
+        onDestroyFunc()
     end)
     --[[function self:Open()
         local tw = twServ:Create(mainBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.212, 0)})
@@ -1444,15 +1444,11 @@ function UILIB.newTab(name: string, img: string)
         newbtn.Parent = newTab
     end
     function self.newLabel(text: string)
-        local labelFunction = {}
         local newLabel = label1:Clone()
         newLabel.Visible = true
         newLabel.Title.Text = text
         newLabel.Parent = newTab
-        function labelFunction.updateLabel(newText: string)
-            newLabel.Title.Text = newText
-        end
-        return newLabel.Title and labelFunction
+        return newLabel.Title
     end
     function self.newInput(name: string, desc: string, func)
         local newInput = textBox:Clone()
