@@ -725,6 +725,7 @@ label1.BorderColor3 = Color3.new(0, 0, 0)
 label1.Position = UDim2.new(0.019283747300505638, 0, 0.01806684397161007, 0)
 label1.AutomaticSize = Enum.AutomaticSize.Y
 label1.Visible = true
+label1.Name = "Label"
 
 -- DrRay.Label.UICorner
 local uiCorner11 = Instance.new("UICorner")
