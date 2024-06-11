@@ -22,6 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
 
+local twServ = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
+local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local globalColor1 = Color3.fromRGB(39, 44, 61)
+local globalColor2 = Color3.fromRGB(0, 255, 38)
+
 -- DrRay
 local screenGui = Instance.new("ScreenGui")
 screenGui.IgnoreGuiInset = true
@@ -336,7 +342,6 @@ tabReserved.BorderColor3 = Color3.new(0, 0, 0)
 tabReserved.ScrollBarThickness = 0
 tabReserved.Position = UDim2.new(0, 0, 0.03999999910593033, 0)
 tabReserved.Visible = false
-tabReserved.Name = "TabReserved"
 
 -- DrRay.TabReserved.UIListLayout
 local uiListLayout3 = Instance.new("UIListLayout")
@@ -351,9 +356,8 @@ tabButtonReserved.BorderSizePixel = 0
 tabButtonReserved.AutoButtonColor = false
 tabButtonReserved.BackgroundColor3 = Color3.fromRGB(42, 42, 58)
 tabButtonReserved.Size = UDim2.new(0.19896680116653442, 0, 0.6315789818763733, 0)
-tabButtonReserved.Name = "TabButtonReserved"
 tabButtonReserved.BorderColor3 = Color3.new(0, 0, 0)
-tabButtonReserved.Visible = false
+tabButtonReserved.Visible = true
 tabButtonReserved.Position = UDim2.new(0.015000020153820515, 0, 0.18421050906181335, 0)
 
 -- DrRay.TabButtonReserved.UICorner
@@ -385,7 +389,6 @@ textLabel2.TextColor3 = Color3.new(1, 1, 1)
 textLabel2.AutomaticSize = Enum.AutomaticSize.X
 textLabel2.Size = UDim2.new(-0.145383819937706, 0, 0.415300577878952, 0)
 textLabel2.BorderColor3 = Color3.new(0, 0, 0)
-textLabel2.Text = "Tab1"
 textLabel2.BackgroundTransparency = 1
 textLabel2.Position = UDim2.new(-1.2657674551010132, 0, 0.37021857500076294, 0)
 textLabel2.Parent = frame2
@@ -440,8 +443,7 @@ dropDown.Size = UDim2.new(0.9614325165748596, 0, 0.2624756097793579, 0)
 dropDown.BorderColor3 = Color3.new(0, 0, 0)
 dropDown.Position = UDim2.new(0.019283747300505638, 0, 0.12373435497283936, 0)
 dropDown.AutomaticSize = Enum.AutomaticSize.Y
-dropDown.Visible = false
-dropDown.Name = "Dropdown"
+dropDown.Visible = true
 
 -- DrRay.Dropdown.UICorner
 local uiCorner6 = Instance.new("UICorner")
@@ -466,7 +468,6 @@ title2.TextSize = 14
 title2.TextColor3 = Color3.new(1, 1, 1)
 title2.Size = UDim2.new(0.9656160473823547, 0, 0.19094853103160858, 0)
 title2.BorderColor3 = Color3.new(0, 0, 0)
-title2.Text = "Dropdown"
 title2.Name = "Title"
 title2.BackgroundTransparency = 1
 title2.Position = UDim2.new(0.017191976308822632, 0, 0.10911344736814499, 0)
@@ -484,7 +485,6 @@ description1.TextSize = 14
 description1.TextColor3 = Color3.new(1, 1, 1)
 description1.Size = UDim2.new(0.9656160473823547, 0, 0.15457738935947418, 0)
 description1.BorderColor3 = Color3.new(0, 0, 0)
-description1.Text = "List"
 description1.Name = "Description"
 description1.BackgroundTransparency = 1
 description1.Position = UDim2.new(0.011461317539215088, 0, 0.7547013759613037, 0)
@@ -623,8 +623,7 @@ keybind.BackgroundTransparency = 0.4000000059604645
 keybind.Size = UDim2.new(0.9614325165748596, 0, 0.2624756097793579, 0)
 keybind.BorderColor3 = Color3.new(0, 0, 0)
 keybind.Position = UDim2.new(0.019283747300505638, 0, 0.12373435497283936, 0)
-keybind.Visible = false
-keybind.Name = "Keybind"
+keybind.Visible = true
 
 -- DrRay.Keybind.UICorner
 local uiCorner9 = Instance.new("UICorner")
@@ -649,7 +648,6 @@ title3.TextSize = 14
 title3.TextColor3 = Color3.new(1, 1, 1)
 title3.Size = UDim2.new(0.9656160473823547, 0, 0.19094853103160858, 0)
 title3.BorderColor3 = Color3.new(0, 0, 0)
-title3.Text = "Keybind"
 title3.Name = "Title"
 title3.BackgroundTransparency = 1
 title3.Position = UDim2.new(0.017191976308822632, 0, 0.10911344736814499, 0)
@@ -667,7 +665,6 @@ description2.TextSize = 14
 description2.TextColor3 = Color3.new(1, 1, 1)
 description2.Size = UDim2.new(0.9656160473823547, 0, 0.15457738935947418, 0)
 description2.BorderColor3 = Color3.new(0, 0, 0)
-description2.Text = "Press this square and enter any key to bind!"
 description2.Name = "Description"
 description2.BackgroundTransparency = 1
 description2.Position = UDim2.new(0.012893982231616974, 0, 0.7092373967170715, 0)
@@ -727,8 +724,7 @@ label1.Size = UDim2.new(0.9614325165748596, 0, 0.07873434573411942, 0)
 label1.BorderColor3 = Color3.new(0, 0, 0)
 label1.Position = UDim2.new(0.019283747300505638, 0, 0.01806684397161007, 0)
 label1.AutomaticSize = Enum.AutomaticSize.Y
-label1.Visible = false
-label1.Name = "Label"
+label1.Visible = true
 
 -- DrRay.Label.UICorner
 local uiCorner11 = Instance.new("UICorner")
@@ -753,7 +749,6 @@ title4.TextSize = 14
 title4.TextColor3 = Color3.new(1, 1, 1)
 title4.Size = UDim2.new(0.9668599367141724, 0, 0.5928126573562622, 0)
 title4.BorderColor3 = Color3.new(0, 0, 0)
-title4.Text = "Label"
 title4.Name = "Title"
 title4.BackgroundTransparency = 1
 title4.Position = UDim2.new(0.018000036478042603, 0, 0.22100010514259338, 0)
@@ -768,7 +763,6 @@ slider.Size = UDim2.new(0.9614325165748596, 0, 0.2624756097793579, 0)
 slider.BorderColor3 = Color3.new(0, 0, 0)
 slider.Position = UDim2.new(0.019283747300505638, 0, 0.12373435497283936, 0)
 slider.Visible = false
-slider.Name = "Slider"
 
 -- DrRay.Slider.UICorner
 local uiCorner12 = Instance.new("UICorner")
@@ -793,7 +787,6 @@ title5.TextSize = 14
 title5.TextColor3 = Color3.new(1, 1, 1)
 title5.Size = UDim2.new(0.9656160473823547, 0, 0.19094853103160858, 0)
 title5.BorderColor3 = Color3.new(0, 0, 0)
-title5.Text = "Speed"
 title5.Name = "Title"
 title5.BackgroundTransparency = 1
 title5.Position = UDim2.new(0.017191976308822632, 0, 0.10911344736814499, 0)
@@ -903,7 +896,6 @@ description3.TextSize = 14
 description3.TextColor3 = Color3.new(1, 1, 1)
 description3.Size = UDim2.new(0.9656160473823547, 0, 0.15457738935947418, 0)
 description3.BorderColor3 = Color3.new(0, 0, 0)
-description3.Text = "Text"
 description3.Name = "Description"
 description3.BackgroundTransparency = 1
 description3.Position = UDim2.new(0.015759311616420746, 0, 0.7274229526519775, 0)
@@ -917,8 +909,7 @@ textBox.BackgroundTransparency = 0.4000000059604645
 textBox.Size = UDim2.new(0.9614325165748596, 0, 0.2624756097793579, 0)
 textBox.BorderColor3 = Color3.new(0, 0, 0)
 textBox.Position = UDim2.new(0.019283747300505638, 0, 0.12373435497283936, 0)
-textBox.Visible = false
-textBox.Name = "Textbox"
+textBox.Visible = true
 
 -- DrRay.Textbox.UICorner
 local uiCorner16 = Instance.new("UICorner")
@@ -943,7 +934,6 @@ title7.TextSize = 14
 title7.TextColor3 = Color3.new(1, 1, 1)
 title7.Size = UDim2.new(0.9656160473823547, 0, 0.19094853103160858, 0)
 title7.BorderColor3 = Color3.new(0, 0, 0)
-title7.Text = "Textbox"
 title7.Name = "Title"
 title7.BackgroundTransparency = 1
 title7.Position = UDim2.new(0.017191976308822632, 0, 0.10911344736814499, 0)
@@ -961,7 +951,6 @@ description4.TextSize = 14
 description4.TextColor3 = Color3.new(1, 1, 1)
 description4.Size = UDim2.new(0.9656160473823547, 0, 0.15457738935947418, 0)
 description4.BorderColor3 = Color3.new(0, 0, 0)
-description4.Text = "Input"
 description4.Name = "Description"
 description4.BackgroundTransparency = 1
 description4.Position = UDim2.new(0.012893982231616974, 0, 0.7092373967170715, 0)
@@ -1022,8 +1011,7 @@ toggle.BackgroundTransparency = 0.4000000059604645
 toggle.Size = UDim2.new(0.9614325165748596, 0, 0.15495234727859497, 0)
 toggle.BorderColor3 = Color3.new(0, 0, 0)
 toggle.Position = UDim2.new(0.019283747300505638, 0, 0.6786856055259705, 0)
-toggle.Visible = false
-toggle.Name = "Toggle"
+toggle.Visible = true
 
 -- DrRay.Toggle.UICorner
 local uiCorner18 = Instance.new("UICorner")
@@ -1049,7 +1037,6 @@ title8.TextSize = 14
 title8.TextColor3 = Color3.new(1, 1, 1)
 title8.Size = UDim2.new(0.9656160473823547, 0, 0.323449969291687, 0)
 title8.BorderColor3 = Color3.new(0, 0, 0)
-title8.Text = "Toggle"
 title8.Name = "Title"
 title8.BackgroundTransparency = 1
 title8.Position = UDim2.new(0.015759311616420746, 0, 0.18482854962348938, 0)
@@ -1067,7 +1054,6 @@ description5.TextSize = 14
 description5.TextColor3 = Color3.new(1, 1, 1)
 description5.Size = UDim2.new(0.9656160473823547, 0, 0.26184046268463135, 0)
 description5.BorderColor3 = Color3.new(0, 0, 0)
-description5.Text = "Toggle I and O xd"
 description5.Name = "Description"
 description5.BackgroundTransparency = 1
 description5.Position = UDim2.new(0.011461318470537663, 0, 0.5852904319763184, 0)
@@ -1076,7 +1062,7 @@ description5.Parent = toggle
 -- DrRay.Toggle.Label
 local label2 = Instance.new("Frame")
 label2.BorderSizePixel = 0
-label2.BackgroundColor3 = Color3.fromRGB(0, 255, 39)
+label2.BackgroundColor3 = globalColor1
 label2.Size = UDim2.new(0.03868212550878525, 0, 0.42860323190689087, 0)
 label2.BorderColor3 = Color3.new(0, 0, 0)
 label2.Position = UDim2.new(0.92550128698349, 0, 0.27990657091140747, 0)
@@ -1132,7 +1118,7 @@ button2.BorderSizePixel = 0
 button2.AutoButtonColor = false
 button2.BackgroundColor3 = Color3.fromRGB(40, 45, 62)
 button2.Selectable = false
-button2.Visible = false
+button2.Visible = true
 button2.Size = UDim2.new(0.9614325165748596, 0, 0.15495234727859497, 0)
 button2.Name = "Button"
 button2.BorderColor3 = Color3.new(0, 0, 0)
@@ -1164,7 +1150,6 @@ title9.TextSize = 14
 title9.TextColor3 = Color3.new(1, 1, 1)
 title9.Size = UDim2.new(0.9656160473823547, 0, 0.323449969291687, 0)
 title9.BorderColor3 = Color3.new(0, 0, 0)
-title9.Text = "Button"
 title9.Name = "Title"
 title9.BackgroundTransparency = 1
 title9.Position = UDim2.new(0.015759311616420746, 0, 0.18482854962348938, 0)
@@ -1182,7 +1167,6 @@ description6.TextSize = 14
 description6.TextColor3 = Color3.new(1, 1, 1)
 description6.Size = UDim2.new(0.9656160473823547, 0, 0.26184046268463135, 0)
 description6.BorderColor3 = Color3.new(0, 0, 0)
-description6.Text = "Button"
 description6.Name = "Description"
 description6.BackgroundTransparency = 1
 description6.Position = UDim2.new(0.011461318470537663, 0, 0.5852904319763184, 0)
@@ -1194,9 +1178,8 @@ dropDownButton.Active = false
 dropDownButton.BorderSizePixel = 0
 dropDownButton.BackgroundColor3 = Color3.fromRGB(40, 45, 62)
 dropDownButton.Selectable = false
-dropDownButton.Visible = false
+dropDownButton.Visible = true
 dropDownButton.Size = UDim2.new(0.9995859265327454, 0, 0.17368526756763458, 0)
-dropDownButton.Name = "DropdownButton"
 dropDownButton.BorderColor3 = Color3.new(0, 0, 0)
 dropDownButton.Position = UDim2.new(0.08656254410743713, 0, 0, 0)
 
@@ -1227,7 +1210,6 @@ name.TextStrokeColor3 = Color3.new(1, 1, 1)
 name.TextColor3 = Color3.fromRGB(160, 160, 160)
 name.Size = UDim2.new(1, 0, 0.59375, 0)
 name.BorderColor3 = Color3.new(0, 0, 0)
-name.Text = "None"
 name.Name = "Name"
 name.BackgroundTransparency = 1
 name.Position = UDim2.new(0, 0, 0.21875, 0)
@@ -1290,7 +1272,6 @@ description7.TextSize = 14
 description7.TextColor3 = Color3.new(1, 1, 1)
 description7.Size = UDim2.new(0.9656160473823547, 0, 0.26184046268463135, 0)
 description7.BorderColor3 = Color3.new(0, 0, 0)
-description7.Text = "Button"
 description7.Name = "Description"
 description7.BackgroundTransparency = 1
 description7.Position = UDim2.new(0.011461318470537663, 0, 0.5852904319763184, 0)
@@ -1299,15 +1280,8 @@ description7.Parent = button3
 local UILIB = {}
 UILIB.__index = UILIB
 
-local listening = false
-local twServ = game:GetService("TweenService")
-local UIS = game:GetService("UserInputService")
-local mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local globalColor1 = Color3.fromRGB(39, 44, 61)
-local globalColor2 = Color3.fromRGB(0, 255, 38)
-local closed = false
-
 function UILIB:Load(name: string, onDestroyFunc, img: string)
+    local closed = false
     local self = setmetatable({}, UILIB)
     local tw = twServ:Create(mainBar, TweenInfo.new(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0.23, 0, 0.212, 0)})
 	tw:Play()
@@ -1315,11 +1289,7 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
 	task.wait(0.3)
 	twServ:Create(topBar1, TweenInfo.new(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(0.23, 0, 0.012, 0)}):Play()
 	textLabel1.Text = name
-	if not img then
-	    logo:Destroy()
-	else
-        logo.Image = img
-    end
+	if img then logo.Image = img else logo:Destroy() end
 
     topBarClose1.MouseButton1Click:Connect(function()
         if not closed then
@@ -1415,19 +1385,25 @@ function UILIB.newTab(name: string, img: string)
     local self = setmetatable({}, UILIB)
     local newTab = tabReserved:Clone()
     newTab.Name = name
-    newTab.Visible = false
     newTab.Parent = mainBar
 
     local newTabBtn = tabButtonReserved:Clone()
     newTabBtn.Name = name
     newTabBtn.Frame.TextLabel.Text = name
     newTabBtn.ImageLabel.Image = img or ""
-    newTabBtn.Visible = true
     newTabBtn.MouseButton1Click:Connect(function()
         for _, v in scrollingFrame1:GetChildren() do
             if v:IsA("ImageButton") then
-                mainBar:FindFirstChild(v.Name).Visible = (v.Name == name)
-                twServ:Create(v, TweenInfo.new(0.2), {Transparency = if v.Name == name then 0 else 0.75}):Play()
+                local vTab = mainBar:FindFirstChild(v.Name)
+                if v.Name ~= name then
+                    twServ:Create(v, TweenInfo.new(0.2), {Transparency = 0.75}):Play()
+                    vTab.Visible = false
+                else
+                    vTab.Visible = true
+                    twServ:Create(v, TweenInfo.new(0.2), {Transparency = 0}):Play()
+                end
+                --mainBar:FindFirstChild(v.Name).Visible = (v.Name == name)
+                --twServ:Create(v, TweenInfo.new(0.2), {Transparency = if v.Name == name then 0 else 0.75}):Play()
             end
         end
     end)
@@ -1436,7 +1412,6 @@ function UILIB.newTab(name: string, img: string)
         local newbtn = button2:Clone()
         newbtn.Title.Text = name
         newbtn.Description.Text = desc
-        newbtn.Visible = true
         newbtn.Name = name
         newbtn.MouseEnter:Connect(function() twServ:Create(newbtn, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newbtn.MouseLeave:Connect(function() twServ:Create(newbtn, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
@@ -1445,7 +1420,6 @@ function UILIB.newTab(name: string, img: string)
     end
     function self.newLabel(text: string)
         local newLabel = label1:Clone()
-        newLabel.Visible = true
         newLabel.Title.Text = text
         newLabel.Parent = newTab
         return newLabel.Title
@@ -1455,7 +1429,6 @@ function UILIB.newTab(name: string, img: string)
         local textbox = newInput.TextboxBar.ActualTextbox
         newInput.MouseEnter:Connect(function() twServ:Create(newInput, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newInput.MouseLeave:Connect(function() twServ:Create(newInput, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
-        newInput.Visible = true
         newInput.Title.Text = name
         newInput.Description.Text = desc
         newInput.Name = name
@@ -1469,7 +1442,6 @@ function UILIB.newTab(name: string, img: string)
         newKey.Title.Text = name
         newKey.Name = name
         newKey.Description.Text = desc
-        newKey.Visible = true
         local bindButton = newKey.Bind.Button
         local a
         bindButton.MouseButton1Click:Connect(function()
@@ -1498,7 +1470,6 @@ function UILIB.newTab(name: string, img: string)
         local newSlider = slider:Clone()
         newSlider.MouseEnter:Connect(function() twServ:Create(newSlider, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newSlider.MouseLeave:Connect(function() twServ:Create(newSlider, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
-        newSlider.Visible = true
         newSlider.Name = name
         newSlider.Title.Text = name
         newSlider.Description.Text = desc
@@ -1530,19 +1501,22 @@ function UILIB.newTab(name: string, img: string)
         end)
         newSlider.Parent = newTab
     end
-    function self.newToggle(title: string, desc: string, defBool: boolean, func)
-        local realToggle = defBool
+    function self.newToggle(title: string, desc: string, func)
+        local realToggle = false
         local newToggle = toggle:Clone()
         newToggle.Name = title
-        newToggle.Visible = true
         newToggle.Title.Text = title
         newToggle.Description.Text = desc
-        newToggle.Label.BackgroundColor3 = if realToggle then globalColor2 else globalColor1
         newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newToggle.Label.Label.MouseButton1Click:Connect(function()
-            realToggle = not realToggle
-            twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = if realToggle then globalColor2 else globalColor1}):Play()
+            if realToggle then
+                realToggle = false
+                twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor1}):Play()
+            else
+                realToggle = true
+                twServ:Create(newToggle.Label, TweenInfo.new(0.2), {BackgroundColor3 = globalColor2}):Play()
+            end
             func(realToggle)
         end)
         newToggle.Parent = newTab
@@ -1550,14 +1524,12 @@ function UILIB.newTab(name: string, img: string)
     function self.newDropdown(name: string, desc: string, listTable, useCustomFunc: boolean, func)
         local dropDownFunction = {}
         local newdd = dropDown:Clone()
-        newdd.Visible = true
         newdd.Name = name
         newdd.Title.Text = name
         newdd.Description.Text = desc
         newdd.Parent = newTab
         for _, list in listTable do
             local newddbtn = dropDownButton:Clone()
-            newddbtn.Visible = true
             newddbtn.Name = list
             newddbtn.Name.Text = list
             newddbtn.MouseButton1Click:Connect(function()
@@ -1594,7 +1566,6 @@ function UILIB.newTab(name: string, img: string)
             end
             for _, list in newList do
                 local newddbtn = dropDownButton:Clone()
-                newddbtn.Visible = true
                 newddbtn.Name = list
                 newddbtn.Name.Text = list
                 newddbtn.MouseButton1Click:Connect(function()
