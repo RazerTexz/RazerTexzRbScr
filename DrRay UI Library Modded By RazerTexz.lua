@@ -763,7 +763,7 @@ slider.BackgroundTransparency = 0.4000000059604645
 slider.Size = UDim2.new(0.9614325165748596, 0, 0.2624756097793579, 0)
 slider.BorderColor3 = Color3.new(0, 0, 0)
 slider.Position = UDim2.new(0.019283747300505638, 0, 0.12373435497283936, 0)
-slider.Visible = false
+slider.Visible = true
 
 -- DrRay.Slider.UICorner
 local uiCorner12 = Instance.new("UICorner")
