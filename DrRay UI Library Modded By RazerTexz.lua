@@ -1404,7 +1404,7 @@ function UILIB.newTab(name: string, img: string)
     function self.newButton(name: string, desc: string, func)
         local newbtn = button2:Clone()
         newbtn.Title.Text = name
-        newbtn.Description.Text = desc
+        if desc == "" then newbtn.Description:Destroy() else newbtn.Description.Text = desc end
         newbtn.Name = name
         newbtn.MouseEnter:Connect(function() twServ:Create(newbtn, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newbtn.MouseLeave:Connect(function() twServ:Create(newbtn, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
@@ -1423,7 +1423,7 @@ function UILIB.newTab(name: string, img: string)
         newInput.MouseEnter:Connect(function() twServ:Create(newInput, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newInput.MouseLeave:Connect(function() twServ:Create(newInput, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newInput.Title.Text = name
-        newInput.Description.Text = desc
+        if desc == "" then newInput.Description:Destroy() else newInput.Description.Text = desc end
         newInput.Name = name
         textbox.FocusLost:Connect(function() func(textbox.Text) end)
         newInput.Parent = newTab
@@ -1434,7 +1434,7 @@ function UILIB.newTab(name: string, img: string)
         newKey.MouseLeave:Connect(function() twServ:Create(newKey, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newKey.Title.Text = name
         newKey.Name = name
-        newKey.Description.Text = desc
+        if desc == "" then newKey.Description:Destroy() else newKey.Description.Text = desc end
         local bindButton = newKey.Bind.Button
         local a
         bindButton.MouseButton1Click:Connect(function()
@@ -1465,7 +1465,7 @@ function UILIB.newTab(name: string, img: string)
         newSlider.MouseLeave:Connect(function() twServ:Create(newSlider, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newSlider.Name = name
         newSlider.Title.Text = name
-        newSlider.Description.Text = desc
+        if desc == "" then newSlider.Description:Destroy() else newSlider.Description.Text = desc end
 
         local valueLabel = newSlider.ActualSlider.Title
         valueLabel.Text = tostring(min)
@@ -1499,7 +1499,7 @@ function UILIB.newTab(name: string, img: string)
         local newToggle = toggle:Clone()
         newToggle.Name = title
         newToggle.Title.Text = title
-        newToggle.Description.Text = desc
+        if desc == "" then newToggle.Description:Destroy() else newToggle.Description.Text = desc end
         newToggle.MouseEnter:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0}):Play() end)
         newToggle.MouseLeave:Connect(function() twServ:Create(newToggle, TweenInfo.new(0.2), {Transparency = 0.4}):Play() end)
         newToggle.Label.Label.MouseButton1Click:Connect(function()
@@ -1519,7 +1519,7 @@ function UILIB.newTab(name: string, img: string)
         local newdd = dropDown:Clone()
         newdd.Name = name
         newdd.Title.Text = name
-        newdd.Description.Text = desc
+        if desc == "" then newdd.Description:Destroy() else newdd.Description.Text = desc end
         newdd.Parent = newTab
         for _, list in listTable do
             local newddbtn = dropDownButton:Clone()
