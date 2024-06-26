@@ -1368,7 +1368,7 @@ function UILIB:Load(name: string, onDestroyFunc, img: string)
         end
     end
     function self:SetTheme(color, color2)
-        for _, v in ipairs(parent:GetChildren()) do
+        for _, v in parent:GetChildren() do
             if v:IsA("GuiObject") then
                 if v.BackgroundColor3 == globalColor then
                     v.BackgroundColor3 = color
@@ -1393,7 +1393,7 @@ function UILIB.newTab(name: string, img: string)
     newTabBtn.Frame.TextLabel.Text = name
     newTabBtn.ImageLabel.Image = img or ""
     newTabBtn.MouseButton1Click:Connect(function()
-        for _, v in ipairs(scrollingFrame1:GetChildren()) do
+        for _, v in scrollingFrame1:GetChildren() do
             if v:IsA("ImageButton") then
                 mainBar:FindFirstChild(v.Name).Visible = (v.Name == name)
                 twServ:Create(v, TweenInfo.new(0.2), {Transparency = if v.Name == name then 0 else 0.75}):Play()
@@ -1521,7 +1521,7 @@ function UILIB.newTab(name: string, img: string)
         newdd.Title.Text = name
         if desc == "" then newdd.Description:Destroy() else newdd.Description.Text = desc end
         newdd.Parent = newTab
-        for _, list in ipairs(listTable) do
+        for _, list in listTable do
             local newddbtn = dropDownButton:Clone()
             newddbtn.Name = list
             newddbtn.Name.Text = list
@@ -1548,12 +1548,12 @@ function UILIB.newTab(name: string, img: string)
             end
         end)
         function dropDownFunction.refresh(newList)
-            for _, v in ipairs(newdd.Box.ScrollingFrame:GetChildren()) do
+            for _, v in newdd.Box.ScrollingFrame:GetChildren() do
                 if v.Name ~= "UIListLayout" then
                     v:Destroy()
                 end
             end
-            for _, list in ipairs(newList) do
+            for _, list in newList do
                 local newddbtn = dropDownButton:Clone()
                 newddbtn.Name = list
                 newddbtn.Name.Text = list

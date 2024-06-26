@@ -152,7 +152,7 @@ function Kavo.CreateLib(kavName, themeList)
     local themeList = themeList or {}
     local selectedTab 
     table.insert(Kavo, kavName)
-    for _, v in ipairs(coreGui:GetChildren()) do
+    for _, v in coreGui:GetChildren() do
         if v.Name == kavName then
             v:Destroy()
         end
@@ -248,7 +248,7 @@ function Kavo.CreateLib(kavName, themeList)
         task.wait()
         tween:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 0, 0), Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))}):Play()
         task.wait(1)
-        for i, v in ipairs(cons) do
+        for i, v in cons do
             if type(cons) == "thread" then
                 task.cancel(cons)
             else
@@ -389,11 +389,11 @@ function Kavo.CreateLib(kavName, themeList)
 
         tabButton.MouseButton1Click:Connect(function()
             UpdateSize()
-            for _, v in ipairs(Pages:GetChildren()) do
+            for _, v in Pages:GetChildren() do
                 v.Visible = false
             end
             page.Visible = true
-            for _, v in ipairs(tabFrames:GetChildren()) do
+            for _, v in tabFrames:GetChildren() do
                 if v:IsA("TextButton") then
                     tweenObject(v, {BackgroundTransparency = 1}, 0.2)
                 end
